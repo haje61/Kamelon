@@ -52,12 +52,6 @@ file=dyncontext.xml
 menu=Test
 mime=
 
-[empty]
-ext=*.empty;
-file=empty.xml
-menu=Test
-mime=
-
 [kwinsens]
 ext=*.kwinsens;
 file=kwinsens.xml
