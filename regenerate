@@ -1,0 +1,6 @@
+#!/bin/bash
+
+make realclean
+perl Makefile.PL
+make
+make test
