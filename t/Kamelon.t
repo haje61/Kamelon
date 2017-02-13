@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-use Test::More tests => 22;
+use Test::More tests => 21;
 BEGIN { use_ok('Syntax::Kamelon') };
 
 my $folder = './t';
