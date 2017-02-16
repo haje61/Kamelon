@@ -594,7 +594,7 @@ sub new {
 	my $txt = Syntax::Kamelon::Wx::LogTextCtrl->new($self, -1, "", [-1, -1], [20,20]);
 	$self->{TXT} = $txt;
 	$self->GetSizer->Add($txt, 1, wxALL|wxEXPAND, 2);
-	$highlighter->LogCall(sub {
+	$highlighter->LogCallSet(sub {
 		my $m = shift;
 		$txt->WriteStyle("$m\n", 'message');
 	});
