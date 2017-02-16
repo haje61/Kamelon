@@ -4,7 +4,7 @@
 	<!ENTITY n "[A-Za-z0-9_]">
 	<!ENTITY n1 "[A-Za-z0-9_/.-]">
 	<!ENTITY badCom "[^ \t#A-Za-z0-9_&quot;']">
-	<!ENTITY badParam "[^ \t#A-Za-z0-9_/.&quot;'&amp;\|\(\)!=-]">
+	<!ENTITY badParam "[^ \t#A-Za-z0-9_/.&quot;'&amp;&lt;&gt;\|\(\)!=-]">
 	<!ENTITY ws "[ \t]">
 	<!ENTITY keyword "mainmenu|menu|endmenu|source|choice|endchoice|comment|config|menuconfig|help|if|endif|depends|optional|default|prompt|tristate|def_tristate|bool|boolean|def_bool|int|hex|string|select|range|visible|option|on|modules|defconfig_list|env|allnoconfig_y">
 	<!ENTITY tab "( ? ? ? ? ? ? ?\t|        )">
@@ -63,10 +63,12 @@ Newer changes in the configuration language:
 - add "visible if" property to menus
 3.15:
 - add option "allnoconfig_yes"
+4.2:
+- add <=, >=, <, > operators
 
 -->
 
-<language name="Kconfig" section="Configuration" extensions="Kconfig*" version="3.16" kateversion="3.4" casesensitive="true" priority="0" author="Martin Walch (walch.martin@web.de)" license="GPLv3">
+<language name="Kconfig" section="Configuration" extensions="Kconfig*" version="5" kateversion="3.4" casesensitive="true" priority="0" author="Martin Walch (walch.martin@web.de)" license="GPLv3">
 
 	<highlighting>
 		<contexts>
@@ -435,6 +437,10 @@ Newer changes in the configuration language:
 				<RegExpr String="\|\|" attribute="exprOp" context="#pop!nl.expr" />
 				<RegExpr String="=" attribute="exprOp" context="#pop!nl.expr" />
 				<RegExpr String="!=" attribute="exprOp" context="#pop!nl.expr" />
+				<RegExpr String="&lt;=" attribute="exprOp" context="#pop!nl.expr" />
+				<RegExpr String="&gt;=" attribute="exprOp" context="#pop!nl.expr" />
+				<RegExpr String="&lt;" attribute="exprOp" context="#pop!nl.expr" />
+				<RegExpr String="&gt;" attribute="exprOp" context="#pop!nl.expr" />
 			</context>
 
 			<context name="nl.binOpOrEnd.SQSymbolConst" attribute="symbolConst" lineEndContext="#pop!error">
@@ -1112,13 +1118,13 @@ Newer changes in the configuration language:
 			<itemData name="error" defStyleNum="dsError" spellChecking="false" />
 			<itemData name="option" defStyleNum="dsOthers" spellChecking="false" />
 			<itemData name="optionEq" defStyleNum="dsNormal" spellChecking="false" />
-			<itemData name="badOptionEq" defStyleNum="dsNormal" italic="true" spellChecking="false" />
-			<itemData name="unknownOption" defStyleNum="dsNormal" italic="true" spellChecking="false" />
-			<itemData name="unknownOptionEq" defStyleNum="dsNormal" italic="true" spellChecking="false" />
+			<itemData name="badOptionEq" defStyleNum="dsWarning" italic="true" spellChecking="false" />
+			<itemData name="unknownOption" defStyleNum="dsWarning" italic="true" spellChecking="false" />
+			<itemData name="unknownOptionEq" defStyleNum="dsWarning" italic="true" spellChecking="false" />
 			<itemData name="unquotedOptionValue" defStyleNum="dsString" spellChecking="false" />
 			<itemData name="quotedOptionValue" defStyleNum="dsString" spellChecking="false" />
 			<itemData name="badUnquotedOptionValue" defStyleNum="dsString" italic="true" spellChecking="false" />
-			<itemData name="badQuotedOptionValue" defStyleNum="dsString" italic="true" spellChecking="false" />
+			<itemData name="badQuotedOptionValue" defStyleNum="dsError" italic="true" spellChecking="false" />
 			<itemData name="unquotedMainmenuPrompt" defStyleNum="dsString" />
 			<itemData name="quotedMainmenuPrompt" defStyleNum="dsString" spellChecking="false" />
 			<itemData name="unquotedSourceString" defStyleNum="dsString" spellChecking="false" />

@@ -25,12 +25,12 @@
 
  -->
 <language name="ANSI C89" section="Sources"
-          version="1.10" kateversion="3.3"
+          version="3" kateversion="5.0"
           indenter="cstyle"
           extensions="*.c;*.C;*.h"
           mimetype="text/x-csrc;text/x-c++src;text/x-chdr"
           priority="2"
-          author="Dominik Haumann (dhdev@gmx.de)" license="LGPL">
+          author="Dominik Haumann (dhdev@gmx.de)" license="LGPLv2+">
   <highlighting>
     <list name="keywords">
       <item> break </item>
@@ -140,11 +140,11 @@
       <itemData name="Float"        defStyleNum="dsFloat"/>
       <itemData name="Char"         defStyleNum="dsChar"/>
       <itemData name="String"       defStyleNum="dsString"/>
-      <itemData name="String Char"  defStyleNum="dsChar"/>
+      <itemData name="String Char"  defStyleNum="dsSpecialChar"/>
       <itemData name="Comment"      defStyleNum="dsComment"/>
       <itemData name="Symbol"       defStyleNum="dsNormal"/>
-      <itemData name="Preprocessor" defStyleNum="dsOthers"/>
-      <itemData name="Prep. Lib"    defStyleNum="dsOthers"/>
+      <itemData name="Preprocessor" defStyleNum="dsPreprocessor"/>
+      <itemData name="Prep. Lib"    defStyleNum="dsImport"/>
     </itemDatas>
   </highlighting>
   <general>

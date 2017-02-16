@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Javadoc" version="1.05" kateversion="2.4" section="Markup" extensions="" license="LGPL" author="Alfredo Luiz Foltran Fialho (alfoltran@ig.com.br)">
+<language name="Javadoc" version="2" kateversion="2.4" section="Markup" extensions="" license="LGPL" author="Alfredo Luiz Foltran Fialho (alfoltran@ig.com.br)">
 	<highlighting>
 		<contexts>
 			<context name="Start" attribute="Normal Text" lineEndContext="#stay">
@@ -94,11 +94,11 @@
 		</contexts>
 		<itemDatas>
 			<itemData name="Normal Text"  defStyleNum="dsNormal"/>
-			<itemData name="BlockTag"     defStyleNum="dsKeyword" color="#808080" selColor="#FFFFFF" bold="1" italic="0"/>
-			<itemData name="InlineTag"    defStyleNum="dsKeyword" color="#808080" selColor="#FFFFFF" bold="0" italic="0"/>
+			<itemData name="BlockTag"     defStyleNum="dsChar" color="#808080" selColor="#FFFFFF" bold="1" italic="0"/>
+			<itemData name="InlineTag"    defStyleNum="dsSpecialChar" color="#808080" selColor="#FFFFFF" bold="0" italic="0"/>
 			<itemData name="JavadocParam" defStyleNum="dsKeyword" color="#008080" selColor="#FFFFFF" bold="0" italic="1"/>
 			<itemData name="SeeTag"       defStyleNum="dsKeyword" color="#008080" selColor="#FFFFFF" bold="0" italic="1"/>
-			<itemData name="JavadocFS"    defStyleNum="dsComment" color="#008000" selColor="#FFFFFF" bold="1" italic="0"/>
+			<itemData name="JavadocFS"    defStyleNum="dsDocumentation" color="#008000" selColor="#FFFFFF" bold="1" italic="0"/>
 			<itemData name="Javadoc"      defStyleNum="dsComment" color="#008000" selColor="#FFFFFF"/>
 		</itemDatas>
 	</highlighting>

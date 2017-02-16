@@ -45,7 +45,7 @@
 
 -->
 
-<language name="ILERPG" version="1.05" kateversion="2.2" section="Sources" extensions="QRPG*.*;qrpg*.*" mimetype="text/x-ilerpg-src" casesensitive="0">
+<language name="ILERPG" version="3" kateversion="2.2" section="Sources" extensions="QRPG*.*;qrpg*.*" mimetype="text/x-ilerpg-src" casesensitive="0" license="GPLv2+" author="Nick Roux (nick@sundown.homeip.net)">
     <highlighting>
     <list name="dkeywords">
 	    <item> EXTPROC </item>
@@ -707,14 +707,14 @@
       <itemData name="Base-N"            defStyleNum="dsBaseN" />
       <itemData name="Float"             defStyleNum="dsFloat" />
       <itemData name="Char"              defStyleNum="dsChar" />
-      <itemData name="ConstantChar"      defStyleNum="dsNormal" color="#DD0022" selColor="#000000" bold="0" italic="0"/>
-      <itemData name="Constant"          defStyleNum="dsNormal" color="#CC2222" selColor="#000000" bold="0" italic="0"/>
-      <itemData name="Reserved"          defStyleNum="dsNormal" color="#BB1133" selColor="#000000" bold="0" italic="0"/>
-      <itemData name="Indicator"         defStyleNum="dsNormal" color="#CC0000" selColor="#000000" bold="0" italic="0"/>
-      <itemData name="Fill"              defStyleNum="dsNormal" color="#FF6347" selColor="#000000" bold="0" italic="0"/>
+		<itemData name="ConstantChar"      defStyleNum="dsSpecialChar" color="#DD0022" selColor="#000000" bold="0" italic="0"/>
+		<itemData name="Constant"          defStyleNum="dsConstant" color="#CC2222" selColor="#000000" bold="0" italic="0"/>
+		<itemData name="Reserved"          defStyleNum="dsExtension" color="#BB1133" selColor="#000000" bold="0" italic="0"/>
+		<itemData name="Indicator"         defStyleNum="dsRegionMarker" color="#CC0000" selColor="#000000" bold="0" italic="0"/>
+		<itemData name="Fill"              defStyleNum="dsDataType" color="#FF6347" selColor="#000000" bold="0" italic="0"/>
       <itemData name="Comment"           defStyleNum="dsComment"/>
-      <itemData name="BoldComment"       defStyleNum="dsNormal" color="#CD853F" selColor="#808080" bold="1" italic="1"/>
-      <itemData name="DivideComment"     defStyleNum="dsComment" bold="1"/>
+		<itemData name="BoldComment"       defStyleNum="dsDocumentation" color="#CD853F" selColor="#808080" bold="1" italic="1"/>
+		<itemData name="DivideComment"     defStyleNum="dsInformation" bold="1"/>
       <itemData name="Directive"         defStyleNum="dsOthers"/>
     </itemDatas>
   </highlighting>

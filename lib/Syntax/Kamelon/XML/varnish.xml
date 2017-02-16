@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Varnish Configuration Language" version="0.3" kateversion="3.4" section="Configuration" extensions="*.vcl;" mimetype="" author="Xavier Guerrin (xavier@tuxfamily.org)" license="WTFPL">
+<language name="Varnish Configuration Language" version="1" kateversion="3.4" section="Configuration" extensions="*.vcl;" mimetype="" author="Xavier Guerrin (xavier@tuxfamily.org)" license="WTFPL">
   <highlighting>
     <list name="vclStandardSubs">
       <item>vcl_recv</item>
@@ -316,27 +316,27 @@
       <itemData name="Director Type"             defStyleNum="dsDataType" />
       <itemData name="Standard VCL Function"     defStyleNum="dsFunction" />
       <itemData name="Standard VCL Sub"          defStyleNum="dsFunction" bold="1" />
-      <itemData name="Operator"                  defStyleNum="dsKeyword" color="#008000" bold="0" />
-      <itemData name="Comparison Operator"       defStyleNum="dsKeyword" color="#008000" bold="0" />
-      <itemData name="Arithmetic Operator"       defStyleNum="dsKeyword" color="#008000" bold="0" />
-      <itemData name="Logical Operator"          defStyleNum="dsKeyword" color="#008000" bold="0" />
+      <itemData name="Operator"                  defStyleNum="dsOperator" color="#008000" bold="0" />
+      <itemData name="Comparison Operator"       defStyleNum="dsOperator" color="#008000" bold="0" />
+      <itemData name="Arithmetic Operator"       defStyleNum="dsOperator" color="#008000" bold="0" />
+      <itemData name="Logical Operator"          defStyleNum="dsOperator" color="#008000" bold="0" />
       <itemData name="String"                    defStyleNum="dsString" bold="0" italic="0" />
       <itemData name="Data Type"                 defStyleNum="dsDataType" />
       <itemData name="Region Marker"             defStyleNum="dsNormal" />
-      <itemData name="Probe Property"            defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
-      <itemData name="Backend Property"          defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
-      <itemData name="Director Property"         defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
-      <itemData name="Storage"                   defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="0" italic="0" />
-      <itemData name="TCP Property"              defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="0" italic="1" />
-      <itemData name="HTTP Property"             defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="0" italic="0" />
-      <itemData name="HTTP Header"               defStyleNum="dsDataType" color="#0D62FF" selColor="#0D62FF" bold="0" italic="0" />
-      <itemData name="HTTP X- Header"            defStyleNum="dsDataType" color="#0D62FF" selColor="#0D62FF" bold="0" italic="1" />
+      <itemData name="Probe Property"            defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
+      <itemData name="Backend Property"          defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
+      <itemData name="Director Property"         defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="1" italic="0" />
+      <itemData name="Storage"                   defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="0" italic="0" />
+      <itemData name="TCP Property"              defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="0" italic="1" />
+      <itemData name="HTTP Property"             defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" bold="0" italic="0" />
+      <itemData name="HTTP Header"               defStyleNum="dsConstant" color="#0D62FF" selColor="#0D62FF" bold="0" italic="0" />
+      <itemData name="HTTP X- Header"            defStyleNum="dsConstant" color="#0D62FF" selColor="#0D62FF" bold="0" italic="1" />
       <itemData name="Decimal"                   defStyleNum="dsDecVal" />
       <itemData name="Duration"                  defStyleNum="dsDecVal" />
       <itemData name="Data Size"                 defStyleNum="dsDecVal" />
       <itemData name="Float"                     defStyleNum="dsFloat" spellChecking="false"/>
-      <itemData name="VMod Identifier"           defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" />
-      <itemData name="Well-known VMod"           defStyleNum="dsDataType" color="#0000FF" selColor="#0000FF" bold="1" />
+      <itemData name="VMod Identifier"           defStyleNum="dsFunction" color="#0000FF" selColor="#0000FF" />
+      <itemData name="Well-known VMod"           defStyleNum="dsOperator" color="#0000FF" selColor="#0000FF" bold="1" />
     </itemDatas>
   </highlighting>
   <general>

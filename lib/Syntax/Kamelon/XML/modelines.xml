@@ -8,8 +8,8 @@
   Copyright (c) 2012-2014 by Alex Turbov (i.zaufi@gmail.com)
   -->
 <language name="Modelines"
-          version="1.2"
-          kateversion="3.4"
+          version="3"
+          kateversion="5.0"
           section="Other"
           extensions=""
           mimetype=""
@@ -31,9 +31,9 @@
   </list>
 
   <list name="Booleans">
-    <!-- NOTE Deprecated since KDE 4.10 -->
-    <!-- <item> auto-brackets </item> -->
-    <item> auto-insert-doxygen </item>
+    <item> auto-brackets </item>
+    <!-- NOTE Deprecated -->
+<!--     <item> auto-insert-doxygen </item> -->
     <item> automatic-spell-checking </item>                 <!-- NOTE Since KDE 4.?? -->
     <item> backspace-indents </item>
     <item> block-selection </item>
@@ -42,6 +42,7 @@
     <item> byte-order-marker </item>
     <item> dynamic-word-wrap </item>
     <item> folding-markers </item>
+    <item> folding-preview </item>                          <!-- Since KTextEditor 5.24 -->
     <item> icon-border </item>
     <item> indent-pasted-text </item>                       <!-- Since KDE 4.11 -->
     <item> keep-extra-spaces </item>
@@ -55,6 +56,8 @@
     <item> replace-tabs </item>
     <item> replace-trailing-space-save </item>
     <item> smart-home </item>
+    <item> scrollbar-minimap</item>                         <!-- Since KTextEditor 5.24 -->
+    <item> scrollbar-preview</item>                         <!-- Since KTextEditor 5.24 -->
     <item> space-indent </item>
     <item> show-tabs </item>
     <item> show-trailing-spaces </item>                     <!-- NOTE Since KDE 4.?? -->
@@ -172,8 +175,8 @@
 
   <itemDatas>
     <itemData name="Comment" defStyleNum="dsComment" spellChecking="true" />
-    <itemData name="Keyword" defStyleNum="dsKeyword" spellChecking="false" />
-    <itemData name="Variable" defStyleNum="dsFunction" spellChecking="false" />
+    <itemData name="Keyword" defStyleNum="dsAnnotation" spellChecking="false" />
+    <itemData name="Variable" defStyleNum="dsCommentVar" spellChecking="false" />
     <itemData name="Number" defStyleNum="dsDecVal" spellChecking="false" />
     <itemData name="String" defStyleNum="dsString" spellChecking="false" />
     <itemData name="Value" defStyleNum="dsOthers" spellChecking="false" />

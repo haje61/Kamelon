@@ -25,7 +25,7 @@
  * Boston, MA  02110-1301, USA.                                       *
  **********************************************************************
  -->
-<language name="mergetag text" version="0.1" kateversion="2.4" section="Configuration" author="Diggory Hardy (diggory.hardy@gmail.com)" license="LGPL" extensions="*.mtt;">
+<language name="mergetag text" version="2" kateversion="2.4" section="Configuration" author="Diggory Hardy (diggory.hardy@gmail.com)" license="LGPLv2+" extensions="*.mtt;">
   <highlighting>
     <contexts>
       <context name="Normal" attribute="Error" lineEndContext="#stay">
@@ -117,10 +117,10 @@
     
     <itemDatas>
       <itemData name="Brackets"         defStyleNum="dsKeyword"/>
-      <itemData name="Tag Character"    defStyleNum="dsKeyword" color="#008040"/>
+		<itemData name="Tag Character"    defStyleNum="dsSpecialChar" color="#008040"/>
       <itemData name="Type"             defStyleNum="dsDataType"/>
       <itemData name="Error"            defStyleNum="dsError"/>
-      <itemData name="Comment Brackets" defStyleNum="dsComment" italic="0" color="#404040" />
+		<itemData name="Comment Brackets" defStyleNum="dsDocumentation" italic="0" color="#404040" />
       <itemData name="Comment"          defStyleNum="dsComment"/>
       <itemData name="Normal Text"      defStyleNum="dsNormal"/>
       <itemData name="ID"               defStyleNum="dsOthers"/>
@@ -131,7 +131,7 @@
       <itemData name="Hex"            defStyleNum="dsBaseN"/>
       <itemData name="Float"          defStyleNum="dsFloat"/>
       
-      <itemData name="EscapeSequence" defStyleNum="dsString"   color="#00aa88" selColor="#ff0000"/>
+		<itemData name="EscapeSequence" defStyleNum="dsSpecialString"   color="#00aa88" selColor="#ff0000"/>
       <itemData name="String"         defStyleNum="dsString"/>
       <itemData name="Char"           defStyleNum="dsChar"/>
     </itemDatas>

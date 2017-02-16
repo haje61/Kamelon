@@ -12,7 +12,7 @@
     - Know bugs:
     * None.
 -->
-<language name="PGN" version="2.01" kateversion="2.3" section="Other" extensions="*.pgn;*.PGN" priority="5" mimetype="" casesensitive="1" author="Ruben Carlo Benante (dr.beco@gmail.com)" license="GNU/GPL">
+<language name="PGN" version="4" kateversion="2.3" section="Other" extensions="*.pgn;*.PGN" priority="5" mimetype="" casesensitive="1" author="Ruben Carlo Benante (dr.beco@gmail.com)" license="GPL">
 <highlighting>
   <list name="keywords_list">
     <item> Event </item>
@@ -90,9 +90,9 @@
   <itemDatas>
     <itemData name="Normal Text" defStyleNum="dsNormal"/>
     <itemData name="Keyword" defStyleNum="dsKeyword" bold="true"/>
-    <itemData name="Piece" defStyleNum="dsNormal" color="#0095FF" bold="1" italic="0"/>
+	 <itemData name="Piece" defStyleNum="dsFunction" color="#0095FF" bold="1" italic="0"/>
     <itemData name="Commentp" defStyleNum="dsComment"/>
-    <itemData name="Commentc" defStyleNum="dsComment" bold="true"/>
+	 <itemData name="Commentc" defStyleNum="dsDocumentation" bold="true"/>
     <itemData name="String" defStyleNum="dsString" bold="false"/>
     <itemData name="Number" defStyleNum="dsDecVal" color="#bb00bb"/>
     <itemData name="Symbol" defStyleNum="dsOthers" color="#00bb00"/>

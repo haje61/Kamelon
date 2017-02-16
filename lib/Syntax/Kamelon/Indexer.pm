@@ -19,12 +19,13 @@ sub new {
    bless ($self, $class);
 
    unless (defined($xmlfolder)) { $xmlfolder = $self->FindINC('Syntax/Kamelon/XML') };
-	unless (defined($indexfile)) { $indexfile = "$xmlfolder/indexrc" };
+	unless (defined($indexfile)) { $indexfile = "indexrc" };
 	unless (defined($noindex)) { $noindex = 0 };
 	$self->{EXTENSIONS} = '';
 	$self->{INDEX} = {};
 	$self->{INDEXFILE} = $indexfile;
 	$self->{XMLFOLDER} = $xmlfolder;
+	$self->{XMLPOOL} = {};
 	
 	
 	$self->LoadIndex($noindex);
@@ -45,7 +46,7 @@ sub CreateIndex {
 		my %index = ();
 		while (my $file = readdir(DIR)) {
 			if ($file =~ /.*\.xml$/) {
-				my $xml = $self->LoadXML(xmlfile => "$folder/$file");
+				my $xml = $self->LoadXML("$folder/$file");
 				if (defined $xml) {
 					my $l = $xml->Language;
 					$index{$l->{'name'}} = { 
@@ -85,7 +86,7 @@ sub CreateExtIndex {
 	}
 }
 
-sub ExtensionLanguages {
+sub ExtensionSyntaxes {
 	my ($self, $item) = @_;
 	my $l = $self->{EXTENSIONS};
 	unless (defined $item ){ return }
@@ -176,7 +177,7 @@ sub InfoXMLFile {
 sub LoadIndex {
 	my ($self, $noindex) = @_;
 	my $file = '';
-	unless ($noindex) { $file = $self->IndexFile }
+	unless ($noindex) { $file = $self->XMLFolder . '/' . $self->IndexFile }
 	if (-e $file) {
 		if (open(OFILE, "<", $file)) {
 			my %index = ();
@@ -204,8 +205,8 @@ sub LoadIndex {
 }
 
 sub LoadXML {
-	my $self = shift;
-	return Syntax::Kamelon::XMLData->new(@_)
+	my ($self, $file) = @_;
+	return Syntax::Kamelon::XMLData->new(xmlfile => $file)
 }
 
 sub SaveIndex {
@@ -226,12 +227,6 @@ sub SaveIndex {
 		close OFILE;
 		return 1
 	}
-}
-
-sub SyntaxList {
-	my $self = shift;
-	my $i = $self->{INDEX};
-	return sort keys %$i
 }
 
 sub XMLFolder {

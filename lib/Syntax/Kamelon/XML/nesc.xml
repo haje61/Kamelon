@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="nesC" author="Shakthi Kannan" license="GPLv2" version="1.00" kateversion="2.3" section="Sources" extensions="*.nc" mimetype="text/x-ncsrc" priority="5">
+<language name="nesC" author="Shakthi Kannan" license="GPLv2" version="2" kateversion="2.3" section="Sources" extensions="*.nc" mimetype="text/x-ncsrc" priority="5">
   <highlighting>
     <list name="keywords">
       <item> break </item>
@@ -167,7 +167,7 @@
     <itemDatas>
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
       <itemData name="Keyword" defStyleNum="dsKeyword"/>
-      <itemData name="Function" defStyleNum="dsKeyword" color="#000080" selColor="#ffffff" bold="0" italic="0"/>
+		<itemData name="Function" defStyleNum="dsFunction" color="#000080" selColor="#ffffff" bold="0" italic="0"/>
       <itemData name="Data Type" defStyleNum="dsDataType"/>
       <itemData name="Decimal" defStyleNum="dsDecVal"/>
       <itemData name="Octal" defStyleNum="dsBaseN"/>

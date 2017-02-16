@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="ColdFusion" version="1.04" kateversion="2.2" section="Markup" extensions="*.cfm;*.cfc;*.cfml;*.dbm" mimetype="text/x-coldfusion">
+<language name="ColdFusion" version="2" kateversion="2.2" section="Markup" extensions="*.cfm;*.cfc;*.cfml;*.dbm" mimetype="text/x-coldfusion">
 
 	<highlighting>
 
@@ -684,32 +684,32 @@
 
 		<itemDatas>
 
-			<itemData name="Normal Text" defStyleNum="dsNormal"			color="#000000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Tags" defStyleNum="dsNormal"				color="#000080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Table Tags" defStyleNum="dsNormal"			color="#008080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Script Tags" defStyleNum="dsNormal"			color="#800000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Image Tags" defStyleNum="dsNormal"			color="#800080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Style Tags" defStyleNum="dsNormal"			color="#800080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Anchor Tags" defStyleNum="dsNormal"			color="#008000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Attribute Values" defStyleNum="dsNormal"	color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Normal Text" defStyleNum="dsNormal" />
+			<itemData name="Tags" defStyleNum="dsRegionMarker"				color="#000080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Table Tags" defStyleNum="dsPreprocessor"			color="#008080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Script Tags" defStyleNum="dsControlFlow"			color="#800000" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Image Tags" defStyleNum="dsFloat"			color="#800080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Style Tags" defStyleNum="dsChar"			color="#800080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Anchor Tags" defStyleNum="dsDecVal"			color="#008000" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Attribute Values" defStyleNum="dsDataType"	color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
 			<itemData name="HTML Comment" defStyleNum="dsComment"		color="#008000" selColor="#999999" bold="0" italic="0" />
-			<itemData name="CF Comment" defStyleNum="dsComment"			color="#ff9900" selColor="#999999" bold="0" italic="0" />
-			<itemData name="Script Comment" defStyleNum="dsComment"		color="#ff9900" selColor="#999999" bold="0" italic="0" />
-			<itemData name="CF Tags" defStyleNum="dsNormal"				color="#800000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Custom Tags" defStyleNum="dsNormal"			color="#cc6666" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="CFX Tags" defStyleNum="dsNormal"			color="#008000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Numbers" defStyleNum="dsNormal"				color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="HTML Entities" defStyleNum="dsNormal"		color="#000000" selColor="#ffffff" bold="1" italic="0" />
-			<itemData name="Style Selectors" defStyleNum="dsNormal"		color="#ff00ff" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Style Properties" defStyleNum="dsNormal"	color="#000080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Style Values" defStyleNum="dsNormal"		color="#ff0000" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Brackets" defStyleNum="dsNormal"			color="#000080" selColor="#ffffff" bold="1" italic="0" />
-			<itemData name="Script Numbers" defStyleNum="dsNormal"		color="#ff00ff" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Script Strings" defStyleNum="dsNormal"		color="#008080" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Script Operators" defStyleNum="dsNormal"	color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
-			<itemData name="Script Keywords" defStyleNum="dsNormal"		color="#0000cc" selColor="#ffffff" bold="1" italic="0" />
+			<itemData name="CF Comment" defStyleNum="dsDocumentation"			color="#ff9900" selColor="#999999" bold="0" italic="0" />
+			<itemData name="Script Comment" defStyleNum="dsInformation"		color="#ff9900" selColor="#999999" bold="0" italic="0" />
+			<itemData name="CF Tags" defStyleNum="dsString"				color="#800000" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Custom Tags" defStyleNum="dsSpecialString"			color="#cc6666" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="CFX Tags" defStyleNum="dsSpecialChar"			color="#008000" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Numbers" defStyleNum="dsBaseN"				color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="HTML Entities" defStyleNum="dsConstant"		color="#000000" selColor="#ffffff" bold="1" italic="0" />
+			<itemData name="Style Selectors" defStyleNum="dsKeyword"		color="#ff00ff" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Style Properties" defStyleNum="dsImport"	color="#000080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Style Values" defStyleNum="dsVerbatimString"		color="#ff0000" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Brackets" defStyleNum="dsOthers"			color="#000080" selColor="#ffffff" bold="1" italic="0" />
+			<itemData name="Script Numbers" defStyleNum="dsAnnotation"		color="#ff00ff" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Script Strings" defStyleNum="dsAttribute"		color="#008080" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Script Operators" defStyleNum="dsBuiltIn"	color="#0000ff" selColor="#ffffff" bold="0" italic="0" />
+			<itemData name="Script Keywords" defStyleNum="dsRegionMarker"		color="#0000cc" selColor="#ffffff" bold="1" italic="0" />
 			<itemData name="Script Functions" defStyleNum="dsFunction"	bold="1" />
-			<itemData name="Script Objects" defStyleNum="dsNormal"		color="#0000cc" selColor="#ffffff" bold="1" italic="0" />
+			<itemData name="Script Objects" defStyleNum="dsRegionMarker"		color="#0000cc" selColor="#ffffff" bold="1" italic="0" />
 
 		</itemDatas>
 

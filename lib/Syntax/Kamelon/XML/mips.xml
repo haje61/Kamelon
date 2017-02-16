@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="MIPS Assembler" version="1.03" kateversion="2.4" section="Assembler" extensions="*.s;" mimetype="text/x-mips" author="Dominik Haumann (dhdev@gmx.de)" license="LGPL" priority="-1">
+<language name="MIPS Assembler" version="2" kateversion="2.4" section="Assembler" extensions="*.s;" mimetype="text/x-mips" author="Dominik Haumann (dhdev@gmx.de)" license="LGPL" priority="-1">
   <highlighting>
     <list name="type">
       <item> .align </item>
@@ -334,7 +334,7 @@
       <itemData name="Normal Text" defStyleNum="dsNormal" />
       <itemData name="Hardware Instruction" defStyleNum="dsKeyword" />
       <itemData name="Pseudo Instruction" defStyleNum="dsFunction"/>
-      <itemData name="Other Register" defStyleNum="dsDataType" color="#0000ff"/>
+		<itemData name="Other Register" defStyleNum="dsOthers" color="#0000ff"/>
       <itemData name="Main Register" defStyleNum="dsDataType"/>
       <itemData name="Floating Point Register" defStyleNum="dsFloat"/>
       <itemData name="Section" defStyleNum="dsDataType"/>

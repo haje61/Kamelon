@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Zonnon" version="1.0" kateversion="2.2" section="Sources" extensions="*.znn" mimetype="text/x-zonnon">
+<language name="Zonnon" version="2" kateversion="2.2" section="Sources" extensions="*.znn" mimetype="text/x-zonnon">
   <highlighting>
     <list name="keywords">
       <item> accept </item>
@@ -131,7 +131,7 @@
       <itemData name="Number"      defStyleNum="dsDecVal" />
       <itemData name="String"      defStyleNum="dsString" />
       <itemData name="Modifier"    defStyleNum="dsOthers" />
-      <itemData name="Predefine"   defStyleNum="dsKeyword"   italic="true" />
+		<itemData name="Predefine"   defStyleNum="dsOperator"   italic="true" />
       <itemData name="Comment"     defStyleNum="dsComment" />
     </itemDatas>
   </highlighting>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Haml" version="1.1" kateversion="3.0" section="Markup"
+<language name="Haml" version="2" kateversion="3.0" section="Markup"
           extensions="*.haml"
           author="Cies Breijs (cies_at_kde_nl)" license="LGPL"
           mimetype="text/x-haml">
@@ -457,31 +457,31 @@
       <itemData name="Hex" defStyleNum="dsBaseN"/>
       <itemData name="Bin" defStyleNum="dsBaseN"/>
 
-      <itemData name="Symbol" defStyleNum="dsString" color="#D40000"/>
+		<itemData name="Symbol" defStyleNum="dsSpecialString" color="#D40000"/>
       <itemData name="String" defStyleNum="dsString"/>
       <itemData name="Unquoted String" defStyleNum="dsString"/>
-      <itemData name="Raw String" defStyleNum="dsString" color="#DD4A4A" selColor="#DD4A4A"/>
-      <itemData name="Command" defStyleNum="dsString" color="#AA3000"/>
-      <itemData name="Message" defStyleNum="dsNormal" color="#4000A7"/> <!-- #4A00C0 -->
-      <itemData name="Regular Expression" defStyleNum="dsOthers" color="#4A5704"/>
+		<itemData name="Raw String" defStyleNum="dsVerbatimString" color="#DD4A4A" selColor="#DD4A4A"/>
+		<itemData name="Command" defStyleNum="dsBuiltIn" color="#AA3000"/>
+		<itemData name="Message" defStyleNum="dsInformation" color="#4000A7"/> <!-- #4A00C0 -->
+		<itemData name="Regular Expression" defStyleNum="dsSpecialChar" color="#4A5704"/>
       <itemData name="Substitution" defStyleNum="dsOthers"/>
       <itemData name="Data" defStyleNum="dsNormal"/>
       <!-- short for 'general delimited input' -->
       <itemData name="GDL input" defStyleNum="dsOthers" />
 
-      <itemData name="Default globals" defStyleNum="dsDataType" color="#C00000" bold="1"/>
-      <itemData name="Global Variable" defStyleNum="dsDataType" color="#C00000"/>
-      <itemData name="Global Constant" defStyleNum="dsDataType" color="#bb1188" bold="1"/>
+		<itemData name="Default globals" defStyleNum="dsExtension" color="#C00000" bold="1"/>
+		<itemData name="Global Variable" defStyleNum="dsVariable" color="#C00000"/>
+		<itemData name="Global Constant" defStyleNum="dsPreprocessor" color="#bb1188" bold="1"/>
       <itemData name="Constant" defStyleNum="dsDataType"/>
-      <itemData name="Constant Value" defStyleNum="dsDataType" color="#bb1188"/>
-      <itemData name="Kernel methods" defStyleNum="dsNormal" color="#000080" selColor="#ffffff"/> <!-- #CC0E86 -->
+		<itemData name="Constant Value" defStyleNum="dsConstant" color="#bb1188"/>
+		<itemData name="Kernel methods" defStyleNum="dsControlFlow" color="#000080" selColor="#ffffff"/> <!-- #CC0E86 -->
       <itemData name="Member" defStyleNum="dsNormal"/>
       <itemData name="Instance Variable" defStyleNum="dsOthers"/>
       <itemData name="Class Variable" defStyleNum="dsOthers"/>
 
       <itemData name="Ruby Comment" defStyleNum="dsComment"/>
       <itemData name="Blockcomment" defStyleNum="dsComment"/>
-      <itemData name="Region Marker" defStyleNum="dsNormal" color="#0000ff"/>
+		<itemData name="Region Marker" defStyleNum="dsRegionMarker" color="#0000ff"/>
       <itemData name="RDoc Value" defStyleNum="dsOthers"/>
 
       <!-- use these to mark errors and alerts things -->

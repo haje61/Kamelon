@@ -101,7 +101,7 @@
    ========================================================================
 -->
 
-<language name="D" version="1.62" kateversion="3.0" section="Sources" extensions="*.d;*.D;*.di;*.DI;" mimetype="text/x-dsrc" casesensitive="true" author="Diggory Hardy (diggory.hardy@gmail.com), Aziz Köksal (aziz.koeksal@gmail.com), Jari-Matti Mäkelä (jmjm@iki.fi), Simon J Mackenzie (project.katedxml@smackoz.fastmail.fm)" license="LGPL">
+<language name="D" version="2" kateversion="5.0" section="Sources" extensions="*.d;*.D;*.di;*.DI;" mimetype="text/x-dsrc" casesensitive="true" author="Diggory Hardy (diggory.hardy@gmail.com), Aziz Köksal (aziz.koeksal@gmail.com), Jari-Matti Mäkelä (jmjm@iki.fi), Simon J Mackenzie (project.katedxml@smackoz.fastmail.fm)" license="LGPL">
   <highlighting>
     <!-- User-defined keywords (add identifiers you'd like highlighted here) -->
     <list name="userkeywords">
@@ -749,63 +749,49 @@
     <itemDatas>
       <itemData name="Normal Text"    defStyleNum="dsNormal"/>
       <itemData name="Symbol"         defStyleNum="dsNormal"/>
-      
       <!-- keywords -->
       <itemData name="Statement"      defStyleNum="dsKeyword"/>
-      <itemData name="Expression"     defStyleNum="dsKeyword"  color="#000080"/>
-      <itemData name="Declarator"     defStyleNum="dsKeyword"  color="#800000"/>
-      <itemData name="Template"       defStyleNum="dsKeyword"  color="#008000"/>
-      
-      <itemData name="Attribute"      defStyleNum="dsKeyword"  color="#800080"/>
-      <itemData name="Deprecated"     defStyleNum="dsKeyword"  color="#800080" strikeOut="true"/>
-      
-      <itemData name="Property"       defStyleNum="dsDataType" color="#000080"/>
-      
+		<itemData name="Expression"     defStyleNum="dsConstant"  color="#000080"/>
+		<itemData name="Declarator"     defStyleNum="dsControlFlow"  color="#800000"/>
+		<itemData name="Template"       defStyleNum="dsExtension"  color="#008000"/>
+		<itemData name="Attribute"      defStyleNum="dsFunction"  color="#800080"/>
+      <itemData name="Deprecated"     defStyleNum="dsWarning"  color="#800080" strikeOut="true"/>
+		<itemData name="Property"       defStyleNum="dsPreprocessor" color="#000080"/>
       <itemData name="Type"           defStyleNum="dsDataType"/>
-      <itemData name="LibrarySymbols" defStyleNum="dsDataType" italic="1"/>
-      
-      <itemData name="UserKeywords"   defStyleNum="dsDataType" italic="1"/>
-      
+      <itemData name="LibrarySymbols" defStyleNum="dsBuiltIn" italic="1"/>
+		<itemData name="UserKeywords"   defStyleNum="dsOperator" italic="1"/>
       <!-- module, import -->
       <itemData name="Module"         defStyleNum="dsKeyword"  color="#008000"/>
       <itemData name="Module Name"    defStyleNum="dsNormal"   color="#008000"/>
-      
       <!-- pragma, special tokens -->
       <itemData name="SpecialTokens"  defStyleNum="dsNormal"   color="#00aa00"/>
       <itemData name="Pragma"         defStyleNum="dsKeyword"  color="#00aa00"/>
-      
       <!-- version, extern -->
       <itemData name="Version"        defStyleNum="dsKeyword"  color="#808000"/>
       <itemData name="Version Type"   defStyleNum="dsNormal"   bold="1"/>
       <itemData name="Linkage"        defStyleNum="dsKeyword"  color="#808000"/>
       <itemData name="Linkage Type"   defStyleNum="dsNormal"   bold="1"/>
-      
       <itemData name="Tests"        defStyleNum="dsKeyword"    color="#ff00ff"/>
-
       <itemData name="Comment"        defStyleNum="dsComment"/>
       <itemData name="Region Marker"  defStyleNum="dsRegionMarker" />
-      
       <itemData name="Error"          defStyleNum="dsError"/>
-      
       <!-- literals -->
       <itemData name="Integer"        defStyleNum="dsDecVal"/>
       <itemData name="Binary"         defStyleNum="dsBaseN"/>
       <itemData name="Octal"          defStyleNum="dsBaseN"/>
       <itemData name="Hex"            defStyleNum="dsBaseN"/>
       <itemData name="Float"          defStyleNum="dsFloat"/>
-      
-      <itemData name="EscapeSequence" defStyleNum="dsString"   color="#00aa88" selColor="#ff0000"/>
+      <itemData name="EscapeSequence" defStyleNum="dsSpecialChar"/>
       <itemData name="String"         defStyleNum="dsString"/>
       <itemData name="Char"           defStyleNum="dsChar"/>
-      <itemData name="RawString"      defStyleNum="dsString"   color="#a100a1" selColor="#ff00ff"/>
-      <itemData name="BQString"       defStyleNum="dsString"   color="#a100a1" selColor="#ff00ff"/>
-      <itemData name="HexString"      defStyleNum="dsString"   color="#a10022" selColor="#ff0055"/>
-      
+      <itemData name="RawString"      defStyleNum="dsVerbatimString"/>
+      <itemData name="BQString"       defStyleNum="dsSpecialString"/>
+      <itemData name="HexString"      defStyleNum="dsSpecialString"/>
       <!-- Ddoc specific -->
       <itemData name="Macros"      defStyleNum="dsOthers" color="#bf5fbf" selColor="#ffffff" bold="1" italic="0" />
-      <itemData name="Macro Text"  defStyleNum="dsNormal" color="#bf7fff" selColor="#ffffff" bold="0" italic="0" />
-      <itemData name="Ddoc"        defStyleNum="dsComment" color="#7f7fff" />
-      <itemData name="DdocSection" defStyleNum="dsKeyword" color="#7f7fff" bold="1" />
+		<itemData name="Macro Text"  defStyleNum="dsAttribute" color="#bf7fff" selColor="#ffffff" bold="0" italic="0" />
+		<itemData name="Ddoc"        defStyleNum="dsDocumentation" color="#7f7fff" />
+		<itemData name="DdocSection" defStyleNum="dsAnnotation" color="#7f7fff" bold="1" />
       <itemData name="DdocCode"    defStyleNum="dsNormal" italic="1" />
     </itemDatas>
   </highlighting>

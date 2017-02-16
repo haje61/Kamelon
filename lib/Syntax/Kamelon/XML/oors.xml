@@ -77,7 +77,7 @@
       <itemData name="Content-Type Delimiter" defStyleNum="dsBaseN" bold="1" />
       <itemData name="Directive" defStyleNum="dsKeyword"/>
       <itemData name="Rule" defStyleNum="dsString" />
-      <itemData name="Backslash Code" defStyleNum="dsString" bold="1" />
+		<itemData name="Backslash Code" defStyleNum="dsSpecialString" bold="1" />
       <itemData name="Alert" defStyleNum="dsAlert" />
       <itemData name="String" defStyleNum="dsString"/>
       <itemData name="String Char" defStyleNum="dsChar"/>

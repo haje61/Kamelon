@@ -15,7 +15,7 @@
 section="Markup"
 extensions="*.rmd;*.Rmd;*.RMD"
 mimetype="text/x-r-markdown"
-version="1.0"
+version="2"
 kateversion="3.4"
 casesensitive="true"
 author="Dirk Sarpe (dsarpe@posteo.de)"
@@ -72,7 +72,7 @@ license="GPL">
     <itemDatas>
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
       <itemData name="Structure" defStyleNum="dsRegionMarker"/>
-      <itemData name="MathMode" defStyleNum="dsRegionMarker" color="#00A000"/>
+		<itemData name="MathMode" defStyleNum="dsControlFlow" color="#00A000"/>
     </itemDatas>
 
   </highlighting>

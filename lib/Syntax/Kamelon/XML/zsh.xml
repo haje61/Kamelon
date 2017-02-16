@@ -8,7 +8,7 @@
         <!ENTITY noword   "(?![\w$+-])">                <!-- no word, $, + or - following -->
         <!ENTITY pathpart "([\w_@.&#37;*?+-]|\\ )">     <!-- valid character in a file name -->
 ]>
-<language name="Zsh" version="0.1" kateversion="2.4" section="Scripts" extensions="*.sh;*.zsh;.zshrc;.zprofile;.zlogin;.zlogout;.profile" mimetype="application/x-shellscript" casesensitive="1" author="Jonathan Kolberg (bulldog98@kubuntu-de.org)" license="LGPL">
+<language name="Zsh" version="1" kateversion="2.4" section="Scripts" extensions="*.sh;*.zsh;.zshrc;.zprofile;.zlogin;.zlogout;.profile" mimetype="application/x-shellscript" casesensitive="1" author="Jonathan Kolberg (bulldog98@kubuntu-de.org)" license="LGPL">
 
 <!-- (c) 2011 by Jonathan Kolberg (bulldog98@kubuntu-de.org)
   modified for zsh -->
@@ -932,10 +932,10 @@
       <itemData name="Normal Text"	defStyleNum="dsNormal" />
       <itemData name="Comment"		defStyleNum="dsComment" />
       <itemData name="Keyword" 		defStyleNum="dsKeyword" />
-      <itemData name="Control" 		defStyleNum="dsKeyword" />
-      <itemData name="Builtin" 		defStyleNum="dsKeyword" color="#808" />
-      <itemData name="Command" 		defStyleNum="dsKeyword" color="#c0c" />
-      <itemData name="Redirection" 	defStyleNum="dsKeyword" color="#238" />
+		<itemData name="Control" 		defStyleNum="dsFunction" />
+		<itemData name="Builtin" 		defStyleNum="dsBuiltIn" color="#808" />
+		<itemData name="Command" 		defStyleNum="dsConstant" color="#c0c" />
+		<itemData name="Redirection" 	defStyleNum="dsOperator" color="#238" />
       <itemData name="Escape" 		defStyleNum="dsDataType" />
       <itemData name="String SingleQ" 	defStyleNum="dsString" />
       <itemData name="String DoubleQ" 	defStyleNum="dsString" />

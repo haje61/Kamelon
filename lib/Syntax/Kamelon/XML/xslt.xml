@@ -52,7 +52,7 @@
 
 -->
 
-<language version="1.03" kateversion="2.4" name="xslt" section="Markup" extensions="*.xsl;*.xslt" license="LGPL" author="Peter Lammich (views@gmx.de)">
+<language version="2" kateversion="2.4" name="xslt" section="Markup" extensions="*.xsl;*.xslt" license="LGPL" author="Peter Lammich (views@gmx.de)">
   <highlighting>
     <list name="keytags">
       <item> xsl:value-of </item>
@@ -411,21 +411,21 @@
       <itemData name="Invalid" defStyleNum="dsError"/>
       <itemData name="Alert" defStyleNum="dsAlert"/>
       <itemData name="Attribute Value" defStyleNum="dsString" color="#800000" selColor="#ffffff" bold="0" italic="0"/>
-      <itemData name="XPath" defStyleNum="dsOthers" color="#008080" selColor="#ffffff" bold="0" italic="0"/>
+		<itemData name="XPath" defStyleNum="dsChar" color="#008080" selColor="#ffffff" bold="0" italic="0"/>
       <itemData name="XPath String" defStyleNum="dsString" color="#800000" selColor="#ffffff" bold="0" italic="0"/>
-      <itemData name="XPath Axis" defStyleNum="dsKeyword" color="#008080" selColor="#ffffff" bold="0" italic="1"/>
-      <itemData name="XPath/ XSLT Function" defStyleNum="dsKeyword" color="#008080" selColor="#ffffff" bold="1" italic="0"/>
-      <itemData name="XPath 2.0/ XSLT 2.0 Function" defStyleNum="dsKeyword" color="#008080" selColor="#ffffff" bold="1" italic="0"/>
-      <itemData name="XPath Attribute" defStyleNum="dsNormal" color="#008080" selColor="#ffffff" bold="0" italic="1" />
-      <itemData name="Variable" defStyleNum="dsNormal" color="#008080" selColor="#ffffff" bold="0" italic="1" />
+		<itemData name="XPath Axis" defStyleNum="dsSpecialString" color="#008080" selColor="#ffffff" bold="0" italic="1"/>
+		<itemData name="XPath/ XSLT Function" defStyleNum="dsSpecialString" color="#008080" selColor="#ffffff" bold="1" italic="0"/>
+		<itemData name="XPath 2.0/ XSLT 2.0 Function" defStyleNum="dsSpecialString" color="#008080" selColor="#ffffff" bold="1" italic="0"/>
+		<itemData name="XPath Attribute" defStyleNum="dsSpecialChar" color="#008080" selColor="#ffffff" bold="0" italic="1" />
+		<itemData name="Variable" defStyleNum="dsSpecialChar" color="#008080" selColor="#ffffff" bold="0" italic="1" />
       <itemData name="Comment" defStyleNum="dsComment"/>
-      <itemData name="XSLT Tag" defStyleNum="dsKeyword" color="#000080" selColor="#ffffff" bold="1" italic="0" />
-      <itemData name="XSLT 2.0 Tag" defStyleNum="dsKeyword" color="#000080" selColor="#ffffff" bold="1" italic="0" />
+		<itemData name="XSLT Tag" defStyleNum="dsSpecialString" color="#000080" selColor="#ffffff" bold="1" italic="0" />
+		<itemData name="XSLT 2.0 Tag" defStyleNum="dsSpecialString" color="#000080" selColor="#ffffff" bold="1" italic="0" />
       <itemData name="Entity Reference" defStyleNum="dsDecVal" />
 
       <itemData name="CDATA" defStyleNum="dsBaseN" bold="1" />
       <itemData name="Processing Instruction" defStyleNum="dsKeyword" />
-      <itemData name="Doctype" defStyleNum="dsDataType" bold="1" />
+		<itemData name="Doctype" defStyleNum="dsImport" bold="1" />
       <itemData name="PEntity Reference" defStyleNum="dsDecVal" />
       
     </itemDatas>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 <!-- Nemerle syntax highlighting v0.2 by caminoix, approved of and corrected by Kamil Skalski (Nazgul) -->
-<language name="Nemerle" version="0.32" kateversion="2.3" section="Sources" extensions="*.n" mimetype="text/x-nemerle" casesensitive="1" author="caminoix + Kamil Skalski (Nazgul)" license="">
+<language name="Nemerle" version="1" kateversion="2.3" section="Sources" extensions="*.n" mimetype="text/x-nemerle" casesensitive="1" author="caminoix + Kamil Skalski (Nazgul)" license="">
 	<highlighting>
 		<list name="Attributes">
 			<item>abstract</item>
@@ -187,7 +187,7 @@
 			<itemData name="Comment" defStyleNum="dsComment" />
 			<itemData name="String" defStyleNum="dsString" />
 
-			<itemData name="Number" defStyleNum="dsOthers" color="#00009f" selColor="#0000e9"/>
+			<itemData name="Number" defStyleNum="dsDecVal" color="#00009f" selColor="#0000e9"/>
 
 			<itemData name="Attribute" defStyleNum="dsOthers" color="#28712f" selColor="#34923d" />
 			<itemData name="CompilationUnit" defStyleNum="dsChar" />
@@ -195,7 +195,7 @@
 			<itemData name="EscapeSequence" defStyleNum="dsBaseN" />
 			<itemData name="Keyword" defStyleNum="dsKeyword" />
 			<itemData name="Preprocessing" defStyleNum="dsChar" />
-			<itemData name="TypeDeclaration" defStyleNum="dsOthers" color="#eeb312" selColor="ffc013" bold="1" />
+			<itemData name="TypeDeclaration" defStyleNum="dsExtension" color="#eeb312" selColor="ffc013" bold="1" />
 		</itemDatas>
 	</highlighting>
 

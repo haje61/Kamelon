@@ -6,7 +6,7 @@ We have moved some keywords for consistency
 -->
 
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Metapost/Metafont" section="Markup" version="0.9" kateversion="2.4"
+<language name="Metapost/Metafont" section="Markup" version="1" kateversion="2.4"
 extensions="*.mp;*.mps;*.mpost;*.mf" mimetype="text/x-metapost" 
 author="Yedvilun (yedvilun@gmail.com)" license="LGPL">
   <highlighting>
@@ -970,25 +970,25 @@ author="Yedvilun (yedvilun@gmail.com)" license="LGPL">
 </contexts>
     <itemDatas>
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
-      <itemData name="Keyword" defStyleNum="dsNormal" color="#800000" selColor="#60FFFF" bold="0" italic="0"/>
-      <itemData name="Keyword Mathmode" defStyleNum="dsNormal" color="#606000" selColor="#FFD0FF" bold="0" italic="0"/>
+		<itemData name="Keyword" defStyleNum="dsKeyword" color="#800000" selColor="#60FFFF" bold="0" italic="0"/>
+		<itemData name="Keyword Mathmode" defStyleNum="dsOthers" color="#606000" selColor="#FFD0FF" bold="0" italic="0"/>
       <itemData name="Comment" defStyleNum="dsComment"/>
 
-      <itemData name="Error" defStyleNum="dsAlert"/>
-      <itemData name="Math" defStyleNum="dsNormal" color="#00A000" selColor="#FF40FF"  bold="0" italic="0"/>
+		<itemData name="Error" defStyleNum="dsError"/>
+		<itemData name="Math" defStyleNum="dsSpecialString" color="#00A000" selColor="#FF40FF"  bold="0" italic="0"/>
       <itemData name="TeX" defStyleNum="dsNormal"/>
       <itemData name="String" defStyleNum="dsString"/>
       <itemData name="Alert" defStyleNum="dsAlert"/>
-      <itemData name="Macro"  defStyleNum="dsKeyword" color="#770000" selColor="#99FFFF" bold="0" italic="0"/>
-      <itemData name="Operator" defStyleNum="dsKeyword" color="#244CFF" bold="0"/>
-      <itemData name="Special" defStyleNum="dsKeyword" color="#008000" bold="0"/>
-      <itemData name="Conditional" defStyleNum="dsKeyword"/>
+		<itemData name="Macro"  defStyleNum="dsBuiltIn" color="#770000" selColor="#99FFFF" bold="0" italic="0"/>
+		<itemData name="Operator" defStyleNum="dsOperator" color="#244CFF" bold="0"/>
+		<itemData name="Special" defStyleNum="dsSpecialChar" color="#008000" bold="0"/>
+		<itemData name="Conditional" defStyleNum="dsControlFlow"/>
 
-      <itemData name="Statement" defStyleNum="dsNormal" color="#0000FF" selColor="#FFFF00" bold="0" italic="0"/>
-      <itemData name="BoolExp" defStyleNum="dsKeyword" italic="1" bold="0" color="#AA00AA" selColor="#FFFF00"/>
+		<itemData name="Statement" defStyleNum="dsVerbatimString" color="#0000FF" selColor="#FFFF00" bold="0" italic="0"/>
+		<itemData name="BoolExp" defStyleNum="dsPreprocessor" italic="1" bold="0" color="#AA00AA" selColor="#FFFF00"/>
       <itemData name="NumExp" defStyleNum="dsFunction"/>
-      <itemData name="Variable" defStyleNum="dsKeyword" color="#550022"/>
-      <itemData name="Identifier" defStyleNum="dsKeyword"/>
+		<itemData name="Variable" defStyleNum="dsVariable" color="#550022"/>
+		<itemData name="Identifier" defStyleNum="dsBaseN"/>
       <itemData name="Type" defStyleNum="dsDataType"/>
       <itemData name="Decimal" defStyleNum="dsDecVal"/>
       <itemData name="Octal" defStyleNum="dsBaseN"/>

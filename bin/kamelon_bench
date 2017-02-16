@@ -5,6 +5,22 @@ use Time::HiRes qw(time);
 
 use Syntax::Kamelon;
 
+my @attributes = Syntax::Kamelon->AvailableAttributes;
+
+my %formtab = ();
+for (@attributes) {
+	$formtab{$_} = ["<font class=\"$_\">", "</font>"]
+}
+
+my $substitutions = {
+	'<' => '&lt;',
+	'>' => '&gt;',
+	'&' => '&amp;',
+	' ' => '&nbsp;',
+	"\t" => '&nbsp;&nbsp;&nbsp;',
+	"\n" => "<BR>\n",
+};
+
 my $cycles = 5;
 my $mode = 'text';
 my $verbose = 0;
@@ -93,8 +109,11 @@ my %langs = (
 );
 
 my $k = Syntax::Kamelon->new(
-	mode => $mode,
 	verbose => $verbose,
+	formatter => ['Base',
+		substitutions => $substitutions,
+		format_table => \%formtab,
+	],
 );
 
 my @langl = sort keys %langs;
@@ -126,7 +145,7 @@ foreach my $ln (@langl) {
 				$r->{'size'} = $r->{'size'} + length($txt);
 			}
 			my $start1 = time;
-			my @dummy = $k->Highlight($txt);
+			my @dummy = $k->Parse($txt);
 			my $hlbench = time - $start1;
 			$r->{'hltot'} = $r->{'hltot'} + $hlbench;
 			if ($hlbench > $r->{'hlmax'}) {

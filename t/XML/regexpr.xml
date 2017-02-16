@@ -10,6 +10,7 @@
 	<StringDetect attribute="Test Area" context="TestI" String="&lt;TestI&gt;" />
 	<StringDetect attribute="Test Area" context="TestComplex" String="&lt;TestComplex&gt;" />
 	<StringDetect attribute="Test Area" context="TestComplexB" String="&lt;TestComplexB&gt;" />
+	<StringDetect attribute="Test Area" context="TestComplexNB" String="&lt;TestComplexNB&gt;" />
 	<StringDetect attribute="Test Area" context="TestComplexD" String="&lt;TestComplexD&gt;" />
 	<StringDetect attribute="Test Area" context="TestComplexDI" String="&lt;TestComplexDI&gt;" />
 	<StringDetect attribute="Test Area" context="TestComplexI" String="&lt;TestComplexI&gt;" />
@@ -45,6 +46,13 @@
 	<!-- tests go here -->
 	<RegExpr attribute="Match" context="#stay" String="\bkameel" />
 	<StringDetect attribute="Test Area" context="#pop" String="&lt;TestComplexB&gt;" />
+</context>
+
+<context name="TestComplexNB" attribute="Test Area" lineEndContext="#stay">
+	<DetectChar attribute="Comment" context="Comment" char="#" />
+	<!-- tests go here -->
+	<RegExpr attribute="Match" context="#stay" String="\Bkameel" />
+	<StringDetect attribute="Test Area" context="#pop" String="&lt;TestComplexNB&gt;" />
 </context>
 
 <context name="TestComplexD" attribute="Test Area" lineEndContext="#stay">

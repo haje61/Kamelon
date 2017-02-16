@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 <language name = "kdesrc-buildrc"
-       version = "0.8"
+       version = "1"
    kateversion = "3.5"
        section = "Configuration"
     extensions = ".kdesrc-buildrc;kdesrc-buildrc"
@@ -78,6 +78,7 @@
       <item>cxxflags</item>
       <item>dest-dir</item>
       <item>do-not-compile</item>
+      <item>git-user</item>
       <item>kdedir</item>
       <item>libpath</item>
       <item>log-dir</item>
@@ -226,13 +227,13 @@
       <itemData name="Comment"             defStyleNum="dsComment"/>
       <itemData name="Boolean"             defStyleNum="dsDecVal" bold="true" color="purple"/>
       <itemData name="Option Name"         defStyleNum="dsKeyword" bold="false" />
-      <itemData name="Unknown Option Name" defStyleNum="dsKeyword" bold="false" color="#7D4C0B" />
+		<itemData name="Unknown Option Name" defStyleNum="dsWarning" bold="false" color="#7D4C0B" />
       <itemData name="Environment Variable Name" defStyleNum="dsString" color="#EE6A50" />
       <itemData name="Option Value"        defStyleNum="dsDecVal" />
       <itemData name="Variable"            defStyleNum="dsOthers" />
       <itemData name="Module Declaration"  defStyleNum="dsKeyword" bold="false"/>
-      <itemData name="Module Name"         defStyleNum="dsOthers" bold="true" />
-      <itemData name="Global Declaration"  defStyleNum="dsKeyword" bold="true" />
+		<itemData name="Module Name"         defStyleNum="dsExtension" bold="true" />
+		<itemData name="Global Declaration"  defStyleNum="dsFunction" bold="true" />
       <itemData name="Possible Error"      defStyleNum="dsError" />
     </itemDatas>
   </highlighting>

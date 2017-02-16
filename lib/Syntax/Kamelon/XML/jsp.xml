@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language version="1.02" kateversion="2.4" name="JSP" section="Markup" extensions="*.jsp;*.JSP" mimetype="text/html" casesensitive="false" author="Rob Martin (rob@gamepimp.com)" license="LGPL">
+<language version="2" kateversion="2.4" name="JSP" section="Markup" extensions="*.jsp;*.JSP" mimetype="text/html" casesensitive="false" author="Rob Martin (rob@gamepimp.com)" license="LGPL">
   <highlighting>
 
     <list name="java-1.4.2-classes">
@@ -3047,11 +3047,11 @@
       <itemData name="Char" defStyleNum="dsChar"/>
       <itemData name="String Char" defStyleNum="dsChar"/>
       <itemData name="Symbol" defStyleNum="dsNormal"/>
-      <itemData name="Java 1.4.2 Classes" defStyleNum="dsNormal" color="#0095FF" selColor="#FFFFFF" bold="1" italic="0"/>
+		<itemData name="Java 1.4.2 Classes" defStyleNum="dsAttribute" color="#0095FF" selColor="#FFFFFF" bold="1" italic="0"/>
 
-      <itemData name="Jsp Directive" defStyleNum="dsNormal" color="#0000ff" selColor="#00ff00" bold="true" italic="true"/>
-      <itemData name="Jsp Scriptlet" defStyleNum="dsNormal" color="#000000" selColor="#ffffff" bold="true" italic="false"/>
-      <itemData name="Jsp Expression" defStyleNum="dsNormal" color="#000000" selColor="#ffffff" bold="true" italic="false"/>
+		<itemData name="Jsp Directive" defStyleNum="dsControlFlow" color="#0000ff" selColor="#00ff00" bold="true" italic="true"/>
+		<itemData name="Jsp Scriptlet" defStyleNum="dsPreprocessor" color="#000000" selColor="#ffffff" bold="true" italic="false"/>
+		<itemData name="Jsp Expression" defStyleNum="dsRegionMarker" color="#000000" selColor="#ffffff" bold="true" italic="false"/>
       <itemData name="Jsp Comment" defStyleNum="dsComment"/>
 
       <itemData name="Jsp Param Name" defStyleNum="dsOthers"/>

@@ -57,7 +57,7 @@
 
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Matlab" version="1.31" kateversion="2.2" section="Scientific" extensions="*.m;*.M" mimetype="text/mfile" casesensitive="1">
+<language name="Matlab" version="2" kateversion="2.2" section="Scientific" extensions="*.m;*.M" mimetype="text/mfile" casesensitive="1">
   <highlighting>
 
     <!-- Reserved keywords in MATLAB -->
@@ -143,7 +143,7 @@
       <itemData name="String" defStyleNum="dsString" color="#b20000"/>
       <itemData name="System" defStyleNum="dsBaseN" color="#b28c00"/>
       <itemData name="Incomplete String" defStyleNum="dsChar" color="#a020f0"/>
-      <itemData name="Keyword"  defStyleNum="dsNormal" color="#0000ff"/>
+		<itemData name="Keyword"  defStyleNum="dsKeyword" color="#0000ff"/>
       <itemData name="Comment" defStyleNum="dsComment" color="#009900"/>
     </itemDatas>
     <!-- MATLAB 6.5 default color scheme

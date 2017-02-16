@@ -2,7 +2,7 @@
 <!DOCTYPE language SYSTEM "language.dtd">
 <language name="Pascal"
           section="Sources" 
-          version="1.23"
+          version="2"
           kateversion="3.3"
           extensions="*.p;*.pas;*.pp"
           mimetype="text/x-pascal" 
@@ -200,7 +200,7 @@
       <itemData name="Normal Text" defStyleNum="dsNormal"  />
       <itemData name="Hex"         defStyleNum="dsBaseN"   />
       <itemData name="Keyword"     defStyleNum="dsKeyword" />
-      <itemData name="ISO/Delphi Extended"  defStyleNum="dsKeyword" color="#000080" />
+		<itemData name="ISO/Delphi Extended"  defStyleNum="dsExtension" color="#000080" />
       <itemData name="Type"  defStyleNum="dsDataType"/>
       <itemData name="Number"      defStyleNum="dsDecVal" />
       <itemData name="String"      defStyleNum="dsString" />

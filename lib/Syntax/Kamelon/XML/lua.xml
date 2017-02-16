@@ -35,7 +35,7 @@
     - improved highlighting
 
     -->
-<language name="Lua" version="1.06" indenter="lua" kateversion="3.4" section="Scripts" extensions="*.lua" mimetype="text/x-lua">
+<language name="Lua" version="2" indenter="lua" kateversion="3.4" section="Scripts" extensions="*.lua" mimetype="text/x-lua">
   <highlighting>
     <list name="keywords">
       <item> and </item>
@@ -281,13 +281,13 @@
       <itemData name="BFunc"           defStyleNum="dsFunction" spellChecking="false"/>
       <itemData name="Comment"         defStyleNum="dsComment"/>
       <itemData name="Constant"        defStyleNum="dsKeyword" spellChecking="false"/>
-      <itemData name="Control"         defStyleNum="dsKeyword" color="#A1A100" selColor="#ffffff" bold="0" italic="0" spellChecking="false"/>
+		<itemData name="Control"         defStyleNum="dsControlFlow" color="#A1A100" selColor="#ffffff" bold="0" italic="0" spellChecking="false"/>
       <itemData name="Error"           defStyleNum="dsError" spellChecking="false"/>
       <itemData name="Keyword"         defStyleNum="dsKeyword" spellChecking="false"/>
       <itemData name="Numbers"         defStyleNum="dsDecVal" spellChecking="false"/>
       <itemData name="Strings"         defStyleNum="dsString"/>
       <itemData name="Symbols"         defStyleNum="dsOthers" spellChecking="false"/>
-      <itemData name="Variable"        defStyleNum="dsKeyword" color="#5555FF" selColor="#ffffff" bold="0" italic="0" spellChecking="false"/>
+		<itemData name="Variable"        defStyleNum="dsVariable" color="#5555FF" selColor="#ffffff" bold="0" italic="0" spellChecking="false"/>
     </itemDatas>
   </highlighting>
   <general>

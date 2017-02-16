@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="SiSU" version="1.02" section="Markup" kateversion="2.4" extensions="*.sst;*.ssm;*.ssi;*._sst;*.-sst;" author="Ralph Amissah (ralph.amissah@gmail.com)" license="LGPL" >
+<language name="SiSU" version="2" section="Markup" kateversion="2.4" extensions="*.sst;*.ssm;*.ssi;*._sst;*.-sst;" author="Ralph Amissah (ralph.amissah@gmail.com)" license="LGPL" >
   <highlighting>
     <list name="somename">
       <item> class </item>
@@ -128,24 +128,24 @@
     </contexts>
     <itemDatas>
       <itemData name="Normal Text" defStyleNum="dsNormal" />
-      <itemData name="Header" defStyleNum="dsNormal" color="#1c869b" selColor="#60FFFF" bold="0" italic="0"/>
-      <itemData name="Heading" defStyleNum="dsNormal" color="#ff0000" selColor="#60FFFF" bold="1" italic="0"/>
-      <itemData name="Bold" defStyleNum="dsNormal" color="#800000" selColor="#60FFFF" bold="1" italic="0"/>
-      <itemData name="Italic" defStyleNum="dsNormal" color="#800000" selColor="#60FFFF" bold="0" italic="1"/>
-      <itemData name="Underscore" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
-      <itemData name="Superscript" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
-      <itemData name="Subscript" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
-      <itemData name="Strike" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
-      <itemData name="Insert" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Header" defStyleNum="dsAttribute" color="#1c869b" selColor="#60FFFF" bold="0" italic="0"/>
+		<itemData name="Heading" defStyleNum="dsBaseN" color="#ff0000" selColor="#60FFFF" bold="1" italic="0"/>
+		<itemData name="Bold" defStyleNum="dsBuiltIn" color="#800000" selColor="#60FFFF" bold="1" italic="0"/>
+		<itemData name="Italic" defStyleNum="dsChar" color="#800000" selColor="#60FFFF" bold="0" italic="1"/>
+		<itemData name="Underscore" defStyleNum="dsConstant" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Superscript" defStyleNum="dsDataType" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Subscript" defStyleNum="dsDecVal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Strike" defStyleNum="dsExtension" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Insert" defStyleNum="dsFloat" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
       <itemData name="Keyword" defStyleNum="dsKeyword" />
-      <itemData name="Endnote" defStyleNum="dsNormal" color="#086800" selColor="#60FFFF" bold="0" italic="0"/>
-      <itemData name="Link" defStyleNum="dsNormal" color="#0000FF" selColor="#60FFFF" bold="0" italic="0"/>
+		<itemData name="Endnote" defStyleNum="dsFunction" color="#086800" selColor="#60FFFF" bold="0" italic="0"/>
+		<itemData name="Link" defStyleNum="dsOperator" color="#0000FF" selColor="#60FFFF" bold="0" italic="0"/>
       <itemData name="String" defStyleNum="dsString" />
       <itemData name="Comment" defStyleNum="dsComment"/>
       <itemData name="Group" defStyleNum="dsRegionMarker"/>
-      <itemData name="Break" defStyleNum="dsNormal" color="#FF0000" selColor="#60FFFF" bold="0" italic="0"/>
-      <itemData name="Indent" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
-      <itemData name="Structure" defStyleNum="dsNormal" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Break" defStyleNum="dsOthers" color="#FF0000" selColor="#60FFFF" bold="0" italic="0"/>
+		<itemData name="Indent" defStyleNum="dsPreprocessor" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
+		<itemData name="Structure" defStyleNum="dsRegionMarker" color="#F00000" selColor="#80FFD0" bold="0" italic="0"/>
     </itemDatas>
   </highlighting>  
   <general>

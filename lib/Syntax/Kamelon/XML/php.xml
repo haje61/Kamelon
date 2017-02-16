@@ -70,7 +70,7 @@ Changes:
   <!ENTITY types "int|integer|bool|boolean|float|double|real|string|array|object">
 ]>
 
-<language name="PHP/PHP" indenter="cstyle" version="1.47" kateversion="3.4" section="Scripts" extensions="" priority="5" mimetype="" hidden="true">
+<language name="PHP/PHP" indenter="cstyle" version="2" kateversion="3.4" section="Scripts" extensions="" priority="5" mimetype="" hidden="true">
   <highlighting>
     <list name="control structures">
       <item>as</item>
@@ -5580,27 +5580,27 @@ Changes:
         <RegExpr attribute="Variable" context="#stay" String="\{\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\[([0-9]*|&quot;[a-zA-Z_]*&quot;)|'[a-zA-Z_]*'|\])*(-&gt;[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\[[a-zA-Z0-9_]*\])*(\[([0-9]*|&quot;[a-zA-Z_]*&quot;)|'[a-zA-Z_]*'|\])*)*\}" />
       </context>
       <context name="htmlnowdoc" attribute="Normal Text" lineEndContext="#stay" dynamic="true">
-        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Heredoc" />
+        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Nowdoc" />
         <IncludeRules context="commonnowdoc" />
         <IncludeRules context="##HTML" />
       </context>
       <context name="cssnowdoc" attribute="Normal Text" lineEndContext="#stay" dynamic="true">
-        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Heredoc" />
+        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Nowdoc" />
         <IncludeRules context="commonnowdoc" />
         <IncludeRules context="##CSS" />
       </context>
       <context name="mysqlnowdoc" attribute="Normal Text" lineEndContext="#stay" dynamic="true">
-        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Heredoc" />
+        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Nowdoc" />
         <IncludeRules context="commonnowdoc" />
         <IncludeRules context="##SQL (MySQL)" />
       </context>
       <context name="javascriptnowdoc" attribute="Normal Text" lineEndContext="#stay" dynamic="true">
-        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Heredoc" />
+        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Nowdoc" />
         <IncludeRules context="commonnowdoc" />
         <IncludeRules context="Normal##JavaScript" />
       </context>
       <context name="nowdoc" attribute="String" lineEndContext="#stay" dynamic="true">
-        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Heredoc" />
+        <RegExpr attribute="Backslash Code" context="#pop" String="^%1;?$" dynamic="true" endRegion="Nowdoc" />
         <IncludeRules context="commonnowdoc" />
       </context>
       <context name="commonnowdoc" attribute="String" lineEndContext="#stay">
@@ -5620,15 +5620,15 @@ Changes:
       <itemData name="Float" defStyleNum="dsFloat" spellChecking="false" />
       <itemData name="String" defStyleNum="dsString" />
       <itemData name="Comment" defStyleNum="dsComment" />
-      <itemData name="Special Variable" defStyleNum="dsKeyword" color="#5555FF" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
-      <itemData name="Variable" defStyleNum="dsKeyword" color="#5555FF" selColor="#ffffff" bold="0" italic="0" spellChecking="false" />
-      <itemData name="Library Constant" defStyleNum="dsKeyword" bold="1" spellChecking="false" />
-      <itemData name="Constant" defStyleNum="dsKeyword" bold="0" spellChecking="false" />
-      <itemData name="Control Structures" defStyleNum="dsKeyword" color="#A1A100" selColor="#ffffff" bold="0" italic="0" spellChecking="false" />
-      <itemData name="Backslash Code" defStyleNum="dsKeyword" color="#0F0F8F" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
+		<itemData name="Special Variable" defStyleNum="dsOperator" color="#5555FF" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
+		<itemData name="Variable" defStyleNum="dsVariable" color="#5555FF" selColor="#ffffff" bold="0" italic="0" spellChecking="false" />
+		<itemData name="Library Constant" defStyleNum="dsDecVal" bold="1" spellChecking="false" />
+		<itemData name="Constant" defStyleNum="dsConstant" bold="0" spellChecking="false" />
+		<itemData name="Control Structures" defStyleNum="dsControlFlow" color="#A1A100" selColor="#ffffff" bold="0" italic="0" spellChecking="false" />
+		<itemData name="Backslash Code" defStyleNum="dsSpecialString" color="#0F0F8F" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
       <itemData name="Other" defStyleNum="dsOthers" spellChecking="false" />
 
-      <itemData name="HTML Tag" defStyleNum="dsKeyword" color="#0F0000" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
+		<itemData name="HTML Tag" defStyleNum="dsFloat" color="#0F0000" selColor="#ffffff" bold="1" italic="0" spellChecking="false" />
       <itemData name="HTML Comment" defStyleNum="dsComment" />
       <itemData name="Identifier" defStyleNum="dsOthers" spellChecking="false" />
       <itemData name="Types" defStyleNum="dsDataType" spellChecking="false" />

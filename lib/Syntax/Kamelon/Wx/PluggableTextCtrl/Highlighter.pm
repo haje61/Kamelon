@@ -42,8 +42,9 @@ my $darkbeige           = [0xf5, 0xf5, 0xa9];
 my $lightgray           = [0xcf, 0xcf, 0xcf];
 my $gray                = [0x80, 0x80, 0x80];
 my $darkgray            = [0x4f, 0x4f, 0x4f];
-my $black               = [0x00, 0x00, 0x00];
-my $white               = [0xff, 0xff, 0xfe];
+my $black               = [0x10, 0x10, 0x10];
+my $white               = [0xef, 0xef, 0xef];
+
 
 my $defaultstyles = [
    ['Alert', $orange, $blue],
@@ -67,7 +68,7 @@ my $defaultstyles = [
    ['IString', $lightred],
    ['Information', $darkgray, $lightgreen],
    ['Keyword', $darkgreen, undef, [undef, undef, undef, wxFONTWEIGHT_BOLD]],
-   ['Normal', ],
+   ['Normal', $black],
    ['Operator', $orange],
    ['Others', $cyan],
    ['Preprocessor', $darkgray, $lightgreen],
@@ -172,11 +173,13 @@ sub EngineInit {
    unless (defined $eng) {
       use Syntax::Kamelon;
       my $k = Syntax::Kamelon->new(
-			format_table => $self->Styles
+			formatter => ['Base',
+				format_table => $self->Styles
+			],
       );
       $self->Engine($k);
    } else {
-		$eng->{FORMATTABLE} = $self->Styles
+		$eng->Formatter->{FORMATTABLE} = $self->Styles
    }
 }
 
@@ -210,7 +213,7 @@ sub HighlightLine {
    my $txt = $tc->GetRange($begin, $end); #get the text to be highlighted
 	my $pos = 0;
 	my $start = 0;
-	my @h = $hlt->Highlight($txt);
+	my @h = $hlt->ParseRaw($txt);
 	while (@h ne 0) {
 		use bytes;
 		$start = $pos;

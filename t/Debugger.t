@@ -2,44 +2,12 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-use Test::More tests => 21;
+use Test::More tests => 19;
 BEGIN { use_ok('Syntax::Kamelon::Debugger') };
-
-use Syntax::Kamelon;
-my $folder = './t';
-my $index = "$folder/indexrc";
-unlink $index;
-
-my $hl = Syntax::Kamelon::Debugger->new(
-	xmlfolder => $folder,
-	indexfile => $index,
-	mode => 'debug',
-);
-
-ok(defined $hl, 'Can create Kamelon debugger');
-
-
-
-ok($hl->{INDEXER}->{INDEX}->{'Test'}->{'file'} eq 'test.xml', "Indexing\n");
-
-$hl->Reset;
-
-$hl->Syntax('Test');
-ok($hl->Syntax eq 'Test', 'Set a language');
-
-my $thl = $hl->GetHighlighter('Test');
-ok(defined $thl, 'Create a highlighter');
-
-$hl->Reset;
-my @expected = ('highlight', 'Normal');
-my @result = $hl->Highlight("highlight");
-# for (@result) { print "$_ " } print "\n";
-ok(&ListCompare(\@expected, \@result), 'unmatched text');
-
-unlink $index;
 
 my $htmldir = './t/HTML';
 my $sampledir = './t/Samples';
+my $outdir = './t/HTML_OUT';
 my $xmldir = './t/XML';
 my @attributes = Syntax::Kamelon->AvailableAttributes;
 
@@ -48,20 +16,29 @@ for (@attributes) {
 	$formtab{$_} = ["<font class=\"$_\">", "</font>"]
 }
 
-$hl = new Syntax::Kamelon(
+my $substitutions = {
+	'<' => '&lt;',
+	'>' => '&gt;',
+	'&' => '&amp;',
+	' ' => '&nbsp;',
+	"\t" => '&nbsp;&nbsp;&nbsp;',
+	"\n" => "<BR>\n",
+};
+
+
+my $hl = new Syntax::Kamelon::Debugger(
 	xmlfolder => $xmldir,
-	mode => 'debug',
 	noindex => 1,
-	substitutions => {
-		'<' => '&lt;',
-		'>' => '&gt;',
-		'&' => '&amp;',
-		' ' => '&nbsp;',
-		"\t" => '&nbsp;&nbsp;&nbsp;',
-		"\n" => "<BR>\n",
-	},
-	format_table => \%formtab,
+	formatter => ['Base',
+		substitutions => $substitutions,
+		format_table => \%formtab,
+	],
 );
+ok(defined $hl, 'Creation');
+
+my $sb = $hl->{FORMATTER}->{SUBSTITUTIONS};
+
+ok((Dumper $substitutions eq Dumper $sb), "Substitutions");
 
 my @l = $hl->AvailableSyntaxes;
 my @li = ();
@@ -77,9 +54,13 @@ for (@li) {
 	$output = "";
 	my $infile = "$sampledir/highlight.$_";
 	my $reffile = "$htmldir/$_.html";
+	my $outfile = "$outdir/$_.html";
 	$hl->Syntax($_);
+	unless (open(OFILE, ">", $outfile)) {
+		die "Cannot open output $outfile"
+	}
 	unless (open(IFILE, "<", $infile)) {
-		die "Cannot open $infile"
+		die "Cannot open input $infile"
 	}
 	&Out("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
 	&Out("<html>\n<head>\n");
@@ -87,10 +68,12 @@ for (@li) {
 	&Out("<title>Testfile $_</title>\n");
 	&Out("</head>\n<body>\n");
 	while (my $in = <IFILE>) {
-		&Out( $hl->HighlightAndFormat($in));
+		$hl->Parse($in);
 	}
+	&Out($hl->Get);
 	&Out("</body>\n</html>\n");
 	close IFILE;
+	close OFILE;
 	my $reftext = &LoadFile($reffile);
 	ok(($reftext eq $output), $_);
 }

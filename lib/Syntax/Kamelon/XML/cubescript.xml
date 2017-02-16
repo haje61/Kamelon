@@ -7,7 +7,7 @@
 
         List values which are current ignored by the keyword identifier are commented.
 -->
-<language name="CubeScript" section="Scripts" version="0.77" kateversion="3.4" extensions="*.cfg" mimetype="" casesensitive="true" author="Kevin Meyer" license="zlib/libpng" indenter="normal">
+<language name="CubeScript" section="Scripts" version="1" kateversion="5.0" extensions="*.cfg" mimetype="" casesensitive="true" author="Kevin Meyer" license="zlib/libpng" indenter="normal">
   <highlighting>
     <!--
         There are far more commands than these, these are just guaranteed to be in all forks.
@@ -429,19 +429,19 @@
       <itemData name="Escaped"     defStyleNum="dsChar" spellChecking="false"/>
       <itemData name="Comment"     defStyleNum="dsComment"/>
       <itemData name="Keyword"     defStyleNum="dsFunction" spellChecking="false"/>
-      <itemData name="Operator"    defStyleNum="dsKeyword" spellChecking="false"/>
+      <itemData name="Operator"    defStyleNum="dsOperator" spellChecking="false"/>
       <itemData name="Key"         defStyleNum="dsOthers" spellChecking="false"/>
       <itemData name="LookupBrackets"    defStyleNum="dsRegionMarker" spellChecking="false"/>
       <itemData name="Brackets"    defStyleNum="dsNormal" bold="1" spellChecking="false"/>
       <!-- These are for the ^f# format tokens, the background colour is explicitly set to try and guarantee visibility at all times -->
-      <itemData name="String0"     defStyleNum="dsString" bold="1" color="#40FF80" backgroundColor="#3F3F3F" spellChecking="false"/>
-      <itemData name="String1"     defStyleNum="dsString" bold="1" color="#60A0FF" backgroundColor="#DFDFDF" spellChecking="false"/>
-      <itemData name="String2"     defStyleNum="dsString" bold="1" color="#FFC040" backgroundColor="#3F3F3F" spellChecking="false"/>
-      <itemData name="String3"     defStyleNum="dsString" bold="1" color="#FF4040" backgroundColor="#DFDFDF" spellChecking="false"/>
-      <itemData name="String4"     defStyleNum="dsString" bold="1" color="#808080" backgroundColor="#DFDFDF" spellChecking="false"/>
-      <itemData name="String5"     defStyleNum="dsString" bold="1" color="#A040A0" backgroundColor="#DFDFDF" spellChecking="false"/>
-      <itemData name="String6"     defStyleNum="dsString" bold="1" color="#FF8000" backgroundColor="#DFDFDF" spellChecking="false"/>
-      <itemData name="String7"     defStyleNum="dsString" bold="1" color="#FFFFFF" backgroundColor="#3F3F3F" spellChecking="false"/>
+      <itemData name="String0"     defStyleNum="dsExtension" bold="1" color="#40FF80" backgroundColor="#3F3F3F" spellChecking="false"/>
+      <itemData name="String1"     defStyleNum="dsSpecialChar" bold="1" color="#60A0FF" backgroundColor="#DFDFDF" spellChecking="false"/>
+      <itemData name="String2"     defStyleNum="dsSpecialString" bold="1" color="#FFC040" backgroundColor="#3F3F3F" spellChecking="false"/>
+      <itemData name="String3"     defStyleNum="dsConstant" bold="1" color="#FF4040" backgroundColor="#DFDFDF" spellChecking="false"/>
+      <itemData name="String4"     defStyleNum="dsVariable" bold="1" color="#808080" backgroundColor="#DFDFDF" spellChecking="false"/>
+      <itemData name="String5"     defStyleNum="dsAttribute" bold="1" color="#A040A0" backgroundColor="#DFDFDF" spellChecking="false"/>
+      <itemData name="String6"     defStyleNum="dsRegionMarker" bold="1" color="#FF8000" backgroundColor="#DFDFDF" spellChecking="false"/>
+      <itemData name="String7"     defStyleNum="dsVerbatimString" bold="1" color="#FFFFFF" backgroundColor="#3F3F3F" spellChecking="false"/>
     </itemDatas>
   </highlighting>
   <general>

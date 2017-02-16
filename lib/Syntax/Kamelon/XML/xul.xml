@@ -4,7 +4,7 @@
 	<!ENTITY name    "[A-Za-z_:][\w.:_-]*">
 	<!ENTITY entref  "&amp;(#[0-9]+|#[xX][0-9A-Fa-f]+|&name;);">
 ]>
-        <language name="XUL" version="0.11" kateversion="2.4" section="Markup" extensions="*.xul;*.xbl" mimetype="text/xul" casesensitive="1" author="Wilbert Berendsen (wilbert@kde.nl), Anders Lund (anders@alweb.dk), Joseph Wenninger (jowenn@kde.org), Whitehawk Stormchaser (zerokode@gmx.net), Marc Dassonneville (marc.dassonneville@gmail.com)" license="LGPL">
+        <language name="XUL" version="2" kateversion="2.4" section="Markup" extensions="*.xul;*.xbl" mimetype="text/xul" casesensitive="1" author="Wilbert Berendsen (wilbert@kde.nl), Anders Lund (anders@alweb.dk), Joseph Wenninger (jowenn@kde.org), Whitehawk Stormchaser (zerokode@gmx.net), Marc Dassonneville (marc.dassonneville@gmail.com)" license="LGPL">
 
 <highlighting>
    <list name="keywords">
@@ -590,7 +590,7 @@
   <itemData name="Doctype" defStyleNum="dsDataType" bold="1" />
   <itemData name="Element" defStyleNum="dsKeyword" />
   <itemData name="Attribute" defStyleNum="dsOthers" />
-  <itemData name="Value" defStyleNum="dsString" color="#a00" />
+  <itemData name="Value" defStyleNum="dsString" />
   <itemData name="EntityRef" defStyleNum="dsDecVal" />
   <itemData name="PEntityRef" defStyleNum="dsDecVal" />
   <itemData name="Error" defStyleNum="dsError" />
@@ -598,8 +598,8 @@
   <itemData name="Keyword"      defStyleNum="dsKeyword"/>
   <itemData name="Function" defStyleNum="dsFunction"/>
   <itemData name="Objects" defStyleNum="dsKeyword" color="#008000" selColor="#00ffff" bold="0" italic="0"/>
-  <itemData name="Math" defStyleNum="dsKeyword" color="#DBA716" selColor="#00ffff" bold="0" italic="0"/>
-  <itemData name="Events" defStyleNum="dsKeyword" color="#F766D5" selColor="#00ffff" bold="0" italic="0"/>
+  <itemData name="Math" defStyleNum="dsOperator" color="#DBA716" selColor="#00ffff" bold="0" italic="0"/>
+  <itemData name="Events" defStyleNum="dsVariable" color="#F766D5" selColor="#00ffff" bold="0" italic="0"/>
   <itemData name="Data Type"    defStyleNum="dsDataType"/>
   <itemData name="Decimal"      defStyleNum="dsDecVal"/>
   <itemData name="Float"        defStyleNum="dsFloat"/>

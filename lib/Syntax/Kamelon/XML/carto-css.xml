@@ -3,7 +3,7 @@
 
 <!-- Kate syntax highlighting definition for Mapbox CartoCSS -->
 
-<language name="CartoCSS" version="0.4" kateversion="2.4" section="Markup" extensions="*.mss" author="Lukas Sommer" license="CC0 Public Domain Dedication, version 1.0, as published by Creative Commons">
+<language name="CartoCSS" version="1" kateversion="5.0" section="Markup" extensions="*.mss" author="Lukas Sommer" license="CC0 Public Domain Dedication, version 1.0, as published by Creative Commons">
 
 	<highlighting>
 
@@ -349,7 +349,7 @@
 
 		<contexts>
 
-			<context attribute="Normal text" lineEndContext="#stay" name="context_default">
+			<context attribute="Normal Text" lineEndContext="#stay" name="context_default">
 				<DetectSpaces/>
 				<Detect2Chars attribute="Comment" context="context_comment_multiline" char="/" char1="*" lookAhead="true" beginRegion="region_comment"/>
 				<Detect2Chars attribute="Comment" context="context_comment_singleline" char="/" char1="/" lookAhead="true" />
@@ -382,7 +382,7 @@
 		<itemDatas>
 			<itemData name="Normal Text" defStyleNum="dsNormal"/>
 			<itemData name="Operator" defStyleNum="dsKeyword" />
-			<itemData name="Variable"  defStyleNum="dsFunction"/>
+			<itemData name="Variable"  defStyleNum="dsVariable"/>
 			<itemData name="Class"  defStyleNum="dsDataType"/>
 			<itemData name="Layer ID" defStyleNum="dsDataType" />
 			<itemData name="Property" defStyleNum="dsKeyword" />

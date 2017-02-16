@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 <!-- Pig syntax highlighting v3.0, Copyright © 2012 Johannes Schwenk, johannes.schwenk@adition.com -->
-<language name="Pig" version="3.0" kateversion="3.4" section="Scripts" extensions="*.pig" mimetype="application/x-pig;text/x-pig" casesensitive="0" author="Johannes Schwenk, johannes.schwenk@adition.com" license="GNU GPL">
+<language name="Pig" version="5" kateversion="3.4" section="Scripts" extensions="*.pig" mimetype="application/x-pig;text/x-pig" casesensitive="0" author="Johannes Schwenk, johannes.schwenk@adition.com" license="GPL">
 	<highlighting>
 		<list name="keywords">
 			<item> load </item>
@@ -177,7 +177,7 @@
 			<itemData name="Statement" defStyleNum="dsOthers" bold="1" spellChecking="false"/>
 			<itemData name="Operator" defStyleNum="dsNormal" bold="1" spellChecking="false"/>
 			<itemData name="Type" defStyleNum="dsDataType" spellChecking="false"/>
-			<itemData name="Grunt" defStyleNum="dsOthers" color="#BA8200" selColor="#FFFFFF" bold="1" italic="0" spellChecking="false"/>
+			<itemData name="Grunt" defStyleNum="dsOperator" color="#BA8200" selColor="#FFFFFF" bold="1" italic="0" spellChecking="false"/>
 			<itemData name="Function" defStyleNum="dsDataType" bold="1" spellChecking="false"/>
 			<itemData name="Float" defStyleNum="dsFloat" spellChecking="false"/>
 			<itemData name="Int" defStyleNum="dsDecVal" spellChecking="false"/>
@@ -185,7 +185,7 @@
 			<itemData name="Octal" defStyleNum="dsBaseN" spellChecking="false"/>
 			<itemData name="Comment" defStyleNum="dsComment"/>
 			<itemData name="String" defStyleNum="dsString"/>
-			<itemData name="Parameter" defStyleNum="dsOthers" color="#25A000" selColor="#FFFFFF" spellChecking="false"/>
+			<itemData name="Parameter" defStyleNum="dsVariable" color="#25A000" selColor="#FFFFFF" spellChecking="false"/>
 		</itemDatas>
 	</highlighting>
 	<general>

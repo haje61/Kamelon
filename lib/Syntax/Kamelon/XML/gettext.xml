@@ -6,8 +6,6 @@
   Copyright 2004, Dominik Haumann <dhdev@gmx.de>
   Copyright 2008, Chusslove Illich <caslav.ilic@gmx.net>
 
-  Last change: 2008-12-03
-
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General Public
   License as published by the Free Software Foundation; either
@@ -23,7 +21,7 @@
   Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
   Boston, MA  02110-1301, USA.
  -->
-<language name="GNU Gettext" version="2.01" kateversion="2.4" section="Markup" extensions="*.po;*.pot" mimetype="text/x-gettext-translation" author="Dominik Haumann (dhdev@gmx.de)" license="LGPL">
+<language name="GNU Gettext" version="4" kateversion="5.0" section="Markup" extensions="*.po;*.pot" mimetype="text/x-gettext-translation" author="Dominik Haumann (dhdev@gmx.de)" license="LGPLv2+">
   <highlighting>
 
     <contexts>
@@ -152,24 +150,24 @@
     </contexts>
 
     <itemDatas>
-      <itemData name = "Normal Text" defStyleNum ="dsNormal" color="#000000"/>
-      <itemData name = "Keyword" defStyleNum ="dsKeyword" color="#000000"/>
-      <itemData name = "KeywordPrevious" defStyleNum ="dsKeyword" italic="true" color="#006060"/>
-      <itemData name = "String" defStyleNum ="dsString" color="#ff0000"/>
-      <itemData name = "StringPrevious" defStyleNum ="dsString" italic="true" color="#008080"/>
+      <itemData name = "Normal Text" defStyleNum ="dsNormal"/>
+      <itemData name = "Keyword" defStyleNum ="dsKeyword"/>
+		<itemData name = "KeywordPrevious" defStyleNum ="dsFunction" italic="true" color="#006060"/>
+      <itemData name = "String" defStyleNum ="dsString"/>
+		<itemData name = "StringPrevious" defStyleNum ="dsSpecialString" italic="true" color="#008080"/>
       <itemData name = "Translator Comment" defStyleNum ="dsComment" color="#888888"/>
-      <itemData name = "Automatic Comment" defStyleNum ="dsComment" color="#0000ff"/>
-      <itemData name = "Reference" defStyleNum ="dsComment" color="#0000ff"/>
-      <itemData name = "Flag" defStyleNum ="dsComment" color="#0000ff"/>
-      <itemData name = "FlagFuzzy" defStyleNum ="dsComment" color="#800080" bold="true"/>
+		<itemData name = "Automatic Comment" defStyleNum ="dsInformation" color="#0000ff"/>
+		<itemData name = "Reference" defStyleNum ="dsDocumentation" color="#0000ff"/>
+		<itemData name = "Flag" defStyleNum ="dsRegionMarker" color="#0000ff"/>
+		<itemData name = "FlagFuzzy" defStyleNum ="dsVariable" color="#800080" bold="true"/>
       <itemData name = "Char" defStyleNum ="dsChar" color="#ff00ff"/>
-      <itemData name = "CharPrevious" defStyleNum ="dsChar" italic="true" color="#00c040"/>
-      <itemData name = "Entity" defStyleNum ="dsString" color="#ff0040" bold="true"/>
-      <itemData name = "EntityPrevious" defStyleNum ="dsString" color="#40c080" bold="true" italic="true"/>
-      <itemData name = "StringTag" defStyleNum ="dsString" color="#c00000" bold="true"/>
-      <itemData name = "StringTagPrevious" defStyleNum ="dsString" color="#006060" bold="true" italic="true"/>
+		<itemData name = "CharPrevious" defStyleNum ="dsSpecialChar" italic="true" color="#00c040"/>
+		<itemData name = "Entity" defStyleNum ="dsBaseN" color="#ff0040" bold="true"/>
+		<itemData name = "EntityPrevious" defStyleNum ="dsConstant" color="#40c080" bold="true" italic="true"/>
+		<itemData name = "StringTag" defStyleNum ="dsFloat" color="#c00000" bold="true"/>
+		<itemData name = "StringTagPrevious" defStyleNum ="dsDataType" color="#006060" bold="true" italic="true"/>
       <itemData name = "Index" defStyleNum ="dsDecVal" color="#0000ff"/>
-      <itemData name = "IndexPrevious" defStyleNum ="dsDecVal" italic="true" color="#000000"/>
+		<itemData name = "IndexPrevious" defStyleNum ="dsVerbatimString" italic="true" color="#000000"/>
       <itemData name = "StringDiffNewWrap" defStyleNum ="dsString" color="#0080f8"/>
       <itemData name = "StringDiffOldWrap" defStyleNum ="dsString" color="#f00080"/>
       <itemData name = "StringDiffNew" defStyleNum ="dsString" underline="true" color="#0080f8"/>

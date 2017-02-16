@@ -2,7 +2,7 @@
 <!DOCTYPE language SYSTEM "language.dtd">
 
 <language name="CoffeeScript"
-          version="1.4"
+          version="2"
           kateversion="3.4"
           section="Scripts"
           extensions="Cakefile;*.coffee;*.coco"
@@ -241,8 +241,8 @@
       <itemData name="Symbol" defStyleNum="dsKeyword" spellChecking="false"/>
       <itemData name="Embedding" defStyleNum="dsChar" spellChecking="false"/>
       <itemData name="Accessor" defStyleNum="dsDataType" spellChecking="false"/>
-      <itemData name="Class" defStyleNum="dsDataType" spellChecking="false" bold="1"/>
-      <itemData name="Javascript" defStyleNum="dsAlert" spellChecking="false" italic="1"/>
+		<itemData name="Class" defStyleNum="dsConstant" spellChecking="false" bold="1"/>
+		<itemData name="Javascript" defStyleNum="dsExtension" spellChecking="false" italic="1"/>
       <itemData name="Regex" defStyleNum="dsString" spellChecking="false"/>
       <itemData name="Reserved" defStyleNum="dsAlert" spellChecking="false"/>
       <itemData name="Value Keywords" defStyleNum="dsOthers" spellChecking="false"/>

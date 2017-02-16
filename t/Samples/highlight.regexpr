@@ -19,11 +19,17 @@ kameel matches. kameel
 KAMEEL does not. KAMEEL
 <TestComplex>
 
-Testing RegExpr.
+Testing RegExpr word boundary
 <RegExpr attribute="Match" context="#stay" String="\bkameel" />
 <TestComplexB>
 kameel matches. :kameel $kameel also but notkameel
 <TestComplexB>
+
+Testing RegExpr non word boundary
+<RegExpr attribute="Match" context="#stay" String="\Bkameel" />
+<TestComplexNB>
+kameel :kameel $kameel all do not match butt notkameel does.
+<TestComplexNB>
 
 Testing RegExprD.
 <RegExpr attribute="Match" context="RegExprDT" String="\b(\d+)" />

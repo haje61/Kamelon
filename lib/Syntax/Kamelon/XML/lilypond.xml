@@ -56,7 +56,7 @@
 ]>
 <language name="LilyPond" section="Other"
           style="lilypond" indenter="lilypond"
-          version="3.07" kateversion="3.3"
+          version="4" kateversion="3.3"
           extensions="*.ly;*.LY;*.ily;*.ILY;*.lyi;*.LYI"
           mimetype="text/x-lilypond"
           author="Wilbert Berendsen (info@wilbertberendsen.nl)" license="LGPL">
@@ -1151,24 +1151,24 @@
       <itemData name="Duration" defStyleNum="dsDataType"/>
       <itemData name="Slur" defStyleNum="dsChar" bold="true"/>
       <itemData name="Dynamic" defStyleNum="dsString" color="#ee5000" bold="true"/>
-      <itemData name="Articulation" defStyleNum="dsString" color="#ee5000" bold="true"/>
-      <itemData name="Chord" defStyleNum="dsDataType" bold="true"/>
-      <itemData name="Beam" defStyleNum="dsDataType" bold="true"/>
+      <itemData name="Articulation" defStyleNum="dsControlFlow" color="#ee5000" bold="true"/>
+      <itemData name="Chord" defStyleNum="dsVariable" bold="true"/>
+      <itemData name="Beam" defStyleNum="dsVariable" bold="true"/>
       <itemData name="Check" defStyleNum="dsDecVal"/>
-      <itemData name="Repeat" defStyleNum="dsDataType" italic="true"/>
+      <itemData name="Repeat" defStyleNum="dsBuiltIn" italic="true"/>
       <itemData name="Keyword" defStyleNum="dsKeyword"/>
       <itemData name="Command" defStyleNum="dsFunction" bold="true"/>
-      <itemData name="User Command" defStyleNum="dsFunction"/>
-      <itemData name="Context" defStyleNum="dsDataType" bold="true"/>
+      <itemData name="User Command" defStyleNum="dsOthers"/>
+      <itemData name="Context" defStyleNum="dsControlFlow" bold="true"/>
       <itemData name="Layout Object" defStyleNum="dsDataType"/>
       <itemData name="Property" defStyleNum="dsDataType"/>
       <itemData name="Variable" defStyleNum="dsDataType"/>
       <itemData name="Engraver" defStyleNum="dsDataType"/>
       <itemData name="Markup" defStyleNum="dsBaseN" color="#009817"/>
-      <itemData name="Lyricmode" defStyleNum="dsKeyword" color="#007010"/>
+      <itemData name="Lyricmode" defStyleNum="dsAttribute" color="#007010"/>
       <itemData name="Lyric Text" defStyleNum="dsNormal" color="#007010"/>
-      <itemData name="Other Mode" defStyleNum="dsKeyword" color="#0094e4"/>
-      <itemData name="Other Text" defStyleNum="dsNormal" color="#0094e4"/>
+      <itemData name="Other Mode" defStyleNum="dsVerbatimString" color="#0094e4"/>
+      <itemData name="Other Text" defStyleNum="dsSpecialString" color="#0094e4"/>
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
       <itemData name="Quoted Text" defStyleNum="dsString"/>
       <itemData name="Comment" defStyleNum="dsComment"/>

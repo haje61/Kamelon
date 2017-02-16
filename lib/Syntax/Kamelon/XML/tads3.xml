@@ -3,11 +3,12 @@
 <!-- TADS 3 syntax highlight definition for Kate. -->
 <!-- Author: Nikos Chantziaras <realnc@gmail.com> -->
 <language name="TADS 3" section="Sources"
-          version="1.0" kateversion="3.3"
+          version="3" kateversion="3.3"
           indenter="cstyle"
           extensions="*.t;*.h"
           mimetype=""
-          priority="0">
+          priority="0"
+          author="Nikos Chantziaras (realnc@gmail.com)">
 
 <highlighting>
 	<list name="keywords">
@@ -156,9 +157,9 @@
 		<itemData name="Comment" defStyleNum="dsComment"/>
 		<itemData name="Symbol" defStyleNum="dsNormal"/>
 		<itemData name="Preprocessor" defStyleNum="dsOthers"/>
-		<itemData name="Backslash Code" defStyleNum="dsKeyword" color="#0F0F8F" selColor="#ffffff" bold="1" italic="0"/>
-		<itemData name="HTML Tag" defStyleNum="dsKeyword" color="#0F0F8F" selColor="#ffffff" bold="0" italic="1"/>
-		<itemData name="Embedded Expression" defStyleNum="dsNormal" color="#000000" selColor="#ffffff" bold="0" italic="1"/>
+		<itemData name="Backslash Code" defStyleNum="dsFunction" color="#0F0F8F" selColor="#ffffff" bold="1" italic="0"/>
+		<itemData name="HTML Tag" defStyleNum="dsPreprocessor" color="#0F0F8F" selColor="#ffffff" bold="0" italic="1"/>
+		<itemData name="Embedded Expression" defStyleNum="dsSpecialString" color="#000000" selColor="#ffffff" bold="0" italic="1"/>
 	</itemDatas>
 
 </highlighting>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Music Publisher" version="1.06" kateversion="2.4" section="Other" extensions="*.mup;*.not" mimetype="text/x-mup;audio/x-mup;application/x-mup;audio/x-notes" casesensitive="1" author="Wilbert Berendsen (wilbert@kde.nl)" license="LGPL">
+<language name="Music Publisher" version="2" kateversion="2.4" section="Other" extensions="*.mup;*.not" mimetype="text/x-mup;audio/x-mup;application/x-mup;audio/x-notes" casesensitive="1" author="Wilbert Berendsen (wilbert@kde.nl)" license="LGPL">
 
   <highlighting>
 
@@ -170,7 +170,7 @@
       <item> ifdef </item>
       <item> ifndef </item>
     </list>
-    
+
 
     <list name="mupmacrodirectives_end">
       <item> @ </item>
@@ -718,20 +718,20 @@
 	<IncludeRules context="Macro" />
       </context>
 
-      
+
       <context attribute="Note Attribute" lineEndContext="#pop" name="Bracket Hs"
       		fallthrough="true" fallthroughContext="#pop">
 	<DetectChar attribute="String" context="String" char="&quot;" />
 	<IncludeRules context="Macro" />
       </context>
-	
+
 
       <context attribute="Note" lineEndContext="#pop" name="Note Probably"
 		fallthrough="true" fallthroughContext="#pop">
 	<RegExpr attribute="Note" context="#pop" String="[a-grs]*" />
       </context>
 
-  
+
       <context attribute="Tuplet" lineEndContext="#pop" name="Tuplet"
 		fallthrough="true" fallthroughContext="#pop">
 	<RegExpr attribute="Tuplet" context="#pop" String="\s*(above|below)?\s*[0-9]{1,2}(y|n|num)?(\s*,\s*[0-9]{1,2}\.?([+][0-9]{1,2}\.?)*)?" />
@@ -740,7 +740,7 @@
 
       <context attribute="Normal Text" lineEndContext="#pop" name="Location"
 		fallthrough="true" fallthroughContext="#pop">
-	<RegExpr attribute="Normal Text" context="#stay" String="[+-\s]+" />
+	<RegExpr attribute="Normal Text" context="#stay" String="[\s+-]+" />
 	<Float attribute="Normal Text" context="#stay" />
 	<RegExpr attribute="Location" context="#stay" String="\btime\b" />
 	<IncludeRules context="Macro" />
@@ -752,7 +752,7 @@
 	<RegExpr attribute="Location Probably" context="#pop" String="[h-qt-z]|_[a-z][a-z_0-9]*" />
       </context>
 
-  
+
       <context attribute="Comment" lineEndContext="#pop" name="Comment">
 	<IncludeRules context="##Alerts" />
       </context>
@@ -822,12 +822,12 @@
 	<DetectChar attribute="Macro" context="#stay" char="@" endRegion="macro" />
       </context>
 
-      
+
       <context attribute="Location" lineEndContext="#pop" name="Macro Location"
 		fallthrough="true" fallthroughContext="#pop">
 	<RegExpr attribute="Location Probably" context="#pop" String=".." />
       </context>
-      
+
     </contexts>
 
     <itemDatas>
@@ -836,22 +836,22 @@
       <itemData name="Special Char"      defStyleNum="dsKeyword" />
       <itemData name="Parameter"         defStyleNum="dsChar" />
       <itemData name="Value"	         defStyleNum="dsFloat" />
-      <itemData name="Unset Command"     defStyleNum="dsFloat"   bold="1" />
+		<itemData name="Unset Command"     defStyleNum="dsChar"   bold="1" />
       <itemData name="Comment"           defStyleNum="dsComment" />
       <itemData name="Macro"             defStyleNum="dsOthers"  color="#11F" selColor="#1FF" />
       <itemData name="Print Command"     defStyleNum="dsBaseN" />
       <itemData name="Barline"           defStyleNum="dsDecVal"  color="#c62" />
       <itemData name="Newscore"          defStyleNum="dsDecVal"  color="#c62" bold="1" />
-      <itemData name="Note"	         defStyleNum="dsNormal" />
-      <itemData name="Note Attribute"    defStyleNum="dsNormal"  italic="1" color="#07b" />
-      <itemData name="Tuplet"            defStyleNum="dsNormal"  color="#035" />
-      <itemData name="Location"          defStyleNum="dsKeyword" color="#0C4" bold="1" />
-      <itemData name="Location Probably" defStyleNum="dsKeyword" color="#0C4" bold="0" />
+		<itemData name="Note"	         defStyleNum="dsControlFlow" />
+		<itemData name="Note Attribute"    defStyleNum="dsAttribute"  italic="1" color="#07b" />
+		<itemData name="Tuplet"            defStyleNum="dsConstant"  color="#035" />
+		<itemData name="Location"          defStyleNum="dsPreprocessor" color="#0C4" bold="1" />
+		<itemData name="Location Probably" defStyleNum="dsRegionMarker" color="#0C4" bold="0" />
       <itemData name="String"            defStyleNum="dsString" />
-      <itemData name="String Special"    defStyleNum="dsString" bold="1" />
+		<itemData name="String Special"    defStyleNum="dsSpecialString" bold="1" />
       <itemData name="String Error"      defStyleNum="dsError" />
-      <itemData name="String Lyrics"     defStyleNum="dsString"  color="#800" />
-      <itemData name="Lyrics"            defStyleNum="dsBaseN"   bold="1" />
+		<itemData name="String Lyrics"     defStyleNum="dsVerbatimString"  color="#800" />
+		<itemData name="Lyrics"            defStyleNum="dsInformation"   bold="1" />
       <itemData name="Error"             defStyleNum="dsError"   color="black" />
     </itemDatas>
 

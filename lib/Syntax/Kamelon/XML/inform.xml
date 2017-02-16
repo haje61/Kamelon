@@ -2,7 +2,7 @@
 <!DOCTYPE language SYSTEM "language.dtd">
 <!-- author: Giancarlo Niccolai (giancarlo@niccolai.ws) -->
 <!-- This file is released under GPL license 2.0 or any later version at your choice. -->
-<language name="Inform" version="1.23" kateversion="2.4" section="Sources" extensions="*.inf;*.h" mimetype="text/x-inform-src" author="Giancarlo Niccolai (giancarlo@niccolai.ws)" license="GPL">
+<language name="Inform" version="2" kateversion="2.4" section="Sources" extensions="*.inf;*.h" mimetype="text/x-inform-src" author="Giancarlo Niccolai (giancarlo@niccolai.ws)" license="GPL">
 <highlighting>
    <list name="keywords">
       <item> if </item>
@@ -384,16 +384,16 @@
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
       <itemData name="Keyword"  defStyleNum="dsKeyword"/>
       <itemData name="Actions"  defStyleNum="dsDataType" color="#E06060" selColor="#400000" bold="0" italic="0"/>
-      <itemData name="Operator"  defStyleNum="dsBaseN" color="#A01060" selColor="#400040" bold="0" italic="0"/>
+		<itemData name="Operator"  defStyleNum="Operator" color="#A01060" selColor="#400040" bold="0" italic="0"/>
       <itemData name="Number"  defStyleNum="dsDecVal" color="#5050C0" selColor="#000000" bold="0" italic="0"/>
-      <itemData name="OpCode"  defStyleNum="dsDecVal" color="#3015F0" selColor="#000000" bold="1" italic="0"/>
+		<itemData name="OpCode"  defStyleNum="dsKeyword" color="#3015F0" selColor="#000000" bold="1" italic="0"/>
       <itemData name="Values"  defStyleNum="dsBaseN" color="#7020F0" selColor="#400000" bold="1" italic="0" />
       <itemData name="Pragma"  defStyleNum="dsOthers" color="#109010" selColor="#400000" bold="1" italic="0" />
       <itemData name="PredefFunction"  defStyleNum="dsFunction" />
       <itemData name="Function"        defStyleNum="dsFunction" />
       <itemData name="Comment"  defStyleNum="dsComment" color="#707070" selColor="#ffffff" bold="0" italic="1"/>
       <itemData name="String"  defStyleNum="dsString" color="#007000" selColor="#007000" bold="0" italic="0"/>
-      <itemData name="Word"  defStyleNum="dsString" color="#007000" selColor="#007000" bold="0" italic="1"/>
+		<itemData name="Word"  defStyleNum="dsSpecialString" color="#007000" selColor="#007000" bold="0" italic="1"/>
    </itemDatas>
 </highlighting>
 <general>

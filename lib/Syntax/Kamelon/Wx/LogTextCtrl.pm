@@ -16,19 +16,22 @@ my $blue                = [0x00, 0x00, 0xff];
 my $darkgreen           = [0x00, 0x80, 0x00];
 my $brown               = [0xa5, 0x2a, 0x2a];
 my $red                 = [0xff, 0x00, 0x00];
+my $foreground 			= [0x10, 0x10, 0x10];
+my $background				= [0xf0, 0xf0, 0xf0];
 
 my $defaultstyle = [
-	['title', undef, undef, [12, undef, undef, wxFONTWEIGHT_BOLD]],
+	['title', $foreground, undef, [12, undef, undef, wxFONTWEIGHT_BOLD]],
 	['key', $blue],
 	['value', $brown],
 	['error', $red],
-	['header', undef, undef, [undef, undef, undef,  wxFONTWEIGHT_BOLD]],
+	['header', $foreground, undef, [undef, undef, undef,  wxFONTWEIGHT_BOLD]],
 	['header1', $blue, undef, [undef, undef, undef,  wxFONTWEIGHT_BOLD]],
 	['message', $darkgreen],
-	['normal'],
+	['normal', $foreground],
 ];
 my $keylength = 20;
 my $formatdirection = 0;
+
 
 sub new {
    my $class = shift;
@@ -38,7 +41,13 @@ sub new {
    $self->SetFont( Wx::Font->new(@$defaultfont) );
    $self->{INDENT} = 0;
    $self->{INDENTSTRING} = "   ";
-   $self->{STYLES} = {};
+
+   my $attr = Wx::TextAttr->new;
+	$attr->SetTextColour(Wx::Colour->new(@$foreground));
+	$attr->SetBackgroundColour(Wx::Colour->new(@$background));
+	$self->SetDefaultStyle($attr);
+
+	$self->{STYLES} = {};
 	$self->SetStyles;
 
    return $self;

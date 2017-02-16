@@ -16,7 +16,6 @@ sub new {
 	my %args = (@_);
 	
 	my $engine = delete $args{engine};
-
    my $self = $class->SUPER::new(%args);
 
    $self->{CURCONTEXT} = '';
@@ -31,30 +30,32 @@ sub new {
 
 sub AttributeGet {
 	my ($self, $attribute) = @_;
+	unless ((defined $attribute) and (length($attribute) > 0)) {
+		return $self->AttributeGetContext;
+	}
 	if (exists $self->{ATTRIBUTES}->{$attribute}) {
 		return $self->{ATTRIBUTES}->{$attribute}
+	} else {
+		return $self->AttributeGetContext;
 	} 
+	return 'Normal'
+}
+
+sub AttributeGetContext {
+	my $self = shift;
 	if (exists $self->ContextData->{$self->CurContext}->{attribute}) {
-		$self->LogWarning("Undefined attribute '$attribute', reverting to context attribute");
-		$attribute = $self->ContextData->{$self->CurContext}->{attribute};
+		my $attribute = $self->ContextData->{$self->CurContext}->{attribute};
 		if (exists $self->{ATTRIBUTES}->{$attribute}) {
 			return $self->{ATTRIBUTES}->{$attribute}
 		} 
-	} 
-	$self->LogWarning("Undefined attribute '$attribute', reverting to 'Normal'");
+	}
 	return 'Normal'
 }
 
 sub AttributeGetF {
-	my ($self, $attribute, $ctx) = @_;
+	my ($self, $attribute) = @_;
 	my $token = $self->AttributeGet($attribute);
-	my $eng = $self->{ENGINE};
-	my $a = $eng->FormatTable($token);
-	unless (defined $a) {
-		$a = $eng->FormatTable('Normal');
-		$self->LogWarning("Undefined Format token '$token', for '$attribute' reverting to 'Normal'");
-	}
-	return $a
+	return $self->Engine->Formatter->FormatTable($token)
 }
 
 sub ContextExists {
@@ -82,11 +83,6 @@ sub CurRule {
 	my $self = shift;
 	if (@_) { $self->{CURRULE} = shift; }
 	return $self->{CURRULE};
-}
-
-sub DebugMode {
-	my $self = shift;
-	return ($self->{ENGINE}->{MODE} eq 'debug')
 }
 
 sub Deliminators {
@@ -186,8 +182,6 @@ my %tests = (
 
 sub Setup {
 	my $self = shift;
-	$self->SUPER::Setup;
-	
 	my $deliminators = ".():!+,-<=>%&*/;?[]^{|}~\\";
 	my $wdelim = $self->WeakDeliminator;
 	while ($wdelim ne '') {
@@ -197,7 +191,9 @@ sub Setup {
 		$deliminators =~ s/$wd//;
 	}
 	my $adelim = $self->AdditionalDeliminator;
-	$deliminators = $deliminators . $adelim;
+	if (defined $adelim) {
+		$deliminators = $deliminators . $adelim;
+	}
 	my @delimchars = split //, $deliminators;
 	my $delim = '';
 	for (@delimchars) {
@@ -267,7 +263,7 @@ sub SetupContext {
 	my %inf = %$data;
 	delete $inf{items};
 	my %newcontext = (
-		attribute => $eng->FormatTable('Normal'),
+		attribute => $eng->{FORMATTER}->FormatTable('Normal'),
 		callbacks => [],
 		debug => [],
 		info => \%inf,
@@ -346,10 +342,10 @@ sub SetupContextRules {
 				if ($language ne $self->Syntax) { #and it refers to another syntax indeed
 					if ($inclattr) { # includeAttr is set
 						my $attr = $self->AttributeGetF($self->ContextData->{$context}->{'attribute'});
-						push @rules, [$eng->can("IncludeLanguageIA"), $language, $context, $attr];
+						push @rules, [$eng->can("IncludeSyntaxIA"), $language, $context, $attr];
 						push @debug, $i;
 					} else {
-						push @rules, [$eng->can("IncludeLanguage"), $language, $context];
+						push @rules, [$eng->can("IncludeSyntax"), $language, $context];
 						push @debug, $i;
 					}
 				} else { #it can be treated as an include rules
@@ -396,9 +392,10 @@ sub SetupContextRules {
 			my $l = $parses{$type};
 			my ($method, @options) = &$l($self, $i);
 			if (defined $method) { #returning an undefined method indicates an integrity problem. the rule is skipped.
+				my $formatter = $eng->Formatter;
 				$i->{method} = $method;
 
-				#set the method 
+				#set the test method 
 				unshift @options, $eng->can($method);
 
 				#add context
@@ -412,9 +409,6 @@ sub SetupContextRules {
 				$attribute = $self->AttributeGetF($attribute);
 				push @options, $attribute;
 				
-				#add beginRegion and endRegion
-				push @options, $beginreg, $endreg;
-
 				#prepend column call if needed
 				if (defined $column) { 
 					unshift @options, $column;
@@ -425,34 +419,56 @@ sub SetupContextRules {
 				if ($firstnonspace) { 
 					unshift @options, $eng->can('testCommonFirstNonSpace');
 				}
-				
-				#add the command call if needed
-				if (defined $command) {
-					push @options, $command, $eng->can('ParseResultCommand');
-				}
-				
-				#add the result parser
+
+				#Add result parsers. Note: Last one to be called is first one to be pushed.
 				my $rparser = 'ParseResult';
+				if ($formatter->Folding) {
+					if ((defined $beginreg) or (defined $endreg)) {
+						$rparser = $rparser . 'Chained';
+					}
+					if (defined $beginreg) {
+						push @options, $beginreg;
+						push @options, $eng->can('ParseResultBeginRegionPost');
+					}
+					if (defined $endreg) {
+						push @options, $endreg;
+						push @options, $eng->can('ParseResultEndRegionPost');
+					}
+					
+				}
 				if ($lookahead) { 
-					$rparser = $rparser . 'LookAhead' 
-				} elsif (defined $overstrike) {
+					$rparser = $rparser . 'LookAhead'
+				}
+				push @options, $eng->can($rparser);
+				if (defined $overstrike) {
 					while (length $overstrike < 128) {
 						$overstrike = $overstrike . $overstrike
 					}
 					push @options, $overstrike;
-					$rparser = $rparser . 'OverStrike' ;
+					push @options, $eng->can('ParseResultOverStrike');
 					
-				} elsif (defined $replace) {
+				} 
+				if (defined $replace) {
 					push @options, $replace;
-					$rparser = $rparser . 'Replace' ;
+					push @options, $eng->can('ParseResultReplace');
+				}
+				if (defined $command) {
+					push @options, $command, $eng->can('ParseResultCommand');
 				}
 				
-				my $p = $eng->can($rparser);
-				push @options, $p;
-				
+				#add region marker parsers
+				if ($formatter->Folding) {
+					if (defined $beginreg) {
+						push @options, $beginreg;
+						push @options, $eng->can('ParseResultBeginRegionPre');
+					}
+					if (defined $endreg) {
+						push @options, $endreg;
+						push @options, $eng->can('ParseResultEndRegionPre');
+					}
+				}
 				push @rules, \@options;
 				push @debug, $i;
-				
 			}
 		}
 	}
@@ -502,6 +518,10 @@ sub SetupRuleAnyChar {
 	my @o = $self->RuleGetArgs($rule, qw/String insensitive/ );
 	my $method = $tests{$rule->{'type'}};
 	my $string = shift @o;
+	unless ((defined $string) and ($string ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
 	my $i = shift @o;
 	if ($i) { 
 		$method = $method . 'I';
@@ -518,11 +538,17 @@ sub SetupRuleDefault {
 
 sub SetupRuleDetectChar {
 	my ($self, $rule) = @_;
-	my @o = $self->RuleGetArgs($rule, qw/char insensitive dynamic/ );
+	my ($char, $i, $d) = $self->RuleGetArgs($rule, qw/char insensitive dynamic/ );
 	my $method = $tests{$rule->{'type'}};
-	my $char = $self->RuleGetChar(shift @o);
-	my $i = shift @o;
-	my $d = shift @o;
+	unless ((defined $char) and ($char ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is not defined or is empty");
+		return (undef);
+	}
+	$char = $self->RuleGetChar($char);
+	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is longer than one character");
+		return (undef);
+	}
 	if ($d and $self->CurContextIsDynamic) {
 		$method = $method . 'D';
 	}
@@ -535,12 +561,26 @@ sub SetupRuleDetectChar {
 
 sub SetupRuleDetect2Chars {
 	my ($self, $rule) = @_;
-	my @o = $self->RuleGetArgs($rule, qw/char char1 insensitive dynamic/ );
+	my ($char, $char1, $i, $d) = $self->RuleGetArgs($rule, qw/char char1 insensitive dynamic/ );
 	my $method = $tests{$rule->{'type'}};
-	my $char = $self->RuleGetChar(shift @o);
-	my $char1 = $self->RuleGetChar(shift @o);
-	my $i = shift @o;
-	my $d = shift @o;
+	unless ((defined $char) and ($char ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is not defined or is empty");
+		return (undef);
+	}
+	unless ((defined $char1) and ($char1 ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char1 is not defined or is empty");
+		return (undef);
+	}
+	$char = $self->RuleGetChar($char);
+	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is longer than one character");
+		return (undef);
+	}
+	$char1 = $self->RuleGetChar($char1);
+	unless (length($char1) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char1 is longer than one character");
+		return (undef);
+	}
 	if ($d and $self->CurContextIsDynamic) {
 		$method = $method . 'D';
 	}
@@ -555,6 +595,10 @@ sub SetupRuleDetect2Chars {
 sub SetupRuleKeyword {
 	my ($self, $rule) = @_;
 	my ($string) = $self->RuleGetArgs($rule, 'String' );
+	unless ((defined $string) and ($string ne '')) {
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
 	my $method = $tests{$rule->{'type'}};
 	unless ($self->KeywordsCase) { $method = $method . 'I' }
 	my $lsts = $self->{LISTS};
@@ -568,10 +612,16 @@ sub SetupRuleKeyword {
 
 sub SetupRuleLineContinue {
 	my ($self, $rule) = @_;
-	my @o = $self->RuleGetArgs($rule, 'char' );
-	my $char = shift @o;
-	unless (defined $char) { $char = '\\' }
-	$char = $self->RuleGetChar($char);
+	my ($char) = $self->RuleGetArgs($rule, 'char' );
+	if  (defined $char) {
+		$self->RuleGetChar($char);
+	} else { 
+		$char = '\\' 
+	}
+	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is longer than one character");
+		return (undef);
+	}
 	if (index($regchars, $char) >= 0) { $char = "\\$char" };
 	
 	my $method = $tests{$rule->{'type'}};
@@ -580,11 +630,26 @@ sub SetupRuleLineContinue {
 
 sub SetupRuleRangeDetect {
 	my ($self, $rule) = @_;
-	my @o = $self->RuleGetArgs($rule, qw/char char1 insensitive/ );
+	my ($char, $char1, $i, $d) = $self->RuleGetArgs($rule, qw/char char1 insensitive/ );
 	my $method = $tests{$rule->{'type'}};
-	my $char = $self->RuleGetChar(shift @o);
-	my $char1 = $self->RuleGetChar(shift @o);
-	my $i = shift @o;
+	unless ((defined $char) and ($char ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is not defined or is empty");
+		return (undef);
+	}
+	unless ((defined $char1) and ($char1 ne '')) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char1 is not defined or is empty");
+		return (undef);
+	}
+	$char = $self->RuleGetChar($char);
+	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char is longer than one character");
+		return (undef);
+	}
+	$char1 = $self->RuleGetChar($char1);
+	unless (length($char1) eq 1) { #the regex did not compile, the rule is useless
+		$self->LogWarning("Option char1 is longer than one character");
+		return (undef);
+	}
 	if ($i) { 
 		$method = $method . 'I';
 		$char = lc($char);
@@ -593,53 +658,74 @@ sub SetupRuleRangeDetect {
 	return $method, $char, $char1
 }
 
-sub SetupRuleRegMinimal {
+# sub SetupRuleRegMinimal {
+# 	my ($self, $rule) = @_;
+# 	my ($string, $minimal) = $self->RuleGetArgs($rule, qw/ String minimal /);
+# # 	my $string = $rule->{'String'};
+# # 	my $minimal = $rule->{'minimal'};
+# # 	unless (defined($minimal)) { $minimal = 0 }
+# # 	$minimal = $self->Booleanize($minimal);
+# 	my $reg = '';
+# 	if ($minimal) {
+# 		my $lastchar = '';
+# 		while ($string ne '') {
+# 			if ($string =~ s/^(\*|\+)//) {
+# 				$reg = "$reg$1";
+# 				if ($lastchar ne "\\") {
+# 					$reg = "$reg?";
+# 				}
+# 				$lastchar = $1;
+# 			} else {
+# 				if ($string =~ s/^(.)//) {
+# 					$reg = "$reg$1";
+# 					$lastchar = $1;
+# 				} 
+# 			}
+# 		}
+# 	} else {
+# 		$reg = $string;
+# 	}
+# 	return $reg
+# }
+
+sub SetupRuleRegExpr {
 	my ($self, $rule) = @_;
-	my ($string, $minimal) = $self->RuleGetArgs($rule, qw/ String minimal /);
-# 	my $string = $rule->{'String'};
-# 	my $minimal = $rule->{'minimal'};
-# 	unless (defined($minimal)) { $minimal = 0 }
-# 	$minimal = $self->Booleanize($minimal);
-	my $reg = '';
+	my ($reg, $i, $d, $minimal) = $self->RuleGetArgs($rule, qw/ String insensitive dynamic minimal/ );
+	unless ((defined $reg) and ($reg ne '')) {
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
 	if ($minimal) {
+		my $string = '';
 		my $lastchar = '';
-		while ($string ne '') {
+		while ($reg ne '') {
 			if ($string =~ s/^(\*|\+)//) {
-				$reg = "$reg$1";
+				$string = "$string$1";
 				if ($lastchar ne "\\") {
-					$reg = "$reg?";
+					$string = "$string?";
 				}
 				$lastchar = $1;
 			} else {
-				if ($string =~ s/^(.)//) {
-					$reg = "$reg$1";
+				if ($reg =~ s/^(.)//) {
+					$string = "$string$1";
 					$lastchar = $1;
 				} 
 			}
 		}
-	} else {
-		$reg = $string;
+		$reg = $string
 	}
-	return $reg
-}
-
-sub SetupRuleRegExpr {
-	my ($self, $rule) = @_;
-	my $reg = $self->SetupRuleRegMinimal($rule);
-	my @o = $self->RuleGetArgs($rule, qw/ insensitive dynamic/ );
-	my $method = $tests{$rule->{'type'}};
-	my $i = shift @o;
-	my $d = shift @o;
-	my $complex = 0;
 	my $prepend;
+	my $method = $tests{$rule->{'type'}};
+	unless ($reg ne '') {
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
 	if ($reg =~ s/^\^//) { 
 		$prepend = 'testCommonLineStart'
-	} elsif ($reg =~ s/^\\(b)//i) {
-		if ($1 eq 'b') {
-			$prepend = 'testCommonLastCharBb'
-		} else {
-			$prepend = 'testCommonLastCharBB'
-		}
+	} elsif ($reg =~ s/^\\(b)//) {
+		$prepend = 'testCommonLastCharBb'
+	} elsif ($reg =~ s/^\\(B)//) {
+		$prepend = 'testCommonLastCharBB'
 	}
 	unless ($d and $self->CurContextIsDynamic) { 
 		$reg = "^($reg)";
@@ -660,7 +746,7 @@ sub SetupRuleRegExpr {
 		$method = $method . 'I';
 	}
 	my @out = ($reg);
-	if (defined $prepend) { 
+	if (defined $prepend) {
 		unshift @out, $prepend, $self->{ENGINE}->can($method) ;
 	} else {
 		unshift @out, $method
@@ -675,6 +761,10 @@ sub SetupRuleStringDetect {
 	my $string = shift @o;
 	my $i = shift @o;
 	my $d = shift @o;
+	unless ((defined $string) and ($string ne '')) {
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
 	if ($d and $self->CurContextIsDynamic) {
 		$method = $method . 'D'
 	}

@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 -->
-<language name="Jam" version="0.4" kateversion="2.4" section="Other" extensions="Jam*;*.jam" mimetype="text/x-jam;text/x-Jamfile;text/x-Jamrules;text/x-Jambase">
+<language name="Jam" version="2" kateversion="2.4" section="Other" extensions="Jam*;*.jam" mimetype="text/x-jam;text/x-Jamfile;text/x-Jamrules;text/x-Jambase" author="Mildred (silkensedai@online.fr)" license="MIT">
   <!--
   Changelog
     0.2
@@ -314,25 +314,25 @@ IN THE SOFTWARE.
     </contexts>
     <itemDatas>
       <!-- action definition (shell script) -->
-      <itemData name="actionAttribute" defStyleNum="dsNormal" italic="1"/>
+      <itemData name="actionAttribute" defStyleNum="dsInformation" italic="1"/>
       <itemData name="ActionText" defStyleNum="dsNormal"/>
       <!-- rule / action call -->
       <itemData name="Rule" defStyleNum="dsFunction" color="black" underline="1"/>
       <itemData name="Action" defStyleNum="dsNormal"/>
       <!-- variables with attributes -->
-      <itemData name="Variable" defStyleNum="dsNormal" color="darkgreen"/>
-      <itemData name="VariableDelimiter" defStyleNum="dsNormal" color="blue"/>
-      <itemData name="VariableAttribute" defStyleNum="dsNormal" color="blue"/>
-      <itemData name="VarAssign" defStyleNum="dsNormal" color="darkgreen"/>
-      <itemData name="Varname" defStyleNum="dsNormal" color="darkgreen" italic="1"/>
+      <itemData name="Variable" defStyleNum="dsVariable" color="darkgreen"/>
+      <itemData name="VariableDelimiter" defStyleNum="dsSpecialChar" color="blue"/>
+      <itemData name="VariableAttribute" defStyleNum="dsDataType" color="blue"/>
+      <itemData name="VarAssign" defStyleNum="dsExtension" color="darkgreen"/>
+      <itemData name="Varname" defStyleNum="dsFloat" color="darkgreen" italic="1"/>
       <!-- common -->
       <itemData name="Normal" defStyleNum="dsNormal"/>
-      <itemData name="Operator" defStyleNum="dsNormal" bold="1"/>
+      <itemData name="Operator" defStyleNum="dsOperator" bold="1"/>
       <itemData name="Keyword" defStyleNum="dsKeyword" bold="1"/>
       <itemData name="Comment" defStyleNum="dsComment"/>
-      <itemData name="CommentTitle" defStyleNum="dsComment" color="darkorange" bold="1"/>
+      <itemData name="CommentTitle" defStyleNum="dsDocumentation" color="darkorange" bold="1"/>
       <itemData name="String" defStyleNum="dsString" color="red"/>
-      <itemData name="EscapeSeq" defStyleNum="dsString" color="purple" bold="1"/>
+      <itemData name="EscapeSeq" defStyleNum="dsSpecialChar" color="purple" bold="1"/>
       <itemData name="Alert" defStyleNum="dsAlert"/>
       <itemData name="Error" defStyleNum="dsError"/>
     </itemDatas>

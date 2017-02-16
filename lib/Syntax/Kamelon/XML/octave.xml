@@ -15,7 +15,7 @@
 -->
 
 
-<language name="Octave" version="1.02" kateversion="3.4" section="Scientific" extensions="*.octave;*.m;*.M" mimetype="text/octave" casesensitive="1" license="GPL" author="Luis Silvestre and Federico Zenith">
+<language name="Octave" version="2" kateversion="3.4" section="Scientific" extensions="*.octave;*.m;*.M" mimetype="text/octave" casesensitive="1" license="GPL" author="Luis Silvestre and Federico Zenith">
 
   <highlighting>
 
@@ -2196,13 +2196,13 @@
       <itemData name="Delimiter" defStyleNum="dsNormal" spellChecking="false"/>
       <itemData name="String" defStyleNum="dsString" color="#b20000"/>
       <itemData name="String Char"  defStyleNum="dsChar"/>
-      <itemData name="Incomplete String" defStyleNum="dsChar" color="#a020f0" spellChecking="false"/>
-      <itemData name="Keyword"  defStyleNum="dsNormal" color="#0000ff" spellChecking="false"/>
+      <itemData name="Incomplete String" defStyleNum="dsSpecialString" color="#a020f0" spellChecking="false"/>
+      <itemData name="Keyword"  defStyleNum="dsKeyword" color="#0000ff" spellChecking="false"/>
       <itemData name="Comment" defStyleNum="dsComment" color="#009900"/>
       <itemData name="Functions" defStyleNum="dsFunction" color="#0000ff" selColor="#00ff00" bold="1" italic="1" spellChecking="false"/>
-      <itemData name="Forge" defStyleNum="dsFunction" color="#000099" selColor="#009900" bold="1" italic="1" spellChecking="false"/>
+      <itemData name="Forge" defStyleNum="dsDataType" color="#000099" selColor="#009900" bold="1" italic="1" spellChecking="false"/>
       <itemData name="Builtin" defStyleNum="dsBaseN" color="#b28c00" spellChecking="false"/>
-      <itemData name="Commands" defStyleNum="dsFunction" color="#b28c00" spellChecking="false"/>
+      <itemData name="Commands" defStyleNum="dsBuiltIn" color="#b28c00" spellChecking="false"/>
     </itemDatas>
 
   </highlighting>

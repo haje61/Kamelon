@@ -82,7 +82,7 @@ sub new {
 		}
 	}
 	
-# 	my $format = delete $args{'format'};
+ 	my $format = delete $args{'formatter'};
 	my $formattable = delete $args{format_table};
 	my $cmnds = delete $args{commands};
 	my $logcall = delete $args{logcall};
@@ -94,6 +94,7 @@ sub new {
 	bless ($self, $class);
 
 	unless (defined $cmnds) { $cmnds = {} }
+	
 	unless (defined($formattable)) { 
 		my %sub = ();
 		for (@attributes) {
@@ -101,25 +102,27 @@ sub new {
 		}
 		$formattable = \%sub
 	}
-	
-# 	#configure the formatter
-# 	unless (defined($format)) {
-# 		$format = ['Raw']
-# 	}
+	unless (defined($substitutions)) { $substitutions = {} }
+	$self->{FORMATTABLE} = $formattable;
+	$self->{SUBSTITUTIONS} = $substitutions;
+
+	#configure the formatter
+	unless (defined($format)) { $format = ['Base'] }
+	$self->InitFormatter($format);
 	
 	unless (defined $logcall) { $logcall = sub { print STDERR shift, "\n" } }
 	unless (defined($syntax)) { $syntax = '' };
-	unless (defined($substitutions)) { $substitutions = {} }
    unless (defined($verbose)) { $verbose = 0 };
 
 	$self->{CAPTURED} = [];
 	$self->{COMMANDS} = [];
+	$self->{CURRENTLINE} = '';
 # 	$self->{FORMATTER} = $format;
-	$self->{FORMATTABLE} = $formattable;
 	$self->{HLPOOL} = {};
 	$self->{INDEXER} = Syntax::Kamelon::Indexer->new(%indexer);
 	$self->{INDEXEROPTS} = \%indexer;
 	$self->{LOGCALL} = $logcall;
+	$self->{LINENUMBER} = 1;
 	$self->{LINESEGMENT} = '';
 	$self->{OUT} = [];
 	$self->{POSTCREATE} = [];
@@ -127,7 +130,6 @@ sub new {
 	$self->{SNIPPET} = '';
 	$self->{SNIPPETATTRIBUTE} = $self->FormatTable('Normal');
 	$self->{STACK} = [];
-	$self->{SUBSTITUTIONS} = $substitutions;
 	$self->{SYNTAX} = $syntax;
 	$self->{USEATTRIBSTACK} = [];
 	$self->{VERBOSE} = $verbose;
@@ -241,6 +243,11 @@ sub CommandExecute {
 	return $parse;
 }
 
+sub CurrentLine {
+	my $self = shift;
+	return $self->{CURRENTLINE};
+}
+
 sub FirstNonSpace {
 	my ($self, $string) = @_;
 	my $line = $self->{LINESEGMENT};
@@ -264,9 +271,18 @@ sub FormatTable {
 	return undef
 }
 
+sub Formatter {
+	my $self = shift;
+	return $self->{FORMATTER}
+}
+
+sub Get {
+	my $self = shift;
+	return $self->{FORMATTER}->Get;
+}
+
 sub GetHighlighter {
 	my ($self, $syntax) = @_;
-# 	print "GetHighlighter $syntax\n";
 	my $pool = $self->{HLPOOL};
 	my $id = $self->{INDEXER};
 	my $i = $id->{INDEX};
@@ -298,90 +314,6 @@ sub GetHighlighter {
 sub GetIndexer {
 	my $self = shift;
 	return $self->{INDEXER}
-}
-
-sub Highlight {
-	my ($self, $text) = @_;
-	$self->{SNIPPET} = '';
-	my $out = $self->{OUT};
-	@$out = ();
-# 	my $call = $modecalls{$self->{MODE}};
-	while ($text ne '') {
-		if ($text =~ s/^([^\n]+\n)//) {
-# 			&$call($self, $1);
-			$self->HighlightLine($1);
-		} else {
-# 			&$call($self, $text);
-			$self->HighlightLine($text);
-			$text = ''
-		}
-	}
-	$self->SnippetForce;
-	return @$out;
-}
-
-sub HighlightAndFormat {
-	my ($self, $text) = @_;
-	my $res = '';
-	my @hl = $self->Highlight($text);
-# 	use Data::Dumper; print Dumper \@hl;
-	while (@hl) {
-		my $f = shift @hl;
-		my $t = shift @hl;
-		unless (defined($t)) { 
-			$t = $self->FormatTable('Normal') 
-		}
-		my $s = $self->Substitutions;
-		my $rr = '';
-		while ($f ne '') {
-			my $k = substr($f , 0, 1);
-			$f = substr($f, 1, length($f) -1);
-			if (exists $s->{$k}) {
-				 $rr = $rr . $s->{$k}
-			} else {
-				$rr = $rr . $k;
-			}
-		}
-		$res = $res . $t->[0] . $rr . $t->[1];
-	}
-	return $res;
-}
-
-sub HighlightLine {
-	my ($self, $text) = @_;
-	while ($text ne '') {
-		my $top = $self->{STACK}->[0];
-		my ($hl, $context) = @$top;
-		my $ctd = $hl->{contexts}->{$context};
-		if ($text =~ s/^(\n)//) {
-			if ($self->LineStart) {
-				my $m = $ctd->{emptycontext};
-				&$m;
-			}
-			$self->SnippetForce;
-			$self->LineEndContext($ctd->{endcontext});
-			my $attr = $ctd->{attribute};
-			$self->SnippetParse($1, $attr);
-			$self->SnippetForce;
-			$self->{LINESEGMENT} = '';
-		} else {
-			my $callbacklist = $ctd->{callbacks};
-			my $debuginfo = $ctd->{debug};
-			unless ($self->ParseContext(\$text, $callbacklist, $debuginfo)) {
-				my $f = $ctd->{fallthroughcontext};
-				if (defined($f)) {
-					&$f;
-				} else {
-					$text =~ s/^(.)//;
-					my $attr = $self->{USEATTRIBSTACK}->[0];
-					unless (defined $attr) {
-						$attr = $ctd->{attribute};
-					}
-					$self->SnippetParse($1, $attr);
-				}
-			}
-		}
-	}
 }
 
 sub IncludeRules {
@@ -421,7 +353,8 @@ sub InitFormatter {
    my ($self, $form) = @_;
    my @fopt = @$form;
    my $module = shift @fopt;
-	if (can_load(modules => {"Syntax::Kamelon::Format::$module" => 0})){
+   $module = "Syntax::Kamelon::Format::$module";
+	if (can_load(modules => {$module => 0})){
 		$self->{FORMATTER} = $module->new($self, @fopt);
 	} else {
 		warn "unable to load formatter $module\n";
@@ -453,6 +386,11 @@ sub LastChar {
 	my $l = $self->{LINESEGMENT};
 	if ($l eq '') { return "\n" } #last character was a newline
 	return substr($l, length($l) - 1, 1);
+}
+
+sub LineNumber {
+	my $self = shift;
+	return $self->{LINENUMBER}
 }
 
 sub LineEndContext {
@@ -498,16 +436,92 @@ sub LogWarning {
 	}
 }
 
+sub Parse {
+	my ($self, $text) = @_;
+	$self->{SNIPPET} = '';
+	my $out = $self->{OUT};
+	@$out = ();
+	while ($text ne '') {
+		if ($text =~ s/^([^\n]+\n)//) {
+			$self->ParseLine($1);
+		} else {
+			$self->ParseLine($text);
+			$text = ''
+		}
+	}
+	$self->SnippetForce;
+	return $self->{FORMATTER}->Format(@$out);
+}
+
+sub ParseLine {
+	my ($self, $text) = @_;
+	$self->{CURRENTLINE} = $text;
+	while ($text ne '') {
+		my $top = $self->{STACK}->[0];
+		my ($hl, $context) = @$top;
+		my $ctd = $hl->{contexts}->{$context};
+		if ($text =~ s/^(\n)//) { #newline detected
+			if ($self->LineStart) {
+				my $m = $ctd->{emptycontext};
+				&$m;
+			}
+			$self->SnippetForce;
+			$self->LineEndContext($ctd->{endcontext});
+			my $attr = $ctd->{attribute};
+			$self->SnippetParse($1, $attr);
+			$self->SnippetForce;
+			$self->{LINESEGMENT} = '';
+			$self->{LINENUMBER} = $self->{LINENUMBER} + 1;
+		} else {
+			my $callbacklist = $ctd->{callbacks};
+			unless ($self->ParseContext(\$text, $callbacklist)) {
+				my $f = $ctd->{fallthroughcontext};
+				if (defined($f)) {
+					&$f;
+				} else {
+					$text =~ s/^(.)//;
+					my $attr = $self->{USEATTRIBSTACK}->[0];
+					unless (defined $attr) {
+						$attr = $ctd->{attribute};
+					}
+					$self->SnippetParse($1, $attr);
+				}
+			}
+		}
+	}
+}
+
 sub ParseContext {
-	my ($self, $text, $callbacklist, $debuginfo) = @_;
+	my ($self, $text, $callbacklist) = @_;
 	my $r = 0;
+	if ($self->StackTop->[1] ne 'aspsource') {
+	}
 	for (@$callbacklist) {
 		my @i = @$_;
 		my $call = shift @i;
-		$r = &$call($self, $text, @i);
-		last if $r;
+		return 1 if &$call($self, $text, @i);
 	}
-	return $r;
+	return '';
+}
+
+sub ParseRaw {
+	my ($self, $text) = @_;
+	$self->{SNIPPET} = '';
+	my $out = $self->{OUT};
+	@$out = ();
+# 	my $call = $modecalls{$self->{MODE}};
+	while ($text ne '') {
+		if ($text =~ s/^([^\n]+\n)//) {
+# 			&$call($self, $1);
+			$self->ParseLine($1);
+		} else {
+# 			&$call($self, $text);
+			$self->ParseLine($text);
+			$text = ''
+		}
+	}
+	$self->SnippetForce;
+	return @$out;
 }
 
 sub ParseResult {
@@ -520,7 +534,21 @@ sub ParseResult {
 	}
 	$self->SnippetParse($string, $attr);
 	&$context;
-	return length $string
+	return 1
+}
+
+sub ParseResultChained {
+	my ($self, $text, $string, $context, $attr) = @_;
+	$$text = substr($$text, length($string));
+	unless (defined($attr)) {
+		my $t = $self->{STACK}->[0];
+		my ($thl, $ctext) = @$t;
+		$attr = $thl->{contexts}->{$ctext}->{attribute};
+	}
+	$self->SnippetParse($string, $attr);
+	&$context;
+	my $parser = pop @_;
+	return &$parser($self, $text, $string, @_);
 }
 
 sub ParseResultCommand {
@@ -534,9 +562,16 @@ sub ParseResultCommand {
 }
 
 sub ParseResultLookAhead {
-	my ($self, $text, $string, $context, $attr, $beginregion, $endregion) = @_;
+	my ($self, $text, $string, $context, $attr) = @_;
 	&$context;
-	return length $string
+	return 1
+}
+
+sub ParseResultChainedLookAhead {
+	my ($self, $text, $string, $context, $attr) = @_;
+	&$context;
+	my $parser = pop @_;
+	return &$parser($self, $text, $string, @_);
 }
 
 sub ParseResultOverStrike {
@@ -544,26 +579,38 @@ sub ParseResultOverStrike {
 	my $text = shift;
 	my $match = shift;
 	my $ovr = pop @_;
-	return &$self->ParseResult($self, $text, substr($ovr, 0, length($match)), @_);
+	my $parser = pop @_;
+	return &$parser->ParseResult($self, $text, substr($ovr, 0, length($match)), @_);
 }
 
-sub ParseResultRegion {
-	my ($self, $text, $string, $context, $attr, $beginregion, $endregion) = @_;
-	$$text = substr($$text, length($string));
-	unless (defined($attr)) {
-		my $t = $self->{STACK}->[0];
-		my ($thl, $ctext) = @$t;
-		$attr = $thl->{contexts}->{$ctext}->{attribute};
-	}
-	$self->SnippetParse($string, $attr);
-	&$context;
-	if (defined $beginregion) {
-		$self->{FORMATTER}->FormatBegin($beginregion);
-	}
-	if (defined $endregion) {
-		$self->{FORMATTER}->FormatEnd($endregion);
-	}
-	return length $string
+sub ParseResultBeginRegionPost {
+	my $self = shift;
+	my $region = pop @_;
+	$self->{FORMATTER}->FoldBeginPost($region);
+	return 1;
+}
+
+sub ParseResultBeginRegionPre {
+	my $self = shift;
+	my $region = pop @_;
+	$self->{FORMATTER}->FoldBeginPre($region);
+	my $parser = pop @_;
+	return &$parser($self, @_);
+}
+
+sub ParseResultEndRegionPost {
+	my $self = shift;
+	my $region = pop @_;
+	$self->{FORMATTER}->FoldEndPost($region);
+	return 1
+}
+
+sub ParseResultEndRegionPre {
+	my $self = shift;
+	my $region = pop @_;
+	$self->{FORMATTER}->FoldEndPre($region);
+	my $parser = pop @_;
+	return &$parser($self, @_);
 }
 
 sub ParseResultReplace {
@@ -571,7 +618,14 @@ sub ParseResultReplace {
 	my $text = shift;
 	my $match = shift;
 	my $replace = pop @_;
-	return &$self->ParseResult($self, $text, $replace, @_);
+	my $parser = pop @_;
+	return &$parser($self, $text, $replace, @_);
+}
+
+sub PushOut {
+	my $self = shift;
+	my $out = $self->{OUT};
+	push @$out, @_;
 }
 
 sub Reset {
@@ -580,9 +634,7 @@ sub Reset {
 	$self->{OUT} = [];
 	$self->{SNIPPET} = '';
 	$self->{LINESEGMENT} = '';
-	if ($self->{DEBUGGER}) {
-		$self->{DEBUGGER}->Reset;
-	}
+	$self->{LINENUMBER} = 1;
 	if ($lang eq '') {
 		$self->{STACK} = [];
 	} else {
@@ -705,7 +757,8 @@ sub testAnyChar {
 	my $test = substr($$text, 0, 1);
 	if (index($string, $test) > -1) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -719,7 +772,8 @@ sub testAnyCharI {
 	$test = lc($test);
 	if (index($string, $test) > -1) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $bck, @_)
+		&$parser($self, $text, $bck, @_);
+		return 1
 	}
 	return ''
 }
@@ -748,7 +802,7 @@ sub testCommonFirstNonSpace {
 sub testCommonLastCharBB {
 	my $self = shift;
 	my $lastchar = $self->LastChar;
-	if ($lastchar =~ /\W/) { return '' }
+	unless ($lastchar =~ /\w/) { return '' }
 	my $text = shift;
 	my $next = shift;
 	return &$next($self, $text, @_)
@@ -780,7 +834,8 @@ sub testDetectChar {
 	my $test = substr($$text, 0, 1);
 	if ($char eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -793,7 +848,8 @@ sub testDetectCharD {
 	my $test = substr($$text, 0, 1);
 	if ($char eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -806,7 +862,8 @@ sub testDetectCharDI {
 	my $test = substr($$text, 0, 1);
 	if (lc($char) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 
@@ -819,7 +876,8 @@ sub testDetectCharI {
 	my $test = substr($$text, 0, 1);
 	if (lc($char) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -833,7 +891,8 @@ sub testDetect2Chars {
 	my $test = substr($$text, 0, 2);
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -849,7 +908,8 @@ sub testDetect2CharsD {
 	my $test = substr($$text, 0, 2);
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -865,7 +925,8 @@ sub testDetect2CharsDI {
 	my $test = substr($$text, 0, 2);
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 
@@ -880,7 +941,8 @@ sub testDetect2CharsI {
 	my $test = substr($$text, 0, 2);
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 
@@ -891,7 +953,8 @@ sub testDetectIdentifier {
 	unless ($self->LastcharDeliminator) { return '' }
 	if ($$text =~ /^([a-z][a-z0-9_]*)/i) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -901,7 +964,8 @@ sub testDetectSpaces {
 	my $text = shift;
 	if ($$text =~ /^([\040|\t]+)/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -912,7 +976,8 @@ sub testFloat {
 	if ($self->LastcharDeliminator) {
 		if ($$text =~ /^((?=\.?\d)\d*(?:\.\d*)?(?:[Ee][+-]?\d+)?)/) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $1, @_)
+			&$parser($self, $text, $1, @_);
+			return 1
 		}
 	}
 	return ''
@@ -923,7 +988,8 @@ sub testHlCChar {
 	my $text = shift;
 	if ($$text =~ /^('.')/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -934,7 +1000,8 @@ sub testHlCHex {
 	if ($self->LastcharDeliminator) {
 		if ($$text =~ /^(0x[0-9a-fA-F]+)/) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $1, @_)
+			&$parser($self, $text, $1, @_);
+			return 1
 		}
 	}
 	return ''
@@ -946,7 +1013,8 @@ sub testHlCOct {
 	if ($self->LastcharDeliminator) {
 		if ($$text =~ /^(0[0-7]+)/) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $1, @_)
+			&$parser($self, $text, $1, @_);
+			return 1;
 		}
 	}
 	return ''
@@ -957,15 +1025,18 @@ sub testHlCStringChar {
 	my $text = shift;
 	if ($$text =~ /^(\\[a|b|e|f|n|r|t|v|'|"|\?])/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	if ($$text =~ /^(\\x[0-9a-fA-F][0-9a-fA-F]?)/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	if ($$text =~ /^(\\[0-7][0-7]?[0-7]?)/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -976,7 +1047,8 @@ sub testInt {
 	if ($self->LastcharDeliminator) {
 		if ($$text =~ /^([+-]?\d+)/) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $1, @_)
+			&$parser($self, $text, $1, @_);
+			return 1
 		}
 	}
 	return ''
@@ -995,7 +1067,8 @@ sub testKeyword {
 		my $match = $1;
 		if (exists $list->{$match}) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $match, @_)
+			&$parser($self, $text, $match, @_);
+			return 1
 		}
 	}
 	return ''
@@ -1015,7 +1088,8 @@ sub testKeywordI {
 		my $test = lc($match);
 		if (exists $list->{$test}) {
 			my $parser = pop @_;
-			return &$parser($self, $text, $match, @_)
+			&$parser($self, $text, $match, @_);
+			return 1
 		}
 	}
 	return ''
@@ -1027,7 +1101,8 @@ sub testLineContinue {
 	my $char = shift;
 	if ($$text =~ /^($char)\n/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -1039,7 +1114,8 @@ sub testRangeDetect {
 	my $char1 = shift;
 	if ($$text =~ /^($char[^$char1]+$char1)/) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 }
 
@@ -1050,7 +1126,8 @@ sub testRangeDetectI {
 	my $char1 = shift;
 	if ($$text =~ /^($char[^$char1]+$char1)/i) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $1, @_)
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 }
 
@@ -1061,6 +1138,7 @@ sub testRegExpr {
 	if ($$text =~ /$reg/) {
 		my $match = $1;
 		chomp $match; #Sometimes a trailing newline is matched.
+		if ($match eq '') { return '' } #Sometimes a reg gives a positive result of zero length
 		if ($#- > 1) {
 			no strict 'refs';
 			my @cap = map {$$_} 2 .. $#-;
@@ -1068,7 +1146,8 @@ sub testRegExpr {
 # 			$self->{STACK}->[0]->[2] = \@cap;
 		}
 		my $parser = pop @_;
-		return &$parser($self, $text, $match, @_)
+		&$parser($self, $text, $match, @_);
+		return 1
 	}
 	return ''
 }
@@ -1090,6 +1169,7 @@ sub testRegExprD {
 	if ($$text =~ /$reg/) {
 		my $match = $1;
 		chomp $match; #Sometimes a trailing newline is matched.
+		if ($match eq '') { return '' } #Sometimes a reg gives a positive result of zero length
 		if ($#- > 1) {
 			no strict 'refs';
 			my @cap = map {$$_} 2 .. $#-;
@@ -1097,7 +1177,8 @@ sub testRegExprD {
 # 			$self->{STACK}->[0]->[2] = \@cap;
 		}
 		my $parser = pop @_;
-		return &$parser($self, $text, $match, @_)
+		&$parser($self, $text, $match, @_);
+		return 1
 	}
 	return ''
 }
@@ -1119,6 +1200,7 @@ sub testRegExprDI {
 	if ($$text =~ /$reg/i) {
 		my $match = $1;
 		chomp $match; #Sometimes a trailing newline is matched.
+		if ($match eq '') { return '' } #Sometimes a reg gives a positive result of zero length
 		if ($#- > 1) {
 			no strict 'refs';
 			my @cap = map {$$_} 2 .. $#-;
@@ -1126,7 +1208,8 @@ sub testRegExprDI {
 # 			$self->{STACK}->[0]->[2] = \@cap;
 		}
 		my $parser = pop @_;
-		return &$parser($self, $text, $match, @_)
+		&$parser($self, $text, $match, @_);
+		return 1
 	}
 	return ''
 }
@@ -1138,6 +1221,7 @@ sub testRegExprI {
 	if ($$text =~ /$reg/i) {
 		my $match = $1;
 		chomp $match; #Sometimes a trailing newline is matched.
+		if ($match eq '') { return '' } #Sometimes a reg gives a positive result of zero length
 		if ($#- > 1) {
 			no strict 'refs';
 			my @cap = map {$$_} 2 .. $#-;
@@ -1145,7 +1229,8 @@ sub testRegExprI {
 # 			$self->{STACK}->[0]->[2] = \@cap;
 		}
 		my $parser = pop @_;
-		return &$parser($self, $text, $match, @_)
+		&$parser($self, $text, $match, @_);
+		return 1
 	}
 	return ''
 }
@@ -1157,7 +1242,8 @@ sub testStringDetect {
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -1170,7 +1256,8 @@ sub testStringDetectD {
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 
@@ -1184,7 +1271,8 @@ sub testStringDetectDI {
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 
@@ -1197,7 +1285,8 @@ sub testStringDetectI {
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -1213,7 +1302,8 @@ sub testWordDetect {
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -1230,7 +1320,8 @@ sub testWordDetectD {
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -1247,7 +1338,8 @@ sub testWordDetectDI {
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
@@ -1263,7 +1355,8 @@ sub testWordDetectI {
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
-		return &$parser($self, $text, $test, @_)
+		&$parser($self, $text, $test, @_);
+		return 1
 	}
 	return ''
 }
