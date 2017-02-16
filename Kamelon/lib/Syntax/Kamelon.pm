@@ -320,6 +320,33 @@ sub Highlight {
 	return @$out;
 }
 
+sub HighlightAndFormat {
+	my ($self, $text) = @_;
+	my $res = '';
+	my @hl = $self->Highlight($text);
+# 	use Data::Dumper; print Dumper \@hl;
+	while (@hl) {
+		my $f = shift @hl;
+		my $t = shift @hl;
+		unless (defined($t)) { 
+			$t = $self->FormatTable('Normal') 
+		}
+		my $s = $self->Substitutions;
+		my $rr = '';
+		while ($f ne '') {
+			my $k = substr($f , 0, 1);
+			$f = substr($f, 1, length($f) -1);
+			if (exists $s->{$k}) {
+				 $rr = $rr . $s->{$k}
+			} else {
+				$rr = $rr . $k;
+			}
+		}
+		$res = $res . $t->[0] . $rr . $t->[1];
+	}
+	return $res;
+}
+
 sub HighlightLine {
 	my ($self, $text) = @_;
 	while ($text ne '') {
@@ -357,36 +384,17 @@ sub HighlightLine {
 	}
 }
 
-sub HighlightAndFormat {
-	my ($self, $text) = @_;
-	my $res = '';
-	my @hl = $self->Highlight($text);
-# 	use Data::Dumper; print Dumper \@hl;
-	while (@hl) {
-		my $f = shift @hl;
-		my $t = shift @hl;
-		unless (defined($t)) { 
-			$t = $self->FormatTable('Normal') 
-		}
-		my $s = $self->Substitutions;
-		my $rr = '';
-		while ($f ne '') {
-			my $k = substr($f , 0, 1);
-			$f = substr($f, 1, length($f) -1);
-			if (exists $s->{$k}) {
-				 $rr = $rr . $s->{$k}
-			} else {
-				$rr = $rr . $k;
-			}
-		}
-		$res = $res . $t->[0] . $rr . $t->[1];
-	}
-	return $res;
+sub IncludeRules {
+	my ($self, $text, $callbacklist, $debuginfo, $inclattr) = @_;
+	$self->UseAttribStackPush($inclattr);
+	my $r = $self->ParseContext(\$text, $callbacklist, $debuginfo);
+	$self->UseAttribStackPull;
+	return $r;
 }
 
-sub IncludeLanguage {
-	my ($self, $text, $language, $context) = @_;
-	my $hl = $self->GetHighlighter($language);
+sub IncludeSyntax {
+	my ($self, $text, $syntax, $context) = @_;
+	my $hl = $self->GetHighlighter($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -395,9 +403,9 @@ sub IncludeLanguage {
 	return $self->ParseContext($text, $callbacklist, $debuginfo);
 }
 
-sub IncludeLanguageIA {
-	my ($self, $text, $language, $context, $attr) = @_;
-	my $hl = $self->GetHighlighter($language);
+sub IncludeSyntaxIA {
+	my ($self, $text, $syntax, $context, $attr) = @_;
+	my $hl = $self->GetHighlighter($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -405,14 +413,6 @@ sub IncludeLanguageIA {
 	my $callbacklist = $hl->{contexts}->{$context}->{callbacks};
 	my $debuginfo = $hl->{contexts}->{$context}->{debug};
 	my $r = $self->ParseContext($text, $callbacklist, $debuginfo);
-	$self->UseAttribStackPull;
-	return $r;
-}
-
-sub IncludeRules {
-	my ($self, $text, $callbacklist, $debuginfo, $inclattr) = @_;
-	$self->UseAttribStackPush($inclattr);
-	my $r = $self->ParseContext(\$text, $callbacklist, $debuginfo);
 	$self->UseAttribStackPull;
 	return $r;
 }
@@ -467,21 +467,19 @@ sub LineEndContext {
 	}
 }
 
-sub LineSegment {
-	my $self = shift;
-	if (@_) { $self->{LINESEGMENT} = shift; };
-	return $self->{LINESEGMENT};
-}
-
 sub LineStart {
 	my $self = shift;
 	return ($self->{LINESEGMENT} eq '')
 }
 
-sub LogCall {
+sub LogCallGet {
+	my $self = shift;
+	return $self->{LOGCALL};
+}
+
+sub LogCallSet {
 	my $self = shift;
 	if (@_) { $self->{LOGCALL} = shift; }
-	return $self->{LOGCALL};
 }
 
 sub LogWarning {
@@ -500,12 +498,6 @@ sub LogWarning {
 	}
 }
 
-sub Out {
-	my $self = shift;
-	if (@_) { $self->{OUT} = shift; }
-	return $self->{OUT};
-}
-
 sub ParseContext {
 	my ($self, $text, $callbacklist, $debuginfo) = @_;
 	my $r = 0;
@@ -519,7 +511,7 @@ sub ParseContext {
 }
 
 sub ParseResult {
-	my ($self, $text, $string, $context, $attr, $beginregion, $endregion) = @_;
+	my ($self, $text, $string, $context, $attr) = @_;
 	$$text = substr($$text, length($string));
 	unless (defined($attr)) {
 		my $t = $self->{STACK}->[0];
@@ -585,34 +577,28 @@ sub ParseResultReplace {
 sub Reset {
 	my $self = shift;
 	my $lang = $self->Syntax;
-	$self->Out([]);
-	$self->Snippet('');
-	$self->LineSegment('');
+	$self->{OUT} = [];
+	$self->{SNIPPET} = '';
+	$self->{LINESEGMENT} = '';
 	if ($self->{DEBUGGER}) {
 		$self->{DEBUGGER}->Reset;
 	}
 	if ($lang eq '') {
-		$self->Stack([]);
+		$self->{STACK} = [];
 	} else {
 		my $hl = $self->GetHighlighter($lang);
 		unless (defined $hl) {
 			if ($self->Debug) {
 				croak "Highlighter for syntax '$lang' could not be created.";
 			}
-			$self->Stack([]);
+			$self->{STACK} = [];
 			return
 		}
 		my $basecontext = $hl->{basecontext};
-		$self->Stack([
+		$self->{STACK} = [
 			[$hl, $basecontext]
-		]);
+		];
 	}
-}
-
-sub Snippet {
-	my $self = shift;
-	if (@_) { $self->{SNIPPET} = shift; }
-	return $self->{SNIPPET};
 }
 
 sub SnippetForce {
@@ -641,12 +627,6 @@ sub SnippetParse {
 	$self->{LINESEGMENT} =  $self->{LINESEGMENT}  . $snip;
 }
 
-sub Stack {
-	my $self = shift;
-	if (@_) { $self->{STACK} = shift; }
-	return $self->{STACK};
-}
-
 sub StackPush {
 	my $self = shift;
 	my $stack = $self->{STACK};
@@ -673,9 +653,7 @@ sub StackTop {
 sub StateCompare {
 	my ($self, $state) = @_;
 	my $h = [ $self->stateGet ];
-	my $equal = 0;
-	if (Dumper($h) eq Dumper($state)) { $equal = 1 };
-	return $equal;
+	return (Dumper($h) eq Dumper($state));
 }
 
 sub StateGet {
@@ -692,7 +670,6 @@ sub StateSet {
 
 sub Substitutions {
 	my $self = shift;
-	if (@_) { $self->{SUBSTITUTIONS} = shift; }
 	return $self->{SUBSTITUTIONS};
 }
 
@@ -1306,12 +1283,6 @@ sub UseAttribStackPull {
 sub UseAttribStackTop {
 	my $self = shift;
 	return $self->{USEATTRIBSTACK}->[0];
-}
-
-sub UseAttrib {
-	my $self = shift;
-	if (@_) { $self->{USEATTRIB} = shift; }
-	return $self->{USEATTRIB};
 }
 
 1;
