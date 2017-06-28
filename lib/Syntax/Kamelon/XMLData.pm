@@ -205,19 +205,6 @@ sub XMLGetList {
 	}
 }
 
-sub XMLSetContext {
-	my ($self, $context, $data) = @_;
-	my $path = $self->Syntax . "::$context";
-	$data->{path} = $path;
-	my $i = $data->{items};
-	my $num = 1;
-	foreach my $item (@$i) {
-		$item->{path} = "$path::$num";
-		$num ++;
-	}
-	$self->ContextData->{$context} = $data;
-}
-
 my %xmlmethods = (
 	context => 'XMLGetContext',
 	itemData => 'XMLGetAttribute',
@@ -245,6 +232,19 @@ sub XMLLoad {
 	}
 	close KATE;
 	$self->FileName($file);
+}
+
+sub XMLSetContext {
+	my ($self, $context, $data) = @_;
+	my $path = $self->Syntax . "::$context";
+	$data->{path} = $path;
+	my $i = $data->{items};
+	my $num = 1;
+	foreach my $item (@$i) {
+		$item->{path} = "$path::$num";
+		$num ++;
+	}
+	$self->ContextData->{$context} = $data;
 }
 
 1;

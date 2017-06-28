@@ -26,6 +26,16 @@ sub new {
 	$self->{LASTPOINT} = [];
 	$self->{LINE} = 1;
 	$self->{STARTIME} = '';
+	$self->{STEPCALL} = sub {
+		my ($text, $inf, $result) = @_;
+		print "Line:   '$$text'\n";
+		print "Result: $result\n";
+		for (sort keys %$inf) {
+			print "$_: '" , $inf->{$_}, "'\n"
+		}
+		print "\nPress a Enter to continue\n";
+		my $key = <STDIN>;
+	};
 	$self->{TASKS} = [];
 	$self->{WATCHINFO} = {};
 	$self->{WATCHPOINT} = [];
@@ -36,12 +46,6 @@ sub new {
 sub CurRule {
 	my $self = shift;
 	return $self->{CURRULE};
-}
-
-sub DebugStack {
-	my $self = shift;
-	if (@_) { $self->{DEBUGSTACK} = shift; }
-	return $self->{DEBUGSTACK};
 }
 
 sub DebugStackPull {
@@ -72,52 +76,32 @@ sub GetStackImage {
 	return \@o
 }
 
-# sub HighlightLine {
-# 	my ($self, $text) = @_;
-# 	my $newline;
-# 	if ($text =~ s/(\n)$//) {
-# 		$newline = $1
-# 	}
-# 	my $top = $self->{STACK}->[0];
-# 	my ($hl, $context) = @$top;
-# 	my $ctd = $hl->{contexts}->{$context};
-# 	while ($text ne '') {
-# 		print "$text\n";
-# 		my $callbacklist = $ctd->{callbacks};
-# 		my $debuginfo = $ctd->{debug};
-# 		my $result = $self->ParseContext(\$text, $callbacklist, $debuginfo);
-# 		unless($result) {
-# 			my $f = $ctd->{fallthroughcontext};
-# 			if (defined($f)) {
-# 				&$f;
-# 			} else {
-# 				my $char = substr($text, 0, 1);
-# 				$text = substr($text, 1, length($text) - 1);
-# # 				$text =~ s/^(.)//;
-# 				my $attr = $self->{USEATTRIBSTACK}->[0];
-# 				unless (defined $attr) {
-# 					$attr = $ctd->{attribute};
-# 				}
-# 				$self->SnippetParse($char, $attr);
-# 			}
-# 		}
-# 	}
-# 	if (defined $newline) {
-# 		if ($self->LineStart) {
-# 			my $m = $ctd->{emptycontext};
-# 			&$m;
-# 		}
-# 		$self->LineEndContext($ctd->{endcontext});
-# 		$self->SnippetForce;
-# 		my $attr = $ctd->{attribute};
-# 		$self->SnippetParse($newline, $attr);
-# 		$self->SnippetForce;
-# 		$self->{LINESEGMENT} = '';
-# 		$self->NewLine;
-# 	}
-# }
+sub NewLine {
+	my $self = shift;
+	my $l = $self->{LINE};
+	$l ++;
+	$self->{LINE} = $l;
+}
 
-sub HighlightLine {
+sub ParseContext {
+	my ($self, $text, $callbacklist, $debuginfo) = @_;
+	my $r = 0;
+	my $num = 0;
+	for (@$callbacklist) {
+		my @i = @$_;
+		my $inf = $debuginfo->[$num];
+		$self->{CURRULE} = $inf->{path};
+		$self->PreTask($$text, $inf);
+		my $call = shift @i;
+		$r = &$call($self, $text, @i);
+		$self->PostTask($text, $inf, $r);
+		$num ++;
+		last if $r;
+	}
+	return $r;
+}
+
+sub ParseLine {
 	my ($self, $text) = @_;
 	while ($text ne '') {
 		my $top = $self->{STACK}->[0];
@@ -157,36 +141,6 @@ sub HighlightLine {
 	}
 }
 
-sub Line {
-	my $self = shift;
-	return $self->{LINE}
-}
-
-sub NewLine {
-	my $self = shift;
-	my $l = $self->{LINE};
-	$l ++;
-	$self->{LINE} = $l;
-}
-
-sub ParseContext {
-	my ($self, $text, $callbacklist, $debuginfo) = @_;
-	my $r = 0;
-	my $num = 0;
-	for (@$callbacklist) {
-		my @i = @$_;
-		my $inf = $debuginfo->[$num];
-		$self->{CURRULE} = $inf->{path};
-		$self->PreTask($$text, $inf);
-		my $call = shift @i;
-		$r = &$call($self, $text, @i);
-		$self->PostTask($text, $inf, $r);
-		$num ++;
-		last if $r;
-	}
-	return $r;
-}
-
 sub ParseResult {
 	my ($self, $text, $string, $context, $attr) = @_;
 	if ($string  =~ s/\n$//) {
@@ -195,12 +149,12 @@ sub ParseResult {
 	return $self->SUPER::ParseResult($text, $string, $context, $attr)
 }
 
-sub ParseResultL {
+sub ParseResultLookAhead {
 	my ($self, $text, $string, $context, $attr) = @_;
 	if ($string  =~ s/\n$//) {
 		$self->LogWarning($self->{CURRULE} ."Attempted to parse a newline in line " . $self->{LINE} . "\n");
 	}
-	return $self->SUPER::ParseResultL($text, $string, $context, $attr)
+	return $self->SUPER::ParseResultLookAhead($text, $string, $context, $attr)
 }
 
 sub PreTask {
@@ -245,7 +199,7 @@ sub SetTasks {
 	my @tasks = ();
 	while (@_) {
 		my $t = shift;
-		if ( $t =~ /^step|timer|watch|timer$/) {
+		if ( $t =~ /^step|timer|watch$/) {
 			push @tasks, $t
 		} else {
 			warn "invalid task $t";
@@ -269,7 +223,9 @@ sub SetWatch {
 }
 
 sub StepPost {
-	my ($self, $text, $inf, $result) = @_;
+	my $self = shift;
+	my $call = $self->{STEPCALL};
+	&$call(@_);
 }
 
 sub StepPre {
