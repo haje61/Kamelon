@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-use Test::More tests => 19;
+use Test::More tests => 18;
 BEGIN { use_ok('Syntax::Kamelon::Debugger') };
 
 my $htmldir = './t/HTML';
