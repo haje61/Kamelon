@@ -149,7 +149,7 @@ menu=Scientific
 mime=
 
 [Bash]
-ext=*.sh;*.bash;*.ebuild;*.eclass;.bashrc;.bash_profile;.bash_login;.profile
+ext=*.sh;*.bash;*.ebuild;*.eclass;*.nix;.bashrc;.bash_profile;.bash_login;.profile
 file=bash.xml
 menu=Scripts
 mime=application/x-shellscript
@@ -159,6 +159,12 @@ ext=*.bib
 file=bibtex.xml
 menu=Markup
 mime=text/x-bib
+
+[Bitbake]
+ext=*.bb;*.bbappend;*.bbclass;*.inc;*.conf
+file=bitbake.xml
+menu=Sources
+mime=
 
 [Boo]
 ext=*.boo
@@ -179,7 +185,7 @@ menu=Sources
 mime=text/x-csharp-src;text/x-csharp-hde
 
 [C++]
-ext=*.c++;*.cxx;*.cpp;*.cc;*.C;*.h;*.hh;*.H;*.h++;*.hxx;*.hpp;*.hcc;*.moc
+ext=*.c++;*.cxx;*.cpp;*.cc;*.C;*.h;*.hh;*.H;*.h++;*.hxx;*.hpp;*.hcc;*.ino;*.pde;*.moc
 file=cpp.xml
 menu=Sources
 mime=text/x-c++src;text/x-c++hdr;text/x-chdr
@@ -263,7 +269,7 @@ menu=Sources
 mime=text/x-clipper-src
 
 [Clojure]
-ext=*.clj;*.cljs
+ext=*.clj;*.cljs;*.cljc
 file=clojure.xml
 menu=Sources
 mime=
@@ -382,6 +388,12 @@ file=eiffel.xml
 menu=Sources
 mime=text/x-eiffel-src
 
+[Elixir]
+ext=*.ex;*.exs;*.eex;*.xml.eex;*.js.eex
+file=elixir.xml
+menu=Sources
+mime=text/x-elixir
+
 [Email]
 ext=*.eml
 file=email.xml
@@ -399,6 +411,12 @@ ext=*.e;*.ex;*.exw;*.exu
 file=euphoria.xml
 menu=Scripts
 mime=text/x-euphoria
+
+[FASTQ]
+ext=*.fastq;*.fq;*.fastq.gz;*.fq.gz
+file=fastq.xml
+menu=Scientific
+mime=text/x-fastq
 
 [FSharp]
 ext=*.fs;*.fsi;*.fsx
@@ -424,6 +442,18 @@ file=freebasic.xml
 menu=Sources
 mime=text/x-freebasic
 
+[G-Code]
+ext=*.ngc
+file=gcode.xml
+menu=3D
+mime=text/ngc
+
+[GAP]
+ext=*.gd;*.gi;*.g
+file=gap.xml
+menu=Scientific
+mime=text/gap
+
 [GCCExtensions]
 ext=*.c++;*.cxx;*.cpp;*.cc;*.C;*.h;*.hh;*.H;*.h++;*.hxx;*.hpp;*.hcc;
 file=gcc.xml
@@ -445,7 +475,7 @@ mime=
 [GLSL]
 ext=*.glsl;*.vert;*.frag;*.geom;*.tcs;*.tes
 file=glsl.xml
-menu=Sources
+menu=3D
 mime=text/x-glslsrc
 
 [GNU Assembler]
@@ -497,14 +527,20 @@ menu=Markup
 mime=text/x-gdf
 
 [Gnuplot]
-ext=*.gnuplot;*.gp;*.gplt
+ext=*.gnuplot;*.gp;*.gplt,*.plt
 file=gnuplot.xml
-menu=Scripts
+menu=Scientific
 mime=
 
 [Go]
 ext=*.go
 file=go.xml
+menu=Sources
+mime=
+
+[Groovy]
+ext=*.groovy
+file=groovy.xml
 menu=Sources
 mime=
 
@@ -605,13 +641,13 @@ menu=Assembler
 mime=
 
 [J]
-ext=*.ijs;*.IJS
+ext=*.ijs;*.ijt;*.IJS;*.IJT
 file=j.xml
 menu=Scripts
 mime=text/x-j;text/x-jsrc
 
 [JSON]
-ext=*.json
+ext=*.json;.kateproject;.arcconfig
 file=json.xml
 menu=Markup
 mime=application/json
@@ -680,6 +716,12 @@ mime=
 ext=Kconfig*
 file=kconfig.xml
 menu=Configuration
+mime=
+
+[Kotlin]
+ext=*.kt;*.kts
+file=kotlin.xml
+menu=Sources
 mime=
 
 [LDIF]
@@ -778,6 +820,12 @@ file=dosbat.xml
 menu=Scripts
 mime=application/x-dos
 
+[Magma]
+ext=*.m;*.mag
+file=magma.xml
+menu=Scientific
+mime=text/x-magma
+
 [Makefile]
 ext=GNUmakefile;Makefile;makefile;GNUmakefile.*;Makefile.*;makefile.*;*.mk
 file=makefile.xml
@@ -825,6 +873,12 @@ ext=*.mediawiki
 file=mediawiki.xml
 menu=Markup
 mime=
+
+[Meson]
+ext=meson.build;meson_options.txt
+file=meson.xml
+menu=Other
+mime=text/x-meson
 
 [Metapost/Metafont]
 ext=*.mp;*.mps;*.mpost;*.mf
@@ -874,6 +928,12 @@ file=mup.xml
 menu=Other
 mime=text/x-mup;audio/x-mup;application/x-mup;audio/x-notes
 
+[NSIS]
+ext=*.nsi
+file=nsis.xml
+menu=Scripts
+mime=text/x-nsis
+
 [Nagios]
 ext=*.cfg
 file=nagios.xml
@@ -901,6 +961,18 @@ mime=
 [Objective Caml]
 ext=*.ml;*.mli
 file=ocaml.xml
+menu=Sources
+mime=text/x-ocaml
+
+[Objective Caml Ocamllex]
+ext=*.mll
+file=ocamllex.xml
+menu=Sources
+mime=
+
+[Objective Caml Ocamlyacc]
+ext=*.mly
+file=ocamlyacc.xml
 menu=Sources
 mime=
 
@@ -946,10 +1018,22 @@ file=php.xml
 menu=Scripts
 mime=
 
+[PL/I]
+ext=*.pli
+file=pli.xml
+menu=Sources
+mime=text/x-pli
+
+[PLY]
+ext=*.ply
+file=ply.xml
+menu=3D
+mime=
+
 [POV-Ray]
 ext=*.inc;*.pov
 file=povray.xml
-menu=Other
+menu=3D
 mime=text/x-povray-script;text/x-povray-include
 
 [Pango]
@@ -1000,6 +1084,12 @@ file=ppd.xml
 menu=Markup
 mime=application/vnd.cups-ppd
 
+[Praat]
+ext=*.Praat;*.praat;*.psc;*.praat-script;*.praatscript;*.proc
+file=praat.xml
+menu=Scripts
+mime=
+
 [Prolog]
 ext=*.prolog;*.dcg;*.pro
 file=prolog.xml
@@ -1013,7 +1103,7 @@ menu=Sources
 mime=text/x-protobuf
 
 [Puppet]
-ext=*.pp;*.xml.erb;*.erb
+ext=*.pp
 file=puppet.xml
 menu=Scripts
 mime=application/x-puppet
@@ -1031,7 +1121,7 @@ menu=Scripts
 mime=application/x-python;text/x-python
 
 [QML]
-ext=*.qml
+ext=*.qml;*.qmltypes
 file=qml.xml
 menu=Scripts
 mime=text/x-qml;application/x-qml
@@ -1057,7 +1147,7 @@ mime=text/x-r-markdown
 [R Script]
 ext=*.R;*.r;*.S;*.s;*.q
 file=r.xml
-menu=Scripts
+menu=Scientific
 mime=
 
 [RELAX NG]
@@ -1099,7 +1189,7 @@ mime=
 [RenderMan RIB]
 ext=*.rib
 file=rib.xml
-menu=Other
+menu=3D
 mime=
 
 [Replicode]
@@ -1133,7 +1223,7 @@ menu=Scripts
 mime=application/x-ruby
 
 [Ruby/Rails/RHTML]
-ext=*.rhtml;*.html.erb
+ext=*.rhtml;*.RHTML;*.html.erb
 file=rhtml.xml
 menu=Markup
 mime=
@@ -1186,6 +1276,12 @@ file=sql-postgresql.xml
 menu=Database
 mime=text/x-sql
 
+[STL]
+ext=*.stl
+file=stl.xml
+menu=3D
+mime=application/sla
+
 [Sather]
 ext=*.sa
 file=sather.xml
@@ -1193,7 +1289,7 @@ menu=Sources
 mime=text/x-sather-src
 
 [Scala]
-ext=*.scala
+ext=*.scala;*.sbt
 file=scala.xml
 menu=Sources
 mime=text/x-scala
@@ -1225,7 +1321,7 @@ mime=text/spice
 [Stata]
 ext=*.do; *.ado; *.doh; *.DO; *.ADO; *.DOH
 file=stata.xml
-menu=Sources
+menu=Scientific
 mime=
 
 [SystemC]
@@ -1252,10 +1348,22 @@ file=tibasic.xml
 menu=Scientific
 mime=
 
+[TOML]
+ext=*.toml
+file=toml.xml
+menu=Configuration
+mime=text/x-toml
+
 [TT2]
 ext=*.tt*;
 file=template-toolkit.xml
 menu=Markup
+mime=
+
+[TaskJuggler]
+ext=*.tjp;*.tji
+file=taskjuggler.xml
+menu=Scripts
 mime=
 
 [Tcl/Tk]
@@ -1303,7 +1411,7 @@ mime=text/x-vhdl
 [VRML]
 ext=*.wrl
 file=vrml.xml
-menu=Markup
+menu=3D
 mime=model/vrml
 
 [Vala]
@@ -1316,6 +1424,30 @@ mime=text/x-vala
 ext=*.supp;
 file=valgrind-suppression.xml
 menu=Other
+mime=
+
+[Varnish 3 module spec file]
+ext=*.vcc;
+file=varnishcc.xml
+menu=Sources
+mime=
+
+[Varnish 4 Configuration Language]
+ext=*.vcl;
+file=varnish4.xml
+menu=Configuration
+mime=
+
+[Varnish 4 Test Case language]
+ext=*.vtc;
+file=varnishtest4.xml
+menu=Configuration
+mime=
+
+[Varnish 4 module spec file]
+ext=*.vcc;
+file=varnishcc4.xml
+menu=Sources
 mime=
 
 [Varnish Configuration Language]
@@ -1354,6 +1486,12 @@ file=winehq.xml
 menu=Configuration
 mime=
 
+[Wavefront OBJ]
+ext=*.obj
+file=wavefront-obj.xml
+menu=3D
+mime=
+
 [Wesnoth Markup Language]
 ext=*.cfg;*.pbl;*.CFG;*.PBL
 file=wml.xml
@@ -1361,10 +1499,10 @@ menu=Markup
 mime=
 
 [XML]
-ext=*.docbook;*.xml;*.rc;*.daml;*.rdf;*.rss;*.xspf;*.xsd;*.svg;*.ui;*.kcfg;*.qrc;*.wsdl
+ext=*.docbook;*.xml;*.rc;*.daml;*.rdf;*.rss;*.xspf;*.xsd;*.svg;*.ui;*.kcfg;*.qrc;*.wsdl;*.scxml
 file=xml.xml
 menu=Markup
-mime=text/xml;text/book;text/daml;text/rdf;application/rss+xml;application/xspf+xml;image/svg+xml;application/x-designer;application/xml
+mime=text/xml;text/book;text/daml;text/rdf;application/rss+xml;application/xspf+xml;image/svg+xml;application/x-designer;application/xml;application/scxml+xml
 
 [XML (Debug)]
 ext=
@@ -1377,6 +1515,12 @@ ext=*.xul;*.xbl
 file=xul.xml
 menu=Markup
 mime=text/xul
+
+[Xonotic Script]
+ext=*.cfg
+file=xonotic-console.xml
+menu=Scripts
+mime=
 
 [YAML]
 ext=*.yaml;*.yml

@@ -226,6 +226,8 @@ sub SaveIndex {
 		}
 		close OFILE;
 		return 1
+	} else {
+		warn "cannot open index file" 
 	}
 }
 
