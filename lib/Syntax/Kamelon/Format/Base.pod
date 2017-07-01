@@ -1,0 +1,50 @@
+
+=head1 OPTIONS
+
+Kamelons' constructor is called with a paired list of options as parameters. You can use
+the following options.
+
+=item B<format_table> => ref to hash
+
+If you use the B<HighlightAndFormat> method, every attribute tag expects a reference of a list with two values. 
+The first one is parsed before the matched text. The second one is parsed after the matched text.
+
+If you know which attributes are used by the syntax definition files you are using you do not have
+to specify all. If you want to play it safe, specify all available attribute tags.
+
+If you do not specify this option, Kamelon will return the attribute tag name.
+
+The following attribute tags are available:
+
+ Alert              Annotation          Attribute           BaseN
+ BuiltIn            Char                Comment             CommentVar
+ Constant           ControlFlow         DataType            DecVal
+ Documentation      Error               Extension           Float
+ Function           Import              Information         Keyword
+ Normal             Operator            Others              Preprocessor
+ RegionMarker       SpecialChar         SpecialString       String
+ Variable           VerbatimString      Warning
+
+The syntax definition XML files have them specified with 'ds' in front of them. When
+loading the XML file, these are removed.
+
+=item B<substitutions> ref to hash
+
+After matching the text B<HighlightAndFormat> looks here if any special characters, like tabs and 
+newlines, need replacement.
+
+=back
+
+=head1 USER METHODS
+
+=over 4
+
+=item B<FormatTable>(I<$tagname>);
+
+Returns the format data belonging to $tagname. Used by the B<Builder> module. The data is set through
+the B<format_table> option.
+
+=item B<Substitutions>
+
+Returns a reference to the substitutions hash.
+
