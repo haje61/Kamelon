@@ -182,5 +182,10 @@ sub Get {
 	return $a;
 }
 
+sub Substitutions {
+	my $self = shift;
+	return $self->{SUBSTITUTIONS}
+}
+
 1;
 __END__

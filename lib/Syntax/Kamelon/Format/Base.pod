@@ -35,16 +35,65 @@ newlines, need replacement.
 
 =back
 
-=head1 USER METHODS
+=head1 METHODS
 
 =over 4
+
+=item B<Clear>
+
+=item B<FoldBeginPost>
+
+=item B<FoldBeginPre>
+
+=item B<FoldBeginPostCall>
+
+=item B<FoldBeginPreCall>
+
+=item B<FoldEndPost>
+
+=item B<FoldEndPre>
+
+=item B<FoldEndPostCall>
+
+=item B<FoldEndPreCall>
+
+=item B<Folding>
+
+=item B<FoldStackLevel>
+
+=item B<FoldStackPull>
+
+=item B<FoldStackPush>
+
+=item B<FoldStackTop>
+
+=item B<Format>
 
 =item B<FormatTable>(I<$tagname>);
 
 Returns the format data belonging to $tagname. Used by the B<Builder> module. The data is set through
 the B<format_table> option.
 
+=item B<Get>
+
 =item B<Substitutions>
 
 Returns a reference to the substitutions hash.
+
+=back
+
+=head1 AUTHOR AND COPYRIGHT
+
+This module is written and maintained by:
+
+Hans Jeuken < hansjeuken at xs4all dot nl>
+
+Copyright (c) 2017 by Hans Jeuken, all rights reserved.
+
+Published under the GPLV3 license
+
+=head1 SEE ALSO
+
+
+=cut
 

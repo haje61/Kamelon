@@ -11,7 +11,7 @@ WriteMakefile(
     NAME              => $pmname,
     VERSION_FROM      => $pmfile, # finds $VERSION, requires EU::MM from perl >= 5.5
     PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ABSTRACT_FROM     => $pmfile, # retrieve abstract from module
+    ABSTRACT_FROM     => '../lib/Syntax/Kamelon.pod', # retrieve abstract from module
     AUTHOR            => 'Hans Jeuken <haje@(none)>',
     #LICENSE           => 'perl',
     #Value must be from legacy list of licenses here

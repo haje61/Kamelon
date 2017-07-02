@@ -1,7 +1,6 @@
 =head1 NAME
 
-Syntax::Kamelon - A versatile and fully programmable textual content parser that is extremely well suited 
-for syntax highlighting and code folding 
+Syntax::Kamelon - A versatile and fully programmable textual content parser that is extremely well suited for syntax highlighting and code folding 
 
 =head1 SYNOPSIS
 
@@ -13,25 +12,28 @@ for syntax highlighting and code folding
  for (@attributes) {
     $attrtab{$_} = ["<font class=\"$_\">", "</font>"]
  }
-
+ 
  my $hl = new Syntax::Kamelon(
     syntax => 'Perl',
-    substitutions => {
-       "<" => "&lt;",
-       ">" => "&gt;",
-       "&" => "&amp;",
-       " " => "&nbsp;",
-       "\t" => "&nbsp;&nbsp;&nbsp;",
-       "\n" => "<BR>\n",
-    },
-    attributes => \%attrtab,
+    formatter ['Base',
+	   substitutions => {
+		  "<" => "&lt;",
+		  ">" => "&gt;",
+        "&" => "&amp;",
+        " " => "&nbsp;",
+        "\t" => "&nbsp;&nbsp;&nbsp;",
+        "\n" => "<BR>\n",
+      },
+      format_table => \%attrtab,
+    ],
  );
  
  
  
  print "<html>\n<head>\n</head>\n<body>\n";
  while (my $in = <>) {
-    print $hl->HighlightText($in);
+    $hl->Parse($in);
+    print $hl->Get;
  }
  print "</body>\n</html>\n";
 
@@ -67,35 +69,13 @@ You can specify the command in the rules of your own syntax xml file.
 Kamelon will give the matched text to your sub as parameter and will parse whatever
 your sub returns. Make it always return at least an empty string.
 
-=item B<format_table> => ref to hash
+=item B<formatter> => ['Name', @options],
 
-Here you specify what Kamelon should return for every attribute tag. Every key in the hash corresponds
-to an available attribute tag.
+A formatter can be any object that inherits B<Syntax::Kamelon::Format::Base> and 
+lives in B<Syntax::Kamelon::Format::Name>. By default 'Base' without options is loaded.
+This is convenient if you only use B<ParseRaw>.
 
-If you use the B<Highlight> method it can be anything you want. I have an application 
-running that holds an Wx::TextStyle object to every attribute tag. 
-
-If you use the B<HighlightAndFormat> method, every attribute tag expects a reference of a list with two values. 
-The first one is parsed before the matched text. The second one is parsed after the matched text.
-
-If you know which attributes are used by the syntax definition files you are using you do not have
-to specify all. If you want to play it safe, specify all available attribute tags.
-
-If you do not specify this option, Kamelon will return the attribute tag name.
-
-The following attribute tags are available:
-
- Alert              Annotation          Attribute           BaseN
- BuiltIn            Char                Comment             CommentVar
- Constant           ControlFlow         DataType            DecVal
- Documentation      Error               Extension           Float
- Function           Import              Information         Keyword
- Normal             Operator            Others              Preprocessor
- RegionMarker       SpecialChar         SpecialString       String
- Variable           VerbatimString      Warning
-
-The syntax definition XML files have them specified with 'ds' in front of them. When
-loading the XML file, these are removed.
+See also B<Syntax::Kamelon::Format::Base>.
 
 =item B<indexfile> => filename
 
@@ -107,6 +87,8 @@ load all xml files in the B<xmlfolder> and attempt to create the indexfile.
 Once the indexfile has been created it becomes static. If you add a syntax definition 
 XML file to the B<xmlfolder> it will no longer be recognized. Delete the indexfile and reload
 Kamelon to fix that. 
+
+See also B<Syntax::Kamelon::Indexer>
 
 =item B<logcall> => ref to sub
 
@@ -120,10 +102,7 @@ you the liberty of adding and removing syntax highlight definition files.
 
 This option comes with a considerable startup penalty.
 
-=item B<substitutions> ref to hash
-
-After matching the text B<HighlightAndFormat> looks here if any special characters, like tabs and 
-newlines, need replacement.
+See also B<Syntax::Kamelon::Indexer>
 
 =item B<syntax> => string
 
@@ -142,6 +121,8 @@ it cannot overcome.
 This is the place where Kamelon looks for syntax highlight definition XML files. By
 default it searches @INC for 'Syntax/Kamelon/XML'. Here you find the
 XML files used in the Kate text editor. They are specially crafted for this module.
+
+See also B<Syntax::Kamelon::Indexer>
 
 =back
 
@@ -166,27 +147,26 @@ Returns the column position in the line that is currently highlighted.
 Returns true if the current line did not contain a non-spatial character so far and the first 
 character in B<$string> is a non spatial character.
 
-=item B<FormatTable>(I<$tagname>);
+=item B<Formatter>
 
-Returns the format data belonging to $tagname. Used by the B<Builder> module. The data is set through
-the B<format_table> option.
+Returns a reference to the formatter object.
 
-=item B<GetHighlighter>(I<$syntax>);
+=item B<GetIndexer>
+
+Returns the Indexer object.
+
+=item B<GetParser>(I<$syntax>);
 
 Returns the B<Highlighter> object from the pool of loaded B<Highlighter> objects. If it is
 not found it will create and return it.
 
-=item B<GetIndexer>
+=item B<Parse(I<$text>);
 
-returns the Indexer object.
+Parses I<$text> and returns a formatted text.
 
-=item B<Highlight>(I<$text>);
+=item B<ParseRaw>(I<$text>);
 
-Parses I<$text> and returns a paired list of text fragments and the format information from B<FormatTable>.
-
-=item B<HighlightAndFormat>(I<$text>);
-
-Parses I<$text> and returns a formatted text. Usefull for creating HTML output.
+Parses I<$text> and returns a paired list of text fragments and the format information from the formatters B<FormatTable>.
 
 =item B<IsDeliminator>(I<$char>);
 
@@ -235,10 +215,6 @@ Returns a copy of the stack in an array.
 =item B<StateSet>(I<@state>);
 
 Set the state to a previously saved state.
-
-=item B<Substitutions>
-
-Returns a reference to the substitutions hash.
 
 =item B<SuggestSyntax>(I<$filename>);
 

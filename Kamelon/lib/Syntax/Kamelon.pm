@@ -81,12 +81,10 @@ sub new {
 			$indexer{$_} = $val;
 		}
 	}
-	
+
  	my $format = delete $args{'formatter'};
-	my $formattable = delete $args{format_table};
 	my $cmnds = delete $args{commands};
 	my $logcall = delete $args{logcall};
-	my $substitutions = delete $args{substitutions};
 	my $syntax = delete $args{syntax};
 	my $verbose = delete $args{verbose};
 
@@ -94,22 +92,11 @@ sub new {
 	bless ($self, $class);
 
 	unless (defined $cmnds) { $cmnds = {} }
-	
-	unless (defined($formattable)) { 
-		my %sub = ();
-		for (@attributes) {
-			$sub{$_} = $_
-		}
-		$formattable = \%sub
-	}
-	unless (defined($substitutions)) { $substitutions = {} }
-	$self->{FORMATTABLE} = $formattable;
-	$self->{SUBSTITUTIONS} = $substitutions;
 
 	#configure the formatter
 	unless (defined($format)) { $format = ['Base'] }
 	$self->InitFormatter($format);
-	
+
 	unless (defined $logcall) { $logcall = sub { print STDERR shift, "\n" } }
 	unless (defined($syntax)) { $syntax = '' };
    unless (defined($verbose)) { $verbose = 0 };
@@ -117,7 +104,6 @@ sub new {
 	$self->{CAPTURED} = [];
 	$self->{COMMANDS} = [];
 	$self->{CURRENTLINE} = '';
-# 	$self->{FORMATTER} = $format;
 	$self->{HLPOOL} = {};
 	$self->{INDEXER} = Syntax::Kamelon::Indexer->new(%indexer);
 	$self->{INDEXEROPTS} = \%indexer;
@@ -128,13 +114,13 @@ sub new {
 	$self->{POSTCREATE} = [];
 	$self->{PULLED} = 0;
 	$self->{SNIPPET} = '';
-	$self->{SNIPPETATTRIBUTE} = $self->FormatTable('Normal');
+	$self->{SNIPPETATTRIBUTE} = $self->Formatter->FormatTable('Normal');
 	$self->{STACK} = [];
 	$self->{SYNTAX} = $syntax;
 	$self->{USEATTRIBSTACK} = [];
 	$self->{VERBOSE} = $verbose;
 	$self->Reset;
-	
+
 	return $self;
 }
 
@@ -258,19 +244,6 @@ sub FirstNonSpace {
 	return ''
 }
 
-sub FormatTable {
-	my $self = shift;
-	my $key = shift;
-	if (defined $key) {
-		my $t = $self->{FORMATTABLE};
-		if (@_) { $t->{$key} = shift; }
-		if (exists $t->{$key}) {
-			return $t->{$key};
-		}
-	}
-	return undef
-}
-
 sub Formatter {
 	my $self = shift;
 	return $self->{FORMATTER}
@@ -281,7 +254,7 @@ sub Get {
 	return $self->{FORMATTER}->Get;
 }
 
-sub GetHighlighter {
+sub GetParser {
 	my ($self, $syntax) = @_;
 	my $pool = $self->{HLPOOL};
 	my $id = $self->{INDEXER};
@@ -302,12 +275,12 @@ sub GetHighlighter {
  		while (@$p) {
 			my $s = shift @$p;
 			unless (exists $pool->{$s}) {
-				$self->GetHighlighter($s)
+				$self->GetParser($s)
 			}
 		}
 		return $hl
 	} else {
-		$self->LogWarning("Highlighter xml for '$syntax' not found");
+		$self->LogWarning("Syntax definition for '$syntax' not found");
 	}
 }
 
@@ -326,7 +299,7 @@ sub IncludeRules {
 
 sub IncludeSyntax {
 	my ($self, $text, $syntax, $context) = @_;
-	my $hl = $self->GetHighlighter($syntax);
+	my $hl = $self->GetParser($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -337,7 +310,7 @@ sub IncludeSyntax {
 
 sub IncludeSyntaxIA {
 	my ($self, $text, $syntax, $context, $attr) = @_;
-	my $hl = $self->GetHighlighter($syntax);
+	my $hl = $self->GetParser($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -638,7 +611,7 @@ sub Reset {
 	if ($lang eq '') {
 		$self->{STACK} = [];
 	} else {
-		my $hl = $self->GetHighlighter($lang);
+		my $hl = $self->GetParser($lang);
 		unless (defined $hl) {
 			if ($self->Debug) {
 				croak "Highlighter for syntax '$lang' could not be created.";
@@ -718,11 +691,6 @@ sub StateSet {
 	my $self = shift;
 	my $s = $self->{STACK};
 	@$s = (@_);
-}
-
-sub Substitutions {
-	my $self = shift;
-	return $self->{SUBSTITUTIONS};
 }
 
 sub SuggestSyntax {
