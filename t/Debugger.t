@@ -70,7 +70,7 @@ for (@li) {
 	while (my $in = <IFILE>) {
 		$hl->Parse($in);
 	}
-	&Out($hl->Get);
+	&Out($hl->Format);
 	&Out("</body>\n</html>\n");
 	close IFILE;
 	close OFILE;

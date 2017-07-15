@@ -244,14 +244,14 @@ sub FirstNonSpace {
 	return ''
 }
 
+sub Format {
+	my $self = shift;
+	return $self->{FORMATTER}->Format;
+}
+
 sub Formatter {
 	my $self = shift;
 	return $self->{FORMATTER}
-}
-
-sub Get {
-	my $self = shift;
-	return $self->{FORMATTER}->Get;
 }
 
 sub GetParser {
@@ -423,7 +423,7 @@ sub Parse {
 		}
 	}
 	$self->SnippetForce;
-	return $self->{FORMATTER}->Format(@$out);
+	$self->{FORMATTER}->Parse(@$out);
 }
 
 sub ParseLine {
@@ -556,32 +556,18 @@ sub ParseResultOverStrike {
 	return &$parser->ParseResult($self, $text, substr($ovr, 0, length($match)), @_);
 }
 
-sub ParseResultBeginRegionPost {
+sub ParseResultBeginRegion {
 	my $self = shift;
 	my $region = pop @_;
-	$self->{FORMATTER}->FoldBeginPost($region);
-	return 1;
-}
-
-sub ParseResultBeginRegionPre {
-	my $self = shift;
-	my $region = pop @_;
-	$self->{FORMATTER}->FoldBeginPre($region);
+	$self->{FORMATTER}->FoldBegin($region);
 	my $parser = pop @_;
 	return &$parser($self, @_);
 }
 
-sub ParseResultEndRegionPost {
+sub ParseResultEndRegion {
 	my $self = shift;
 	my $region = pop @_;
-	$self->{FORMATTER}->FoldEndPost($region);
-	return 1
-}
-
-sub ParseResultEndRegionPre {
-	my $self = shift;
-	my $region = pop @_;
-	$self->{FORMATTER}->FoldEndPre($region);
+	$self->{FORMATTER}->FoldEnd($region);
 	my $parser = pop @_;
 	return &$parser($self, @_);
 }
@@ -595,12 +581,12 @@ sub ParseResultReplace {
 	return &$parser($self, $text, $replace, @_);
 }
 
-sub PushOut {
-	my $self = shift;
-	my $out = $self->{OUT};
-	push @$out, @_;
-}
-
+# sub PushOut {
+# 	my $self = shift;
+# 	my $out = $self->{OUT};
+# 	push @$out, @_;
+# }
+# 
 sub Reset {
 	my $self = shift;
 	my $lang = $self->Syntax;
@@ -608,6 +594,7 @@ sub Reset {
 	$self->{SNIPPET} = '';
 	$self->{LINESEGMENT} = '';
 	$self->{LINENUMBER} = 1;
+	$self->{FORMATTER}->Reset;
 	if ($lang eq '') {
 		$self->{STACK} = [];
 	} else {

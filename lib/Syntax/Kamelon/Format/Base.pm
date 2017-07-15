@@ -13,22 +13,18 @@ sub new {
    my $engine = shift;
 	my %args = (@_);
 
-	my $foldbeginpostcall = delete $args{foldbeginpostcall};
-	my $foldbeginprecall = delete $args{foldbeginprecall};
-	my $foldendpostcall = delete $args{foldendpostcall};
-	my $foldendprecall = delete $args{foldendprecall};
+	my $foldbegincall = delete $args{foldbegincall};
+	my $foldendcall = delete $args{foldendcall};
 	my $folding = delete $args{folding};
 	my $formattable = delete $args{format_table};
 	my $substitutions = delete $args{substitutions};
-	unless (defined $foldbeginpostcall) { $foldbeginpostcall = sub {} }
-	unless (defined $foldbeginprecall) { $foldbeginprecall = sub {} }
-	unless (defined $foldendpostcall) { $foldendpostcall = sub {} }
-	unless (defined $foldendprecall) { $foldendpostcall = sub {} }
+	unless (defined $foldbegincall) { $foldbegincall = sub {} }
+	unless (defined $foldendcall) { $foldendcall = sub {} }
 	unless (defined $folding) { $folding = 0 }
  	unless (defined($formattable)) { 
 		my %sub = ();
 		for ($engine->AvailableAttributes) {
-			$sub{$_} = $_
+			$sub{$_} = [$_, $_]
 		}
 		$formattable = \%sub
 	}
@@ -36,11 +32,11 @@ sub new {
 	my $self = {
 		ENGINE => $engine,
 		FOLDING => $folding,
+		FORMATLIST => [],
 		OUTPUT => '',
-		FOLDBEGINPOSTCALL => $foldbeginpostcall,
-		FOLDBEGINPRECALL => $foldbeginprecall,
-		FOLDENDPOSTCALL => $foldendpostcall,
-		FOLDENDPRECALL => $foldendprecall,
+		FOLDBEGINCALL => $foldbegincall,
+		FOLDENDCALL => $foldendcall,
+		FOLDHASH => {},
 		FOLDSTACK => [],
    	FORMATTABLE => $formattable,
 		SUBSTITUTIONS => $substitutions,
@@ -54,56 +50,41 @@ sub Clear {
 	$self->{OUTPUT} = '';
 }
 
-sub FoldBeginPost {
-	my ($self, $region) = @_;
-	my $call = $self->{FOLDBEGINPOSTCALL};
-	&$call($region);
-}
-
-sub FoldBeginPre {
+sub FoldBegin {
 	my ($self, $region) = @_;
 	my $eng = $self->{ENGINE};
-	my @op = ($region, $eng->LineNumber, $eng->CurrentLine);
+	my @op = ($eng->LineNumber, $region, $eng->CurrentLine);
 	$self->FoldStackPush(@op);
-	my $call = $self->{FOLDBEGINPRECALL};
-	&$call($region);
 }
 
-sub FoldBeginPostCall {
+sub FoldBeginCall {
 	my $self = shift;
-	if (@_) { $self->{FOLDBEGINPOSTCALL} = shift; }
-	return $self->{FOLDBEGINPOSTCALL};
+	if (@_) { $self->{FOLDBEGINCALL} = shift; }
+	return $self->{FOLDBEGINCALL};
 }
 
-sub FoldBeginPreCall {
-	my $self = shift;
-	if (@_) { $self->{FOLDBEGINPRECALL} = shift; }
-	return $self->{FOLDBEGINPRECALL};
-}
-
-sub FoldEndPost {
+sub FoldEnd {
 	my ($self, $region) = @_;
-	my $call = $self->{FOLDENDPOSTCALL};
-	&$call($region);
+	my $eng = $self->{ENGINE};
+	my $endline = $eng->LineNumber;
+	my $stacktop = $self->FoldStackTop;
+	if ($endline > $stacktop->[0]) {
+		my $beginline = shift @$stacktop;
+		unshift @$stacktop, $endline;
+		$self->{FOLDHASH}->{$beginline} = $stacktop;
+	}
 	$self->FoldStackPull;
 }
 
-sub FoldEndPre {
-	my ($self, $region) = @_;
-	my $call = $self->{FOLDENDPRECALL};
-	&$call($region);
+sub FoldEndCall {
+	my $self = shift;
+	if (@_) { $self->{FOLDENDCALL} = shift; }
+	return $self->{FOLDENDCALL};
 }
 
-sub FoldEndPostCall {
+sub FoldHash {
 	my $self = shift;
-	if (@_) { $self->{FOLDENDPOSTCALL} = shift; }
-	return $self->{FOLDENDPOSTCALL};
-}
-
-sub FoldEndPreCall {
-	my $self = shift;
-	if (@_) { $self->{FOLDENDPRECALL} = shift; }
-	return $self->{FOLDENDPRECALL};
+	return $self->{FOLDHASH};
 }
 
 sub Folding {
@@ -139,27 +120,28 @@ sub FoldStackTop {
 sub Format {
 	my $self = shift;
 	my $res = '';
-	while (@_) {
-		my $f = shift;
-		my $t = shift;
-		unless (defined($t)) { 
-			$t = $self->FormatTable('Normal') 
-		}
+	my $snippets = $self->{FORMATLIST};
+	while (@$snippets) {
+		my $f = shift @$snippets;
+		my $t = shift @$snippets;
+# 		unless (defined($t)) { 
+# 			$t = $self->FormatTable('Normal') 
+# 		}
 		my $s = $self->{SUBSTITUTIONS};
 		my $rr = '';
-		while ($f ne '') {
-			my $k = substr($f , 0, 1);
-			$f = substr($f, 1, length($f) -1);
+		my @string = split //, $f;
+		while (@string) {
+			my $k = shift @string;
 			if (exists $s->{$k}) {
-				 $rr = $rr . $s->{$k}
+					$rr = $rr . $s->{$k}
 			} else {
 				$rr = $rr . $k;
 			}
+
 		}
-		my @tags = @$t;
 		$res = $res . $t->[0] . $rr . $t->[1];
 	}
-	$self->{OUTPUT} = $self->{OUTPUT} . $res
+	return $res
 }
 
 sub FormatTable {
@@ -175,11 +157,25 @@ sub FormatTable {
 	return undef
 }
 
-sub Get {
+# sub Get {
+# 	my $self = shift;
+# 	my $a = $self->{OUTPUT};
+# 	$self->{OUTPUT} = '';
+# 	return $a;
+# }
+
+sub Parse {
 	my $self = shift;
-	my $a = $self->{OUTPUT};
+	my $list = $self->{FORMATLIST};
+	push @$list, @_;
+}
+
+sub Reset {
+	my $self = shift;
+	$self->{FOLDHASH} = {};
+	$self->{FOLDSTACK} = [];
+	$self->{FORMATLIST} = [];
 	$self->{OUTPUT} = '';
-	return $a;
 }
 
 sub Substitutions {

@@ -422,20 +422,6 @@ sub SetupContextRules {
 
 				#Add result parsers. Note: Last one to be called is first one to be pushed.
 				my $rparser = 'ParseResult';
-				if ($formatter->Folding) {
-					if ((defined $beginreg) or (defined $endreg)) {
-						$rparser = $rparser . 'Chained';
-					}
-					if (defined $beginreg) {
-						push @options, $beginreg;
-						push @options, $eng->can('ParseResultBeginRegionPost');
-					}
-					if (defined $endreg) {
-						push @options, $endreg;
-						push @options, $eng->can('ParseResultEndRegionPost');
-					}
-					
-				}
 				if ($lookahead) { 
 					$rparser = $rparser . 'LookAhead'
 				}
@@ -460,11 +446,11 @@ sub SetupContextRules {
 				if ($formatter->Folding) {
 					if (defined $beginreg) {
 						push @options, $beginreg;
-						push @options, $eng->can('ParseResultBeginRegionPre');
+						push @options, $eng->can('ParseResultBeginRegion');
 					}
 					if (defined $endreg) {
 						push @options, $endreg;
-						push @options, $eng->can('ParseResultEndRegionPre');
+						push @options, $eng->can('ParseResultEndRegion');
 					}
 				}
 				push @rules, \@options;

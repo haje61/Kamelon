@@ -56,6 +56,7 @@ for (@li) {
 	my $infile = "$sampledir/highlight.$_";
 	my $reffile = "$htmldir/$_.html";
 	my $outfile = "$outdir/$_.html";
+	$hl->Reset;
 	$hl->Syntax($_);
 	unless (open(OFILE, ">", $outfile)) {
 		die "Cannot open output $outfile"
@@ -71,7 +72,7 @@ for (@li) {
 	while (my $in = <IFILE>) {
 		$hl->Parse($in);
 	}
-	&Out($hl->Get);
+	&Out($hl->Format);
 	&Out("</body>\n</html>\n");
 	close IFILE;
 	close OFILE;

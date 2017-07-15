@@ -4,8 +4,6 @@ print <<__EOF;
 
 *********************************************************
 This package contains a number of scripts that use Wx.
-Wx is not prescribed as a pre-requisite because it is not
-necessary to have Wx installed for using Kamelon itself.
 If you want to use these scripts, please install it.
 *********************************************************
 
@@ -23,6 +21,7 @@ WriteMakefile(
     PREREQ_PM         => {
 		'XML::TokeParser' => 0,
 		'Time::HiRes' => 0,
+		'Template' => 0,
     }, # e.g., Module::Name => 1.1
     ABSTRACT_FROM     => 'lib/Syntax/Kamelon.pod', # retrieve abstract from module
 );
