@@ -254,6 +254,20 @@ sub Formatter {
 	return $self->{FORMATTER}
 }
 
+sub GetData {
+	my $self = shift;
+	my $f = $self->{FORMATTER};
+	return {
+		snippets => $f->{FORMATLIST},
+		folds => $f->{FOLDHASH},
+	}
+}
+
+sub GetIndexer {
+	my $self = shift;
+	return $self->{INDEXER}
+}
+
 sub GetParser {
 	my ($self, $syntax) = @_;
 	my $pool = $self->{HLPOOL};
@@ -282,11 +296,6 @@ sub GetParser {
 	} else {
 		$self->LogWarning("Syntax definition for '$syntax' not found");
 	}
-}
-
-sub GetIndexer {
-	my $self = shift;
-	return $self->{INDEXER}
 }
 
 sub IncludeRules {
@@ -412,18 +421,23 @@ sub LogWarning {
 sub Parse {
 	my ($self, $text) = @_;
 	$self->{SNIPPET} = '';
+	my $form = $self->{FORMATTER};
 	my $out = $self->{OUT};
 	@$out = ();
 	while ($text ne '') {
-		if ($text =~ s/^([^\n]+\n)//) {
+		if ($text =~ s/^([^\n]*\n)//) {
 			$self->ParseLine($1);
+			$self->SnippetForce;
+			$form->Parse(@$out);
+			@$out = ();
 		} else {
 			$self->ParseLine($text);
-			$text = ''
+			$text = '';
+			$self->SnippetForce;
+			$form->Parse(@$out);
+			@$out = ();
 		}
 	}
-	$self->SnippetForce;
-	$self->{FORMATTER}->Parse(@$out);
 }
 
 sub ParseLine {
@@ -440,8 +454,8 @@ sub ParseLine {
 			}
 			$self->SnippetForce;
 			$self->LineEndContext($ctd->{endcontext});
-			my $attr = $ctd->{attribute};
-			$self->SnippetParse($1, $attr);
+# 			my $attr = $ctd->{attribute};
+# 			$self->SnippetParse($1, $attr);
 			$self->SnippetForce;
 			$self->{LINESEGMENT} = '';
 			$self->{LINENUMBER} = $self->{LINENUMBER} + 1;

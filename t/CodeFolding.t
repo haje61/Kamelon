@@ -27,7 +27,6 @@ my $substitutions = {
 
 
 my $hl = new Syntax::Kamelon(
-	noindex => 1,
 	formatter => ['Base',
 		folding => 1,
 # 		foldbegincall => \&FoldBegin,

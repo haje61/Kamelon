@@ -114,8 +114,8 @@ sub ParseLine {
 			}
 			$self->LineEndContext($ctd->{endcontext});
 			$self->SnippetForce;
-			my $attr = $ctd->{attribute};
-			$self->SnippetParse($1, $attr);
+# 			my $attr = $ctd->{attribute};
+# 			$self->SnippetParse($1, $attr);
 			$self->SnippetForce;
 			$self->{LINESEGMENT} = '';
 			$self->NewLine;

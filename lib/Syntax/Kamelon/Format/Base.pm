@@ -17,6 +17,7 @@ sub new {
 	my $foldendcall = delete $args{foldendcall};
 	my $folding = delete $args{folding};
 	my $formattable = delete $args{format_table};
+	my $newline = delete $args{newline};
 	my $substitutions = delete $args{substitutions};
 	unless (defined $foldbegincall) { $foldbegincall = sub {} }
 	unless (defined $foldendcall) { $foldendcall = sub {} }
@@ -24,10 +25,11 @@ sub new {
  	unless (defined($formattable)) { 
 		my %sub = ();
 		for ($engine->AvailableAttributes) {
-			$sub{$_} = [$_, $_]
+			$sub{$_} = $_,
 		}
 		$formattable = \%sub
 	}
+	unless (defined($newline)) { $newline = "\n" }
 	unless (defined($substitutions)) { $substitutions = {} }
 	my $self = {
 		ENGINE => $engine,
@@ -39,6 +41,7 @@ sub new {
 		FOLDHASH => {},
 		FOLDSTACK => [],
    	FORMATTABLE => $formattable,
+   	NEWLINE => $newline,
 		SUBSTITUTIONS => $substitutions,
 	};
    bless ($self, $class);
@@ -120,26 +123,30 @@ sub FoldStackTop {
 sub Format {
 	my $self = shift;
 	my $res = '';
-	my $snippets = $self->{FORMATLIST};
-	while (@$snippets) {
-		my $f = shift @$snippets;
-		my $t = shift @$snippets;
-# 		unless (defined($t)) { 
-# 			$t = $self->FormatTable('Normal') 
-# 		}
-		my $s = $self->{SUBSTITUTIONS};
-		my $rr = '';
-		my @string = split //, $f;
-		while (@string) {
-			my $k = shift @string;
-			if (exists $s->{$k}) {
-					$rr = $rr . $s->{$k}
-			} else {
-				$rr = $rr . $k;
-			}
+	my $lines = $self->{FORMATLIST};
+	while (@$lines) {
+		my $snippets = shift @$lines;
+		while (@$snippets) {
+			my $f = shift @$snippets;
+			my $t = shift @$snippets;
+	# 		unless (defined($t)) { 
+	# 			$t = $self->FormatTable('Normal') 
+	# 		}
+			my $s = $self->{SUBSTITUTIONS};
+			my $rr = '';
+			my @string = split //, $f;
+			while (@string) {
+				my $k = shift @string;
+				if (exists $s->{$k}) {
+						$rr = $rr . $s->{$k}
+				} else {
+					$rr = $rr . $k;
+				}
 
+			}
+			$res = $res . $t->[0] . $rr . $t->[1];
 		}
-		$res = $res . $t->[0] . $rr . $t->[1];
+		$res = $res . $self->{NEWLINE};
 	}
 	return $res
 }
@@ -167,7 +174,7 @@ sub FormatTable {
 sub Parse {
 	my $self = shift;
 	my $list = $self->{FORMATLIST};
-	push @$list, @_;
+	push @$list, \@_;
 }
 
 sub Reset {

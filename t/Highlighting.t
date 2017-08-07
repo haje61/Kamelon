@@ -23,7 +23,6 @@ my $substitutions = {
 	'&' => '&amp;',
 	' ' => '&nbsp;',
 	"\t" => '&nbsp;&nbsp;&nbsp;',
-	"\n" => "<BR>\n",
 };
 
 
@@ -33,6 +32,7 @@ my $hl = new Syntax::Kamelon(
 	formatter => ['Base',
 		substitutions => $substitutions,
 		format_table => \%formtab,
+		newline => "</br>\n",
 	],
 );
 ok(defined $hl, 'Creation');

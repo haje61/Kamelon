@@ -29,8 +29,9 @@ sub new {
 	my $self = $class->SUPER::new($engine, %args);
 
 	unless (defined $template) {
-		$template = "No template set";
+		die "No template file set";
 	}
+	unless (-e $template) { die "template file does not exist" }
 	my $toolkit;
 	if (defined $ttconfig) {
 		$toolkit = Template->new($ttconfig)
@@ -38,8 +39,7 @@ sub new {
 		$toolkit = Template->new()
 	}
 	unless (defined $wrap) { $wrap = 0 }
-	unless (defined $outmet) { $outmet = "useget" }
-	if ($outmet eq "useget") { $outmet = ref $self->{OUTPUT} }
+	unless (defined $outmet) { $outmet = "returnscalar" }
 	$self->{OUTMETHOD} = $outmet;
 	$self->{TEMPLATE} = $template;
 	$self->{TT} = $toolkit;
@@ -50,21 +50,47 @@ sub new {
 
 sub Format {
 	my $self = shift;
+	my $out = '';
+	my $output;
 	my $outmet = $self->{OUTMETHOD};
+	if ($outmet eq 'returnscalar') {
+		$output = \$out
+	} else {
+		$output = $outmet
+	}
 	my $template = $self->{TEMPLATE};
 	my $toolkit = $self->{TT};
 	my $data = {
 		folds => $self->{FOLDHASH},
-		snippets => $self->{FORMATLIST},
+		content => $self->{FORMATLIST},
 	};
-	$toolkit->process($template, $data, $outmet);
-	return $self->SUPER->Get;
+	$toolkit->process($template, $data, $output)  || do {
+		my $error = $toolkit->error();
+		print STDERR "error type: ", $error->type(), "\n";
+		print STDERR "error info: ", $error->info(), "\n";
+		print STDERR $error, "\n";
+	};
+	return $out
 }
 
 sub OutMethod {
 	my $self = shift;
 	if (@_) { $self->{OUTMETHOD} = shift }
 	return $self->{OUTMETHOD}
+}
+
+sub Parse {
+	my $self = shift;
+	my @line = ();
+	while (@_) {
+		my %tok = (
+			text => shift,
+			tag => shift,
+		);
+		push @line, \%tok
+	}
+	my $fl = $self->{FORMATLIST};
+	push @$fl, \@line
 }
 
 sub Template {

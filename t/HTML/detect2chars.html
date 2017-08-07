@@ -5,50 +5,50 @@
 <title>Testfile detect2chars</title>
 </head>
 <body>
-<font class="Normal">Testing&nbsp;detect2chars</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Normal">Testing&nbsp;default&nbsp;without&nbsp;options</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;char=</font><font class="String">"c"</font><font class="Others">&nbsp;char1=</font><font class="String">"s"</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;Test&gt;</font><font class="Others"><BR>
-</font><font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others"><BR>
-</font><font class="Others">AMSTERDAM&nbsp;CS</font><font class="Others"><BR>
-</font><font class="Others">&lt;Test&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Normal">Testing&nbsp;dynamic</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"TestDT"</font><font class="Others">&nbsp;String=</font><font class="String">"\s(c)har(s)"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;dynamic=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#pop"</font><font class="Others">&nbsp;char=</font><font class="String">"1"</font><font class="Others">&nbsp;char1=</font><font class="String">"2"</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;TestD&gt;</font><font class="Others"><BR>
-</font><font class="Others">scoop</font><font class="DataType">&nbsp;chars</font><font class="Others">&nbsp;</font><font class="Others"><BR>
-</font><font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font><font class="Comment"><BR>
-</font><font class="Others">&lt;TestD&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;TestD&gt;</font><font class="Others"><BR>
-</font><font class="Others">scoop</font><font class="DataType">&nbsp;chars</font><font class="Others"><BR>
-</font><font class="Others">AMSTERDAM&nbsp;CS&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;tthis&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font><font class="Comment"><BR>
-</font><font class="Others">&lt;TestD&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Normal">Testing&nbsp;dynamic&nbsp;insensitive</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"TestDIT"</font><font class="Others">&nbsp;String=</font><font class="String">"\s(c)har(s)"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;dynamic=</font><font class="String">"true"</font><font class="Others">&nbsp;insensitive=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#pop"</font><font class="Others">&nbsp;char=</font><font class="String">"1"</font><font class="Others">&nbsp;char1=</font><font class="String">"2"</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;TestDI&gt;</font><font class="Others"><BR>
-</font><font class="Others">scoop</font><font class="DataType">&nbsp;chars</font><font class="Others"><BR>
-</font><font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font><font class="Comment"><BR>
-</font><font class="Others">&lt;TestDI&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;TestDI&gt;</font><font class="Others"><BR>
-</font><font class="Others">scoop</font><font class="DataType">&nbsp;chars</font><font class="Others"><BR>
-</font><font class="Others">AMSTERDAM&nbsp;</font><font class="DataType">CS</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font><font class="Comment"><BR>
-</font><font class="Others">&lt;TestDI&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Normal">Testing&nbsp;insensitive</font><font class="Normal"><BR>
-</font><font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;insensitive=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;char=</font><font class="String">"c"</font><font class="Others">&nbsp;char1=</font><font class="String">"s"</font><font class="Keyword">/&gt;</font><font class="Normal"><BR>
-</font><font class="Normal"><BR>
-</font><font class="Others">&lt;TestI&gt;</font><font class="Others"><BR>
-</font><font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others"><BR>
-</font><font class="Others">AMSTERDAM&nbsp;</font><font class="DataType">CS</font><font class="Others"><BR>
-</font><font class="Others">&lt;TestI&gt;</font><font class="Normal"><BR>
-</font></body>
+<font class="Normal">Testing&nbsp;detect2chars</font></br>
+</br>
+<font class="Normal">Testing&nbsp;default&nbsp;without&nbsp;options</font></br>
+<font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;char=</font><font class="String">"c"</font><font class="Others">&nbsp;char1=</font><font class="String">"s"</font><font class="Keyword">/&gt;</font></br>
+</br>
+<font class="Others">&lt;Test&gt;</font></br>
+<font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font></br>
+<font class="Others">AMSTERDAM&nbsp;CS</font></br>
+<font class="Others">&lt;Test&gt;</font></br>
+</br>
+<font class="Normal">Testing&nbsp;dynamic</font></br>
+<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"TestDT"</font><font class="Others">&nbsp;String=</font><font class="String">"\s(c)har(s)"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;dynamic=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#pop"</font><font class="Others">&nbsp;char=</font><font class="String">"1"</font><font class="Others">&nbsp;char1=</font><font class="String">"2"</font><font class="Keyword">/&gt;</font></br>
+</br>
+<font class="Others">&lt;TestD&gt;</font></br>
+<font class="Others">scoop</font><font class="DataType">&nbsp;chars</font><font class="Others">&nbsp;</font></br>
+<font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font></br>
+<font class="Others">&lt;TestD&gt;</font></br>
+</br>
+<font class="Others">&lt;TestD&gt;</font></br>
+<font class="Others">scoop</font><font class="DataType">&nbsp;chars</font></br>
+<font class="Others">AMSTERDAM&nbsp;CS&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;tthis&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font></br>
+<font class="Others">&lt;TestD&gt;</font></br>
+</br>
+<font class="Normal">Testing&nbsp;dynamic&nbsp;insensitive</font></br>
+<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"TestDIT"</font><font class="Others">&nbsp;String=</font><font class="String">"\s(c)har(s)"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;dynamic=</font><font class="String">"true"</font><font class="Others">&nbsp;insensitive=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#pop"</font><font class="Others">&nbsp;char=</font><font class="String">"1"</font><font class="Others">&nbsp;char1=</font><font class="String">"2"</font><font class="Keyword">/&gt;</font></br>
+</br>
+<font class="Others">&lt;TestDI&gt;</font></br>
+<font class="Others">scoop</font><font class="DataType">&nbsp;chars</font></br>
+<font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font></br>
+<font class="Others">&lt;TestDI&gt;</font></br>
+</br>
+<font class="Others">&lt;TestDI&gt;</font></br>
+<font class="Others">scoop</font><font class="DataType">&nbsp;chars</font></br>
+<font class="Others">AMSTERDAM&nbsp;</font><font class="DataType">CS</font><font class="Others">&nbsp;12&nbsp;</font><font class="Comment">#if&nbsp;this&nbsp;matches,&nbsp;dynamic&nbsp;was&nbsp;not&nbsp;called</font></br>
+<font class="Others">&lt;TestDI&gt;</font></br>
+</br>
+<font class="Normal">Testing&nbsp;insensitive</font></br>
+<font class="Keyword">&lt;Detect2Chars</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;insensitive=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;char=</font><font class="String">"c"</font><font class="Others">&nbsp;char1=</font><font class="String">"s"</font><font class="Keyword">/&gt;</font></br>
+</br>
+<font class="Others">&lt;TestI&gt;</font></br>
+<font class="Others">amsterdam&nbsp;</font><font class="DataType">cs</font></br>
+<font class="Others">AMSTERDAM&nbsp;</font><font class="DataType">CS</font></br>
+<font class="Others">&lt;TestI&gt;</font></br>
+</body>
 </html>
