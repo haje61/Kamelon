@@ -268,7 +268,7 @@ sub GetIndexer {
 	return $self->{INDEXER}
 }
 
-sub GetParser {
+sub GetLexer {
 	my ($self, $syntax) = @_;
 	my $pool = $self->{HLPOOL};
 	my $id = $self->{INDEXER};
@@ -289,7 +289,7 @@ sub GetParser {
  		while (@$p) {
 			my $s = shift @$p;
 			unless (exists $pool->{$s}) {
-				$self->GetParser($s)
+				$self->GetLexer($s)
 			}
 		}
 		return $hl
@@ -308,7 +308,7 @@ sub IncludeRules {
 
 sub IncludeSyntax {
 	my ($self, $text, $syntax, $context) = @_;
-	my $hl = $self->GetParser($syntax);
+	my $hl = $self->GetLexer($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -319,7 +319,7 @@ sub IncludeSyntax {
 
 sub IncludeSyntaxIA {
 	my ($self, $text, $syntax, $context, $attr) = @_;
-	my $hl = $self->GetParser($syntax);
+	my $hl = $self->GetLexer($syntax);
 	if ($context eq '') {
 		$context = $hl->{basecontext};
 	}
@@ -612,7 +612,7 @@ sub Reset {
 	if ($lang eq '') {
 		$self->{STACK} = [];
 	} else {
-		my $hl = $self->GetParser($lang);
+		my $hl = $self->GetLexer($lang);
 		unless (defined $hl) {
 			if ($self->Debug) {
 				croak "Highlighter for syntax '$lang' could not be created.";

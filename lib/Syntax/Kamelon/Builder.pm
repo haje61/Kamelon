@@ -474,7 +474,7 @@ sub SetupContextShifter {
 		my $p = $eng->{POSTCREATE};
 		push @$p, $syntax;
 		return sub {
-			my $hl = $eng->GetHighlighter($syntax);
+			my $hl = $eng->GetLexer($syntax);
 			if ($tcontext eq '') { $tcontext = $hl->{basecontext} }
 			$eng->StackPush($hl, $tcontext);
 		}

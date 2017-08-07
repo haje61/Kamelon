@@ -533,7 +533,7 @@ sub entryClose {
 
 sub entryOpen {
 	my ($self, $item) = @_;
-	my $hl = $highlighter->GetHighlighter($item);
+	my $hl = $highlighter->GetLexer($item);
 	$self->{HL} = $hl;
 	my $cb = $self->{CCOMBO};
 	my $ctx = $hl->{contexts};
