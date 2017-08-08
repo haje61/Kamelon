@@ -71,10 +71,13 @@ sub FoldEnd {
 	my $eng = $self->{ENGINE};
 	my $endline = $eng->LineNumber;
 	my $stacktop = $self->FoldStackTop;
-	if ($endline > $stacktop->[0]) {
-		my $beginline = shift @$stacktop;
-		unshift @$stacktop, $endline;
-		$self->{FOLDHASH}->{$beginline} = $stacktop;
+	my $folding = $self->{FOLDING};
+	if (($folding eq 'all') or ($self->FoldStackLevel <= $folding)) {
+		if ($endline > $stacktop->[0]) {
+			my $beginline = shift @$stacktop;
+			unshift @$stacktop, $endline;
+			$self->{FOLDHASH}->{$beginline} = $stacktop;
+		}
 	}
 	$self->FoldStackPull;
 }

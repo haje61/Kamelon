@@ -60,17 +60,21 @@ sub Format {
 	}
 	my $template = $self->{TEMPLATE};
 	my $toolkit = $self->{TT};
-	my $data = {
-		folds => $self->{FOLDHASH},
-		content => $self->{FORMATLIST},
-	};
-	$toolkit->process($template, $data, $output)  || do {
+	$toolkit->process($template, $self->GetData, $output)  || do {
 		my $error = $toolkit->error();
 		print STDERR "error type: ", $error->type(), "\n";
 		print STDERR "error info: ", $error->info(), "\n";
 		print STDERR $error, "\n";
 	};
 	return $out
+}
+
+sub GetData {
+	my $self = shift;
+	return {
+		folds => $self->{FOLDHASH},
+		content => $self->{FORMATLIST},
+	}
 }
 
 sub OutMethod {

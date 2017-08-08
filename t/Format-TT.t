@@ -16,6 +16,7 @@ unless (-e $template) { die "template does not exist" }
 my $kam = Syntax::Kamelon->new(
 	syntax => 'Perl',
 	formatter => ['TT',
+		folding => 2,
 		template => $template,
 	],
 );
