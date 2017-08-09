@@ -56,8 +56,13 @@ sub Clear {
 sub FoldBegin {
 	my ($self, $region) = @_;
 	my $eng = $self->{ENGINE};
-	my @op = ($eng->LineNumber, $region, $eng->CurrentLine);
-	$self->FoldStackPush(@op);
+	chomp(my $line = $eng->CurrentLine);
+	my %op = (
+		start => $eng->LineNumber, 
+		region => $region, 
+		line => $line
+	);
+	$self->FoldStackPush(\%op);
 }
 
 sub FoldBeginCall {
@@ -73,9 +78,10 @@ sub FoldEnd {
 	my $stacktop = $self->FoldStackTop;
 	my $folding = $self->{FOLDING};
 	if (($folding eq 'all') or ($self->FoldStackLevel <= $folding)) {
-		if ($endline > $stacktop->[0]) {
-			my $beginline = shift @$stacktop;
-			unshift @$stacktop, $endline;
+		if ($endline > $stacktop->{start}) {
+			my $beginline = delete $stacktop->{start};
+			$stacktop->{end} = $endline;
+			$stacktop->{depth} = $self->FoldStackLevel;
 			$self->{FOLDHASH}->{$beginline} = $stacktop;
 		}
 	}
@@ -114,7 +120,7 @@ sub FoldStackPull {
 sub FoldStackPush {
 	my $self = shift;
 	my $stack = $self->{FOLDSTACK};
-	unshift @$stack, \@_
+	unshift @$stack, shift;
 }
 
 sub FoldStackTop {

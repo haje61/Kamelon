@@ -8,7 +8,7 @@
 <div class="index" width="25%">
 </br>
 <h2>Index</h2>
-[% FOREACH fold IN folds.keys.nsort %]<a href="#[% fold %]">[% node = folds.$fold %][% node.last %]</a></br>
+[% FOREACH fold IN folds.keys.nsort %][% node = folds.$fold %][% level = node.depth  %][% WHILE level > 1 %]&nbsp;&nbsp;&nbsp;[% level = level - 1 %][% END %]<a href="#[% fold %]">[% linktxt = node.line.trim %][% FILTER replace('\040', '&nbsp;') %][% FILTER replace('\t', '&nbsp;&nbsp;&nbsp;') %][% FILTER html %][% linktxt.substr(0, 32) %][% END %][% END %][% END %]</a></br>
 [% END %]
 </div>
 <div class="content" width="75%">
