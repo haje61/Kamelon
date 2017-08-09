@@ -92,7 +92,7 @@ foreach my $ln (@langl) {
 		my $r = $results{$ln};
 		$k->Syntax($ln);
 		$k->Reset;
-		open(TST, "<samples/$fl") or die "cannot open $fl";
+		open(TST, "<t/Bench/$fl") or die "cannot open $fl";
 		my $hltp = 0;
 		my $fmtp = 0;
 		while (<TST>) { 

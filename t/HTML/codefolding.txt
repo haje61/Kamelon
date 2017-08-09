@@ -1,182 +1,270 @@
-104 => 107, Block, sub CanUndo {
-, 
-109 => 112, Block, sub CanRedo {
-, 
-114 => 119, Block, sub Clear {
-, 
-116 => 118, Block,    unless ($self->Broadcast('clear')) {
-, 
-121 => 125, Block, sub ClearSelection {
-, 
-127 => 132, Block, sub Command {
-, 
-134 => 139, Block, sub Copy {
-, 
-136 => 138, Block,    unless ($self->Broadcast('copy')) {
-, 
-141 => 146, Block, sub Cut {
-, 
-143 => 145, Block,    unless ($self->Broadcast('cut')) {
-, 
-148 => 157, Block, sub DoRemove {
-, 
-153 => 155, Block,    if (defined($ins)) {
-, 
-159 => 170, Block, sub DoReplace {
-, 
-163 => 165, Block,    if ($sel) {
-, 
-166 => 168, Block,    if (defined($ins)) {
-, 
-172 => 184, Block, sub DoWrite {
-, 
-177 => 179, Block,    if ($sel) {
-, 
-180 => 182, Block,    if (defined($ins)) {
-, 
-186 => 198, Block, sub FindPluginId {
-, 
-190 => 195, Block,    foreach (@$plgs) {
-, 
-191 => 193, Block,       if ($name eq $plgs->[$index]->Name) {
-, 
-200 => 209, Block, sub FindPlugin {
-, 
-203 => 207, Block,    foreach (@$plgs) {
-, 
-204 => 206, Block,       if ($name eq $_->Name) {
-, 
-211 => 225, Block, sub GetClipboardText {
-, 
-214 => 223, Block,    if (wxTheClipboard->Open) {
-, 
-218 => 220, Block,       if( $ok ) {
-, 
-227 => 232, Block, sub GetLineNumber {
-, 
-234 => 238, Block, sub HasSelection {
-, 
-24 => 26, Block, if ($debug) {
-, 
-241 => 247, Block, sub IsWriteable {
-, 
-243 => 245, Block,    if ((($key >= 32) and ($key < 127)) or (($key > 127) and ($key < 256))) {
-, 
-249 => 264, Block, sub Listening {
-, 
-251 => 262, Block,    if (@_) {
-, 
-253 => 261, Block,       unless ($new eq $self->{LISTENING}) {
-, 
-255 => 257, Block,          if ($new) {
-, 
-257 => 259, Block,          } else {
-, 
-266 => 271, Block, sub LoadFile {
-, 
-268 => 270, Block,    unless ($self->Broadcast('load', @_)) {
-, 
-273 => 285, Block, sub LoadPlugin {
-, 
-28 => 47, Block, sub new {
-, 
-280 => 282, Block, 	if (defined($plug)) {
-, 
-282 => 284, Block, 	} else {
-, 
-287 => 293, Block, sub Name {
-, 
-295 => 310, Block, sub OnChar {
-, 
-298 => 304, Block,    if ($k eq 322) { #Insert key pressed, record flip insert/ovr mode.
-, 
-299 => 301, Block,       if ($self->OvrMode) {
-, 
-301 => 303, Block,       } else {
-, 
-305 => 307, Block,    unless ($self->Broadcast('key', $event)) {
-, 
-312 => 316, Block, sub OvrMode {
-, 
-318 => 323, Block, sub Paste {
-, 
-320 => 322, Block,    unless ($self->Broadcast('paste')) {
-, 
-325 => 336, Block, sub Plugin {
-, 
-329 => 331, Block,    unless ($id =~ /^\d+$/) {
-, 
-33 => 37, Block,    $self->{COMMANDS} = {
-, 
-332 => 334, Block,    if (@_) { 
-, 
-338 => 348, Block, sub Receive {
-, 
-342 => 346, Block,    if (exists $self->{COMMANDS}->{$name}) {
-, 
-350 => 355, Block, sub Redo {
-, 
-352 => 354, Block,    unless ($self->Broadcast('redo')) {
-, 
-357 => 361, Block, sub RegisterPlugin {
-, 
-363 => 369, Block, sub Remove {
-, 
-366 => 368, Block,    unless ($self->Broadcast(@call)) {
-, 
-371 => 377, Block, sub Remove2Call {
-, 
-379 => 385, Block, sub Replace {
-, 
-382 => 384, Block,    unless ($self->Broadcast(@call)) {
-, 
-387 => 393, Block, sub Replace2Call {
-, 
-395 => 400, Block, sub SaveFile {
-, 
-397 => 399, Block,    unless ($self->Broadcast('save', @_)) {
-, 
-402 => 405, Block, sub NativePlugins {
-, 
-407 => 410, Block, sub Syntax {
-, 
-412 => 417, Block, sub Undo {
-, 
-414 => 416, Block,    unless ($self->Broadcast('undo')) {
-, 
-419 => 425, Block, sub WriteText {
-, 
-422 => 424, Block,    unless ($self->Broadcast(@call)) {
-, 
-427 => 430, Block, sub WriteText2Call {
-, 
-49 => 54, Block, sub AppendText {
-, 
-51 => 53, Block,    unless ($self->Broadcast('append', @_)) {
-, 
-56 => 66, Block, sub Broadcast {
-, 
-60 => 64, Block,    foreach (@$plugs) {
-, 
-61 => 63, Block,       if ($_->Receive(@_)) {
-, 
-68 => 76, Block, sub Call2Remove {
-, 
-70 => 72, Block,    if ($call =~ /.*remove$/) {
-, 
-72 => 75, Block,    } else {
-, 
-78 => 86, Block, sub Call2Replace {
-, 
-80 => 82, Block,    if ($call =~ /.*replace$/) {
-, 
-82 => 85, Block,    } else {
-, 
-88 => 96, Block, sub Call2WriteText {
-, 
-90 => 92, Block,    if ($call =~ /.*write$/) {
-, 
-92 => 95, Block,    } else {
-, 
-98 => 102, Block, sub Callback {
-, 
+104 => [
+   depth => 1,
+   end => 107,
+   line => sub CanUndo {,
+   region => Block,
+]
+109 => [
+   depth => 1,
+   end => 112,
+   line => sub CanRedo {,
+   region => Block,
+]
+114 => [
+   depth => 1,
+   end => 119,
+   line => sub Clear {,
+   region => Block,
+]
+121 => [
+   depth => 1,
+   end => 125,
+   line => sub ClearSelection {,
+   region => Block,
+]
+127 => [
+   depth => 1,
+   end => 132,
+   line => sub Command {,
+   region => Block,
+]
+134 => [
+   depth => 1,
+   end => 139,
+   line => sub Copy {,
+   region => Block,
+]
+141 => [
+   depth => 1,
+   end => 146,
+   line => sub Cut {,
+   region => Block,
+]
+148 => [
+   depth => 1,
+   end => 157,
+   line => sub DoRemove {,
+   region => Block,
+]
+159 => [
+   depth => 1,
+   end => 170,
+   line => sub DoReplace {,
+   region => Block,
+]
+172 => [
+   depth => 1,
+   end => 184,
+   line => sub DoWrite {,
+   region => Block,
+]
+186 => [
+   depth => 1,
+   end => 198,
+   line => sub FindPluginId {,
+   region => Block,
+]
+200 => [
+   depth => 1,
+   end => 209,
+   line => sub FindPlugin {,
+   region => Block,
+]
+211 => [
+   depth => 1,
+   end => 225,
+   line => sub GetClipboardText {,
+   region => Block,
+]
+227 => [
+   depth => 1,
+   end => 232,
+   line => sub GetLineNumber {,
+   region => Block,
+]
+234 => [
+   depth => 1,
+   end => 238,
+   line => sub HasSelection {,
+   region => Block,
+]
+24 => [
+   depth => 1,
+   end => 26,
+   line => if ($debug) {,
+   region => Block,
+]
+241 => [
+   depth => 1,
+   end => 247,
+   line => sub IsWriteable {,
+   region => Block,
+]
+249 => [
+   depth => 1,
+   end => 264,
+   line => sub Listening {,
+   region => Block,
+]
+266 => [
+   depth => 1,
+   end => 271,
+   line => sub LoadFile {,
+   region => Block,
+]
+273 => [
+   depth => 1,
+   end => 285,
+   line => sub LoadPlugin {,
+   region => Block,
+]
+28 => [
+   depth => 1,
+   end => 47,
+   line => sub new {,
+   region => Block,
+]
+287 => [
+   depth => 1,
+   end => 293,
+   line => sub Name {,
+   region => Block,
+]
+295 => [
+   depth => 1,
+   end => 310,
+   line => sub OnChar {,
+   region => Block,
+]
+312 => [
+   depth => 1,
+   end => 316,
+   line => sub OvrMode {,
+   region => Block,
+]
+318 => [
+   depth => 1,
+   end => 323,
+   line => sub Paste {,
+   region => Block,
+]
+325 => [
+   depth => 1,
+   end => 336,
+   line => sub Plugin {,
+   region => Block,
+]
+338 => [
+   depth => 1,
+   end => 348,
+   line => sub Receive {,
+   region => Block,
+]
+350 => [
+   depth => 1,
+   end => 355,
+   line => sub Redo {,
+   region => Block,
+]
+357 => [
+   depth => 1,
+   end => 361,
+   line => sub RegisterPlugin {,
+   region => Block,
+]
+363 => [
+   depth => 1,
+   end => 369,
+   line => sub Remove {,
+   region => Block,
+]
+371 => [
+   depth => 1,
+   end => 377,
+   line => sub Remove2Call {,
+   region => Block,
+]
+379 => [
+   depth => 1,
+   end => 385,
+   line => sub Replace {,
+   region => Block,
+]
+387 => [
+   depth => 1,
+   end => 393,
+   line => sub Replace2Call {,
+   region => Block,
+]
+395 => [
+   depth => 1,
+   end => 400,
+   line => sub SaveFile {,
+   region => Block,
+]
+402 => [
+   depth => 1,
+   end => 405,
+   line => sub NativePlugins {,
+   region => Block,
+]
+407 => [
+   depth => 1,
+   end => 410,
+   line => sub Syntax {,
+   region => Block,
+]
+412 => [
+   depth => 1,
+   end => 417,
+   line => sub Undo {,
+   region => Block,
+]
+419 => [
+   depth => 1,
+   end => 425,
+   line => sub WriteText {,
+   region => Block,
+]
+427 => [
+   depth => 1,
+   end => 430,
+   line => sub WriteText2Call {,
+   region => Block,
+]
+49 => [
+   depth => 1,
+   end => 54,
+   line => sub AppendText {,
+   region => Block,
+]
+56 => [
+   depth => 1,
+   end => 66,
+   line => sub Broadcast {,
+   region => Block,
+]
+68 => [
+   depth => 1,
+   end => 76,
+   line => sub Call2Remove {,
+   region => Block,
+]
+78 => [
+   depth => 1,
+   end => 86,
+   line => sub Call2Replace {,
+   region => Block,
+]
+88 => [
+   depth => 1,
+   end => 96,
+   line => sub Call2WriteText {,
+   region => Block,
+]
+98 => [
+   depth => 1,
+   end => 102,
+   line => sub Callback {,
+   region => Block,
+]

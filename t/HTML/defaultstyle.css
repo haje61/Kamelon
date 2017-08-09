@@ -1,3 +1,5 @@
+
+
 body {
   background: #f4f4f4;
   font-family: "Monospace";
@@ -7,8 +9,19 @@ font {
   font-family: "Monospace";
   font-size: 1em;
 }
-
-
+.index {
+  margin-right: 10px;
+  width: 340px;
+  float: left;
+  height: 100%;
+}
+.content {
+  width: 944px;
+  padding: 20px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 font.Alert {
 	color: Orange;
 	font-weight: bold;

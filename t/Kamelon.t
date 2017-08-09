@@ -22,7 +22,7 @@ $yashe->Reset;
 $yashe->Syntax('Test');
 ok($yashe->Syntax eq 'Test', 'Set a language');
 
-my $thl = $yashe->GetParser('Test');
+my $thl = $yashe->GetLexer('Test');
 ok(defined $thl, 'Create a highlighter');
 # use Data::Dumper;
 # print Dumper $thl;

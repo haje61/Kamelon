@@ -17,33 +17,22 @@ sub new {
 
    my $outmet = delete $args{outmethod};
    my $template = delete $args{template};
+	my $toolkit = delete $args{toolkit};
 	my $ttconfig = delete $args{ttconfig};
-	my $wrap = delete $args{wrap};
 
-	my @attr = $engine->AvailableAttributes;
-	my %attrhash = ();
-	for (@attr) {
-		$attrhash{$_} = $_;
-	}
-	$args{format_table} = \%attrhash;
 	my $self = $class->SUPER::new($engine, %args);
 
-	unless (defined $template) {
-		die "No template file set";
+	unless (defined $toolkit) {
+		if (defined $ttconfig) {
+			$toolkit = Template->new($ttconfig)
+		} else {
+			$toolkit = Template->new()
+		}
 	}
-	unless (-e $template) { die "template file does not exist" }
-	my $toolkit;
-	if (defined $ttconfig) {
-		$toolkit = Template->new($ttconfig)
-	} else {
-		$toolkit = Template->new()
-	}
-	unless (defined $wrap) { $wrap = 0 }
 	unless (defined $outmet) { $outmet = "returnscalar" }
 	$self->{OUTMETHOD} = $outmet;
 	$self->{TEMPLATE} = $template;
 	$self->{TT} = $toolkit;
-	$self->{WRAP} = $wrap;
 
 	return $self;
 }
@@ -72,8 +61,8 @@ sub Format {
 sub GetData {
 	my $self = shift;
 	return {
-		folds => $self->{FOLDHASH},
-		content => $self->{FORMATLIST},
+		folds => $self->{FOLDS},
+		content => $self->{LINES},
 	}
 }
 
@@ -93,7 +82,7 @@ sub Parse {
 		);
 		push @line, \%tok
 	}
-	my $fl = $self->{FORMATLIST};
+	my $fl = $self->{LINES};
 	push @$fl, \@line
 }
 
@@ -102,13 +91,6 @@ sub Template {
 	if (@_) { $self->{TEMPLATE} = shift }
 	return $self->{TEMPLATE}
 }
-
-sub Wrap {
-	my $self = shift;
-	if (@_) { $self->{WRAP} = shift }
-	return $self->{WRAP}
-}
-
 
 1;
 __END__

@@ -52,16 +52,16 @@ while (my $in = <IFILE>) {
 }
 
 
-my $foldingpoints = $hl->Formatter->{FOLDHASH};
+my $foldingpoints = $hl->Formatter->{FOLDS};
 
 for (sort keys %$foldingpoints) {
 	my $p = $foldingpoints->{$_};
-	my @o = @$p;
-	&Out("$_ => ");
-	for (@o) {
-		&Out($_ . ", ");
+	my %o = %$p;
+	&Out("$_ => [\n");
+	for (sort keys %o) {
+		&Out("   $_ => " . $o{$_} . ",\n");
 	}
-	&Out("\n");
+	&Out("]\n");
 }
 
 close IFILE;
