@@ -8,12 +8,36 @@
 <div class="index" width="25%">
 </br>
 <h2>Index</h2>
-[% FOREACH fold IN folds.keys.nsort %][% node = folds.$fold %][% level = node.depth  %][% WHILE level > 1 %]&nbsp;&nbsp;&nbsp;[% level = level - 1 %][% END %]<a href="#[% fold %]">[% linktxt = node.line.trim %][% FILTER replace('\040', '&nbsp;') %][% FILTER replace('\t', '&nbsp;&nbsp;&nbsp;') %][% FILTER html %][% linktxt.substr(0, 32) %][% END %][% END %][% END %]</a></br>
-[% END %]
+[% FOREACH fold IN folds.keys.nsort ~%]
+	[% node = folds.$fold ~%]
+	[% level = node.depth ~%]
+	[% WHILE level > 1 ~%]
+		&nbsp;&nbsp;&nbsp;
+		[%~ level = level - 1 ~%]
+	[% END ~%]
+	<a href="#[% fold %]">
+	[%~ linktxt = node.line.trim ~%]
+		[% linktxt.substr(0, 32) FILTER html FILTER replace('\040', '&nbsp;') FILTER replace('\t', '&nbsp;&nbsp;&nbsp;') ~%]
+	</a></br>
+[% END ~%]
 </div>
+
 <div class="content" width="75%">
 <h2>Content</h2>
-[% linenum = 0 %][% FOREACH line = content %][% linenum = linenum + 1 %][% IF folds.exists(linenum) %]<a name="[% linenum %]"></a>[% END%][% linenum  FILTER format('%03d') %]&nbsp;[% FOREACH snippet = line %]<font class="[% snippet.tag %]">[% FILTER replace('\040', '&nbsp;') %][% FILTER replace('\t', '&nbsp;&nbsp;&nbsp;') %][% FILTER html %][% snippet.text %][% END %][% END %][% END %]</font>[% END %]</br>
-[% END %]</div>
+[% linenum = 0 ~%]
+[% FOREACH line = content ~%]
+	[% linenum = linenum + 1 ~%]
+	[% IF folds.exists(linenum) ~%]
+		<a name="[% linenum %]"></a>
+	[%~ END ~%]
+	[% linenum  FILTER format('%03d') ~%]
+	&nbsp;
+	[%~ FOREACH snippet = line ~%]
+		<font class="[% snippet.tag %]">
+			[%~ snippet.text FILTER html FILTER replace('\040', '&nbsp;') FILTER replace('\t', '&nbsp;&nbsp;&nbsp;') ~%]
+		</font>
+	[%~ END %]</br>
+[% END ~%]
+</div>
 </body>
 </html>

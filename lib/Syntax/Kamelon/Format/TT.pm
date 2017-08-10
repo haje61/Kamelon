@@ -15,6 +15,7 @@ sub new {
    my $engine = shift;
    my %args = (@_);
 
+	my $notoolkit = delete $args{notoolkit};
    my $outmet = delete $args{outmethod};
    my $template = delete $args{template};
 	my $toolkit = delete $args{toolkit};
@@ -22,11 +23,14 @@ sub new {
 
 	my $self = $class->SUPER::new($engine, %args);
 
-	unless (defined $toolkit) {
-		if (defined $ttconfig) {
-			$toolkit = Template->new($ttconfig)
-		} else {
-			$toolkit = Template->new()
+	unless (defined $notoolkit) { $notoolkit = 0 }
+	unless ($notoolkit) {
+		unless (defined $toolkit) {
+			if (defined $ttconfig) {
+				$toolkit = Template->new($ttconfig)
+			} else {
+				$toolkit = Template->new()
+			}
 		}
 	}
 	unless (defined $outmet) { $outmet = "returnscalar" }
@@ -90,6 +94,12 @@ sub Template {
 	my $self = shift;
 	if (@_) { $self->{TEMPLATE} = shift }
 	return $self->{TEMPLATE}
+}
+
+sub Toolkit {
+	my $self = shift;
+	if (@_) { $self->{TOOLKIT} = shift }
+	return $self->{TOOLKIT}
 }
 
 1;

@@ -1,0 +1,67 @@
+=head1 NAME
+
+Syntax::Kamelon::Format::TT 
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+B<Syntax::Kamelon::Format::TT> provides is formatting interface to B<Syntax::Kamelon> that provides support for the Template Toolkit. 
+You do not have to create an instance of B<TT> yourself. B<Kamelon> will do that for you. It inherits B<Syntax::Kamelon::Format::Base>.
+It is flexible in its use. You have the option of letting it take care of all Template Toolkit operations. Or you can just collect the
+formatting information after the parsing process and feed this information to your own instance of Template Toolkit.
+
+=head1 OPTIONS
+
+The constructor is called with a paired list of options as parameters. You can use
+the following options.
+
+=item B<notoolkit> boolean
+
+If you specify this option B<TT> will not create a Template Toolkit instance. You can pull the formatting data through the B<GetData> method. 
+The default setting is 0. If you set this option, all other options become meaningless.
+
+=item B<outmethod> various
+
+This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar, an output file handle, or
+
+=item B<template> filename
+
+=item B<toolkit> boolean
+
+=item B<ttconfig> boolean
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item B<Format>
+
+=item B<GetData> boolean
+
+=item B<OutMethod> boolean
+
+=item B<Parse> boolean
+
+=item B<Template> boolean
+
+=item B<Toolit> boolean
+
+=back
+
+=head1 AUTHOR AND COPYRIGHT
+
+This module is written and maintained by:
+
+Hans Jeuken < hansjeuken at xs4all dot nl>
+
+Copyright (c) 2017 by Hans Jeuken, all rights reserved.
+
+Published under the GPLV3 license
+
+=head1 SEE ALSO
+
+=cut
+

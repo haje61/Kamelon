@@ -1,10 +1,29 @@
+=head1 NAME
+
+Syntax::Kamelon::Format::Base
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to B<Syntax::Kamelon>. You do not have to create an instance of
+B<Base> yourself. B<Kamelon> will do that for you. During the parsing process it collects all the parsing information from B<Kamelon> 
+through the B<Parse> method. When all information is collected you can start the formatting through the B<Format> method.
 
 =head1 OPTIONS
+
+=over 4
 
 The constructor is called with a paired list of options as parameters. You can use
 the following options.
 
-=item B<folding> boolean
+=item B<folding> integer
+
+This option specifies if the code folding mechanism in B<Kamelon> should be activated and to which nesting depth you
+want code folding to be detected. If you set it to 0 the codefolding routines are not loaded. With any other value they
+are and parsing speed will be lower. If you set it to 1 only the top folds will be passed on to the formatter, making it 
+ideal to create an indexed document. If you want all code folding points detected, set it to a high value, like 999 or so.
+The default value is 0.
 
 =item B<format_table> => ref to hash
 
@@ -30,32 +49,22 @@ The following attribute tags are available:
 The syntax definition XML files have them specified with 'ds' in front of them. When
 loading the XML file, these are removed.
 
+=item B<newline> => string
+
 =item B<substitutions> ref to hash
 
 After matching the text B<HighlightAndFormat> looks here if any special characters, like tabs and 
-newlines, need replacement.
+spaces, need replacement.
 
 =back
 
-=head1 METHODS
+=head1 USER METHODS
 
 =over 4
-
-=item B<FoldBegin>
-
-=item B<FoldEnd>
 
 =item B<Folding>
 
 =item B<Folds>
-
-=item B<FoldStackLevel>
-
-=item B<FoldStackPull>
-
-=item B<FoldStackPush>
-
-=item B<FoldStackTop>
 
 =item B<Format>
 
@@ -73,6 +82,24 @@ the B<format_table> option.
 =item B<Substitutions>
 
 Returns a reference to the substitutions hash.
+
+=back
+
+=head1 SYSTEM METHODS
+
+=over 4
+
+=item B<FoldBegin>
+
+=item B<FoldEnd>
+
+=item B<FoldStackLevel>
+
+=item B<FoldStackPull>
+
+=item B<FoldStackPush>
+
+=item B<FoldStackTop>
 
 =back
 

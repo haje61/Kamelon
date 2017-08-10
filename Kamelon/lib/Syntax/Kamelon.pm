@@ -254,15 +254,6 @@ sub Formatter {
 	return $self->{FORMATTER}
 }
 
-sub GetData {
-	my $self = shift;
-	my $f = $self->{FORMATTER};
-	return {
-		snippets => $f->{FORMATLIST},
-		folds => $f->{FOLDHASH},
-	}
-}
-
 sub GetIndexer {
 	my $self = shift;
 	return $self->{INDEXER}
