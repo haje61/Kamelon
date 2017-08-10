@@ -41,11 +41,6 @@ sub new {
    return $self;
 }
 
-sub Clear {
-	my $self = shift;
-	$self->{OUTPUT} = '';
-}
-
 sub FoldBegin {
 	my ($self, $region) = @_;
 	my $eng = $self->{ENGINE};

@@ -4,14 +4,6 @@
 The constructor is called with a paired list of options as parameters. You can use
 the following options.
 
-=item B<foldbeginprecall> ref to anonymous sub
-
-=item B<foldbeginpostcall> ref to anonymous sub
-
-=item B<foldendpostcall> ref to anonymous sub
-
-=item B<foldendprecall> ref to anonymous sub
-
 =item B<folding> boolean
 
 =item B<format_table> => ref to hash
@@ -49,25 +41,13 @@ newlines, need replacement.
 
 =over 4
 
-=item B<Clear>
+=item B<FoldBegin>
 
-=item B<FoldBeginPost>
-
-=item B<FoldBeginPre>
-
-=item B<FoldBeginPostCall>
-
-=item B<FoldBeginPreCall>
-
-=item B<FoldEndPost>
-
-=item B<FoldEndPre>
-
-=item B<FoldEndPostCall>
-
-=item B<FoldEndPreCall>
+=item B<FoldEnd>
 
 =item B<Folding>
+
+=item B<Folds>
 
 =item B<FoldStackLevel>
 
@@ -84,7 +64,11 @@ newlines, need replacement.
 Returns the format data belonging to $tagname. Used by the B<Builder> module. The data is set through
 the B<format_table> option.
 
-=item B<Get>
+=item B<Lines>
+
+=item B<Parse>
+
+=item B<Reset>
 
 =item B<Substitutions>
 
