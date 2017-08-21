@@ -49,7 +49,14 @@ The following attribute tags are available:
 The syntax definition XML files have them specified with 'ds' in front of them. When
 loading the XML file, these are removed.
 
+=item B<minfoldsize> => integer
+
+Specifies the minimum size, in lines, of a fold. Default is 1 line.
+
 =item B<newline> => string
+
+Specifies what a newline looks like. By default it is set to "\n". If you are, for example, parsing to HTML you might want to 
+set it to "</br>\n".
 
 =item B<substitutions> ref to hash
 
@@ -64,9 +71,16 @@ spaces, need replacement.
 
 =item B<Folding>
 
+Corresponds with the B<folding> option. You can set and get the folding depth here. If the folding depth changes from 0 to something
+else or vice versa, all the loaded lexers in B<Kamelon> are removed and need to be reloaded.
+
 =item B<Folds>
 
+Returns a reference to the folds hash.
+
 =item B<Format>
+
+Usually called through B<Kamelon>. It turns the parsing and folding information into a textstring and returns it.
 
 =item B<FormatTable>(I<$tagname>);
 
@@ -75,13 +89,15 @@ the B<format_table> option.
 
 =item B<Lines>
 
-=item B<Parse>
+Returns a reference to the lines array.
 
 =item B<Reset>
 
+Clears all parser data.
+
 =item B<Substitutions>
 
-Returns a reference to the substitutions hash.
+Sets and returns a reference to the substitutions hash.
 
 =back
 
@@ -89,17 +105,45 @@ Returns a reference to the substitutions hash.
 
 =over 4
 
-=item B<FoldBegin>
+=item B<FoldBegin>(I<$regionname>) 
 
-=item B<FoldEnd>
+Called By Kamelon when it encounters a beginRegion attribute in a rule.
+It collects the line number, the current line that is parsed, and pushes
+all that to the fold stack in a hash.
+
+=item B<FoldEnd>(I<$regionname>)
+
+Called By Kamelon when it encounters an endRegion attribute in a rule.
+Pulls the top item from the foldhash. It checks if the fold end occurred
+in a different line then where it started. If so it passes a valid fold
+record to the folds hash with the starting line number as key. 
+This hash looks like:
+ 	$linenumber => {
+ 		end => $endline,
+ 		depth => $folddepth,
+ 		line => $text,
+ 		region => $regionname,
+ 	}
 
 =item B<FoldStackLevel>
 
+Returns the nesting depth of folds.
+
 =item B<FoldStackPull>
 
-=item B<FoldStackPush>
+Returns the top item on the foldstack and removes it from the stack.
+
+=item B<FoldStackPush>(I<$reftohash>)
+
+Pushes $reftohash to the fold stack.
 
 =item B<FoldStackTop>
+
+Returns top item from the fold stack.
+
+=item B<Parse>(I<@out>)
+
+Called by Kamelon to send the line it just parsed to the formatter.
 
 =back
 

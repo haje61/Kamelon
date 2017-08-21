@@ -23,31 +23,76 @@ The default setting is 0. If you set this option, all other options become meani
 
 =item B<outmethod> various
 
-This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar, an output file handle, or
+This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
+a reference to a output file handle, or a filename. You can also set it to 'returnscalar', which is also the default value.
+If this case the B<Format> method returns the formatted document in a scalar variable.
 
-=item B<template> filename
+=item B<template> various
 
-=item B<toolkit> boolean
+This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
+a reference to a input file handle, or a file name.
 
-=item B<ttconfig> boolean
+=item B<toolkit> ref to template toolkit instance
+
+Use this option if you want to use your own instance of Template Toolkit for formatting. If you set this option, 
+the B<ttconfig> option is not used.
+
+=item B<ttconfig> ref to hash
+
+This is the config hash that is used in Template Tookits constructor. By default it is set to {}.
 
 =back
 
-=head1 METHODS
-
-=over 4
+=head1 USER METHODS
 
 =item B<Format>
 
-=item B<GetData> boolean
+Overwritten method. Usually called through B<Kamelon>. Formats the data collected by B<Parse> by using Template Toolkit.
 
-=item B<OutMethod> boolean
+=item B<GetData>
 
-=item B<Parse> boolean
+Use this method if you want to use your own instance of Template Tooolkit instead of B<TT>'s internal one. It returns
+a data structure that looks like this:
 
-=item B<Template> boolean
+ my $data = {
+    folds => { #the keys of this hash are line numbers
+	    4 => {
+          end => $endline,
+		    depth => $folddepth,
+		    line => $text,
+		    region => $regionname,
+	    },
+	    ...
+    },
+    content => [
+       [{ text => $snippet, tag => $tagname}, ...], #this is one line
+       ...
+    ],
+ }
 
-=item B<Toolit> boolean
+=item B<OutMethod>(I<$various>)
+
+Corresponds with the B<outmethod> option. Sets and returns the output method.
+
+=item B<Template>(I<$various>)
+
+Corresponds with the B<template> option. Sets and returns the template that will
+be processed by B<Format>.
+
+=item B<Toolkit> ref to Template Toolkit instance
+
+Corresponds with the B<toolkit> option. Sets and returns the Template Toolkit
+instance that is used for formatting.
+
+=over 4
+
+=back
+
+=head1 SYSTEM METHODS
+
+=over 4
+
+=item B<Parse>
 
 =back
 

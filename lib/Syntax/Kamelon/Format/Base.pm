@@ -15,6 +15,7 @@ sub new {
 
 	my $folding = delete $args{folding};
 	my $formattable = delete $args{format_table};
+	my $minfoldsize = delete $args{minfoldsize};
 	my $newline = delete $args{newline};
 	my $substitutions = delete $args{substitutions};
 	unless (defined $folding) { $folding = 0 }
@@ -25,6 +26,7 @@ sub new {
 		}
 		$formattable = \%sub
 	}
+	unless (defined($minfoldsize)) { $minfoldsize = 1 }
 	unless (defined($newline)) { $newline = "\n" }
 	unless (defined($substitutions)) { $substitutions = {} }
 	my $self = {
@@ -34,6 +36,7 @@ sub new {
 		FOLDS => {},
 		FOLDSTACK => [],
    	FORMATTABLE => $formattable,
+   	MINFOLDSIZE => $minfoldsize,
    	NEWLINE => $newline,
 		SUBSTITUTIONS => $substitutions,
 	};
@@ -60,7 +63,7 @@ sub FoldEnd {
 	my $stacktop = $self->FoldStackTop;
 	my $folding = $self->{FOLDING};
 	if (($folding eq 'all') or ($self->FoldStackLevel <= $folding)) {
-		if ($endline > $stacktop->{start}) {
+		if (($endline - $stacktop->{start}) >= $self->{MINFOLDSIZE}) {
 			my $beginline = delete $stacktop->{start};
 			$stacktop->{end} = $endline;
 			$stacktop->{depth} = $self->FoldStackLevel;
@@ -77,6 +80,14 @@ sub Folds {
 
 sub Folding {
 	my $self = shift;
+	if (@_) {
+		my $f = shift;
+		my $cf = $self->{FOLDING};
+		if (($f ne $cf) and (($f eq 0) or ($cf eq 0))){
+			$self->{FOLDING} = $f;
+			$self->{ENGINE}->ClearLexers;
+		}
+	}
 	return $self->{FOLDING};
 }
 
@@ -166,6 +177,7 @@ sub Reset {
 
 sub Substitutions {
 	my $self = shift;
+	if (@_) { $self->{SUBSTITUTIONS} = shift }
 	return $self->{SUBSTITUTIONS}
 }
 

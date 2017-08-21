@@ -204,6 +204,11 @@ sub CapturedParseR {
 	return ($s, @out);
 }
 
+sub ClearLexers {
+	my $self = shift;
+	$self->{HLPOOL} = {}
+}
+
 sub Column {
 	my $self = shift;
 	my $l = length($self->{LINESEGMENT});
