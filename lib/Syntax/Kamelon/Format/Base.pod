@@ -4,6 +4,37 @@ Syntax::Kamelon::Format::Base
 
 =head1 SYNOPSIS
 
+ use Syntax::Kamelon;
+ 
+ my $htmldir = './t/HTML';
+ my $sampledir = './t/Samples';
+ my $outdir = './t/HTML_OUT';
+ my $xmldir = './t/XML';
+ my @attributes = Syntax::Kamelon->AvailableAttributes;
+ 
+ my %formtab = ();
+ for (@attributes) {
+    $formtab{$_} = ["<font class=\"$_\">", "</font>"]
+ }
+
+ my $substitutions = {
+    '<' => '&lt;',
+    '>' => '&gt;',
+    '&' => '&amp;',
+    ' ' => '&nbsp;',
+    "\t" => '&nbsp;&nbsp;&nbsp;',
+ };
+ 
+ my $kam = new Syntax::Kamelon(
+    xmlfolder => $xmldir,
+    noindex => 1,
+    formatter => ['Base',
+       substitutions => $substitutions,
+       format_table => \%formtab,
+       newline => "</br>\n",
+    ],
+ );
+
 =head1 DESCRIPTION
 
 B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to B<Syntax::Kamelon>. You do not have to create an instance of

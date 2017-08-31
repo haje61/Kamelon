@@ -4,6 +4,22 @@ Syntax::Kamelon::Format::TT
 
 =head1 SYNOPSIS
 
+ my $template = 't/Samples/template.tpl';
+ 
+ my $kam = Syntax::Kamelon->new(
+    syntax => 'Perl',
+    formatter => ['TT',
+       folding => 2,
+       template => $template,
+    ],
+ );
+ 
+ while (my $in = <IFILE>) {
+    $kam->Parse($in);
+ }
+ 
+ print $kam->Format;
+
 =head1 DESCRIPTION
 
 B<Syntax::Kamelon::Format::TT> provides is formatting interface to B<Syntax::Kamelon> that provides support for the Template Toolkit. 
@@ -92,7 +108,14 @@ instance that is used for formatting.
 
 =over 4
 
-=item B<Parse>
+=item B<Parse>(I<@out>);
+
+Overwritten method. receives a paired list of tags and textfragments and converts eacht pair to a hash that looks like:
+
+ {
+    text => $text,
+    tage => $tagname
+ }
 
 =back
 

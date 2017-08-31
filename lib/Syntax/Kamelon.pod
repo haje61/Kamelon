@@ -155,9 +155,9 @@ Returns a reference to the formatter object.
 
 Returns the Indexer object.
 
-=item B<GetParser>(I<$syntax>);
+=item B<GetLexer>(I<$syntax>);
 
-Returns the B<Highlighter> object from the pool of loaded B<Highlighter> objects. If it is
+Returns the lexer data structure from the pool of loaded lexers. If it is
 not found it will create and return it.
 
 =item B<Parse(I<$text>);
