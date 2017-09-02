@@ -1,6 +1,3 @@
-.directory
-bin/hlansi.pl
-bin/hlhtml.pl
 bin/kamelon_analyze
 bin/kamelon_bench
 bin/kamelon_compile
@@ -33,7 +30,6 @@ lib/Syntax/Kamelon/Diagnostics.pm
 lib/Syntax/Kamelon/Diagnostics.pod
 lib/Syntax/Kamelon/Format/Base.pm
 lib/Syntax/Kamelon/Format/Base.pod
-lib/Syntax/Kamelon/Format/HTML4.pm
 lib/Syntax/Kamelon/Format/TT.pm
 lib/Syntax/Kamelon/Format/TT.pod
 lib/Syntax/Kamelon/Indexer.pm
