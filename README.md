@@ -32,5 +32,9 @@ for use with the template toolkit.
 
 Help and support is appreciated.
 
+# user license
+
+This software is licensed under the GPLV3.
+
 
 
