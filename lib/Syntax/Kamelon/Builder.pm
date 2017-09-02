@@ -204,6 +204,14 @@ sub Setup {
 	$delim = " |\t|\n|" . $delim;
 	$self->{DELIMINATORS} = $delim;
 	
+	my $casesensitive = 1;
+	unless ($self->KeywordsCase eq 'undef') {
+		$casesensitive = $self->KeywordsCase
+	}
+	if (exists $self->Language->{'casesensitive'}) {
+		$casesensitive = $self->Booleanize($self->Language->{'casesensitive'})
+	}
+	$self->KeywordsCase($casesensitive);
 	#turn lists into hashes for faster and easier lookup.
 	my $lists = $self->Lists;
 	for (keys %$lists) {
@@ -212,12 +220,12 @@ sub Setup {
 		my %h = ();
 		for (@$l) {
 			my $elm = $_;
-			unless ($self->KeywordsCase) { $elm = lc $elm }
+			unless ($casesensitive) { $elm = lc $elm }
 			$h{$elm} = 1;
 		}
 		$lists->{$list} = \%h;
 	}
-	
+
 	my %parser = (
 		basecontext => $self->BaseContext,
 		contexts => {},
@@ -225,7 +233,7 @@ sub Setup {
 		lists => $lists,
 		syntax => $self->Syntax,
 	);
-	
+
 	#setup contexts
 	my $cond = $self->ContextData;
 	for (keys %$cond) {

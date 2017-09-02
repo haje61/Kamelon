@@ -15,7 +15,7 @@ TYPEMAP: <<HERE
 TYPEMAP
 Syntax::Kamelon T_PTROBJ
 HERE
-      
+
 PROTOTYPES: ENABLE
 
 
@@ -32,6 +32,13 @@ CODE:
         RETVAL = sv_bless( self, gv_stashpv( class, 0 ) );
 OUTPUT:
         RETVAL
+
+
+void
+DESTROY(self)
+	SV * self;
+	CODE:
+		free(self);
 
 
 # Local variables:

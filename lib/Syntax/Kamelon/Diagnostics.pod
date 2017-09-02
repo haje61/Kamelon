@@ -1,4 +1,61 @@
-=item B<new>
+=head1 NAME
+
+Syntax::Kamelon::Diagnostics - Explore syntax definition XML files
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head1 OPTIONS
+
+The constructor is called with a paired list or hash of options as parameters. You can use
+the following options.
+
+=over 4
+
+=item B<indexer> => ref to instance of B<Syntax::Kamelon::Indexer>
+
+Here you can specify your own instance of the indexer module you wish to use. If you
+specify this option, all other options become meaningless.
+
+=item B<indexfile> => filename
+
+Specifies the filename where Kamelon stores information about available syntax definitions.
+
+By default it points to 'indexrc' in the B<xmlfolder>. If the file does not exist Kamelon will 
+load all xml files in the B<xmlfolder> and attempt to create the indexfile.
+
+Once the indexfile has been created it becomes static. If you add a syntax definition 
+XML file to the B<xmlfolder> it will no longer be recognized. Delete the indexfile and reload
+Kamelon to fix that. 
+
+See also B<Syntax::Kamelon::Indexer>
+
+=item B<noindex> => boolean
+
+By default 0. If you set this option Kamelon will ignore the existence of an indexfile
+and manually build the index, without saving it. But it gives
+you the liberty of adding and removing syntax highlight definition files.
+
+=item B<xmlfolder> => folder
+
+This is the place where Kamelon looks for syntax highlight definition XML files. By
+default it searches @INC for 'Syntax/Kamelon/XML'. Here you find the
+XML files used in the Kate text editor. They are specially crafted for this module.
+
+See also B<Syntax::Kamelon::Indexer>
+
+=back
+
+=head1 USER METHODS
+
+=over 4
+
+=back
+
+=head1 SYSTEM METHODS
+
+=over 4
 
 =item B<AttributeExists>
 
@@ -30,7 +87,7 @@
 
 =item B<CurSyntax>
 
-=item B<CurXML{>
+=item B<CurXML>
 
 =item B<Diagnoze>
 
@@ -106,3 +163,21 @@
 
 =item B<SyntaxFilter>
 
+=back
+
+=head1 AUTHOR AND COPYRIGHT
+
+This module is written and maintained by:
+
+Hans Jeuken < hansjeuken at xs4all dot nl>
+
+Copyright (c) 2017 by Hans Jeuken, all rights reserved.
+
+Published under the GPLV3 license
+
+=head1 SEE ALSO
+
+B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
+B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base>, B<Syntax::Kamelon::Format::TT>
+
+=cut

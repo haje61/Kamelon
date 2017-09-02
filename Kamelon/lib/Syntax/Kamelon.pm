@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp;
 
-use AutoLoader;
+# use AutoLoader;
 
 use Syntax::Kamelon::Builder;
 use Syntax::Kamelon::Indexer;
@@ -13,21 +13,21 @@ use Data::Dumper;
 
 our $VERSION = '0.12';
 
-sub AUTOLOAD {
-    # This AUTOLOAD is used to 'autoload' constants from the constant()
-    # XS function.
-    my $constname;
-    our $AUTOLOAD;
-    ($constname = $AUTOLOAD) =~ s/.*:://;
-    croak "&Syntax::Kamelon::constant not defined" if $constname eq 'constant';
-    my ($error, $val) = constant($constname);
-    if ($error) { croak $error; }
-    {
-		no strict 'refs';
-	    *$AUTOLOAD = sub { $val };
-    }
-    goto &$AUTOLOAD;
-}
+# sub AUTOLOAD {
+#     # This AUTOLOAD is used to 'autoload' constants from the constant()
+#     # XS function.
+#     my $constname;
+#     our $AUTOLOAD;
+#     ($constname = $AUTOLOAD) =~ s/.*:://;
+#     croak "&Syntax::Kamelon::constant not defined" if $constname eq 'constant';
+#     my ($error, $val) = constant($constname);
+#     if ($error) { croak $error; }
+#     {
+# 		no strict 'refs';
+# 	    *$AUTOLOAD = sub { $val };
+#     }
+#     goto &$AUTOLOAD;
+# }
 
 my @attributes = qw (
 	Alert
@@ -63,8 +63,8 @@ my @attributes = qw (
 	Warning
 );
 
-require XSLoader;
-XSLoader::load('Syntax::Kamelon', $VERSION);
+# require XSLoader;
+# XSLoader::load('Syntax::Kamelon', $VERSION);
 
 
 sub new {
@@ -88,7 +88,8 @@ sub new {
 	my $syntax = delete $args{syntax};
 	my $verbose = delete $args{verbose};
 
-	my $self = Syntax::Kamelon->new_kam();
+	my $self = {}; #forego XS routines for now.
+# 	my $self = Syntax::Kamelon->new_kam();
 	bless ($self, $class);
 
 	unless (defined $cmnds) { $cmnds = {} }

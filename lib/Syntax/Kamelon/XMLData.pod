@@ -109,5 +109,8 @@ Published under the GPLV3 license.
 
 =head1 SEE ALSO
 
+B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
+B<Syntax::Kamelon::Format::Base>, B<Syntax::Kamelon::Format::TT>
+
 =cut
 

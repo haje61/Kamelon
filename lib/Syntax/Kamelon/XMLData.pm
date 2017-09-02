@@ -22,7 +22,7 @@ sub new {
 		ADDDELIMINATORS => '',
 		WEAKDELIMINATORS => '',
 		FILENAME => $file,
-		KEYWORDSCASE => 1,
+		KEYWORDSCASE => 'undef',
 		LANGUAGE => {},
 		LISTS => {},
 	};

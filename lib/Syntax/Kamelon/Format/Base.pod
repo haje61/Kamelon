@@ -43,10 +43,10 @@ through the B<Parse> method. When all information is collected you can start the
 
 =head1 OPTIONS
 
-=over 4
-
 The constructor is called with a paired list of options as parameters. You can use
 the following options.
+
+=over 4
 
 =item B<folding> integer
 
@@ -190,6 +190,8 @@ Published under the GPLV3 license
 
 =head1 SEE ALSO
 
+B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
+B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::TT>
 
 =cut
 
