@@ -35,6 +35,8 @@ Full path and file name of the xml file to load.
 
 =head1 STRUCTURE OF A LEXER
 
+=over 4
+
 =item B<Global overview>
 
  my $lexer = {
@@ -85,6 +87,8 @@ lookup. After all we only need to know if an entry exists or not.
 =item B<Context shifters>
 
 =item B<Result parsers>
+
+=back
 
 =head1 SYSTEM METHODS
 

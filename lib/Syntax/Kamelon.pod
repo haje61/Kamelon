@@ -160,7 +160,7 @@ Returns the Indexer object.
 Returns the lexer data structure from the pool of loaded lexers. If it is
 not found it will create and return it.
 
-=item B<Parse(I<$text>);
+=item B<Parse>(I<$text>);
 
 Parses I<$text> and returns a formatted text.
 
