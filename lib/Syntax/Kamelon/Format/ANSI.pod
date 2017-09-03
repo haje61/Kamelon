@@ -1,0 +1,51 @@
+=head1 NAME
+
+Syntax::Kamelon::Format::ANSI
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to B<Syntax::Kamelon>. You do not have to create an instance of
+B<Base> yourself. B<Kamelon> will do that for you. During the parsing process it collects all the parsing information from B<Kamelon> 
+through the B<Parse> method. When all information is collected you can start the formatting through the B<Format> method.
+
+=head1 OPTIONS
+
+The constructor is called with a paired list of options as parameters. You can use
+the following options.
+
+=over 4
+
+
+=back
+
+=head1 USER METHODS
+
+=over 4
+
+=back
+
+=head1 SYSTEM METHODS
+
+=over 4
+
+=back
+
+=head1 AUTHOR AND COPYRIGHT
+
+This module is written and maintained by:
+
+Hans Jeuken < hansjeuken at xs4all dot nl>
+
+Copyright (c) 2017 by Hans Jeuken, all rights reserved.
+
+Published under the GPLV3 license
+
+=head1 SEE ALSO
+
+B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
+B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base> B<Syntax::Kamelon::Format::TT>, B<Syntax::Kamelon::Format::HTML4>
+
+=cut
+

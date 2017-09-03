@@ -12,7 +12,7 @@ use Wx;
 my $help = <<__EOF;
 This is a viewer/debugger for the Kamelon syntax highlight engine.
 
-yashe_debug_wx takes the following arguments:
+kamelon_debug_wx takes the following arguments:
 
 -help
    Displays this text.
@@ -361,7 +361,7 @@ sub new {
 	$parent = Wx::Panel->new($split, -1);
 	$tsiz = Wx::BoxSizer->new(wxVERTICAL);
 	$parent->SetSizer($tsiz);
-	my $txtc = Syntax::Kamelon::Wx::PluggableTextCtrl->new($parent, -1, "", [-1, -1], $size, wxHSCROLL|wxTE_MULTILINE|wxTE_PROCESS_TAB);
+	my $txtc = Syntax::Kamelon::Wx::PluggableTextCtrl->new($parent, -1, "", [-1, -1], $size, wxHSCROLL|wxTE_MULTILINE|wxTE_PROCESS_TAB|wxTE_RICH);
 	$self->{TXTC} = $txtc;
 	$txtc->LoadPlugin('UndoRedo');
 	print ref $highlighter, "\n";

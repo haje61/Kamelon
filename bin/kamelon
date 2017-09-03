@@ -1,0 +1,120 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Template;
+use Syntax::Kamelon;
+
+my $help = <<__EOF;
+Use the following options:
+
+-help
+   Displays this text.
+
+-i
+-indexfile
+   Specify the indexfile to use. By default it uses Kamelon's.
+
+-f
+-file
+   Specify source file to parse. By default kamelon will read from 
+   standard input.
+
+-o
+-output
+   Specify an output file. By default kamelon will print to standard
+   output.
+
+-s
+-syntax
+   Specify which syntax definition to use
+
+-x
+-xmldir
+   Specifies the XML directory. By default it uses Kamelon's.
+__EOF
+
+my $indexfile;
+my $inputfile;
+my $noindex = 0;
+my $outputfile;
+my $syntax;
+my $xmldir;
+
+
+my %shortargs = (
+	'-f' => sub { 
+		$inputfile = shift @ARGV;
+		unless (-e $inputfile) { die "inputfile '$inputfile' does not exist" }
+	},
+	'-i' => sub { 
+		$indexfile = shift @ARGV;
+		unless (-e $indexfile) { die "indexfile '$indexfile' does not exist" }
+	},
+	'-n' => sub { 
+		$noindex = 1;
+	},
+	'-o' => sub { 
+		$outputfile = shift @ARGV;
+	},
+	'-s' => sub  {
+		$syntax = shift @ARGV;
+	},
+	'-x' => sub  {
+		$xmldir = shift @ARGV;
+		unless (-e $xmldir) { die "$xmldir does not exist" }
+		unless (-d $xmldir) { die "$xmldir is not a directory" }
+	},
+);
+
+my %args = (%shortargs,
+	'-file' => $shortargs{'-f'},
+	'-indexfile' => $shortargs{'-i'},
+	'-noindex' => $shortargs{'-n'},
+	'-ouput' => $shortargs{'-o'},
+	'-syntax' => $shortargs{'-s'},
+	'-xmldir' => $shortargs{'-x'},
+	'-help' => sub { print "$help\n"; exit }
+);
+
+while (@ARGV) {
+	my $t = shift @ARGV;
+	if (exists $args{$t}) {
+		my $call = $args{$t};
+		&$call;
+	} else {
+		my @op = sort keys %args;
+		my $opstr = "";
+		for (@op) {
+			$opstr = "$opstr $_"
+		}
+		die "Invalid option $t.\n$help";
+	}
+}
+
+unless (defined $syntax) {
+	die "You must specify the syntax option";
+}
+
+my $ifh;
+if (defined $inputfile) {
+	open $ifh, '<', $inputfile or die "Could not open $inputfile; $!";
+} else {
+	$ifh = *STDIN;
+}
+
+my $ofh;
+if (defined $outputfile) {
+	open $ofh, '>', $outputfile or die "Could not open $outputfile; $!";
+} else {
+	$ofh = *STDOUT;
+}
+
+my $kam = Syntax::Kamelon->new(
+	indexfile => $indexfile,
+	xmlfolder => $xmldir,
+	syntax => $syntax,
+);
+
+
+

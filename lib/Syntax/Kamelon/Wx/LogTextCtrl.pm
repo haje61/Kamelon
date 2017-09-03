@@ -35,7 +35,7 @@ my $formatdirection = 0;
 
 sub new {
    my $class = shift;
-   my $self = $class->SUPER::new(@_, wxHSCROLL|wxTE_MULTILINE|wxTE_READONLY);
+   my $self = $class->SUPER::new(@_, wxHSCROLL|wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH);
 
 
    $self->SetFont( Wx::Font->new(@$defaultfont) );
