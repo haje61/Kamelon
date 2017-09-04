@@ -7,7 +7,7 @@ use Carp;
 use vars qw($VERSION);
 $VERSION="0.01";
 
-use base Syntax::Kamelon::Format::TT;
+use base qw(Syntax::Kamelon::Format::TT);
 
 sub new {
    my $class = shift;

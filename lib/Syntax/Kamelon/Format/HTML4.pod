@@ -17,7 +17,6 @@ the following options.
 
 =over 4
 
-
 =back
 
 =head1 USER METHODS

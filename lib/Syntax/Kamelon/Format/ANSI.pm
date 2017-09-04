@@ -7,7 +7,7 @@ use Carp;
 use vars qw($VERSION);
 $VERSION="0.01";
 
-use base Syntax::Kamelon::Format::TT;
+use base qw(Syntax::Kamelon::Format::TT);
 use Term::ANSIColor;
 
 my %styles = (
@@ -19,18 +19,18 @@ my %styles = (
 		BaseN => color('green'),
 		BuiltIn => color('yellow bold'),
 		Char => color('magenta'),
-		Comment => color('white bold on_blue'),
+		Comment => color('white bold on_bright_black'),
 		CommentVar => color('green bold'),
 		Constant => color('magenta bold'),
 		ControlFlow => color('blue bold on_yellow'),
-		DataType => color('blue'),
-		DecVal => color('blue bold'),
+		DataType => color('bright_blue'),
+		DecVal => color('bright_blue bold'),
 		Documentation => color('black on_white'),
 		Error => color('yellow bold on_red'),
 		Extension => color('magenta on_blue'),
-		Float => color('blue bold'),
+		Float => color('bright_blue bold'),
 		Function => color('yellow bold on_blue'),
-		Import => color('red on_white')'',
+		Import => color('red on_white'),
 		Information => color('blue on_white'),
 		Keyword => color('white bold'),
 		Normal => color('white'),
@@ -38,10 +38,10 @@ my %styles = (
 		Others => color('yellow bold on_green'),
 		Preprocessor => color('blue on_yellow'),
 		RegionMarker => color('black on_yellow'),
-		SpecialChar => color('red on green'),
-		SpecialString => color('red on_yellow'),
+		SpecialChar => color('red on_green'),
+		SpecialString => color('red on_bright_yellow'),
 		String => color('red'),
-		Variable => color('blue on_red bold'),
+		Variable => color('blue bold on_red'),
 		VerbatimString  => color('red on_blue'),
 		Warning => color('green bold on_red'),
 	},
@@ -288,11 +288,14 @@ sub new {
 	my $template = $template_plain;
 	if (defined $offset) {
 		$template = $template_numbered;
-		$self->{LINEOFFSET} = $offset;
 	}
 	$args{template} = \$template;
 
 	my $self = $class->SUPER::new($engine, %args);
+
+	if (defined $offset) {
+		$self->{LINEOFFSET} = $offset;
+	}
 	return $self;
 }
 
@@ -300,7 +303,9 @@ sub GetData {
 	my $self = shift;
 	my $data = $self->SUPER::GetData;
 	$data->{colorreset} = color('reset');
-	$data->{lineoffset} = $self->{LINEOFFSET} - 1;
+	if (defined $self->{LINEOFFSET}) {
+		$data->{lineoffset} = $self->{LINEOFFSET} - 1;
+	}
 	return $data
 }
 
