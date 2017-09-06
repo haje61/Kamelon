@@ -1,434 +1,434 @@
-001 [37;1mpackage[0m[37m [0m[33;1;44mSyntax::Kamelon[0m[37m::[0m[33;1;44mWx[0m[37m::[0m[33;1;44mPluggableTextCtrl[0m[37m;[0m
+001 [37;1mpackage[0m[37;40m [0m[96mSyntax::Kamelon[0m[37;40m::[0m[96mWx[0m[37;40m::[0m[96mPluggableTextCtrl[0m[37;40m;[0m
 002 
-003 [33;1;44muse[0m[37m [0m[37;1mstrict[0m[37m;[0m
-004 [33;1;44muse[0m[37m [0m[37;1mwarnings[0m[37m;[0m
-005 [33;1;44muse[0m[37m Carp;[0m
+003 [96muse[0m[37;40m [0m[37;1mstrict[0m[37;40m;[0m
+004 [96muse[0m[37;40m [0m[37;1mwarnings[0m[37;40m;[0m
+005 [96muse[0m[37;40m Carp;[0m
 006 
-007 [33;1;44muse[0m[37m [0m[37;1mvars[0m[37m [0m[32mqw([0m[37m$VERSION[0m[32m)[0m[37m;[0m
-008 [94m$VERSION[0m[37m=[0m[32m"[0m[31;103m0.01[0m[32m"[0m[37m;[0m
+007 [96muse[0m[37;40m [0m[37;1mvars[0m[37;40m [0m[32mqw([0m[37;40m$VERSION[0m[32m)[0m[37;40m;[0m
+008 [93m$VERSION[0m[37;40m=[0m[32m"[0m[31;103m0.01[0m[32m"[0m[37;40m;[0m
 009 
-010 [33;1;44muse[0m[37m Wx [0m[32mqw([0m[37m :textctrl :font :colour [0m[32m)[0m[37m;[0m
-011 [33;1;44muse[0m[37m [0m[33;1;44mWx::DND[0m[37m;[0m
-012 [33;1;44muse[0m[37m Wx [0m[32mqw([0m[37m wxTheClipboard [0m[32m)[0m[37m;[0m
-013 [33;1;44muse[0m[37m base [0m[32mqw([0m[37m Wx::TextCtrl [0m[32m)[0m[37m;[0m
-014 [33;1;44muse[0m[37m [0m[33;1;44mWx::Event[0m[37m [0m[32mqw([0m[37m EVT_CHAR [0m[32m)[0m[37m;[0m
+010 [96muse[0m[37;40m Wx [0m[32mqw([0m[37;40m :textctrl :font :colour [0m[32m)[0m[37;40m;[0m
+011 [96muse[0m[37;40m [0m[96mWx::DND[0m[37;40m;[0m
+012 [96muse[0m[37;40m Wx [0m[32mqw([0m[37;40m wxTheClipboard [0m[32m)[0m[37;40m;[0m
+013 [96muse[0m[37;40m base [0m[32mqw([0m[37;40m Wx::TextCtrl [0m[32m)[0m[37;40m;[0m
+014 [96muse[0m[37;40m [0m[96mWx::Event[0m[37;40m [0m[32mqw([0m[37;40m EVT_CHAR [0m[32m)[0m[37;40m;[0m
 015 
-016 [33;1;44mrequire[0m[37m [0m[33;1;44mSyntax::Kamelon[0m[37m::[0m[33;1;44mWx[0m[37m::[0m[33;1;44mPluggableTextCtrl[0m[37m::[0m[33;1;44mKeyEchoes[0m[37m;[0m
-017 [33;1;44mrequire[0m[37m [0m[33;1;44mSyntax::Kamelon[0m[37m::[0m[33;1;44mWx[0m[37m::[0m[33;1;44mPluggableTextCtrl[0m[37m::[0m[33;1;44mUndoRedo[0m[37m;[0m
-018 [33;1;44mrequire[0m[37m [0m[33;1;44mSyntax::Kamelon[0m[37m::[0m[33;1;44mWx[0m[37m::[0m[33;1;44mPluggableTextCtrl[0m[37m::[0m[33;1;44mHighlighter[0m[37m;[0m
+016 [96mrequire[0m[37;40m [0m[96mSyntax::Kamelon[0m[37;40m::[0m[96mWx[0m[37;40m::[0m[96mPluggableTextCtrl[0m[37;40m::[0m[96mKeyEchoes[0m[37;40m;[0m
+017 [96mrequire[0m[37;40m [0m[96mSyntax::Kamelon[0m[37;40m::[0m[96mWx[0m[37;40m::[0m[96mPluggableTextCtrl[0m[37;40m::[0m[96mUndoRedo[0m[37;40m;[0m
+018 [96mrequire[0m[37;40m [0m[96mSyntax::Kamelon[0m[37;40m::[0m[96mWx[0m[37;40m::[0m[96mPluggableTextCtrl[0m[37;40m::[0m[96mHighlighter[0m[37;40m;[0m
 019 
-020 [37;1mmy[0m[37m [0m[94m$defaultfont[0m[37m = [[0m[94;1m10[0m[37m, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, [0m[94;1m0[0m[37m];[0m
+020 [37;1mmy[0m[37;40m [0m[93m$defaultfont[0m[37;40m = [[0m[31;1m10[0m[37;40m, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, [0m[31;1m0[0m[37;40m];[0m
 021 
-022 [37;1mmy[0m[37m [0m[94m$debug[0m[37m = [0m[94;1m0[0m[37m;[0m
+022 [37;1mmy[0m[37;40m [0m[93m$debug[0m[37;40m = [0m[31;1m0[0m[37;40m;[0m
 023 
-024 [37;1mif[0m[37m ([0m[94m$debug[0m[37m) {[0m
-025 [37m   [0m[33;1;44muse[0m[37m [0m[33;1;44mData::Dumper[0m[37m;[0m
-026 [37m}[0m
+024 [37;1mif[0m[37;40m ([0m[93m$debug[0m[37;40m) {[0m
+025 [37;40m   [0m[96muse[0m[37;40m [0m[96mData::Dumper[0m[37;40m;[0m
+026 [37;40m}[0m
 027 
-028 [37;1msub [0m[33;1;44mnew[0m[37m {[0m
-029 [37m   [0m[37;1mmy[0m[37m [0m[94m$class[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-030 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[94m$class[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mnew[0m[37m([0m[94m@_[0m[37m);[0m
+028 [37;1msub [0m[96mnew[0m[37;40m {[0m
+029 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$class[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+030 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[93m$class[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mnew[0m[37;40m([0m[93m@_[0m[37;40m);[0m
 031 
-032 [37m   [0m[94m$self[0m[37m->{CALLBACK} = [0m[37;1msub [0m[37m{};[0m
-033 [37m   [0m[94m$self[0m[37m->{COMMANDS} = {[0m
-034 [37m      [0m[32m'[0m[31mdoremove[0m[32m'[0m[37m => \&DoRemove,[0m
-035 [37m      [0m[32m'[0m[31mdoreplace[0m[32m'[0m[37m => \&DoReplace,[0m
-036 [37m      [0m[32m'[0m[31mdowrite[0m[32m'[0m[37m => \&DoWrite,[0m
-037 [37m   };[0m
-038 [37m   [0m[94m$self[0m[37m->{LISTENING} = [0m[94;1m0[0m[37m;[0m
-039 [37m   [0m
-040 [37m   [0m[94m$self[0m[37m->{OVRMODE} = [0m[94;1m0[0m[37m;[0m
-041 [37m   [0m[94m$self[0m[37m->{PLUGINS} = [];[0m
+032 [37;40m   [0m[93m$self[0m[37;40m->{CALLBACK} = [0m[37;1msub [0m[37;40m{};[0m
+033 [37;40m   [0m[93m$self[0m[37;40m->{COMMANDS} = {[0m
+034 [37;40m      [0m[32m'[0m[32;103mdoremove[0m[32m'[0m[37;40m => \&DoRemove,[0m
+035 [37;40m      [0m[32m'[0m[32;103mdoreplace[0m[32m'[0m[37;40m => \&DoReplace,[0m
+036 [37;40m      [0m[32m'[0m[32;103mdowrite[0m[32m'[0m[37;40m => \&DoWrite,[0m
+037 [37;40m   };[0m
+038 [37;40m   [0m[93m$self[0m[37;40m->{LISTENING} = [0m[31;1m0[0m[37;40m;[0m
+039 [37;40m   [0m
+040 [37;40m   [0m[93m$self[0m[37;40m->{OVRMODE} = [0m[31;1m0[0m[37;40m;[0m
+041 [37;40m   [0m[93m$self[0m[37;40m->{PLUGINS} = [];[0m
 042 
-043 [37m   [0m[94m$self[0m[37m->[0m[94mSetFont[0m[37m( [0m[33;1;44mWx::Font[0m[37m->new([0m[94m@$defaultfont[0m[37m) );[0m
-044 [37m   EVT_CHAR([0m[94m$self[0m[37m, \&OnChar);[0m
+043 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSetFont[0m[37;40m( [0m[96mWx::Font[0m[37;40m->new([0m[93m@$defaultfont[0m[37;40m) );[0m
+044 [37;40m   EVT_CHAR([0m[93m$self[0m[37;40m, \&OnChar);[0m
 045 
-046 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m;[0m
-047 [37m}[0m
+046 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m;[0m
+047 [37;40m}[0m
 048 
-049 [37;1msub [0m[33;1;44mAppendText[0m[37m {[0m
-050 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-051 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mappend[0m[32m'[0m[37m, [0m[94m@_[0m[37m)) {[0m
-052 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mAppend[0m[37m([0m[94m@_[0m[37m);[0m
-053 [37m   }[0m
-054 [37m}[0m
+049 [37;1msub [0m[96mAppendText[0m[37;40m {[0m
+050 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+051 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mappend[0m[32m'[0m[37;40m, [0m[93m@_[0m[37;40m)) {[0m
+052 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mAppend[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+053 [37;40m   }[0m
+054 [37;40m}[0m
 055 
-056 [37;1msub [0m[33;1;44mBroadcast[0m[37m {[0m
-057 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-058 [37m   [0m[37;1mmy[0m[37m [0m[94m$plugs[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-059 [37m   [0m[37;1mmy[0m[37m [0m[94m$flag[0m[37m = [0m[94;1m0[0m[37m;[0m
-060 [37m   [0m[37;1mforeach[0m[37m ([0m[94m@$plugs[0m[37m) {[0m
-061 [37m      [0m[37;1mif[0m[37m ([0m[34;43m$_[0m[37m->[0m[94mReceive[0m[37m([0m[94m@_[0m[37m)) {[0m
-062 [37m         [0m[94m$flag[0m[37m = [0m[94;1m1[0m[37m;[0m
-063 [37m      }[0m
-064 [37m   }[0m
-065 [37m   [0m[37;1mreturn[0m[37m [0m[94m$flag[0m[37m;[0m
-066 [37m}[0m
+056 [37;1msub [0m[96mBroadcast[0m[37;40m {[0m
+057 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+058 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$plugs[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+059 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$flag[0m[37;40m = [0m[31;1m0[0m[37;40m;[0m
+060 [37;40m   [0m[37;1mforeach[0m[37;40m ([0m[93m@$plugs[0m[37;40m) {[0m
+061 [37;40m      [0m[37;1mif[0m[37;40m ([0m[94;43m$_[0m[37;40m->[0m[93mReceive[0m[37;40m([0m[93m@_[0m[37;40m)) {[0m
+062 [37;40m         [0m[93m$flag[0m[37;40m = [0m[31;1m1[0m[37;40m;[0m
+063 [37;40m      }[0m
+064 [37;40m   }[0m
+065 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$flag[0m[37;40m;[0m
+066 [37;40m}[0m
 067 
-068 [37;1msub [0m[33;1;44mCall2Remove[0m[37m {[0m
-069 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$call[0m[37m, [0m[94m$index[0m[37m, [0m[94m$txt[0m[37m) = [0m[94m@_[0m[37m;[0m
-070 [37m   [0m[37;1mif[0m[37m ([0m[94m$call[0m[37m =~ [0m[32m/[0m[33;1;42m.[0m[35m*[0m[33;1;42mremove[0m[35m$[0m[32m/[0m[37m) {[0m
-071 [37m      [0m[37;1mreturn[0m[37m ([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$txt[0m[37m))[0m
-072 [37m   } [0m[37;1melse[0m[37m {[0m
-073 [37m      carp [0m[32m"[0m[31;103mCall '[0m[94m$call[0m[32m'[0m[31;103m is not a remove type[0m[32m"[0m[37m;[0m
-074 [37m      [0m[37;1mreturn[0m[37m [0m[33;1;44mundef[0m
-075 [37m   }[0m
-076 [37m}[0m
+068 [37;1msub [0m[96mCall2Remove[0m[37;40m {[0m
+069 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$call[0m[37;40m, [0m[93m$index[0m[37;40m, [0m[93m$txt[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+070 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$call[0m[37;40m =~ [0m[32m/[0m[36;1m.[0m[36;1;103m*[0m[36;1mremove[0m[36;1;103m$[0m[32m/[0m[37;40m) {[0m
+071 [37;40m      [0m[37;1mreturn[0m[37;40m ([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$txt[0m[37;40m))[0m
+072 [37;40m   } [0m[37;1melse[0m[37;40m {[0m
+073 [37;40m      carp [0m[32m"[0m[31;103mCall '[0m[93m$call[0m[32m'[0m[31;103m is not a remove type[0m[32m"[0m[37;40m;[0m
+074 [37;40m      [0m[37;1mreturn[0m[37;40m [0m[96mundef[0m
+075 [37;40m   }[0m
+076 [37;40m}[0m
 077 
-078 [37;1msub [0m[33;1;44mCall2Replace[0m[37m {[0m
-079 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$call[0m[37m, [0m[94m$index[0m[37m, [0m[94m$old[0m[37m, [0m[94m$txt[0m[37m, [0m[94m$sel[0m[37m) = [0m[94m@_[0m[37m;[0m
-080 [37m   [0m[37;1mif[0m[37m ([0m[94m$call[0m[37m =~ [0m[32m/[0m[33;1;42m.[0m[35m*[0m[33;1;42mreplace[0m[35m$[0m[32m/[0m[37m) {[0m
-081 [37m      [0m[37;1mreturn[0m[37m ([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$old[0m[37m), [0m[94m$txt[0m[37m)[0m
-082 [37m   } [0m[37;1melse[0m[37m {[0m
-083 [37m      carp [0m[32m"[0m[31;103mCall '[0m[94m$call[0m[32m'[0m[31;103m is not a replace type[0m[32m"[0m[37m;[0m
-084 [37m      [0m[37;1mreturn[0m[37m [0m[33;1;44mundef[0m
-085 [37m   }[0m
-086 [37m}[0m
+078 [37;1msub [0m[96mCall2Replace[0m[37;40m {[0m
+079 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$call[0m[37;40m, [0m[93m$index[0m[37;40m, [0m[93m$old[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[93m$sel[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+080 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$call[0m[37;40m =~ [0m[32m/[0m[36;1m.[0m[36;1;103m*[0m[36;1mreplace[0m[36;1;103m$[0m[32m/[0m[37;40m) {[0m
+081 [37;40m      [0m[37;1mreturn[0m[37;40m ([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$old[0m[37;40m), [0m[93m$txt[0m[37;40m)[0m
+082 [37;40m   } [0m[37;1melse[0m[37;40m {[0m
+083 [37;40m      carp [0m[32m"[0m[31;103mCall '[0m[93m$call[0m[32m'[0m[31;103m is not a replace type[0m[32m"[0m[37;40m;[0m
+084 [37;40m      [0m[37;1mreturn[0m[37;40m [0m[96mundef[0m
+085 [37;40m   }[0m
+086 [37;40m}[0m
 087 
-088 [37;1msub [0m[33;1;44mCall2WriteText[0m[37m {[0m
-089 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$call[0m[37m, [0m[94m$index[0m[37m, [0m[94m$txt[0m[37m) = [0m[94m@_[0m[37m;[0m
-090 [37m   [0m[37;1mif[0m[37m ([0m[94m$call[0m[37m =~ [0m[32m/[0m[33;1;42m.[0m[35m*[0m[33;1;42mwrite[0m[35m$[0m[32m/[0m[37m) {[0m
-091 [37m      [0m[37;1mreturn[0m[37m [0m[94m$txt[0m
-092 [37m   } [0m[37;1melse[0m[37m {[0m
-093 [37m      carp [0m[32m"[0m[31;103mCall '[0m[94m$call[0m[32m'[0m[31;103m is not a write type[0m[32m"[0m[37m;[0m
-094 [37m      [0m[37;1mreturn[0m[37m [0m[33;1;44mundef[0m
-095 [37m   }[0m
-096 [37m}[0m
+088 [37;1msub [0m[96mCall2WriteText[0m[37;40m {[0m
+089 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$call[0m[37;40m, [0m[93m$index[0m[37;40m, [0m[93m$txt[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+090 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$call[0m[37;40m =~ [0m[32m/[0m[36;1m.[0m[36;1;103m*[0m[36;1mwrite[0m[36;1;103m$[0m[32m/[0m[37;40m) {[0m
+091 [37;40m      [0m[37;1mreturn[0m[37;40m [0m[93m$txt[0m
+092 [37;40m   } [0m[37;1melse[0m[37;40m {[0m
+093 [37;40m      carp [0m[32m"[0m[31;103mCall '[0m[93m$call[0m[32m'[0m[31;103m is not a write type[0m[32m"[0m[37;40m;[0m
+094 [37;40m      [0m[37;1mreturn[0m[37;40m [0m[96mundef[0m
+095 [37;40m   }[0m
+096 [37;40m}[0m
 097 
-098 [37;1msub [0m[33;1;44mCallback[0m[37m {[0m
-099 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-100 [37m   [0m[37;1mif[0m[37m ([0m[94m@_[0m[37m) { [0m[94m$self[0m[37m->{CALLBACK} = [0m[33;1;44mshift[0m[37m; }[0m
-101 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->{CALLBACK};[0m
-102 [37m}[0m
+098 [37;1msub [0m[96mCallback[0m[37;40m {[0m
+099 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+100 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m@_[0m[37;40m) { [0m[93m$self[0m[37;40m->{CALLBACK} = [0m[96mshift[0m[37;40m; }[0m
+101 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->{CALLBACK};[0m
+102 [37;40m}[0m
 103 
-104 [37;1msub [0m[33;1;44mCanUndo[0m[37m {[0m
-105 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-106 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mcanundo[0m[32m'[0m[37m);[0m
-107 [37m}[0m
+104 [37;1msub [0m[96mCanUndo[0m[37;40m {[0m
+105 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+106 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mcanundo[0m[32m'[0m[37;40m);[0m
+107 [37;40m}[0m
 108 
-109 [37;1msub [0m[33;1;44mCanRedo[0m[37m {[0m
-110 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-111 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mcanredo[0m[32m'[0m[37m);[0m
-112 [37m}[0m
+109 [37;1msub [0m[96mCanRedo[0m[37;40m {[0m
+110 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+111 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mcanredo[0m[32m'[0m[37;40m);[0m
+112 [37;40m}[0m
 113 
-114 [37;1msub [0m[33;1;44mClear[0m[37m {[0m
-115 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-116 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mclear[0m[32m'[0m[37m)) {[0m
-117 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mClear[0m[37m;[0m
-118 [37m   }[0m
-119 [37m}[0m
+114 [37;1msub [0m[96mClear[0m[37;40m {[0m
+115 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+116 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mclear[0m[32m'[0m[37;40m)) {[0m
+117 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mClear[0m[37;40m;[0m
+118 [37;40m   }[0m
+119 [37;40m}[0m
 120 
-121 [37;1msub [0m[33;1;44mClearSelection[0m[37m {[0m
-122 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-123 [37m   [0m[37;1mmy[0m[37m [0m[94m$ins[0m[37m = [0m[94m$self[0m[37m->[0m[94mGetInsertionPoint[0m[37m;[0m
-124 [37m   [0m[94m$self[0m[37m->[0m[94mSetSelection[0m[37m([0m[94m$ins[0m[37m, [0m[94m$ins[0m[37m);[0m
-125 [37m}[0m
+121 [37;1msub [0m[96mClearSelection[0m[37;40m {[0m
+122 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+123 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$ins[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mGetInsertionPoint[0m[37;40m;[0m
+124 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSetSelection[0m[37;40m([0m[93m$ins[0m[37;40m, [0m[93m$ins[0m[37;40m);[0m
+125 [37;40m}[0m
 126 
-127 [37;1msub [0m[33;1;44mCommand[0m[37m {[0m
-128 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-129 [37m   [0m[37;1mmy[0m[37m [0m[94m$name[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-130 [37m   [0m[37;1mif[0m[37m ([0m[94m@_[0m[37m) { [0m[94m$self[0m[37m->{COMMANDS}[0m[32m-[0m[37m>{[0m[94m$name[0m[37m} = [0m[33;1;44mshift[0m[37m }[0m
-131 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->{COMMANDS}[0m[32m-[0m[37m>{[0m[94m$name[0m[37m}[0m
-132 [37m}[0m
+127 [37;1msub [0m[96mCommand[0m[37;40m {[0m
+128 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+129 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$name[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+130 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m@_[0m[37;40m) { [0m[93m$self[0m[37;40m->{COMMANDS}[0m[32m-[0m[37;40m>{[0m[93m$name[0m[37;40m} = [0m[96mshift[0m[37;40m }[0m
+131 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->{COMMANDS}[0m[32m-[0m[37;40m>{[0m[93m$name[0m[37;40m}[0m
+132 [37;40m}[0m
 133 
-134 [37;1msub [0m[33;1;44mCopy[0m[37m {[0m
-135 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-136 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mcopy[0m[32m'[0m[37m)) {[0m
-137 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mCopy[0m[37m;[0m
-138 [37m   }[0m
-139 [37m}[0m
+134 [37;1msub [0m[96mCopy[0m[37;40m {[0m
+135 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+136 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mcopy[0m[32m'[0m[37;40m)) {[0m
+137 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mCopy[0m[37;40m;[0m
+138 [37;40m   }[0m
+139 [37;40m}[0m
 140 
-141 [37;1msub [0m[33;1;44mCut[0m[37m {[0m
-142 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-143 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mcut[0m[32m'[0m[37m)) {[0m
-144 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mCut[0m[37m;[0m
-145 [37m   }[0m
-146 [37m}[0m
+141 [37;1msub [0m[96mCut[0m[37;40m {[0m
+142 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+143 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mcut[0m[32m'[0m[37;40m)) {[0m
+144 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mCut[0m[37;40m;[0m
+145 [37;40m   }[0m
+146 [37;40m}[0m
 147 
-148 [37;1msub [0m[33;1;44mDoRemove[0m[37m {[0m
-149 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-150 [37m   [0m[37;1mmy[0m[37m ([0m[94m$index[0m[37m, [0m[94m$txt[0m[37m, [0m[94m$sel[0m[37m, [0m[94m$ins[0m[37m) = [0m[94m@_[0m[37m;[0m
-151 [37m   [0m[94m$self[0m[37m->[0m[94mClearSelection[0m[37m;[0m
-152 [37m   [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mRemove[0m[37m([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$txt[0m[37m));[0m
-153 [37m   [0m[37;1mif[0m[37m ([0m[33;1;44mdefined[0m[37m([0m[94m$ins[0m[37m)) {[0m
-154 [37m      [0m[94m$self[0m[37m->[0m[94mSetInsertionPoint[0m[37m([0m[94m$ins[0m[37m);[0m
-155 [37m   }[0m
-156 [37m   [0m[37;1mreturn[0m[37m [0m[94;1m1[0m
-157 [37m}[0m
+148 [37;1msub [0m[96mDoRemove[0m[37;40m {[0m
+149 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+150 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$index[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[93m$sel[0m[37;40m, [0m[93m$ins[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+151 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mClearSelection[0m[37;40m;[0m
+152 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mRemove[0m[37;40m([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$txt[0m[37;40m));[0m
+153 [37;40m   [0m[37;1mif[0m[37;40m ([0m[96mdefined[0m[37;40m([0m[93m$ins[0m[37;40m)) {[0m
+154 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSetInsertionPoint[0m[37;40m([0m[93m$ins[0m[37;40m);[0m
+155 [37;40m   }[0m
+156 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[31;1m1[0m
+157 [37;40m}[0m
 158 
-159 [37;1msub [0m[33;1;44mDoReplace[0m[37m {[0m
-160 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$index[0m[37m, [0m[94m$old[0m[37m, [0m[94m$txt[0m[37m, [0m[94m$sel[0m[37m, [0m[94m$ins[0m[37m) = [0m[94m@_[0m[37m;[0m
-161 [37m   [0m[94m$self[0m[37m->[0m[94mClearSelection[0m[37m;[0m
-162 [37m   [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mReplace[0m[37m([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$old[0m[37m), [0m[94m$txt[0m[37m);[0m
-163 [37m   [0m[37;1mif[0m[37m ([0m[94m$sel[0m[37m) {[0m
-164 [37m      [0m[94m$self[0m[37m->[0m[94mSetSelection[0m[37m([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$txt[0m[37m));[0m
-165 [37m   }[0m
-166 [37m   [0m[37;1mif[0m[37m ([0m[33;1;44mdefined[0m[37m([0m[94m$ins[0m[37m)) {[0m
-167 [37m      [0m[94m$self[0m[37m->[0m[94mSetInsertionPoint[0m[37m([0m[94m$ins[0m[37m);[0m
-168 [37m   }[0m
-169 [37m   [0m[37;1mreturn[0m[37m [0m[94;1m1[0m
-170 [37m}[0m
+159 [37;1msub [0m[96mDoReplace[0m[37;40m {[0m
+160 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$index[0m[37;40m, [0m[93m$old[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[93m$sel[0m[37;40m, [0m[93m$ins[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+161 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mClearSelection[0m[37;40m;[0m
+162 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mReplace[0m[37;40m([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$old[0m[37;40m), [0m[93m$txt[0m[37;40m);[0m
+163 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$sel[0m[37;40m) {[0m
+164 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSetSelection[0m[37;40m([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$txt[0m[37;40m));[0m
+165 [37;40m   }[0m
+166 [37;40m   [0m[37;1mif[0m[37;40m ([0m[96mdefined[0m[37;40m([0m[93m$ins[0m[37;40m)) {[0m
+167 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSetInsertionPoint[0m[37;40m([0m[93m$ins[0m[37;40m);[0m
+168 [37;40m   }[0m
+169 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[31;1m1[0m
+170 [37;40m}[0m
 171 
-172 [37;1msub [0m[33;1;44mDoWrite[0m[37m {[0m
-173 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$index[0m[37m, [0m[94m$txt[0m[37m, [0m[94m$sel[0m[37m, [0m[94m$ins[0m[37m) = [0m[94m@_[0m[37m;[0m
-174 [37m   [0m[94m$self[0m[37m->[0m[94mClearSelection[0m[37m;[0m
-175 [37m   [0m[94m$self[0m[37m->[0m[94mSetInsertionPoint[0m[37m([0m[94m$index[0m[37m);[0m
-176 [37m   [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mWriteText[0m[37m([0m[94m$txt[0m[37m);[0m
-177 [37m   [0m[37;1mif[0m[37m ([0m[94m$sel[0m[37m) {[0m
-178 [37m      [0m[94m$self[0m[37m->[0m[94mSetSelection[0m[37m([0m[94m$index[0m[37m, [0m[94m$index[0m[37m + [0m[33;1;44mlength[0m[37m([0m[94m$txt[0m[37m));[0m
-179 [37m   }[0m
-180 [37m   [0m[37;1mif[0m[37m ([0m[33;1;44mdefined[0m[37m([0m[94m$ins[0m[37m)) {[0m
-181 [37m      [0m[94m$self[0m[37m->[0m[94mSetInsertionPoint[0m[37m([0m[94m$ins[0m[37m);[0m
-182 [37m   }[0m
-183 [37m   [0m[37;1mreturn[0m[37m [0m[94;1m1[0m
-184 [37m}[0m
+172 [37;1msub [0m[96mDoWrite[0m[37;40m {[0m
+173 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$index[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[93m$sel[0m[37;40m, [0m[93m$ins[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+174 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mClearSelection[0m[37;40m;[0m
+175 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSetInsertionPoint[0m[37;40m([0m[93m$index[0m[37;40m);[0m
+176 [37;40m   [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mWriteText[0m[37;40m([0m[93m$txt[0m[37;40m);[0m
+177 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$sel[0m[37;40m) {[0m
+178 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSetSelection[0m[37;40m([0m[93m$index[0m[37;40m, [0m[93m$index[0m[37;40m + [0m[96mlength[0m[37;40m([0m[93m$txt[0m[37;40m));[0m
+179 [37;40m   }[0m
+180 [37;40m   [0m[37;1mif[0m[37;40m ([0m[96mdefined[0m[37;40m([0m[93m$ins[0m[37;40m)) {[0m
+181 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSetInsertionPoint[0m[37;40m([0m[93m$ins[0m[37;40m);[0m
+182 [37;40m   }[0m
+183 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[31;1m1[0m
+184 [37;40m}[0m
 185 
-186 [37;1msub [0m[33;1;44mFindPluginId[0m[37m {[0m
-187 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$name[0m[37m) = [0m[94m@_[0m[37m;[0m
-188 [37m   [0m[37;1mmy[0m[37m [0m[94m$plgs[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-189 [37m   [0m[37;1mmy[0m[37m [0m[94m$index[0m[37m = [0m[94;1m0[0m[37m;[0m
-190 [37m   [0m[37;1mforeach[0m[37m ([0m[94m@$plgs[0m[37m) {[0m
-191 [37m      [0m[37;1mif[0m[37m ([0m[94m$name[0m[37m [0m[32meq[0m[37m [0m[94m$plgs[0m[37m->[[0m[94m$index[0m[37m][0m[32m-[0m[37m>Name) {[0m
-192 [37m         [0m[37;1mreturn[0m[37m [0m[94m$index[0m
-193 [37m      }[0m
-194 [37m      [0m[94m$index[0m[37m ++;[0m
-195 [37m   }[0m
-196 [37;1;44m#   carp "Plugin $name is not loaded\n";[0m
-197 [37m   [0m[37;1mreturn[0m[37m [0m[33;1;44mundef[0m[37m;[0m
-198 [37m}[0m
+186 [37;1msub [0m[96mFindPluginId[0m[37;40m {[0m
+187 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$name[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+188 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$plgs[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+189 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$index[0m[37;40m = [0m[31;1m0[0m[37;40m;[0m
+190 [37;40m   [0m[37;1mforeach[0m[37;40m ([0m[93m@$plgs[0m[37;40m) {[0m
+191 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$name[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$plgs[0m[37;40m->[[0m[93m$index[0m[37;40m][0m[32m-[0m[37;40m>Name) {[0m
+192 [37;40m         [0m[37;1mreturn[0m[37;40m [0m[93m$index[0m
+193 [37;40m      }[0m
+194 [37;40m      [0m[93m$index[0m[37;40m ++;[0m
+195 [37;40m   }[0m
+196 [37;1;100m#   carp "Plugin $name is not loaded\n";[0m
+197 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[96mundef[0m[37;40m;[0m
+198 [37;40m}[0m
 199 
-200 [37;1msub [0m[33;1;44mFindPlugin[0m[37m {[0m
-201 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$name[0m[37m) = [0m[94m@_[0m[37m;[0m
-202 [37m   [0m[37;1mmy[0m[37m [0m[94m$plgs[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-203 [37m   [0m[37;1mforeach[0m[37m ([0m[94m@$plgs[0m[37m) {[0m
-204 [37m      [0m[37;1mif[0m[37m ([0m[94m$name[0m[37m [0m[32meq[0m[37m [0m[34;43m$_[0m[37m->[0m[94mName[0m[37m) {[0m
-205 [37m			[0m[37;1mreturn[0m[37m [0m[34;43m$_[0m
-206 [37m      }[0m
-207 [37m   }[0m
-208 [37m   [0m[37;1mreturn[0m[37m [0m[33;1;44mundef[0m[37m;[0m
-209 [37m}[0m
+200 [37;1msub [0m[96mFindPlugin[0m[37;40m {[0m
+201 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$name[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+202 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$plgs[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+203 [37;40m   [0m[37;1mforeach[0m[37;40m ([0m[93m@$plgs[0m[37;40m) {[0m
+204 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$name[0m[37;40m [0m[32meq[0m[37;40m [0m[94;43m$_[0m[37;40m->[0m[93mName[0m[37;40m) {[0m
+205 [37;40m			[0m[37;1mreturn[0m[37;40m [0m[94;43m$_[0m
+206 [37;40m      }[0m
+207 [37;40m   }[0m
+208 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[96mundef[0m[37;40m;[0m
+209 [37;40m}[0m
 210 
-211 [37;1msub [0m[33;1;44mGetClipboardText[0m[37m {[0m
-212 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-213 [37m   [0m[37;1mmy[0m[37m [0m[94m$txt[0m[37m = [0m[33;1;44mundef[0m[37m;[0m
-214 [37m   [0m[37;1mif[0m[37m (wxTheClipboard->Open) {[0m
-215 [37m      [0m[37;1mif[0m[37m ([0m[94m$debug[0m[37m) { [0m[33;1;44mprint[0m[37m [0m[32m"[0m[31;103mClipboard open[0m[35m\n[0m[32m"[0m[37m }[0m
-216 [37m      [0m[37;1mmy[0m[37m [0m[94m$textdata[0m[37m = [0m[33;1;44mWx::TextDataObject[0m[37m->new;[0m
-217 [37m      [0m[37;1mmy[0m[37m [0m[94m$ok[0m[37m = wxTheClipboard->GetData( [0m[94m$textdata[0m[37m );[0m
-218 [37m      [0m[37;1mif[0m[37m( [0m[94m$ok[0m[37m ) {[0m
-219 [37m         [0m[94m$txt[0m[37m = [0m[94m$textdata[0m[37m->[0m[94mGetText[0m[37m;[0m
-220 [37m      }[0m
-221 [37m      [0m[37;1mif[0m[37m ([0m[94m$debug[0m[37m [0m[32mand[0m[37m [0m[33;1;44mdefined[0m[37m([0m[94m$txt[0m[37m)) { [0m[33;1;44mprint[0m[37m [0m[32m"[0m[31;103mClipboard text: [0m[94m$txt[0m[35m\n[0m[32m"[0m[37m }[0m
-222 [37m      wxTheClipboard->Close;[0m
-223 [37m   }[0m
-224 [37m   [0m[37;1mreturn[0m[37m [0m[94m$txt[0m[37m;[0m
-225 [37m}[0m
+211 [37;1msub [0m[96mGetClipboardText[0m[37;40m {[0m
+212 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+213 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$txt[0m[37;40m = [0m[96mundef[0m[37;40m;[0m
+214 [37;40m   [0m[37;1mif[0m[37;40m (wxTheClipboard->Open) {[0m
+215 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$debug[0m[37;40m) { [0m[96mprint[0m[37;40m [0m[32m"[0m[31;103mClipboard open[0m[36;1;103m\n[0m[32m"[0m[37;40m }[0m
+216 [37;40m      [0m[37;1mmy[0m[37;40m [0m[93m$textdata[0m[37;40m = [0m[96mWx::TextDataObject[0m[37;40m->new;[0m
+217 [37;40m      [0m[37;1mmy[0m[37;40m [0m[93m$ok[0m[37;40m = wxTheClipboard->GetData( [0m[93m$textdata[0m[37;40m );[0m
+218 [37;40m      [0m[37;1mif[0m[37;40m( [0m[93m$ok[0m[37;40m ) {[0m
+219 [37;40m         [0m[93m$txt[0m[37;40m = [0m[93m$textdata[0m[37;40m->[0m[93mGetText[0m[37;40m;[0m
+220 [37;40m      }[0m
+221 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$debug[0m[37;40m [0m[32mand[0m[37;40m [0m[96mdefined[0m[37;40m([0m[93m$txt[0m[37;40m)) { [0m[96mprint[0m[37;40m [0m[32m"[0m[31;103mClipboard text: [0m[93m$txt[0m[36;1;103m\n[0m[32m"[0m[37;40m }[0m
+222 [37;40m      wxTheClipboard->Close;[0m
+223 [37;40m   }[0m
+224 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$txt[0m[37;40m;[0m
+225 [37;40m}[0m
 226 
-227 [37;1msub [0m[33;1;44mGetLineNumber[0m[37m {[0m
-228 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$index[0m[37m) = [0m[94m@_[0m[37m;[0m
-229 [37m   [0m[37;1munless[0m[37m ([0m[33;1;44mdefined[0m[37m([0m[94m$index[0m[37m)) { [0m[94m$index[0m[37m = [0m[94m$self[0m[37m->[0m[94mGetInsertionPoint[0m[37m };[0m
-230 [37m   [0m[37;1mmy[0m[37m ([0m[94m$col[0m[37m, [0m[94m$line[0m[37m) = [0m[94m$self[0m[37m->[0m[94mPositionToXY[0m[37m([0m[94m$index[0m[37m);[0m
-231 [37m   [0m[37;1mreturn[0m[37m [0m[94m$line[0m[37m;[0m
-232 [37m}[0m
+227 [37;1msub [0m[96mGetLineNumber[0m[37;40m {[0m
+228 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$index[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+229 [37;40m   [0m[37;1munless[0m[37;40m ([0m[96mdefined[0m[37;40m([0m[93m$index[0m[37;40m)) { [0m[93m$index[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mGetInsertionPoint[0m[37;40m };[0m
+230 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$col[0m[37;40m, [0m[93m$line[0m[37;40m) = [0m[93m$self[0m[37;40m->[0m[93mPositionToXY[0m[37;40m([0m[93m$index[0m[37;40m);[0m
+231 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$line[0m[37;40m;[0m
+232 [37;40m}[0m
 233 
-234 [37;1msub [0m[33;1;44mHasSelection[0m[37m {[0m
-235 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-236 [37m   [0m[37;1mmy[0m[37m ([0m[94m$selb[0m[37m, [0m[94m$sele[0m[37m) = [0m[94m$self[0m[37m->[0m[94mGetSelection[0m[37m;[0m
-237 [37m   [0m[37;1mreturn[0m[37m ([0m[94m$selb[0m[37m [0m[32mne[0m[37m [0m[94m$sele[0m[37m)[0m
-238 [37m}[0m
+234 [37;1msub [0m[96mHasSelection[0m[37;40m {[0m
+235 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+236 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$selb[0m[37;40m, [0m[93m$sele[0m[37;40m) = [0m[93m$self[0m[37;40m->[0m[93mGetSelection[0m[37;40m;[0m
+237 [37;40m   [0m[37;1mreturn[0m[37;40m ([0m[93m$selb[0m[37;40m [0m[32mne[0m[37;40m [0m[93m$sele[0m[37;40m)[0m
+238 [37;40m}[0m
 239 
-240 [37;1;44m# [0m[37;1;42mTODO[0m[37;1;44m make this unicode compatible[0m
-241 [37;1msub [0m[33;1;44mIsWriteable[0m[37m {[0m
-242 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$key[0m[37m) = [0m[94m@_[0m[37m;[0m
-243 [37m   [0m[37;1mif[0m[37m ((([0m[94m$key[0m[37m >= [0m[94;1m32[0m[37m) [0m[32mand[0m[37m ([0m[94m$key[0m[37m < [0m[94;1m127[0m[37m)) [0m[32mor[0m[37m (([0m[94m$key[0m[37m > [0m[94;1m127[0m[37m) [0m[32mand[0m[37m ([0m[94m$key[0m[37m < [0m[94;1m256[0m[37m))) {[0m
-244 [37m      [0m[37;1mreturn[0m[37m [0m[94;1m1[0m
-245 [37m   }[0m
-246 [37m   [0m[37;1mreturn[0m[37m [0m[94;1m0[0m
-247 [37m}[0m
+240 [37;1;100m# [0m[37;1;42mTODO[0m[37;1;100m make this unicode compatible[0m
+241 [37;1msub [0m[96mIsWriteable[0m[37;40m {[0m
+242 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$key[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+243 [37;40m   [0m[37;1mif[0m[37;40m ((([0m[93m$key[0m[37;40m >= [0m[31;1m32[0m[37;40m) [0m[32mand[0m[37;40m ([0m[93m$key[0m[37;40m < [0m[31;1m127[0m[37;40m)) [0m[32mor[0m[37;40m (([0m[93m$key[0m[37;40m > [0m[31;1m127[0m[37;40m) [0m[32mand[0m[37;40m ([0m[93m$key[0m[37;40m < [0m[31;1m256[0m[37;40m))) {[0m
+244 [37;40m      [0m[37;1mreturn[0m[37;40m [0m[31;1m1[0m
+245 [37;40m   }[0m
+246 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[31;1m0[0m
+247 [37;40m}[0m
 248 
-249 [37;1msub [0m[33;1;44mListening[0m[37m {[0m
-250 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-251 [37m   [0m[37;1mif[0m[37m ([0m[94m@_[0m[37m) {[0m
-252 [37m      [0m[37;1mmy[0m[37m [0m[94m$new[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-253 [37m      [0m[37;1munless[0m[37m ([0m[94m$new[0m[37m [0m[32meq[0m[37m [0m[94m$self[0m[37m->{LISTENING}) {[0m
-254 [37m         [0m[37;1mmy[0m[37m [0m[94m$plgs[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-255 [37m         [0m[37;1mif[0m[37m ([0m[94m$new[0m[37m) {[0m
-256 [37m            [0m[33;1;44munshift[0m[37m [0m[94m@$plgs[0m[37m, [0m[94m$self[0m
-257 [37m         } [0m[37;1melse[0m[37m {[0m
-258 [37m            [0m[33;1;44mshift[0m[37m [0m[94m@$plgs[0m
-259 [37m         }[0m
-260 [37m         [0m[94m$self[0m[37m->{LISTENING} = [0m[94m$new[0m
-261 [37m      }[0m
-262 [37m   }[0m
-263 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->{LISTENING}[0m
-264 [37m}[0m
+249 [37;1msub [0m[96mListening[0m[37;40m {[0m
+250 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+251 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m@_[0m[37;40m) {[0m
+252 [37;40m      [0m[37;1mmy[0m[37;40m [0m[93m$new[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+253 [37;40m      [0m[37;1munless[0m[37;40m ([0m[93m$new[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$self[0m[37;40m->{LISTENING}) {[0m
+254 [37;40m         [0m[37;1mmy[0m[37;40m [0m[93m$plgs[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+255 [37;40m         [0m[37;1mif[0m[37;40m ([0m[93m$new[0m[37;40m) {[0m
+256 [37;40m            [0m[96munshift[0m[37;40m [0m[93m@$plgs[0m[37;40m, [0m[93m$self[0m
+257 [37;40m         } [0m[37;1melse[0m[37;40m {[0m
+258 [37;40m            [0m[96mshift[0m[37;40m [0m[93m@$plgs[0m
+259 [37;40m         }[0m
+260 [37;40m         [0m[93m$self[0m[37;40m->{LISTENING} = [0m[93m$new[0m
+261 [37;40m      }[0m
+262 [37;40m   }[0m
+263 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->{LISTENING}[0m
+264 [37;40m}[0m
 265 
-266 [37;1msub [0m[33;1;44mLoadFile[0m[37m {[0m
-267 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-268 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mload[0m[32m'[0m[37m, [0m[94m@_[0m[37m)) {[0m
-269 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mLoadFile[0m[37m([0m[94m@_[0m[37m);[0m
-270 [37m   }[0m
-271 [37m}[0m
+266 [37;1msub [0m[96mLoadFile[0m[37;40m {[0m
+267 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+268 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mload[0m[32m'[0m[37;40m, [0m[93m@_[0m[37;40m)) {[0m
+269 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mLoadFile[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+270 [37;40m   }[0m
+271 [37;40m}[0m
 272 
-273 [37;1msub [0m[33;1;44mLoadPlugin[0m[37m {[0m
-274 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-275 [37m	[0m[37;1mmy[0m[37m [0m[94m$plug[0m[37m = [0m[33;1;44mundef[0m[37m;[0m
-276 [37m	[0m[37;1mmy[0m[37m [0m[94m$name[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-277 [37m	[0m[37;1;44m#Does anybody have a better idea for this?[0m
-278 [37m	[0m[94m$name[0m[37m = [0m[32m"[0m[31;103mSyntax::Kamelon::Wx::PluggableTextCtrl::[0m[94m$name[0m[32m"[0m[37m;[0m
-279 [37m	[0m[94m$plug[0m[37m = [0m[94m$name[0m[37m->[0m[94mnew[0m[37m([0m[94m$self[0m[37m, [0m[94m@_[0m[37m);[0m
-280 [37m	[0m[37;1mif[0m[37m ([0m[33;1;44mdefined[0m[37m([0m[94m$plug[0m[37m)) {[0m
-281 [37m		[0m[94m$self[0m[37m->[0m[94mRegisterPlugin[0m[37m([0m[94m$plug[0m[37m);[0m
-282 [37m	} [0m[37;1melse[0m[37m {[0m
-283 [37m		carp [0m[32m"[0m[31;103munable to load plugin [0m[94m$name[0m[35m\n[0m[32m"[0m[37m;[0m
-284 [37m	}[0m
-285 [37m}[0m
+273 [37;1msub [0m[96mLoadPlugin[0m[37;40m {[0m
+274 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+275 [37;40m	[0m[37;1mmy[0m[37;40m [0m[93m$plug[0m[37;40m = [0m[96mundef[0m[37;40m;[0m
+276 [37;40m	[0m[37;1mmy[0m[37;40m [0m[93m$name[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+277 [37;40m	[0m[37;1;100m#Does anybody have a better idea for this?[0m
+278 [37;40m	[0m[93m$name[0m[37;40m = [0m[32m"[0m[31;103mSyntax::Kamelon::Wx::PluggableTextCtrl::[0m[93m$name[0m[32m"[0m[37;40m;[0m
+279 [37;40m	[0m[93m$plug[0m[37;40m = [0m[93m$name[0m[37;40m->[0m[93mnew[0m[37;40m([0m[93m$self[0m[37;40m, [0m[93m@_[0m[37;40m);[0m
+280 [37;40m	[0m[37;1mif[0m[37;40m ([0m[96mdefined[0m[37;40m([0m[93m$plug[0m[37;40m)) {[0m
+281 [37;40m		[0m[93m$self[0m[37;40m->[0m[93mRegisterPlugin[0m[37;40m([0m[93m$plug[0m[37;40m);[0m
+282 [37;40m	} [0m[37;1melse[0m[37;40m {[0m
+283 [37;40m		carp [0m[32m"[0m[31;103munable to load plugin [0m[93m$name[0m[36;1;103m\n[0m[32m"[0m[37;40m;[0m
+284 [37;40m	}[0m
+285 [37;40m}[0m
 286 
-287 [37;1msub [0m[33;1;44mName[0m[37m {[0m
-288 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-289 [37m   [0m[37;1mmy[0m[37m [0m[94m$name[0m[37m = [0m[33;1;44mref[0m[37m [0m[94m$self[0m[37m;[0m
-290 [37m   [0m[94m$name[0m[37m =~[0m[32ms/[0m[33;1;42m.[0m[35m*[0m[33;1;42m::[0m[32m//[0m[37m;[0m
-291 [37m   [0m[37;1mif[0m[37m ([0m[94m$debug[0m[37m) { [0m[33;1;44mprint[0m[37m [0m[32m"[0m[31;103mplugin name is [0m[94m$name[0m[35m\n[0m[32m"[0m[37m }[0m
-292 [37m   [0m[37;1mreturn[0m[37m [0m[94m$name[0m
-293 [37m}[0m
+287 [37;1msub [0m[96mName[0m[37;40m {[0m
+288 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+289 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$name[0m[37;40m = [0m[96mref[0m[37;40m [0m[93m$self[0m[37;40m;[0m
+290 [37;40m   [0m[93m$name[0m[37;40m =~[0m[32ms/[0m[36;1m.[0m[36;1;103m*[0m[36;1m::[0m[32m//[0m[37;40m;[0m
+291 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$debug[0m[37;40m) { [0m[96mprint[0m[37;40m [0m[32m"[0m[31;103mplugin name is [0m[93m$name[0m[36;1;103m\n[0m[32m"[0m[37;40m }[0m
+292 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$name[0m
+293 [37;40m}[0m
 294 
-295 [37;1msub [0m[33;1;44mOnChar[0m[37m {[0m
-296 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$event[0m[37m) = [0m[94m@_[0m[37m;[0m
-297 [37m   [0m[37;1mmy[0m[37m [0m[94m$k[0m[37m = [0m[94m$event[0m[37m->[0m[94mGetKeyCode[0m[37m;[0m
-298 [37m   [0m[37;1mif[0m[37m ([0m[94m$k[0m[37m [0m[32meq[0m[37m [0m[94;1m322[0m[37m) { [0m[37;1;44m#Insert key pressed, record flip insert/ovr mode.[0m
-299 [37m      [0m[37;1mif[0m[37m ([0m[94m$self[0m[37m->[0m[94mOvrMode[0m[37m) {[0m
-300 [37m         [0m[94m$self[0m[37m->[0m[94mOvrMode[0m[37m([0m[94;1m0[0m[37m)[0m
-301 [37m      } [0m[37;1melse[0m[37m {[0m
-302 [37m         [0m[94m$self[0m[37m->[0m[94mOvrMode[0m[37m([0m[94;1m1[0m[37m)[0m
-303 [37m      }[0m
-304 [37m   }[0m
-305 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mkey[0m[32m'[0m[37m, [0m[94m$event[0m[37m)) {[0m
-306 [37m      [0m[94m$event[0m[37m->[0m[94mSkip[0m[37m;[0m
-307 [37m   }[0m
-308 [37m   [0m[37;1mmy[0m[37m [0m[94m$callback[0m[37m = [0m[94m$self[0m[37m->[0m[94mCallback[0m[37m;[0m
-309 [37m   &[0m[94m$callback[0m[37m;[0m
-310 [37m}[0m
+295 [37;1msub [0m[96mOnChar[0m[37;40m {[0m
+296 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$event[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+297 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$k[0m[37;40m = [0m[93m$event[0m[37;40m->[0m[93mGetKeyCode[0m[37;40m;[0m
+298 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m$k[0m[37;40m [0m[32meq[0m[37;40m [0m[31;1m322[0m[37;40m) { [0m[37;1;100m#Insert key pressed, record flip insert/ovr mode.[0m
+299 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mOvrMode[0m[37;40m) {[0m
+300 [37;40m         [0m[93m$self[0m[37;40m->[0m[93mOvrMode[0m[37;40m([0m[31;1m0[0m[37;40m)[0m
+301 [37;40m      } [0m[37;1melse[0m[37;40m {[0m
+302 [37;40m         [0m[93m$self[0m[37;40m->[0m[93mOvrMode[0m[37;40m([0m[31;1m1[0m[37;40m)[0m
+303 [37;40m      }[0m
+304 [37;40m   }[0m
+305 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mkey[0m[32m'[0m[37;40m, [0m[93m$event[0m[37;40m)) {[0m
+306 [37;40m      [0m[93m$event[0m[37;40m->[0m[93mSkip[0m[37;40m;[0m
+307 [37;40m   }[0m
+308 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$callback[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mCallback[0m[37;40m;[0m
+309 [37;40m   &[0m[93m$callback[0m[37;40m;[0m
+310 [37;40m}[0m
 311 
-312 [37;1msub [0m[33;1;44mOvrMode[0m[37m {[0m
-313 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-314 [37m   [0m[37;1mif[0m[37m ([0m[94m@_[0m[37m) { [0m[94m$self[0m[37m->{OVRMODE} = [0m[33;1;44mshift[0m[37m; }[0m
-315 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->{OVRMODE};[0m
-316 [37m}[0m
+312 [37;1msub [0m[96mOvrMode[0m[37;40m {[0m
+313 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+314 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m@_[0m[37;40m) { [0m[93m$self[0m[37;40m->{OVRMODE} = [0m[96mshift[0m[37;40m; }[0m
+315 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->{OVRMODE};[0m
+316 [37;40m}[0m
 317 
-318 [37;1msub [0m[33;1;44mPaste[0m[37m {[0m
-319 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-320 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mpaste[0m[32m'[0m[37m)) {[0m
-321 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mPaste[0m[37m;[0m
-322 [37m   }[0m
-323 [37m}[0m
+318 [37;1msub [0m[96mPaste[0m[37;40m {[0m
+319 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+320 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mpaste[0m[32m'[0m[37;40m)) {[0m
+321 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mPaste[0m[37;40m;[0m
+322 [37;40m   }[0m
+323 [37;40m}[0m
 324 
-325 [37;1msub [0m[33;1;44mPlugin[0m[37m {[0m
-326 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-327 [37m   [0m[37;1mmy[0m[37m [0m[94m$id[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-328 [37m   [0m[37;1mmy[0m[37m [0m[94m$plgs[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-329 [37m   [0m[37;1munless[0m[37m ([0m[94m$id[0m[37m =~ [0m[32m/[0m[35m^[0m[32m\d[0m[35m+$[0m[32m/[0m[37m) {[0m
-330 [37m      [0m[94m$id[0m[37m = [0m[94m$self[0m[37m->[0m[94mFindPluginId[0m[37m([0m[94m$id[0m[37m);[0m
-331 [37m   }[0m
-332 [37m   [0m[37;1mif[0m[37m ([0m[94m@_[0m[37m) { [0m
-333 [37m      [0m[94m$self[0m[37m->{PLUGINS}[0m[32m-[0m[37m>[[0m[94m$id[0m[37m] = [0m[33;1;44mshift[0m[37m; [0m
-334 [37m   }[0m
-335 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->{PLUGINS}[0m[32m-[0m[37m>[[0m[94m$id[0m[37m];[0m
-336 [37m}[0m
+325 [37;1msub [0m[96mPlugin[0m[37;40m {[0m
+326 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+327 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$id[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+328 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$plgs[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+329 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$id[0m[37;40m =~ [0m[32m/[0m[36;1;103m^[0m[92m\d[0m[36;1;103m+$[0m[32m/[0m[37;40m) {[0m
+330 [37;40m      [0m[93m$id[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mFindPluginId[0m[37;40m([0m[93m$id[0m[37;40m);[0m
+331 [37;40m   }[0m
+332 [37;40m   [0m[37;1mif[0m[37;40m ([0m[93m@_[0m[37;40m) { [0m
+333 [37;40m      [0m[93m$self[0m[37;40m->{PLUGINS}[0m[32m-[0m[37;40m>[[0m[93m$id[0m[37;40m] = [0m[96mshift[0m[37;40m; [0m
+334 [37;40m   }[0m
+335 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->{PLUGINS}[0m[32m-[0m[37;40m>[[0m[93m$id[0m[37;40m];[0m
+336 [37;40m}[0m
 337 
-338 [37;1msub [0m[33;1;44mReceive[0m[37m {[0m
-339 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-340 [37m   [0m[37;1mmy[0m[37m [0m[94m$name[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-341 [37;1;44m#    if ($debug) { print "received $name\n"; print Dumper $self->{COMMANDS} }[0m
-342 [37m   [0m[37;1mif[0m[37m ([0m[33;1;44mexists[0m[37m [0m[94m$self[0m[37m->{COMMANDS}[0m[32m-[0m[37m>{[0m[94m$name[0m[37m}) {[0m
-343 [37m      [0m[37;1mif[0m[37m ([0m[94m$debug[0m[37m) { [0m[33;1;44mprint[0m[37m [0m[32m"[0m[31;103mexecuting [0m[94m$name[0m[35m\n[0m[32m"[0m[37m }[0m
-344 [37m      [0m[37;1mmy[0m[37m [0m[94m$cmd[0m[37m = [0m[94m$self[0m[37m->[0m[94mCommand[0m[37m([0m[94m$name[0m[37m);[0m
-345 [37m      [0m[37;1mreturn[0m[37m &[0m[94m$cmd[0m[37m([0m[94m$self[0m[37m, [0m[94m@_[0m[37m);[0m
-346 [37m   }[0m
-347 [37m   [0m[37;1mreturn[0m[37m [0m[94;1m0[0m
-348 [37m}[0m
+338 [37;1msub [0m[96mReceive[0m[37;40m {[0m
+339 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+340 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$name[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+341 [37;1;100m#    if ($debug) { print "received $name\n"; print Dumper $self->{COMMANDS} }[0m
+342 [37;40m   [0m[37;1mif[0m[37;40m ([0m[96mexists[0m[37;40m [0m[93m$self[0m[37;40m->{COMMANDS}[0m[32m-[0m[37;40m>{[0m[93m$name[0m[37;40m}) {[0m
+343 [37;40m      [0m[37;1mif[0m[37;40m ([0m[93m$debug[0m[37;40m) { [0m[96mprint[0m[37;40m [0m[32m"[0m[31;103mexecuting [0m[93m$name[0m[36;1;103m\n[0m[32m"[0m[37;40m }[0m
+344 [37;40m      [0m[37;1mmy[0m[37;40m [0m[93m$cmd[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mCommand[0m[37;40m([0m[93m$name[0m[37;40m);[0m
+345 [37;40m      [0m[37;1mreturn[0m[37;40m &[0m[93m$cmd[0m[37;40m([0m[93m$self[0m[37;40m, [0m[93m@_[0m[37;40m);[0m
+346 [37;40m   }[0m
+347 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[31;1m0[0m
+348 [37;40m}[0m
 349 
-350 [37;1msub [0m[33;1;44mRedo[0m[37m {[0m
-351 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-352 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mredo[0m[32m'[0m[37m)) {[0m
-353 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mRedo[0m[37m;[0m
-354 [37m   }[0m
-355 [37m}[0m
+350 [37;1msub [0m[96mRedo[0m[37;40m {[0m
+351 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+352 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mredo[0m[32m'[0m[37;40m)) {[0m
+353 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mRedo[0m[37;40m;[0m
+354 [37;40m   }[0m
+355 [37;40m}[0m
 356 
-357 [37;1msub [0m[33;1;44mRegisterPlugin[0m[37m {[0m
-358 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$plug[0m[37m) = [0m[94m@_[0m[37m;[0m
-359 [37m   [0m[37;1mmy[0m[37m [0m[94m$pl[0m[37m = [0m[94m$self[0m[37m->{PLUGINS};[0m
-360 [37m   [0m[33;1;44mpush[0m[37m [0m[94m@$pl[0m[37m, [0m[94m$plug[0m[37m;[0m
-361 [37m}[0m
+357 [37;1msub [0m[96mRegisterPlugin[0m[37;40m {[0m
+358 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$plug[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+359 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$pl[0m[37;40m = [0m[93m$self[0m[37;40m->{PLUGINS};[0m
+360 [37;40m   [0m[96mpush[0m[37;40m [0m[93m@$pl[0m[37;40m, [0m[93m$plug[0m[37;40m;[0m
+361 [37;40m}[0m
 362 
-363 [37;1msub [0m[33;1;44mRemove[0m[37m {[0m
-364 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-365 [37m   [0m[37;1mmy[0m[37m [0m[94m@call[0m[37m = [0m[94m$self[0m[37m->[0m[94mRemove2Call[0m[37m([0m[94m@_[0m[37m);[0m
-366 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[94m@call[0m[37m)) {[0m
-367 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mRemove[0m[37m([0m[94m@_[0m[37m);[0m
-368 [37m   }[0m
-369 [37m}[0m
+363 [37;1msub [0m[96mRemove[0m[37;40m {[0m
+364 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+365 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m@call[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mRemove2Call[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+366 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[93m@call[0m[37;40m)) {[0m
+367 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mRemove[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+368 [37;40m   }[0m
+369 [37;40m}[0m
 370 
-371 [37;1msub [0m[33;1;44mRemove2Call[0m[37m {[0m
-372 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$begin[0m[37m, [0m[94m$end[0m[37m) = [0m[94m@_[0m[37m;[0m
-373 [37m   [0m[37;1mmy[0m[37m [0m[94m$sel[0m[37m = [0m[94;1m0[0m[37m;[0m
-374 [37m   [0m[37;1mmy[0m[37m ([0m[94m$selb[0m[37m, [0m[94m$sele[0m[37m) = [0m[94m$self[0m[37m->[0m[94mGetSelection[0m[37m;[0m
-375 [37m   [0m[37;1mif[0m[37m (([0m[94m$selb[0m[37m [0m[32meq[0m[37m [0m[94m$begin[0m[37m) [0m[32mand[0m[37m ([0m[94m$sele[0m[37m [0m[32meq[0m[37m [0m[94m$end[0m[37m)) { [0m[94m$sel[0m[37m = [0m[94;1m1[0m[37m }[0m
-376 [37m   [0m[37;1mreturn[0m[37m ([0m[32m'[0m[31mremove[0m[32m'[0m[37m, [0m[94m$begin[0m[37m, [0m[94m$self[0m[37m->[0m[94mGetRange[0m[37m([0m[94m$begin[0m[37m, [0m[94m$end[0m[37m), [0m[94m$sel[0m[37m)[0m
-377 [37m}[0m
+371 [37;1msub [0m[96mRemove2Call[0m[37;40m {[0m
+372 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$begin[0m[37;40m, [0m[93m$end[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+373 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$sel[0m[37;40m = [0m[31;1m0[0m[37;40m;[0m
+374 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$selb[0m[37;40m, [0m[93m$sele[0m[37;40m) = [0m[93m$self[0m[37;40m->[0m[93mGetSelection[0m[37;40m;[0m
+375 [37;40m   [0m[37;1mif[0m[37;40m (([0m[93m$selb[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$begin[0m[37;40m) [0m[32mand[0m[37;40m ([0m[93m$sele[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$end[0m[37;40m)) { [0m[93m$sel[0m[37;40m = [0m[31;1m1[0m[37;40m }[0m
+376 [37;40m   [0m[37;1mreturn[0m[37;40m ([0m[32m'[0m[32;103mremove[0m[32m'[0m[37;40m, [0m[93m$begin[0m[37;40m, [0m[93m$self[0m[37;40m->[0m[93mGetRange[0m[37;40m([0m[93m$begin[0m[37;40m, [0m[93m$end[0m[37;40m), [0m[93m$sel[0m[37;40m)[0m
+377 [37;40m}[0m
 378 
-379 [37;1msub [0m[33;1;44mReplace[0m[37m {[0m
-380 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-381 [37m   [0m[37;1mmy[0m[37m [0m[94m@call[0m[37m = [0m[94m$self[0m[37m->[0m[94mReplace2Call[0m[37m([0m[94m@_[0m[37m);[0m
-382 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[94m@call[0m[37m)) {[0m
-383 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mReplace[0m[37m([0m[94m@_[0m[37m);[0m
-384 [37m   }[0m
-385 [37m}[0m
+379 [37;1msub [0m[96mReplace[0m[37;40m {[0m
+380 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+381 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m@call[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mReplace2Call[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+382 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[93m@call[0m[37;40m)) {[0m
+383 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mReplace[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+384 [37;40m   }[0m
+385 [37;40m}[0m
 386 
-387 [37;1msub [0m[33;1;44mReplace2Call[0m[37m {[0m
-388 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$begin[0m[37m, [0m[94m$end[0m[37m, [0m[94m$txt[0m[37m) = [0m[94m@_[0m[37m;[0m
-389 [37m   [0m[37;1mmy[0m[37m [0m[94m$sel[0m[37m = [0m[94;1m0[0m[37m;[0m
-390 [37m   [0m[37;1mmy[0m[37m ([0m[94m$selb[0m[37m, [0m[94m$sele[0m[37m) = [0m[94m$self[0m[37m->[0m[94mGetSelection[0m[37m;[0m
-391 [37m   [0m[37;1mif[0m[37m (([0m[94m$selb[0m[37m [0m[32meq[0m[37m [0m[94m$begin[0m[37m) [0m[32mand[0m[37m ([0m[94m$sele[0m[37m [0m[32meq[0m[37m [0m[94m$end[0m[37m)) { [0m[94m$sel[0m[37m = [0m[94;1m1[0m[37m }[0m
-392 [37m   [0m[37;1mreturn[0m[37m ([0m[32m'[0m[31mreplace[0m[32m'[0m[37m, [0m[94m$begin[0m[37m, [0m[94m$txt[0m[37m, [0m[94m$self[0m[37m->[0m[94mGetRange[0m[37m([0m[94m$begin[0m[37m, [0m[94m$end[0m[37m), [0m[94m$sel[0m[37m)[0m
-393 [37m}[0m
+387 [37;1msub [0m[96mReplace2Call[0m[37;40m {[0m
+388 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$begin[0m[37;40m, [0m[93m$end[0m[37;40m, [0m[93m$txt[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+389 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$sel[0m[37;40m = [0m[31;1m0[0m[37;40m;[0m
+390 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$selb[0m[37;40m, [0m[93m$sele[0m[37;40m) = [0m[93m$self[0m[37;40m->[0m[93mGetSelection[0m[37;40m;[0m
+391 [37;40m   [0m[37;1mif[0m[37;40m (([0m[93m$selb[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$begin[0m[37;40m) [0m[32mand[0m[37;40m ([0m[93m$sele[0m[37;40m [0m[32meq[0m[37;40m [0m[93m$end[0m[37;40m)) { [0m[93m$sel[0m[37;40m = [0m[31;1m1[0m[37;40m }[0m
+392 [37;40m   [0m[37;1mreturn[0m[37;40m ([0m[32m'[0m[32;103mreplace[0m[32m'[0m[37;40m, [0m[93m$begin[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[93m$self[0m[37;40m->[0m[93mGetRange[0m[37;40m([0m[93m$begin[0m[37;40m, [0m[93m$end[0m[37;40m), [0m[93m$sel[0m[37;40m)[0m
+393 [37;40m}[0m
 394 
-395 [37;1msub [0m[33;1;44mSaveFile[0m[37m {[0m
-396 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-397 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31msave[0m[32m'[0m[37m, [0m[94m@_[0m[37m)) {[0m
-398 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mSaveFile[0m[37m([0m[94m@_[0m[37m);[0m
-399 [37m   }[0m
-400 [37m}[0m
+395 [37;1msub [0m[96mSaveFile[0m[37;40m {[0m
+396 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+397 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103msave[0m[32m'[0m[37;40m, [0m[93m@_[0m[37;40m)) {[0m
+398 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mSaveFile[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+399 [37;40m   }[0m
+400 [37;40m}[0m
 401 
-402 [37;1msub [0m[33;1;44mNativePlugins[0m[37m {[0m
-403 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-404 [37m   [0m[37;1mreturn[0m[37m [0m[32mqw[[0m[37m Highlighter KeyEchoes UndoRedo   [0m[32m][0m
-405 [37m}[0m
+402 [37;1msub [0m[96mNativePlugins[0m[37;40m {[0m
+403 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+404 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[32mqw[[0m[37;40m Highlighter KeyEchoes UndoRedo   [0m[32m][0m
+405 [37;40m}[0m
 406 
-407 [37;1msub [0m[33;1;44mSyntax[0m[37m {[0m
-408 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-409 [37m   [0m[37;1mreturn[0m[37m [0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31msyntax[0m[32m'[0m[37m, [0m[94m@_[0m[37m);[0m
-410 [37m}[0m
+407 [37;1msub [0m[96mSyntax[0m[37;40m {[0m
+408 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+409 [37;40m   [0m[37;1mreturn[0m[37;40m [0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103msyntax[0m[32m'[0m[37;40m, [0m[93m@_[0m[37;40m);[0m
+410 [37;40m}[0m
 411 
-412 [37;1msub [0m[33;1;44mUndo[0m[37m {[0m
-413 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-414 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[32m'[0m[31mundo[0m[32m'[0m[37m)) {[0m
-415 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mUndo[0m[37m;[0m
-416 [37m   }[0m
-417 [37m}[0m
+412 [37;1msub [0m[96mUndo[0m[37;40m {[0m
+413 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+414 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[32m'[0m[32;103mundo[0m[32m'[0m[37;40m)) {[0m
+415 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mUndo[0m[37;40m;[0m
+416 [37;40m   }[0m
+417 [37;40m}[0m
 418 
-419 [37;1msub [0m[33;1;44mWriteText[0m[37m {[0m
-420 [37m   [0m[37;1mmy[0m[37m [0m[94m$self[0m[37m = [0m[33;1;44mshift[0m[37m;[0m
-421 [37m   [0m[37;1mmy[0m[37m [0m[94m@call[0m[37m = [0m[94m$self[0m[37m->[0m[94mWriteText2Call[0m[37m([0m[94m@_[0m[37m);[0m
-422 [37m   [0m[37;1munless[0m[37m ([0m[94m$self[0m[37m->[0m[94mBroadcast[0m[37m([0m[94m@call[0m[37m)) {[0m
-423 [37m      [0m[94m$self[0m[37m->[0m[94mSUPER[0m[37m::[0m[94mWriteText[0m[37m([0m[94m@_[0m[37m);[0m
-424 [37m   }[0m
-425 [37m}[0m
+419 [37;1msub [0m[96mWriteText[0m[37;40m {[0m
+420 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m$self[0m[37;40m = [0m[96mshift[0m[37;40m;[0m
+421 [37;40m   [0m[37;1mmy[0m[37;40m [0m[93m@call[0m[37;40m = [0m[93m$self[0m[37;40m->[0m[93mWriteText2Call[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+422 [37;40m   [0m[37;1munless[0m[37;40m ([0m[93m$self[0m[37;40m->[0m[93mBroadcast[0m[37;40m([0m[93m@call[0m[37;40m)) {[0m
+423 [37;40m      [0m[93m$self[0m[37;40m->[0m[93mSUPER[0m[37;40m::[0m[93mWriteText[0m[37;40m([0m[93m@_[0m[37;40m);[0m
+424 [37;40m   }[0m
+425 [37;40m}[0m
 426 
-427 [37;1msub [0m[33;1;44mWriteText2Call[0m[37m {[0m
-428 [37m   [0m[37;1mmy[0m[37m ([0m[94m$self[0m[37m, [0m[94m$txt[0m[37m) = [0m[94m@_[0m[37m;[0m
-429 [37m   [0m[37;1mreturn[0m[37m ([0m[32m'[0m[31mwrite[0m[32m'[0m[37m, [0m[94m$self[0m[37m->[0m[94mGetInsertionPoint[0m[37m, [0m[94m$txt[0m[37m, [0m[94;1m0[0m[37m);[0m
-430 [37m}[0m
+427 [37;1msub [0m[96mWriteText2Call[0m[37;40m {[0m
+428 [37;40m   [0m[37;1mmy[0m[37;40m ([0m[93m$self[0m[37;40m, [0m[93m$txt[0m[37;40m) = [0m[93m@_[0m[37;40m;[0m
+429 [37;40m   [0m[37;1mreturn[0m[37;40m ([0m[32m'[0m[32;103mwrite[0m[32m'[0m[37;40m, [0m[93m$self[0m[37;40m->[0m[93mGetInsertionPoint[0m[37;40m, [0m[93m$txt[0m[37;40m, [0m[31;1m0[0m[37;40m);[0m
+430 [37;40m}[0m
 431 
 432 
-433 [94;1m1[0m[37m;[0m
+433 [31;1m1[0m[37;40m;[0m
 434 [37;1m__END__[0m

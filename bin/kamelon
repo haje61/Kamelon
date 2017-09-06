@@ -71,7 +71,7 @@ my %args = (%shortargs,
 	'-file' => $shortargs{'-f'},
 	'-indexfile' => $shortargs{'-i'},
 	'-noindex' => $shortargs{'-n'},
-	'-ouput' => $shortargs{'-o'},
+	'-output' => $shortargs{'-o'},
 	'-syntax' => $shortargs{'-s'},
 	'-xmldir' => $shortargs{'-x'},
 	'-help' => sub { print "$help\n"; exit }
@@ -83,11 +83,6 @@ while (@ARGV) {
 		my $call = $args{$t};
 		&$call;
 	} else {
-		my @op = sort keys %args;
-		my $opstr = "";
-		for (@op) {
-			$opstr = "$opstr $_"
-		}
 		die "Invalid option $t.\n$help";
 	}
 }

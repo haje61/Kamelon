@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-use Test::More tests => 17;
+use Test::More tests => 16;
 
 use Syntax::Kamelon;
 
@@ -10,36 +10,25 @@ my $htmldir = './t/HTML';
 my $sampledir = './t/Samples';
 my $outdir = './t/HTML_OUT';
 my $xmldir = './t/XML';
-my @attributes = Syntax::Kamelon->AvailableAttributes;
 
+my @attributes = Syntax::Kamelon->AvailableAttributes;
 my %formtab = ();
 for (@attributes) {
-	$formtab{$_} = ["<font class=\"$_\">", "</font>"]
+	$formtab{$_} = "<font class=\"$_\">"
 }
-
-my $substitutions = {
-	'<' => '&lt;',
-	'>' => '&gt;',
-	'&' => '&amp;',
-	' ' => '&nbsp;',
-	"\t" => '&nbsp;&nbsp;&nbsp;',
-};
 
 
 my $hl = new Syntax::Kamelon(
 	xmlfolder => $xmldir,
 	noindex => 1,
 	formatter => ['Base',
-		substitutions => $substitutions,
+		textfilter => "[%~ text FILTER html FILTER replace('\\040', '&nbsp;') FILTER replace('\\t', '&nbsp;&nbsp;&nbsp;') ~%]",
 		format_table => \%formtab,
 		newline => "</br>\n",
+		tagend => '</font>',
 	],
 );
 ok(defined $hl, 'Creation');
-
-my $sb = $hl->{FORMATTER}->{SUBSTITUTIONS};
-
-ok((Dumper $substitutions eq Dumper $sb), "Substitutions");
 
 my @l = $hl->AvailableSyntaxes;
 my @li = ();

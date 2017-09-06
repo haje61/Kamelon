@@ -8,14 +8,14 @@
 <font class="Normal">Testing&nbsp;commonoptions</font></br>
 </br>
 <font class="Normal">column&nbsp;option</font></br>
-<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;column=</font><font class="String">"5"</font><font class="Others">&nbsp;String=</font><font class="String">"\d"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">&quot;Match&quot;</font><font class="Others">&nbsp;context=</font><font class="String">&quot;#stay&quot;</font><font class="Others">&nbsp;column=</font><font class="String">&quot;5&quot;</font><font class="Others">&nbsp;String=</font><font class="String">&quot;\d&quot;</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
 <font class="Others">&lt;C&gt;</font></br>
 <font class="Comment">#every&nbsp;digit&nbsp;on&nbsp;column&nbsp;5&nbsp;is&nbsp;matched</font></br>
 <font class="Others">01234</font><font class="DataType">5</font><font class="Others">6789</font></br>
 <font class="Others">&lt;C&gt;</font></br>
 </br>
 <font class="Normal">column&nbsp;and&nbsp;firstNonSpace&nbsp;both&nbsp;set</font></br>
-<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;firstNonSpace=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;column=</font><font class="String">"5"</font><font class="Others">&nbsp;String=</font><font class="String">"\d"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">&quot;Match&quot;</font><font class="Others">&nbsp;firstNonSpace=</font><font class="String">&quot;true&quot;</font><font class="Others">&nbsp;context=</font><font class="String">&quot;#stay&quot;</font><font class="Others">&nbsp;column=</font><font class="String">&quot;5&quot;</font><font class="Others">&nbsp;String=</font><font class="String">&quot;\d&quot;</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
 <font class="Others">&lt;CFNS&gt;</font></br>
 <font class="Comment">#if&nbsp;the&nbsp;first&nbsp;non&nbsp;space&nbsp;on&nbsp;column&nbsp;5&nbsp;is&nbsp;a&nbsp;digit,&nbsp;it&nbsp;is&nbsp;matched</font></br>
 <font class="Others">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font class="DataType">5</font><font class="Others">6789</font></br>
@@ -23,7 +23,7 @@
 <font class="Others">&lt;CFNS&gt;</font></br>
 </br>
 <font class="Normal">firstNonSpace</font></br>
-<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;firstNonSpace=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"#stay"</font><font class="Others">&nbsp;String=</font><font class="String">"\d"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;RegExpr</font><font class="Others">&nbsp;attribute=</font><font class="String">&quot;Match&quot;</font><font class="Others">&nbsp;firstNonSpace=</font><font class="String">&quot;true&quot;</font><font class="Others">&nbsp;context=</font><font class="String">&quot;#stay&quot;</font><font class="Others">&nbsp;String=</font><font class="String">&quot;\d&quot;</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
 <font class="Others">&lt;FNS&gt;</font></br>
 <font class="Comment">#if&nbsp;the&nbsp;first&nbsp;non&nbsp;space&nbsp;is&nbsp;a&nbsp;digit,&nbsp;it&nbsp;is&nbsp;matched.</font></br>
 <font class="Others">&nbsp;&nbsp;&nbsp;</font><font class="DataType">4</font><font class="Others">u</font></br>
@@ -32,8 +32,8 @@
 <font class="Others">&lt;FNS&gt;</font></br>
 </br>
 <font class="Normal">lookAhead</font></br>
-<font class="Keyword">&lt;StringDetect</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match2"</font><font class="Others">&nbsp;lookAhead=</font><font class="String">"true"</font><font class="Others">&nbsp;context=</font><font class="String">"LT"</font><font class="Others">&nbsp;String=</font><font class="String">"aap"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
-<font class="Keyword">&lt;StringDetect</font><font class="Others">&nbsp;attribute=</font><font class="String">"Match"</font><font class="Others">&nbsp;context=</font><font class="String">"#pop"</font><font class="Others">&nbsp;String=</font><font class="String">"aap"</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;StringDetect</font><font class="Others">&nbsp;attribute=</font><font class="String">&quot;Match2&quot;</font><font class="Others">&nbsp;lookAhead=</font><font class="String">&quot;true&quot;</font><font class="Others">&nbsp;context=</font><font class="String">&quot;LT&quot;</font><font class="Others">&nbsp;String=</font><font class="String">&quot;aap&quot;</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
+<font class="Keyword">&lt;StringDetect</font><font class="Others">&nbsp;attribute=</font><font class="String">&quot;Match&quot;</font><font class="Others">&nbsp;context=</font><font class="String">&quot;#pop&quot;</font><font class="Others">&nbsp;String=</font><font class="String">&quot;aap&quot;</font><font class="Normal">&nbsp;</font><font class="Keyword">/&gt;</font></br>
 <font class="Others">&lt;L&gt;</font></br>
 <font class="Others">Daar&nbsp;zit&nbsp;een&nbsp;</font><font class="DataType">aap</font><font class="Others">.</font></br>
 <font class="Others">&lt;L&gt;</font></br>

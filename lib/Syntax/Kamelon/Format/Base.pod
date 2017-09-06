@@ -89,10 +89,25 @@ Specifies the minimum size, in lines, of a fold. Default is 1 line.
 Specifies what a newline looks like. By default it is set to "\n". If you are, for example, parsing to HTML you might want to 
 set it to "</br>\n".
 
-=item B<substitutions> ref to hash
+=item B<outmethod> various
 
-After matching the text B<HighlightAndFormat> looks here if any special characters, like tabs and 
-spaces, need replacement.
+This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
+a reference to a output file handle, or a filename. You can also set it to 'returnscalar', which is also the default value.
+If this case the B<Format> method returns the formatted document in a scalar variable.
+
+=item B<template> various
+
+This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
+a reference to a input file handle, or a file name.
+
+=item B<toolkit> ref to template toolkit instance
+
+Use this option if you want to use your own instance of Template Toolkit for formatting. If you set this option, 
+the B<ttconfig> option is not used.
+
+=item B<ttconfig> ref to hash
+
+This is the config hash that is used in Template Tookits constructor. By default it is set to {}.
 
 =back
 
@@ -118,17 +133,48 @@ Usually called through B<Kamelon>. It turns the parsing and folding information 
 Returns the format data belonging to $tagname. Used by the B<Builder> module. The data is set through
 the B<format_table> option.
 
+=item B<GetData>
+
+Use this method if you want to use your own instance of Template Tooolkit instead of B<TT>'s internal one. It returns
+a data structure that looks like this:
+
+ my $data = {
+    folds => { #the keys of this hash are line numbers
+	    4 => {
+          end => $endline,
+		    depth => $folddepth,
+		    line => $text,
+		    region => $regionname,
+	    },
+	    ...
+    },
+    content => [
+       [{ text => $snippet, tag => $tagname}, ...], #this is one line
+       ...
+    ],
+ }
+
 =item B<Lines>
 
 Returns a reference to the lines array.
+
+=item B<OutMethod>(I<$various>)
+
+Corresponds with the B<outmethod> option. Sets and returns the output method.
 
 =item B<Reset>
 
 Clears all parser data.
 
-=item B<Substitutions>
+=item B<Template>(I<$various>)
 
-Sets and returns a reference to the substitutions hash.
+Corresponds with the B<template> option. Sets and returns the template that will
+be processed by B<Format>.
+
+=item B<Toolkit> ref to Template Toolkit instance
+
+Corresponds with the B<toolkit> option. Sets and returns the Template Toolkit
+instance that is used for formatting.
 
 =back
 

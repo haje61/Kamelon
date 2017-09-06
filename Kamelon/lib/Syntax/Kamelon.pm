@@ -82,7 +82,7 @@ sub new {
 		}
 	}
 
- 	my $format = delete $args{'formatter'};
+ 	my $format = delete $args{formatter};
 	my $cmnds = delete $args{commands};
 	my $logcall = delete $args{logcall};
 	my $syntax = delete $args{syntax};
