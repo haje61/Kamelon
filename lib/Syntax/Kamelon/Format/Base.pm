@@ -6,7 +6,7 @@ use Carp;
 
 use vars qw($VERSION);
 $VERSION="0.01";
-use Template;
+use base qw(Template);
 
 my $default_template = <<__EOF;
 [% IF lineoffset.defined ~%]
@@ -28,8 +28,7 @@ my $default_template = <<__EOF;
 __EOF
 
 sub new {
-   my $proto = shift;
-   my $class = ref($proto) || $proto;
+   my $class = shift;
    my $engine = shift;
 	my %args = (@_);
 
@@ -70,36 +69,47 @@ sub new {
 
 	my $textfilter = delete $args{textfilter};
 
-	my $toolkit = delete $args{toolkit};
 	my $ttconfig = delete $args{ttconfig};
-	unless (defined $toolkit) {
-		if (defined $ttconfig) {
-			$toolkit = Template->new($ttconfig)
-		} else {
-			$toolkit = Template->new()
+	
+	if (%args) {
+		for (keys %args) {
+			warn "unrecognized option: $_"
 		}
 	}
+	my $self;
+	if (defined $ttconfig) {
+		$self= $class->SUPER::new($ttconfig)
+	} else {
+		$self= $class->SUPER::new()
+	}
 
-	my $self = {
-		DATA => $data,
-		ENGINE => $engine,
-		FOLDING => $folding,
-		LINES => [],
-		FOLDS => {},
-		FOLDSTACK => [],
-   	FORMATTABLE => $formattable,
-   	LINEOFFSET => $offset,
-   	MINFOLDSIZE => $minfoldsize,
-   	NEWLINE => $newline,
-   	OUTMETHOD => $outmet,
-		TAGEND => $tagend,
-		TEMPLATE => $template,
-		TT => $toolkit,
-	};
-	bless ($self, $class);
+	$self->{DATA} = $data;
+	$self->{ENGINE} = $engine;
+	$self->{FOLDING} = $folding;
+	$self->{LINES} = [];
+	$self->{FOLDS} = {};
+	$self->{FOLDSTACK} = [];
+	$self->{FORMATTABLE} = $formattable;
+	$self->{LINEOFFSET} = $offset;
+	$self->{MINFOLDSIZE} = $minfoldsize;
+	$self->{NEWLINE} = $newline;
+	$self->{OUTMETHOD} = $outmet;
+	$self->{TAGEND} = $tagend;
+	$self->{TEMPLATE} = $template;
 	$self->TextFilter($textfilter);
 
    return $self;
+}
+
+sub FindINC {
+   my ($self, $file) = @_;
+   for (@INC) {
+      my $f = $_ . "/$file";
+      if (-e $f) {
+         return $f;
+      }
+   }
+   return undef;
 }
 
 sub FoldBegin {
@@ -174,34 +184,6 @@ sub FoldStackTop {
 	return $stack->[0]
 }
 
-# sub Format {
-# 	my $self = shift;
-# 	my $res = '';
-# 	my $lines = $self->{LINES};
-# 	while (@$lines) {
-# 		my $snippets = shift @$lines;
-# 		while (@$snippets) {
-# 			my $f = shift @$snippets;
-# 			my $t = shift @$snippets;
-# 			my $s = $self->{SUBSTITUTIONS};
-# 			my $rr = '';
-# 			my @string = split //, $f;
-# 			while (@string) {
-# 				my $k = shift @string;
-# 				if (exists $s->{$k}) {
-# 						$rr = $rr . $s->{$k}
-# 				} else {
-# 					$rr = $rr . $k;
-# 				}
-# 
-# 			}
-# 			$res = $res . $t->[0] . $rr . $t->[1];
-# 		}
-# 		$res = $res . $self->{NEWLINE};
-# 	}
-# 	return $res
-# }
-
 sub Format {
 	my $self = shift;
 	my $out = '';
@@ -210,9 +192,8 @@ sub Format {
 		$outmet = \$out
 	}
 	my $template = $self->{TEMPLATE};
-	my $toolkit = $self->{TT};
-	$toolkit->process($template, $self->GetData, $outmet)  || do {
-		my $error = $toolkit->error();
+	$self->process($template, $self->GetData, $outmet)  || do {
+		my $error = $self->error();
 		print STDERR "error type: ", $error->type(), "\n";
 		print STDERR "error info: ", $error->info(), "\n";
 		print STDERR $error, "\n";
@@ -286,17 +267,20 @@ sub PreProcessOff {
 }
 
 sub PreProcessOn {
-	my ($self, $t) = @_;
-	my $tk = $self->{TT};
-	my $text = '';
-	my $filt = $self->{TEXTFILTER};
-	$tk->process(\$filt, { text => $t }, \$text)  || do {
-		my $error = $tk->error();
+	my ($self, $text) = @_;
+	return $self->Process($self->{TEXTFILTER}, { text => $text })
+}
+
+sub Process {
+	my ($self, $template, $data) = @_;
+	my $out = '';
+	$self->process($template, $data, \$out)  || do {
+		my $error = $self->error();
 		print STDERR "error type: ", $error->type(), "\n";
 		print STDERR "error info: ", $error->info(), "\n";
 		print STDERR $error, "\n";
 	};
-	return $text
+	return $out
 }
 
 sub Reset {
@@ -330,12 +314,6 @@ sub TextFilter {
 		$self->{TEXTFILTER} = $filt
 	}
 	return $self->{TEXTFILTER}
-}
-
-sub Toolkit {
-	my $self = shift;
-	if (@_) { $self->{TOOLKIT} = shift }
-	return $self->{TOOLKIT}
 }
 
 1;

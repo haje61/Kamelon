@@ -88,12 +88,19 @@ sub new {
 	my $syntax = delete $args{syntax};
 	my $verbose = delete $args{verbose};
 
+	if (%args) {
+		for (keys %args) {
+			warn "unrecognized option: $_"
+		}
+	}
 	my $self = {}; #forego XS routines for now.
 # 	my $self = Syntax::Kamelon->new_kam();
 	bless ($self, $class);
 
 	unless (defined $cmnds) { $cmnds = {} }
 
+	#this one must be defined before we configure the formatter
+	$self->{INDEXER} = Syntax::Kamelon::Indexer->new(%indexer);
 	#configure the formatter
 	unless (defined($format)) { $format = ['Base'] }
 	$self->InitFormatter($format);
@@ -106,8 +113,6 @@ sub new {
 	$self->{COMMANDS} = [];
 	$self->{CURRENTLINE} = '';
 	$self->{HLPOOL} = {};
-	$self->{INDEXER} = Syntax::Kamelon::Indexer->new(%indexer);
-	$self->{INDEXEROPTS} = \%indexer;
 	$self->{LOGCALL} = $logcall;
 	$self->{LINENUMBER} = 1;
 	$self->{LINESEGMENT} = '';

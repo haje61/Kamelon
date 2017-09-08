@@ -26,8 +26,7 @@ sub new {
 	$self->{INDEXFILE} = $indexfile;
 	$self->{XMLFOLDER} = $xmlfolder;
 	$self->{XMLPOOL} = {};
-	
-	
+
 	$self->LoadIndex($noindex);
 
    return $self;
