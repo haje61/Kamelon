@@ -3,6 +3,7 @@
   font-family: "Monospace";
   font-size: 1em;
   background: Gray;
+  color: Black;
   padding: 20px;
   height: 100%;
   margin-left: auto;
@@ -67,7 +68,7 @@ font.Float {
 	font-weight: bold;
 }
 font.Function {
-   color: Brown;
+   color: BurlyWood;
 }
 font.Import {
    color: DarkRed;

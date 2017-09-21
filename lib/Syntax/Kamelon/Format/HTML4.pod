@@ -17,6 +17,34 @@ the following options.
 
 =over 4
 
+=item B<foldmarkers> boolean
+
+=item B<footer> various
+
+=item B<header> various
+
+=item B<inlinecss> boolean
+
+=item B<javascript> integer
+
+=item B<layoutcss> filename
+
+=item B<lineoffset> integer
+
+=item B<plainpanel> ref to hash
+
+=item B<scrolled> boolean
+
+=item B<scrolledpanel> ref to hash
+
+=item B<sections> boolean
+
+=item B<themecss> integer
+
+=item B<themefolder> integer
+
+=item B<title> string
+
 =back
 
 =head1 USER METHODS

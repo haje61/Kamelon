@@ -451,7 +451,7 @@ sub SetupContextRules {
 				}
 				
 				#add region marker parsers
-				if ($formatter->Folding) {
+				if ($formatter->Foldingdepth) {
 					if (defined $beginreg) {
 						push @options, $beginreg;
 						push @options, $eng->can('ParseResultBeginRegion');

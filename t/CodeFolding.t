@@ -16,23 +16,9 @@ for (@attributes) {
 	$formtab{$_} = ["<font class=\"$_\">", "</font>"]
 }
 
-my $substitutions = {
-	'<' => '&lt;',
-	'>' => '&gt;',
-	'&' => '&amp;',
-	' ' => '&nbsp;',
-	"\t" => '&nbsp;&nbsp;&nbsp;',
-	"\n" => "<BR>\n",
-};
-
-
 my $hl = new Syntax::Kamelon(
 	formatter => ['Base',
-		folding => 1,
-# 		foldbegincall => \&FoldBegin,
-# 		foldendcall => \&FoldEnd,
-		substitutions => $substitutions,
-		format_table => \%formtab,
+		foldingdepth => 1,
 	],
 	syntax => 'Perl',
 );

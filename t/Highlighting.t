@@ -17,12 +17,12 @@ for (@attributes) {
 	$formtab{$_} = "<font class=\"$_\">"
 }
 
-
+my $textfilter = "[%~ text FILTER html FILTER replace('\\040', '&nbsp;') FILTER replace('\\t', '&nbsp;&nbsp;&nbsp;') ~%]";
 my $hl = new Syntax::Kamelon(
 	xmlfolder => $xmldir,
 	noindex => 1,
 	formatter => ['Base',
-		textfilter => "[%~ text FILTER html FILTER replace('\\040', '&nbsp;') FILTER replace('\\t', '&nbsp;&nbsp;&nbsp;') ~%]",
+		textfilter => \$textfilter,
 		format_table => \%formtab,
 		newline => "</br>\n",
 		tagend => '</font>',

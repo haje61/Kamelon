@@ -30,8 +30,6 @@ lib/Syntax/Kamelon/Diagnostics.pm
 lib/Syntax/Kamelon/Diagnostics.pod
 lib/Syntax/Kamelon/Format/Base.pm
 lib/Syntax/Kamelon/Format/Base.pod
-lib/Syntax/Kamelon/Format/TT.pm
-lib/Syntax/Kamelon/Format/TT.pod
 lib/Syntax/Kamelon/Indexer.pm
 lib/Syntax/Kamelon/Indexer.pod
 lib/Syntax/Kamelon/Wx/KamelonList.pm
@@ -384,7 +382,7 @@ t/CodeFolding.t
 t/Debugger.t
 t/Diagnostics.t
 t/Format-Base.t
-t/Format-TT.t
+t/Format-HTML4.t
 t/Highlighting.t
 t/HTML/anychar.html
 t/HTML/codefolding.txt
@@ -395,7 +393,6 @@ t/HTML/detectchar.html
 t/HTML/detectid.html
 t/HTML/detectsp.html
 t/HTML/dyncontext.html
-t/HTML/empty.html
 t/HTML/format-tt.html
 t/HTML/index.html
 t/HTML/kwinsens.html

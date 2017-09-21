@@ -35,8 +35,8 @@ sub new {
 	my $data = delete $args{data};
 	unless (defined $data) { $data = {} }
 
-	my $folding = delete $args{folding};
-	unless (defined $folding) { $folding = 0 }
+	my $foldingdepth = delete $args{foldingdepth};
+	unless (defined $foldingdepth) { $foldingdepth = 0 }
 
 	my $formattable = delete $args{format_table};
  	unless (defined($formattable)) { 
@@ -52,9 +52,6 @@ sub new {
 
 	my $newline = delete $args{newline};
 	unless (defined($newline)) { $newline = "\n" }
-
-	my $notoolkit = delete $args{notoolkit};
-	unless (defined $notoolkit) { $notoolkit = 0 }
 
 	my $offset = delete $args{lineoffset};
 
@@ -85,7 +82,7 @@ sub new {
 
 	$self->{DATA} = $data;
 	$self->{ENGINE} = $engine;
-	$self->{FOLDING} = $folding;
+	$self->{FOLDINGDEPTH} = $foldingdepth;
 	$self->{LINES} = [];
 	$self->{FOLDS} = {};
 	$self->{FOLDSTACK} = [];
@@ -129,8 +126,8 @@ sub FoldEnd {
 	my $eng = $self->{ENGINE};
 	my $endline = $eng->LineNumber;
 	my $stacktop = $self->FoldStackTop;
-	my $folding = $self->{FOLDING};
-	if (($folding eq 'all') or ($self->FoldStackLevel <= $folding)) {
+	my $foldingdepth = $self->{FOLDINGDEPTH};
+	if (($foldingdepth eq 'all') or ($self->FoldStackLevel <= $foldingdepth)) {
 		if (($endline - $stacktop->{start}) >= $self->{MINFOLDSIZE}) {
 			my $beginline = delete $stacktop->{start};
 			$stacktop->{end} = $endline;
@@ -146,17 +143,17 @@ sub Folds {
 	return $self->{FOLDS};
 }
 
-sub Folding {
+sub Foldingdepth {
 	my $self = shift;
 	if (@_) {
 		my $f = shift;
-		my $cf = $self->{FOLDING};
+		my $cf = $self->{FOLDINGDEPTH};
 		if (($f ne $cf) and (($f eq 0) or ($cf eq 0))){
-			$self->{FOLDING} = $f;
+			$self->{FOLDINGDEPTH} = $f;
 			$self->{ENGINE}->ClearLexers;
 		}
 	}
-	return $self->{FOLDING};
+	return $self->{FOLDINGDEPTH};
 }
 
 sub FoldStackLevel {

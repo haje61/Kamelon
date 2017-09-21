@@ -66,7 +66,6 @@ my @attributes = qw (
 # require XSLoader;
 # XSLoader::load('Syntax::Kamelon', $VERSION);
 
-
 sub new {
 	my $proto = shift;
 	my $class = ref($proto) || $proto;

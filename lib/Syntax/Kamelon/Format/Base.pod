@@ -39,7 +39,8 @@ Syntax::Kamelon::Format::Base
 
 B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to B<Syntax::Kamelon>. You do not have to create an instance of
 B<Base> yourself. B<Kamelon> will do that for you. During the parsing process it collects all the parsing information from B<Kamelon> 
-through the B<Parse> method. When all information is collected you can start the formatting through the B<Format> method.
+through the B<Parse> method. When all information is collected you can start the formatting through the B<Format> method. It is based
+on the Template Toolkit.
 
 =head1 OPTIONS
 
@@ -48,7 +49,9 @@ the following options.
 
 =over 4
 
-=item B<folding> integer
+=item B<data> ref to hash
+
+=item B<foldingdepth> integer
 
 This option specifies if the code folding mechanism in B<Kamelon> should be activated and to which nesting depth you
 want code folding to be detected. If you set it to 0 the codefolding routines are not loaded. With any other value they
@@ -89,21 +92,22 @@ Specifies the minimum size, in lines, of a fold. Default is 1 line.
 Specifies what a newline looks like. By default it is set to "\n". If you are, for example, parsing to HTML you might want to 
 set it to "</br>\n".
 
+=item B<lineoffset> integer
+
 =item B<outmethod> various
 
 This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
 a reference to a output file handle, or a filename. You can also set it to 'returnscalar', which is also the default value.
 If this case the B<Format> method returns the formatted document in a scalar variable.
 
+=item B<tagend> styring
+
 =item B<template> various
 
 This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
 a reference to a input file handle, or a file name.
 
-=item B<toolkit> ref to template toolkit instance
-
-Use this option if you want to use your own instance of Template Toolkit for formatting. If you set this option, 
-the B<ttconfig> option is not used.
+=item B<textfilter> various
 
 =item B<ttconfig> ref to hash
 
@@ -115,7 +119,9 @@ This is the config hash that is used in Template Tookits constructor. By default
 
 =over 4
 
-=item B<Folding>
+=item B<FindINC>
+
+=item B<Foldingdepth>
 
 Corresponds with the B<folding> option. You can set and get the folding depth here. If the folding depth changes from 0 to something
 else or vice versa, all the loaded lexers in B<Kamelon> are removed and need to be reloaded.
