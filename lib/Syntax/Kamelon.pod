@@ -126,7 +126,7 @@ See also B<Syntax::Kamelon::Indexer>
 
 =back
 
-=head1 USER METHODS
+=head1 PUBLIC METHODS
 
 =over 4
 
@@ -228,7 +228,7 @@ Switches to the lexer in $syntax and performs a reset.
 
 =back
 
-=head1 SYSTEM METHODS
+=head1 PRIVATE METHODS
 
 =over 4
 

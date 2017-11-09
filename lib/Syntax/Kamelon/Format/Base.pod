@@ -6,41 +6,30 @@ Syntax::Kamelon::Format::Base
 
  use Syntax::Kamelon;
  
- my $htmldir = './t/HTML';
- my $sampledir = './t/Samples';
- my $outdir = './t/HTML_OUT';
- my $xmldir = './t/XML';
  my @attributes = Syntax::Kamelon->AvailableAttributes;
- 
  my %formtab = ();
  for (@attributes) {
-    $formtab{$_} = ["<font class=\"$_\">", "</font>"]
+    $formtab{$_} = "<font class=\"$_\">"
  }
 
- my $substitutions = {
-    '<' => '&lt;',
-    '>' => '&gt;',
-    '&' => '&amp;',
-    ' ' => '&nbsp;',
-    "\t" => '&nbsp;&nbsp;&nbsp;',
- };
- 
- my $kam = new Syntax::Kamelon(
-    xmlfolder => $xmldir,
-    noindex => 1,
+ my $textfilter = "[%~ text FILTER html FILTER replace('\\040', '&nbsp;') FILTER replace('\\t', '&nbsp;&nbsp;&nbsp;') ~%]";
+ my $hl = new Syntax::Kamelon(
     formatter => ['Base',
-       substitutions => $substitutions,
+       textfilter => \$textfilter,
        format_table => \%formtab,
        newline => "</br>\n",
+       tagend => '</font>',
     ],
- );
+);
 
 =head1 DESCRIPTION
 
-B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to B<Syntax::Kamelon>. You do not have to create an instance of
-B<Base> yourself. B<Kamelon> will do that for you. During the parsing process it collects all the parsing information from B<Kamelon> 
-through the B<Parse> method. When all information is collected you can start the formatting through the B<Format> method. It is based
-on the Template Toolkit.
+B<Syntax::Kamelon::Format::Base> provides a basic formatting interface to 
+B<Syntax::Kamelon>. You do not have to create an instance of B<Base> 
+yourself. B<Kamelon> will do that for you. During the parsing process it 
+collects all the parsing information from B<Kamelon> through the B<Parse> 
+method. When all information is collected you can start the formatting 
+through the B<Format> method. It is based on and inherits B<Template> toolkit.
 
 =head1 OPTIONS
 
@@ -49,9 +38,11 @@ the following options.
 
 =over 4
 
-=item B<data> ref to hash
+=item B<data> => ref to hash
 
-=item B<foldingdepth> integer
+Set a user defined hash that is used by the B<process> method. Parsing data is added to this hash.
+
+=item B<foldingdepth> => integer
 
 This option specifies if the code folding mechanism in B<Kamelon> should be activated and to which nesting depth you
 want code folding to be detected. If you set it to 0 the codefolding routines are not loaded. With any other value they
@@ -92,22 +83,30 @@ Specifies the minimum size, in lines, of a fold. Default is 1 line.
 Specifies what a newline looks like. By default it is set to "\n". If you are, for example, parsing to HTML you might want to 
 set it to "</br>\n".
 
-=item B<lineoffset> integer
+=item B<lineoffset> => integer
 
-=item B<outmethod> various
+Specifies the start line number in the output. If you do not specify this option
+no line numbers are shown.
+
+=item B<outmethod> => various
 
 This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
 a reference to a output file handle, or a filename. You can also set it to 'returnscalar', which is also the default value.
 If this case the B<Format> method returns the formatted document in a scalar variable.
 
-=item B<tagend> styring
+=item B<tagend> => string
 
-=item B<template> various
+Specifies the end of a highlight tag.
+
+=item B<template> => various
 
 This option is passed on to the B<process> method of the Template Toolkit. It can be a reference to a scalar,
 a reference to a input file handle, or a file name.
 
-=item B<textfilter> various
+=item B<textfilter> => various
+
+This otion allows you to run every line through a user defined template. A sort of pre-formatting.
+This means you do not have to rewrite the core template.
 
 =item B<ttconfig> ref to hash
 
@@ -115,11 +114,9 @@ This is the config hash that is used in Template Tookits constructor. By default
 
 =back
 
-=head1 USER METHODS
+=head1 PUBLIC METHODS
 
 =over 4
-
-=item B<FindINC>
 
 =item B<Foldingdepth>
 
@@ -144,7 +141,7 @@ the B<format_table> option.
 Use this method if you want to use your own instance of Template Tooolkit instead of B<TT>'s internal one. It returns
 a data structure that looks like this:
 
- my $data = {
+ {
     folds => { #the keys of this hash are line numbers
 	    4 => {
           end => $endline,
@@ -177,6 +174,11 @@ Clears all parser data.
 Corresponds with the B<template> option. Sets and returns the template that will
 be processed by B<Format>.
 
+=item B<TextFilter>(I<$template>)
+
+Corresponds with the B<textfilter> option. Sets and returns the template that is
+used for preprocessing a line of text.
+
 =item B<Toolkit> ref to Template Toolkit instance
 
 Corresponds with the B<toolkit> option. Sets and returns the Template Toolkit
@@ -184,9 +186,11 @@ instance that is used for formatting.
 
 =back
 
-=head1 SYSTEM METHODS
+=head1 PRIVATE METHODS
 
 =over 4
+
+=item B<FindINC>
 
 =item B<FoldBegin>(I<$regionname>) 
 
@@ -228,6 +232,20 @@ Returns top item from the fold stack.
 
 Called by Kamelon to send the line it just parsed to the formatter.
 
+=item B<PreProcessOff>(I<$line>)
+
+Called when no textfilter is defined. Actually only returns $line.
+
+=item B<PreProcessOn>(I<$line>)
+
+Called when a textfilter is defined. Pre-formats $line using the template
+defined in B<TextFilter>.
+
+=item B<Process>
+
+Convenience method. Does the same as B<process> in Template::Toolkit. Adds
+error reporting and always retuns the processed input as a scalar.
+
 =back
 
 =head1 AUTHOR AND COPYRIGHT
@@ -243,7 +261,7 @@ Published under the GPLV3 license
 =head1 SEE ALSO
 
 B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
-B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::TT>
+B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::HTML4>, B<Syntax::Kamelon::Format::ANSI>
 
 =cut
 

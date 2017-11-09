@@ -98,6 +98,12 @@ sub new {
    return $self;
 }
 
+sub Data {
+	my $self = shift;
+	if (@_) { $self->{DATA} = shift }
+	return $self->{DATA}
+}
+
 sub FindINC {
    my ($self, $file) = @_;
    for (@INC) {
@@ -224,9 +230,21 @@ sub GetData {
 	return \%data;
 }
 
+sub LineOffset {
+	my $self = shift;
+	if (@_) { $self->{LINEOFFSET} = shift }
+	return $self->{LINEOFFSET}
+}
+
 sub Lines {
 	my $self = shift;
 	return $self->{LINES}
+}
+
+sub MinFoldSize {
+	my $self = shift;
+	if (@_) { $self->{MINFOLDSIZE} = shift }
+	return $self->{MINFOLDSIZE}
 }
 
 sub OutMethod {
@@ -251,12 +269,6 @@ sub Parse {
 	my $fl = $self->{LINES};
 	push @$fl, \@line
 }
-
-# sub Parse {
-# 	my $self = shift;
-# 	my $list = $self->{LINES};
-# 	push @$list, \@_;
-# }
 
 sub PreProcessOff {
 	my ($self, $text) = @_;

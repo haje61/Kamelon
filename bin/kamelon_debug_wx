@@ -361,7 +361,7 @@ sub new {
 	$parent = Wx::Panel->new($split, -1);
 	$tsiz = Wx::BoxSizer->new(wxVERTICAL);
 	$parent->SetSizer($tsiz);
-	my $txtc = Syntax::Kamelon::Wx::PluggableTextCtrl->new($parent, -1, "", [-1, -1], $size, wxHSCROLL|wxTE_MULTILINE|wxTE_PROCESS_TAB|wxTE_RICH);
+	my $txtc = Syntax::Kamelon::Wx::PluggableTextCtrl->new($parent, -1, "", [-1, -1], $size, wxHSCROLL|wxTE_MULTILINE|wxTE_PROCESS_TAB|wxTE_RICH2);
 	$self->{TXTC} = $txtc;
 	$txtc->LoadPlugin('UndoRedo');
 	print ref $highlighter, "\n";

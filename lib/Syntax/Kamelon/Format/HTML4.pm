@@ -232,9 +232,15 @@ sub new {
 	$self->{SCROLLEDPANEL} = $scrolledpanel;
 	$self->{SECTIONS} = $sections;
 	$self->{THEMECSS} = $themecss;
-	$self->{TITLE} = $title;
 	$self->{THEMEFOLDER} = $themefolder;
+	$self->{TITLE} = $title;
 	return $self;
+}
+
+sub FoldMarkers {
+	my $self = shift;
+	if (@_) { $self->{FOLDMARKERS} = shift }
+	return $self->{FOLDMARKERS}
 }
 
 sub Format {
@@ -287,6 +293,12 @@ sub Format {
 	return $self->SUPER::Format;
 }
 
+sub Footer {
+	my $self = shift;
+	if (@_) { $self->{FOOTER} = shift }
+	return $self->{FOOTER}
+}
+
 sub GetData {
 	my $self = shift;
 	my $data = $self->SUPER::GetData;
@@ -298,6 +310,30 @@ sub GetData {
 	return $data
 }
 
+sub Header {
+	my $self = shift;
+	if (@_) { $self->{HEADER} = shift }
+	return $self->{HEADER}
+}
+
+sub InlineCSS {
+	my $self = shift;
+	if (@_) { $self->{INLINECSS} = shift }
+	return $self->{INLINECSS}
+}
+
+sub Javascript {
+	my $self = shift;
+	if (@_) { $self->{JAVASCRIPT} = shift }
+	return $self->{JAVASCRIPT}
+}
+
+sub LayoutCSS {
+	my $self = shift;
+	if (@_) { $self->{LAYOUTCSS} = shift }
+	return $self->{LAYOUTCSS}
+}
+
 sub LoadFile {
 	my ($self, $file) = @_;
 	open IN, "<$file" or return undef;
@@ -307,6 +343,48 @@ sub LoadFile {
 	}
 	close IN;
 	return $out
+}
+
+sub PlainPanel {
+	my $self = shift;
+	if (@_) { $self->{PLAINPANEL} = shift }
+	return $self->{PLAINPANEL}
+}
+
+sub Scrolled {
+	my $self = shift;
+	if (@_) { $self->{SCROLLED} = shift }
+	return $self->{SCROLLED}
+}
+
+sub ScrolledPanel {
+	my $self = shift;
+	if (@_) { $self->{SCROLLEDPANEL} = shift }
+	return $self->{SCROLLEDPANEL}
+}
+
+sub Sections {
+	my $self = shift;
+	if (@_) { $self->{SECTIONS} = shift }
+	return $self->{SECTIONS}
+}
+
+sub ThemeCSS {
+	my $self = shift;
+	if (@_) { $self->{THEMECSS} = shift }
+	return $self->{THEMECSS}
+}
+
+sub ThemeFolder {
+	my $self = shift;
+	if (@_) { $self->{THEMEFOLDER} = shift }
+	return $self->{THEMEFOLDER}
+}
+
+sub Title {
+	my $self = shift;
+	if (@_) { $self->{TITLE} = shift }
+	return $self->{TITLE}
 }
 
 1;

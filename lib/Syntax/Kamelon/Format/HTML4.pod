@@ -47,15 +47,41 @@ the following options.
 
 =back
 
-=head1 USER METHODS
+=head1 METHODS
 
 =over 4
 
-=back
+=item B<FoldMarkers>
 
-=head1 SYSTEM METHODS
+=item B<Format>
 
-=over 4
+=item B<Footer>
+
+=item B<GetData>
+
+=item B<Header>
+
+=item B<InlineCSS>
+
+=item B<Javascript>
+
+=item B<LayoutCSS>
+
+=item B<LoadFile>
+
+=item B<PlainPanel>
+
+=item B<Scrolled>
+
+=item B<ScrolledPanel>
+
+=item B<Sections>
+
+=item B<ThemeCSS>
+
+=item B<ThemeFolder>
+
+=item B<Title>
 
 =back
 
@@ -72,7 +98,7 @@ Published under the GPLV3 license
 =head1 SEE ALSO
 
 B<Syntax::Kamelon>, B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
-B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base> B<Syntax::Kamelon::Format::TT>, B<Syntax::Kamelon::Format::HTML4>
+B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base> B<Syntax::Kamelon::Format::ANSI>
 
 =cut
 
