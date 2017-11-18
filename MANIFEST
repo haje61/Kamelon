@@ -329,6 +329,7 @@ lib/Syntax/Kamelon/XML/zonnon.xml
 lib/Syntax/Kamelon/XML/zsh.xml
 lib/Syntax/Kamelon/XMLData.pm
 lib/Syntax/Kamelon/XMLData.pod
+Changes
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
