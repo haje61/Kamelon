@@ -418,6 +418,7 @@ t/HTML/rangedet.html
 t/HTML/regexpr.html
 t/HTML/stringdet.html
 t/HTML/worddet.html
+t/HTML_OUT/defaultstyle.css
 t/Indexer.t
 t/Kamelon.t
 t/Samples/codefolding.pm

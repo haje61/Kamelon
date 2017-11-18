@@ -11,7 +11,7 @@ use Syntax::Kamelon::Indexer;
 use Module::Load::Conditional qw[can_load];
 use Data::Dumper;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 # sub AUTOLOAD {
 #     # This AUTOLOAD is used to 'autoload' constants from the constant()
