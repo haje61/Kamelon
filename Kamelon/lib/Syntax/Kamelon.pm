@@ -596,19 +596,15 @@ sub ParseResultReplace {
 	return &$parser($self, $text, $replace, @_);
 }
 
-# sub PushOut {
-# 	my $self = shift;
-# 	my $out = $self->{OUT};
-# 	push @$out, @_;
-# }
-# 
 sub Reset {
 	my $self = shift;
 	my $lang = $self->Syntax;
 	$self->{OUT} = [];
 	$self->{SNIPPET} = '';
 	$self->{LINESEGMENT} = '';
-	$self->{LINENUMBER} = 1;
+	my $linenumber = $self->Formatter->LineOffset;
+	unless (defined $linenumber) { $linenumber = 1 }
+	$self->{LINENUMBER} = $linenumber;
 	$self->{FORMATTER}->Reset;
 	if ($lang eq '') {
 		$self->{STACK} = [];
@@ -616,7 +612,7 @@ sub Reset {
 		my $hl = $self->GetLexer($lang);
 		unless (defined $hl) {
 			if ($self->Debug) {
-				croak "Highlighter for syntax '$lang' could not be created.";
+				croak "Lexer for syntax '$lang' could not be created.";
 			}
 			$self->{STACK} = [];
 			return

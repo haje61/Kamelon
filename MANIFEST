@@ -1,7 +1,10 @@
+bin/kamelon
 bin/kamelon_analyze
 bin/kamelon_bench
 bin/kamelon_compile
 bin/kamelon_debug_wx
+bin/kamelon_demo
+bin/kamelon_demo_wx
 bin/kamelon_hl_dumper
 bin/kamelon_stepper
 bin/kamelon_xml_updater
@@ -12,12 +15,18 @@ Kamelon/const-c.inc
 Kamelon/const-xs.inc
 Kamelon/fallback/const-c.inc
 Kamelon/fallback/const-xs.inc
+Kamelon/Kamelon.bs
+Kamelon/Kamelon.c
+Kamelon/Kamelon.o
 Kamelon/Kamelon.xs
 Kamelon/kamelonc.c
 Kamelon/kamelonc.h
+Kamelon/kamelonc.o
 Kamelon/lib/Syntax/Kamelon.pm
 Kamelon/Makefile.PL
 Kamelon/MANIFEST
+Kamelon/MYMETA.json
+Kamelon/MYMETA.yml
 Kamelon/ppport.h
 Kamelon/README
 Kamelon/t/Kamelon.t
@@ -28,8 +37,18 @@ lib/Syntax/Kamelon/Debugger.pm
 lib/Syntax/Kamelon/Debugger.pod
 lib/Syntax/Kamelon/Diagnostics.pm
 lib/Syntax/Kamelon/Diagnostics.pod
+lib/Syntax/Kamelon/Format/ANSI.pm
+lib/Syntax/Kamelon/Format/ANSI.pod
 lib/Syntax/Kamelon/Format/Base.pm
 lib/Syntax/Kamelon/Format/Base.pod
+lib/Syntax/Kamelon/Format/HTML4.pm
+lib/Syntax/Kamelon/Format/HTML4.pod
+lib/Syntax/Kamelon/Format/HTML4/Black.css
+lib/Syntax/Kamelon/Format/HTML4/DarkGray.css
+lib/Syntax/Kamelon/Format/HTML4/Gray.css
+lib/Syntax/Kamelon/Format/HTML4/layout.css
+lib/Syntax/Kamelon/Format/HTML4/LightGray.css
+lib/Syntax/Kamelon/Format/HTML4/White.css
 lib/Syntax/Kamelon/Indexer.pm
 lib/Syntax/Kamelon/Indexer.pod
 lib/Syntax/Kamelon/Wx/KamelonList.pm
@@ -323,7 +342,6 @@ LICENSE
 Makefile.PL
 MANIFEST			This list of files
 README.md
-regenerate
 t/Bench.t
 t/Bench/highlight.abc
 t/Bench/highlight.ahdl
@@ -381,6 +399,7 @@ t/Builder.t
 t/CodeFolding.t
 t/Debugger.t
 t/Diagnostics.t
+t/Format-ANSI.t
 t/Format-Base.t
 t/Format-HTML4.t
 t/Highlighting.t
@@ -393,6 +412,11 @@ t/HTML/detectchar.html
 t/HTML/detectid.html
 t/HTML/detectsp.html
 t/HTML/dyncontext.html
+t/HTML/format-ansi-1.ansi
+t/HTML/format-ansi-2.ansi
+t/HTML/format-html4-1.html
+t/HTML/format-html4-2.html
+t/HTML/format-html4-3.html
 t/HTML/format-tt.html
 t/HTML/index.html
 t/HTML/kwinsens.html

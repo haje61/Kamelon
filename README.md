@@ -8,8 +8,11 @@ Kamelon is written in Perl (5).
 # Installation
 
  perl Makefile.PL
+ 
  make
+ 
  make test
+ 
  make install
 
 The distribution contains a number of modules and scripts that use Wx.
@@ -28,7 +31,7 @@ for use with the template toolkit.
 
  Improve speed by Rewriting some core functions of Kamelon in C
  
- Add output formatters for HTML4, HTML5, PDF, RTF, ODT, etcetera
+ Add output formatters for HTML5, PDF, RTF, ODT, etcetera
 
 Help and support is appreciated.
 
