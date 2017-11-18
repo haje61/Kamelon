@@ -3,8 +3,6 @@ bin/kamelon_analyze
 bin/kamelon_bench
 bin/kamelon_compile
 bin/kamelon_debug_wx
-bin/kamelon_demo
-bin/kamelon_demo_wx
 bin/kamelon_hl_dumper
 bin/kamelon_stepper
 bin/kamelon_xml_updater
@@ -15,18 +13,11 @@ Kamelon/const-c.inc
 Kamelon/const-xs.inc
 Kamelon/fallback/const-c.inc
 Kamelon/fallback/const-xs.inc
-Kamelon/Kamelon.bs
-Kamelon/Kamelon.c
-Kamelon/Kamelon.o
 Kamelon/Kamelon.xs
-Kamelon/kamelonc.c
 Kamelon/kamelonc.h
-Kamelon/kamelonc.o
 Kamelon/lib/Syntax/Kamelon.pm
 Kamelon/Makefile.PL
 Kamelon/MANIFEST
-Kamelon/MYMETA.json
-Kamelon/MYMETA.yml
 Kamelon/ppport.h
 Kamelon/README
 Kamelon/t/Kamelon.t
