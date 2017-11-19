@@ -6,7 +6,7 @@ use Carp;
 use List::Util 'any';
 
 use vars qw($VERSION);
-$VERSION="0.01";
+$VERSION="0.15";
 
 use base qw(Syntax::Kamelon::Format::Base);
 

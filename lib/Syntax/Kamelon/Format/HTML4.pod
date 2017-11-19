@@ -1,6 +1,6 @@
 =head1 NAME
 
-Syntax::Kamelon::Format::HTML4
+Syntax::Kamelon::Format::HTML4 - Formatting module for HTML output
 
 =head1 SYNOPSIS
 

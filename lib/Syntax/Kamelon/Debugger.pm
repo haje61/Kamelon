@@ -5,7 +5,7 @@ use warnings;
 use Time::HiRes qw(time);
 use base qw(Syntax::Kamelon);
 
-my $VERSION = '0.01';
+my $VERSION = '0.15';
 
 my %functions = (
 	step => [\&StepPre, \&StepPost],

@@ -1,6 +1,6 @@
 =head1 NAME
 
-Syntax::Kamelon::Format::ANSI
+Syntax::Kamelon::Format::ANSI - Formatting module for ANSI output
 
 =head1 SYNOPSIS
 

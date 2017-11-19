@@ -203,8 +203,9 @@ Published under the GPLV3 license
 
 =head1 SEE ALSO
 
-B<Syntax::Kamelon>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
-B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base>, B<Syntax::Kamelon::Format::TT>
+B<Syntax::Kamelon>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>,
+B<Syntax::Kamelon::Indexer>, B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base>,
+B<Syntax::Kamelon::Format::ANSI>, B<Syntax::Kamelon::Format:HTML4>
 
 =cut
 

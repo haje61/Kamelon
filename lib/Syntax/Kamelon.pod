@@ -6,36 +6,21 @@ Syntax::Kamelon - A versatile and fully programmable textual content parser that
 
  use Syntax::Kamelon;
  
- my @attributes = Syntax::Kamelon->AvailableAttributes;
-
- my %attrtab = ();
- for (@attributes) {
-    $attrtab{$_} = ["<font class=\"$_\">", "</font>"]
- }
- 
+ my $textfilter = "[%~ text FILTER html FILTER replace('\\040', '&nbsp;') FILTER replace('\\t', '&nbsp;&nbsp;&nbsp;') ~%]";
  my $hl = new Syntax::Kamelon(
-    syntax => 'Perl',
-    formatter ['Base',
-	   substitutions => {
-		  "<" => "&lt;",
-		  ">" => "&gt;",
-        "&" => "&amp;",
-        " " => "&nbsp;",
-        "\t" => "&nbsp;&nbsp;&nbsp;",
-        "\n" => "<BR>\n",
-      },
-      format_table => \%attrtab,
+    xmlfolder => $xmldir,
+    noindex => 1,
+    formatter => ['Base',
+       textfilter => \$textfilter,
+       format_table => \%formtab,
+       newline => "</br>\n",
+       tagend => '</font>',
     ],
  );
- 
- 
- 
- print "<html>\n<head>\n</head>\n<body>\n";
- while (my $in = <>) {
-    $hl->Parse($in);
-    print $hl->Get;
+ while (my $in = <IFILE>) {
+   $hl->Parse($in);
  }
- print "</body>\n</html>\n";
+ print $hl->Format;
 
 =head1 DESCRIPTION
 
@@ -49,8 +34,7 @@ highlight definition xml files directly. That makes development and testing a lo
 also opens up a new field of applications like creating your own highlight definitions to 
 neatly format your reports. Tons of bugs have been removed. Testing has been redesigned. 
 It runs about four times faster than version 0.10 and is up to spec with the latest Kate 
-highlight definitions. Also I have extended Kates' xml definitions to make it usefull outside
-the editor environement.
+highlight definitions.
 
 =head1 OPTIONS
 
@@ -138,6 +122,10 @@ Returns a list of all available attribute tags. Can also be called before initia
 
 Returns a list of all available syntax definitions.
 
+=item B<ClearLexers>
+
+Empties the pool of loaded lexers. Every called lexer will be loaded from scratch.
+
 =item B<Column>
 
 Returns the column position in the line that is currently highlighted.
@@ -146,6 +134,10 @@ Returns the column position in the line that is currently highlighted.
 
 Returns true if the current line did not contain a non-spatial character so far and the first 
 character in B<$string> is a non spatial character.
+
+=item B<Format>
+
+Calls the B<Format> method of the currently loaded formatter and returns the result.
 
 =item B<Formatter>
 
@@ -159,14 +151,6 @@ Returns the Indexer object.
 
 Returns the lexer data structure from the pool of loaded lexers. If it is
 not found it will create and return it.
-
-=item B<Parse>(I<$text>);
-
-Parses I<$text> and returns a formatted text.
-
-=item B<ParseRaw>(I<$text>);
-
-Parses I<$text> and returns a paired list of text fragments and the format information from the formatters B<FormatTable>.
 
 =item B<IsDeliminator>(I<$char>);
 
@@ -184,6 +168,10 @@ Returns true if the last character that was parsed was a deliminator.
 
 Returns the last character that was parsed.
 
+=item B<LineNumber>
+
+Returns the line number of the next line that is to be parsed.
+
 =item B<LineStart>
 
 Returns true if the parser is at the beginning of a line.
@@ -199,6 +187,14 @@ Sets the anonymous sub that handles Warnings. See also the B<locall> option.
 =item B<LogWarning>(I<$message>);
 
 Send a message to the warning mechanism of Kamelon.
+
+=item B<Parse>(I<$text>);
+
+Parses I<$text> and returns a formatted text.
+
+=item B<ParseRaw>(I<$text>);
+
+Parses I<$text> and returns a paired list of text fragments and the format information from the formatters B<FormatTable>.
 
 =item B<Reset>
 
@@ -261,10 +257,6 @@ Used with dynamic rules.
 Calls the sub connected to $cmdname with $matchedtext as parameter.
 Returns whatever the sub returns.
 
-=item B<HighlightLine>(I<$text>);
-
-Called by B<Highlight>. It is given one line (including the newline) as a parameter.
-
 =item B<IncludeRules>(I<$text>, I<$callbacklist>, I<$debuginfo>, I<$inclattr>);
 
 Called when an IncludeRules instruction is encountered in a lexer context.
@@ -295,6 +287,10 @@ Makes sure the context shift is done properly when a LineEndContext is specified
 The internal combustion engine of Kamelon. It parses $$text through all callbacks
 in $callbacklist. If a match is found it parses the result and stops. Returns true if 
 a match was made.
+
+=item B<ParseLine>(I<$text>);
+
+Called by B<Parse>. It is given one line (including the newline) as a parameter.
 
 =item B<ParseResultXXXX>
 
@@ -505,8 +501,9 @@ Published under the GPLV3 license
 
 =head1 SEE ALSO
 
-B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>, B<Syntax::Kamelon::Indexer>, 
-B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base>, B<Syntax::Kamelon::Format::TT>
+B<Syntax::Kamelon::Builder>, B<Syntax::Kamelon::Debugger>, B<Syntax::Kamelon::Diagnostics>,
+B<Syntax::Kamelon::Indexer>, B<Syntax::Kamelon::XMLData>, B<Syntax::Kamelon::Format::Base>, 
+B<Syntax::Kamelon::Format::ANSI>, B<Syntax::Kamelon::Format::HTML4>.
 
 =cut
 

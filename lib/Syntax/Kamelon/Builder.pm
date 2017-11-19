@@ -1,6 +1,6 @@
 package Syntax::Kamelon::Builder;
 
-our $VERSION = '0.01';
+our $VERSION = '0.15';
 
 use strict;
 use Carp qw(cluck);

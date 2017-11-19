@@ -3,7 +3,7 @@ package Syntax::Kamelon::Indexer;
 use strict;
 use warnings;
 
-my $VERSION = '0.01';
+my $VERSION = '0.15';
 
 
 sub new {

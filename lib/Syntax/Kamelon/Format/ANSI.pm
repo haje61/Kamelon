@@ -5,7 +5,7 @@ use warnings;
 use Carp;
 
 use vars qw($VERSION);
-$VERSION="0.01";
+$VERSION="0.15";
 
 use base qw(Syntax::Kamelon::Format::Base);
 use Term::ANSIColor;

@@ -1,6 +1,6 @@
 =head1 NAME
 
-Syntax::Kamelon::Format::Base
+Syntax::Kamelon::Format::Base - Basic formatting module
 
 =head1 SYNOPSIS
 
