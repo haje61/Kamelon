@@ -16,13 +16,23 @@ my $pmfile = 'Kamelon/lib/Syntax/Kamelon.pm';
 
 use ExtUtils::MakeMaker;
 WriteMakefile(
-    NAME              => 'Syntax::Kamelon',
-    VERSION_FROM      => $pmfile, # finds $VERSION, requires EU::MM from perl >= 5.5
-    PREREQ_PM         => {
-		'XML::TokeParser' => 0,
-		'Time::HiRes' => 0,
-		'Template' => 0,
-    }, # e.g., Module::Name => 1.1
-    ABSTRACT_FROM     => 'lib/Syntax/Kamelon.pod', # retrieve abstract from module
+   NAME              => 'Syntax::Kamelon',
+   VERSION_FROM      => $pmfile, # finds $VERSION, requires EU::MM from perl >= 5.5
+   PREREQ_PM         => {
+      'XML::TokeParser' => 0,
+      'Time::HiRes' => 0,
+      'Template' => 0,
+   }, # e.g., Module::Name => 1.1
+   ABSTRACT_FROM     => 'lib/Syntax/Kamelon.pod', # retrieve abstract from module
+   META_MERGE        => {
+      "meta-spec" => { version => 2 },
+      resources => {
+         repository => {
+             type => 'git',
+             url => 'git://github.com/haje61/Kamelon.git',
+             web => 'https://github.com/haje61/Kamelon',
+         },
+      },
+   },
 );
- 
+

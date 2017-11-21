@@ -3,4 +3,7 @@
 make realclean
 perl Makefile.PL
 make
+perl -Mblib tools/generate_syntaxes_pod
+perl Makefile.PL
+make
 make test
