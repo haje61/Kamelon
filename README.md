@@ -33,12 +33,11 @@ If you want to do this before installation then you do:
 
 # State of development
 
-Kamelon parsing mechanism is stable and fully developed. The formatting
-side of Kamelon is coming out of alpha phase. Documentation is well
-underway but still rather spartan. There is a working output formatters
-based on the template toolkit. Besides a base formatter that you can 
-configure for just about anything (Syntax::Kamelon::Base) there are
-also formatters for ANSI (Syntax::Kamelon::ANSI) and HTML4 
+Kamelon parsing mechanism is stable and fully developed. Documentation
+is well underway but still rather spartan. There area working output
+formatters based on the template toolkit. Besides a base formatter
+that you can configure for just about anything (Syntax::Kamelon::Base)
+there are also formatters for ANSI (Syntax::Kamelon::ANSI) and HTML4
 (Syntax::Kamelon::HTML4) output.
 
 # Development plans
