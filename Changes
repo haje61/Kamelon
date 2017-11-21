@@ -17,4 +17,6 @@ Version 0.16
 	Added script to generate list of included syntax definitions in pod format as Syntax::Kamelon::Syntaxes
 	Fixed some bugs in Syntax::Kamelon::Indexer.pm
 	Added method InfoVersion to Syntax::Kamelon::Indexer.pm
+	set repository in Makefile.PL
+	
 

@@ -3,6 +3,7 @@
 make realclean
 perl Makefile.PL
 make
+perl -Mblib tools/recreate_index
 perl -Mblib tools/generate_syntaxes_pod
 perl Makefile.PL
 make
