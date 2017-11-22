@@ -30,22 +30,19 @@ use warnings;
 use lib 't/testlib';
 
 
-use Test::More tests => 3;
+use Test::More tests => 2;
 
 BEGIN { use_ok('KamTest') };
 
-my $tmpfolder = 't/outtest';
-unlink $tmpfolder;
-InitOutFolder($tmpfolder);
-ok(-e $tmpfolder, "Setting output folder");
-unlink $tmpfolder;
 
 my $kam = new KamelonEmulator;
 
-my $outfolder = 't/KamTest';
-InitOutFolder($outfolder);
+my $workfolder = 't/KamTest';
+InitWorkFolder($workfolder);
+PreText("***");
+PostText("***");
 
-my $reffile = 't/KamTest/samplefile.txt';
+my $samplefile = 'samplefile.txt';
 my $outfile = 'output.txt';
-ok(TestParse($kam, $reffile, $outfile, $reffile), 'Parsing');
+ok((TestParse($kam, $samplefile, $outfile) eq 1), 'Parsing');
 
