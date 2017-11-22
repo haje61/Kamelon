@@ -334,6 +334,7 @@ lib/Syntax/Kamelon/XML/zsh.xml
 lib/Syntax/Kamelon/XMLData.pm
 lib/Syntax/Kamelon/XMLData.pod
 lib/Syntax/Kamelon.pod
+t/01-Kamelon.t
 t/Bench/highlight.abc
 t/Bench/highlight.ahdl
 t/Bench/highlight.asm
@@ -449,7 +450,6 @@ t/HTML_OUT/regexpr.html
 t/HTML_OUT/stringdet.html
 t/HTML_OUT/worddet.html
 t/Indexer.t
-t/Kamelon.t
 t/Samples/codefolding.pm
 t/Samples/highlight.anychar
 t/Samples/highlight.commonoptions
@@ -472,6 +472,7 @@ t/Samples/template.tpl
 t/test.xml
 t/test2.xml
 t/test3.xml
+t/testlib/KamTest.pm
 t/XML/alert.xml
 t/XML/anychar.xml
 t/XML/commonoptions.xml

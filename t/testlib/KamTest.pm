@@ -3,6 +3,11 @@ package KamTest;
 use strict;
 use warnings;
 
+use Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw(InitOutFolder LoadFile TestParse);
+
+
 our $outfolder;
 
 sub InitOutFolder {
@@ -26,12 +31,11 @@ sub LoadFile {
 }
 
 sub TestParse {
-	my ($kam, $reffile) = @_;
+	my ($kam, $reffile, $outfile, $samplefile) = @_;
 	my $output = "";
 
-	my $ofile = "$outfile-$testnum.html";
-	unless (open(OFILE, ">", $ofile)) {
-		die "Cannot open output $ofile"
+	unless (open(OFILE, ">", "$outfolder/$outfile")) {
+		die "Cannot open output $outfile"
 	}
 
 	unless (open(IFILE, "<", $samplefile)) {
@@ -45,6 +49,11 @@ sub TestParse {
 	my $out = $kam->Format;
 	$output = $output . $out;
 	print OFILE $out;
+	
+	close OFILE;
+	close IFILE;
+	
+	my $refdata = LoadFile($reffile);
 
 }
 
