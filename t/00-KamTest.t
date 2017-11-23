@@ -33,7 +33,7 @@ use lib 't/testlib';
 use Test::More tests => 2;
 
 BEGIN { use_ok('KamTest') };
-
+use KamTest qw(InitWorkFolder PreText PostText TestParse);
 
 my $kam = new KamelonEmulator;
 

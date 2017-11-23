@@ -5,7 +5,17 @@ use warnings;
 
 use Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT = qw(InitWorkFolder LoadFile Out PreText PostText TestParse);
+our @EXPORT_OK = qw(
+	CompareFile
+	InitWorkFolder
+	LoadFile
+	Format
+	OutPut
+	Parse
+	PreText
+	PostText
+	TestParse
+);
 
 
 our $workfolder;
@@ -15,6 +25,28 @@ our $samplefolder;
 our $pretext = "";
 our $posttext = "";
 our $output = "";
+
+sub CompareFile {
+	my $file = shift;
+	my $refdata = LoadFile("$reffolder/$file");
+	if ($refdata eq $output) {
+		return 1
+	}
+	return 0
+}
+
+sub Format {
+	$output = "";
+	my ($kam, $file) = @_;
+	unless (open(OFILE, ">", "$outfolder/$file")) {
+		die "Cannot open output $file"
+	}
+	Out($pretext);
+	Out($kam->Format);
+	Out($posttext);
+	close OFILE;
+	return $output;
+}
 
 sub InitWorkFolder {
 	$workfolder = shift;
@@ -54,6 +86,27 @@ sub Out {
 	print OFILE $out;
 }
 
+sub OutPut {
+	my ($out, $file) = @_;
+	$output = $pretext . $out . $posttext;
+	unless (open(OFILE, ">", "$outfolder/$file")) {
+		die "Cannot open output $file"
+	}
+	print OFILE $output;
+	close OFILE;
+}
+
+sub Parse {
+	my ($kam, $samplefile) = @_;
+	unless (open(IFILE, "<", "$samplefolder/$samplefile")) {
+		die "Cannot open input $samplefile"
+	}
+	while (my $in = <IFILE>) {
+		$kam->Parse($in);
+	}
+	close IFILE;
+}
+
 sub PreText {
 	$pretext = shift;
 }
@@ -64,34 +117,9 @@ sub PostText {
 
 sub TestParse {
 	my ($kam, $samplefile, $outfile) = @_;
-	$output = "";
-
-	unless (open(OFILE, ">", "$outfolder/$outfile")) {
-		die "Cannot open output $outfile"
-	}
-
-	unless (open(IFILE, "<", "$samplefolder/$samplefile")) {
-		die "Cannot open input $samplefile"
-	}
-
-	Out($pretext);
-	while (my $in = <IFILE>) {
-		$kam->Parse($in);
-	}
-
-	my $out = $kam->Format;
-	Out($out);
-	Out($posttext);
-
-	close OFILE;
-	close IFILE;
-
-	my $refdata = LoadFile("$reffolder/$outfile");
-
-	if ($refdata eq $output) {
-		return 1
-	}
-	return 0
+	Parse($kam, $samplefile);
+	Format($kam, $outfile);
+	return CompareFile($outfile);
 }
 
 1;
