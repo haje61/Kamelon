@@ -71,7 +71,8 @@ sub LoadFile {
 	my $file = shift;
 	my $text = '';
 	unless (open(AFILE, "<", $file)) {
-		die "Cannot open $file"
+		warn "Cannot open $file";
+		return ''
 	}
 	while (my $in = <AFILE>) {
 		$text = $text . $in
