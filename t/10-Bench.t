@@ -4,7 +4,7 @@ use lib 't/testlib';
 
 use Test::More tests => 47;
 use Syntax::Kamelon;
-use KamTest qw(CompareFile InitWorkFolder ClearTimer Format GetTime Parse);
+use KamTest qw(CompareFile InitWorkFolder ClearTimer Format GetTime Parse WriteCleanUp);
 
 
 my $cycles = 5;
@@ -127,3 +127,4 @@ print "minimum throughput ", sprintf("%6d", $minthroughput), "\n";
 print "maximum throughput ", sprintf("%6d", $maxthroughput), "\n";
 print "average throughput ", sprintf("%6d", $averagethroughput), "\n";
 
+WriteCleanUp;

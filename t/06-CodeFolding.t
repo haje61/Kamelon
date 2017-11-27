@@ -4,7 +4,7 @@ use lib 't/testlib';
 
 use Test::More tests => 1;
 use Syntax::Kamelon;
-use KamTest qw(CompareFile InitWorkFolder OutPut Parse);
+use KamTest qw(CompareFile InitWorkFolder OutPut Parse WriteCleanUp);
 
 InitWorkFolder('t/Codefolding');
 
@@ -37,3 +37,4 @@ for (sort keys %$foldingpoints) {
 OutPut($out, $reffile);
 ok((CompareFile($reffile) eq 1), 'Codefolding');
 
+WriteCleanUp;

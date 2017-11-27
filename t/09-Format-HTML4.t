@@ -6,7 +6,7 @@ use Test::More tests => 10;
 BEGIN { use_ok('Syntax::Kamelon::Format::HTML4') };
 
 use Syntax::Kamelon;
-use KamTest qw(InitWorkFolder TestParse);
+use KamTest qw(InitWorkFolder TestParse WriteCleanUp);
 
 my @messages = (
 	'Plain', 
@@ -100,3 +100,4 @@ for (@kams) {
 	$num ++;
 }
 
+WriteCleanUp;

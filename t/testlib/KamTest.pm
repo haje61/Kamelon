@@ -17,6 +17,7 @@ our @EXPORT_OK = qw(
 	PreText
 	PostText
 	TestParse
+	WriteCleanUp
 );
 use Time::HiRes qw(time);
 
@@ -30,6 +31,8 @@ our $pretext = "";
 our $posttext = "";
 our $output = "";
 our $timed = 0;
+
+our @cleanup = ();
 
 sub ClearTimer {
 	$timed = 0;
@@ -50,6 +53,7 @@ sub Format {
 	unless (open(OFILE, ">", "$outfolder/$file")) {
 		die "Cannot open output $file"
 	}
+	push @cleanup, $file;
 	Out($pretext);
 	Out($kam->Format);
 	Out($posttext);
@@ -106,6 +110,7 @@ sub OutPut {
 	unless (open(OFILE, ">", "$outfolder/$file")) {
 		die "Cannot open output $file"
 	}
+	push @cleanup, $file;
 	print OFILE $output;
 	close OFILE;
 }
@@ -137,6 +142,17 @@ sub TestParse {
 	Parse($kam, $samplefile);
 	Format($kam, $outfile);
 	return CompareFile($outfile);
+}
+
+sub WriteCleanUp {
+	my $file = "$workfolder/CLEANUP";
+	unless (open(OFILE, ">", $file)) {
+		die "Cannot open output $file"
+	}
+	for (@cleanup) {
+		print OFILE "$_\n";
+	}
+	close OFILE;
 }
 
 1;

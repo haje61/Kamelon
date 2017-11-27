@@ -5,7 +5,7 @@ use lib 't/testlib';
 use Test::More tests => 16;
 
 use Syntax::Kamelon;
-use KamTest qw(InitWorkFolder PostText PreText TestParse);
+use KamTest qw(InitWorkFolder PostText PreText TestParse WriteCleanUp);
 
 InitWorkFolder('t/Highlighting');
 
@@ -56,3 +56,5 @@ __EOF
 	$hl->Syntax($_);
 	ok((TestParse($hl, "highlight.$_", "$_.html") eq 1), $_);
 }
+
+WriteCleanUp;

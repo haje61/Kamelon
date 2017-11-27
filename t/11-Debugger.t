@@ -4,7 +4,7 @@ use lib 't/testlib';
 
 use Test::More tests => 3;
 BEGIN { use_ok('Syntax::Kamelon::Debugger') };
-use KamTest qw(InitWorkFolder TestParse);
+use KamTest qw(InitWorkFolder TestParse WriteCleanUp);
 
 InitWorkFolder('t/Debugger');
 
@@ -18,3 +18,4 @@ ok(defined $k, 'Creation');
 
 ok((TestParse($k, "codefolding.pm", "debuggertest.html") eq 1), "Parsing and formatting");
 
+WriteCleanUp;

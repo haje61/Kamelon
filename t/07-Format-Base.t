@@ -6,7 +6,7 @@ use Test::More tests => 10;
 BEGIN { use_ok('Syntax::Kamelon::Format::Base') };
 
 use Syntax::Kamelon;
-use KamTest qw(InitWorkFolder PreText PostText TestParse);
+use KamTest qw(InitWorkFolder PreText PostText TestParse WriteCleanUp);
 
 my %formtab = ();
 for (Syntax::Kamelon->AvailableAttributes) {
@@ -170,3 +170,5 @@ __EOF
 	ok((TestParse($_, 'codefolding.pm', "format-base-$num.html") eq 1), $title);
 	$num ++;
 }
+
+WriteCleanUp;
