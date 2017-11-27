@@ -6,7 +6,9 @@ use warnings;
 use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(
+	ClearTimer
 	CompareFile
+	GetTime
 	InitWorkFolder
 	LoadFile
 	Format
@@ -16,6 +18,8 @@ our @EXPORT_OK = qw(
 	PostText
 	TestParse
 );
+use Time::HiRes qw(time);
+
 
 
 our $workfolder;
@@ -25,6 +29,11 @@ our $samplefolder;
 our $pretext = "";
 our $posttext = "";
 our $output = "";
+our $timed = 0;
+
+sub ClearTimer {
+	$timed = 0;
+}
 
 sub CompareFile {
 	my $file = shift;
@@ -46,6 +55,10 @@ sub Format {
 	Out($posttext);
 	close OFILE;
 	return $output;
+}
+
+sub GetTime {
+	return $timed
 }
 
 sub InitWorkFolder {
@@ -103,7 +116,10 @@ sub Parse {
 		die "Cannot open input $samplefile"
 	}
 	while (my $in = <IFILE>) {
+		my $starttime = time;
 		$kam->Parse($in);
+		my $endtime = time;
+		$timed = $timed + ($endtime - $starttime);
 	}
 	close IFILE;
 }
