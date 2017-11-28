@@ -527,10 +527,8 @@ t/Highlighting/XML/worddet.xml
 t/Highlighting/XML/xml.xml
 t/KamTest/reference_files/output.txt
 t/KamTest/samples/samplefile.txt
-t/Samples/sample.commonoptions
-t/Samples/sample.dyncontext
-t/Samples/template.tpl
 t/testlib/KamTest.pm
+t/XMLData/xml.xml
 tools/clean_up
 tools/generate_manifest
 tools/generate_syntaxes_pod
