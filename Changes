@@ -27,7 +27,7 @@ Version 0.17 November 28, 2017
 	Refactored testing
 	Set license in Makefile.PL
 
-Version 0.18 December xx, 2017
+Version 0.18 December 14, 2017
 
 	Fixed line 245 of XMLData.pm so Perl 5.8.x will compile (hopefully)
 	Created a helper script for updating xml definition files
@@ -112,7 +112,7 @@ Version 0.18 December xx, 2017
 	Updated syntax Ruby/Rails/RHTML from version 5 to version 6
 	Updated syntax SQL from version 2 to version 3
 	Updated syntax SQL (MySQL) from version 2 to version 3
-	Updated syntax SQL (Oracle) from version 2 to version 4
+	Updated syntax SQL (Oracle) from versimon 2 to version 4
 	Updated syntax SQL (PostgreSQL) from version 2 to version 5
 	Updated syntax Scala from version 3 to version 4
 	Updated syntax Scheme from version 3 to version 4
