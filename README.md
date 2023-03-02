@@ -42,9 +42,9 @@ there are also formatters for ANSI (Syntax::Kamelon::ANSI) and HTML4
 
 # Development plans
 
-Improve speed by Rewriting some core functions of Kamelon in C
-
 Add output formatters for HTML5, PDF, RTF, ODT, etcetera
+
+The Perl formatter coul use some tlc. We do not have a formatter for Raku.
 
 Help and support is appreciated.
 

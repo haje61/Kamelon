@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+        <title>lib/Syntax/Kamelon/XML/lilypond.xml - metacpan.org</title>
+        <link rel="alternate" type="application/rss+xml" title="Recent CPAN Uploads of Alt-Syntax-Kamelon-RT129134 - MetaCPAN" href="/dist/Alt-Syntax-Kamelon-RT129134/releases.rss" />
+        <link href="/_assets/dd939318225a0cf923ff244bc524c412899d1ce1.css" rel="stylesheet" type="text/css">
+        <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
+        <link rel="shortcut icon" href="/static/icons/favicon.ico">
+        <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
+        <script src="/_assets/3e536982ecc98e88d3f1d50e437cbd00a5ead37f.js" type="text/javascript" defer></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          (function(skey, ga_id){
+            ga('create', ga_id, {
+              siteSpeedSampleRate : 100,
+              storage             : 'none',
+              clientId            : localStorage.getItem(skey)
+            });
+            ga(function(tracker) {
+              localStorage.setItem(skey, tracker.get('clientId'));
+            });
+            ga('send', 'pageview');
+          })('ga:clientId', 'UA-27829474-1');
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                <li class="visible-xs">
+                <a href="#" data-toggle="slidepanel" data-target=".slidepanel">
+                  <i class="fa fa-bars icon-slidepanel"></i>
+                </a>
+                </li>
+                    <li class="">
+                        <a href="/"><img src="/static/icons/metacpan-icon.png"  alt="MetaCPAN icon"/>                            Home                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://grep.metacpan.org/"><i class="fa fa-search"></i>                            grep::cpan                        </a>
+                    </li>
+                    <li class="">
+                        <a href="/recent"><i class="fa fa-history"></i>                            Recent                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="/about"><i class="fa fa-info"></i>                            About                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="/about/faq"><i class="fa fa-question"></i>                            FAQ                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="https://github.com/metacpan/metacpan-web/issues"><i class="fab fa-github-alt"></i>                            GitHub Issues                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="/news"><i class="fa fa-newspaper"></i>                            News                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="/tools"><i class="fa fa-wrench"></i>                            Tools                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="https://fastapi.metacpan.org/"><i class="fa fa-database"></i>                            API                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <form action="/account/logout" method="POST" id="metacpan-logout"></form>
+                    <li class="dropdown logged_in" style="display: none;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Account
+                        <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/account/identities">Identities</a></li>
+                            <li><a href="/account/profile">Profile</a></li>
+                            <li><a href="/account/favorite/list">Favorites</a></li>
+                            <li>
+                                <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown logged_out" style="display: none;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Sign in
+                        <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/login/github">
+                                    <i class="fab fa-github fa-fw"></i>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/login/twitter">
+                                    <i class="fab fa-twitter fa-fw"></i>
+                                    Twitter
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/login/google">
+                                    <i class="fab fa-google fa-fw"></i>
+                                    Google
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid ">
+
+
+            <div class="row hidden-phone">
+                <div class="head-small-logo col-md-3">
+                    <a href="/" class="small-logo"></a>
+                </div>
+                <div class="col-md-9">
+                    <form action="/search" class="search-form form-horizontal">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" name="q" size="41" id="metacpan_search-input" class="form-control" value="">
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="submit">Search</button>
+                                    <button class="btn search-btn help-btn">?</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="main-content col-md-12">
+<div class="breadcrumbs">
+  <a data-keyboard-shortcut="g s" href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source">CXW / Alt-Syntax-Kamelon-RT129134-0.000001</a>
+    / <a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source/lib">lib</a>
+    / <a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source/lib/Syntax">Syntax</a>
+    / <a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source/lib/Syntax/Kamelon">Kamelon</a>
+    / <a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source/lib/Syntax/Kamelon/XML">XML</a>
+    / lilypond.xml
+</div>
+                    <ul class="nav-list slidepanel ">
+                        <li class="visible-xs">
+<div>
+    <form action="/search">
+        <input type="search" class="form-control tool-bar-form" placeholder="Search" name="q">
+        <input type="submit" class="hidden">
+    </form>
+</div>
+
+                        </li>
+  <li class="nav-header">Tools</li>
+  <li>
+    <a data-keyboard-shortcut="g d" href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
+  </li>
+  <li>
+    <a data-keyboard-shortcut="g a" href="/author/CXW"><i class="fa fa-user fa-fw black"></i>Author</a>
+  </li>
+  <li>&nbsp;</li>
+  <li><a href="https://fastapi.metacpan.org/source/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/lib/Syntax/Kamelon/XML/lilypond.xml"><i class="fa fa-file-alt fa-fw black"></i>Raw code</a></li>
+  <li><a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/source/lib/Syntax/Kamelon/XML/lilypond.xml"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
+  <li>
+    <a href="/release/CXW/Alt-Syntax-Kamelon-RT129134-0.000001/raw/lib/Syntax/Kamelon/XML/lilypond.xml?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
+  </li>
+  <li class="nav-header">Info</li>
+  <li>0 lines of code</li>
+  <li>0 lines of pod</li>
+  <li>58.62K bytes</li>
+                    </ul>
+<div class="content">
+<pre id="metacpan_source" class="line-numbers pod-toggle" data-pod-lines=""><code class="language-plain">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE language SYSTEM &quot;language.dtd&quot; [
+  &lt;!ENTITY b &quot;(?![A-Za-z])&quot;&gt;
+  &lt;!ENTITY rest &quot;\b[srR]&amp;b;&quot;&gt;
+  &lt;!ENTITY pitch &quot;\b([a-h]((iss){1,2}|(ess){1,2}|(is){1,2}|(es){1,2}|(sharp){1,2}|(flat){1,2}|ss?|ff?)?|(do|re|mi|fa|sol|la|si)(dd?|bb?|ss?|kk?)?|q)(&#39;+|,+|&amp;b;)&quot;&gt;
+  &lt;!ENTITY duration &quot;(\\(longa|breve)\b|(1|2|4|8|16|32|64|128|256|512|1024|2048)(?!\d))(\s*\.+)?(\s*\*\s*\d+(/\d+)?)*&quot;&gt;
+  &lt;!ENTITY dynamics &quot;p{1,5}|mp|mf|f{1,5}|s?fp|sff?|spp?|[sr]?fz|cresc|decresc|dim&quot;&gt;
+  &lt;!ENTITY scripts &quot;\d+|accent|marcato|staccat(issim)?o|espressivo|tenuto|portato|(up|down)(bow|mordent|prall)|flageolet|thumb|[lr](heel|toe)|open|stopped|turn|reverseturn|trill|mordent|prall(prall|mordent|down|up)?|lineprall|signumcongruentiae|(short|long|verylong)?fermata|segno|(var)?coda|snappizzicato|halfopen&quot;&gt;
+  &lt;!ENTITY keywords &quot;accepts|alias|consists|defaultchild|denies|description|grobdescriptions|include|invalid|language|name|objectid|once|remove|sequential|simultaneous|type|version|score|book|bookpart&quot;&gt;
+  &lt;!ENTITY deprecatedkeywords &quot;consistsend&quot;&gt;
+
+  &lt;!-- predefined commands, grouped, TODO: unravel other commands --&gt;
+  &lt;!ENTITY commands-heads &quot;(aiken|funk|sacredHarp|southernHarmony|walker)Heads(Minor)?&quot;&gt;
+  &lt;!ENTITY commands-other1 &quot;acciaccatura|addQuote|afterGrace|allowPageTurn|alternative|apply(Context|Music|Output)|appoggiatura|arpeggio(Arrow(Down|Up)|Bracket|Normal|Parenthesis)?|(a|de)scendens|auctum|augmentum|autoBeamO(ff|n)|autochange|balloon(Grob)?Text|bar|barNumberCheck|bendAfter|breathe|break|cadenzaO(ff|n)|cavum|clef(\s+(treble|violin|G|alto|C|tenor|(sub)?bass|F|french|(mezzo)?soprano|(var)?baritone|percussion|tab))?|(end)?(de)?cr|cresc(TextCresc|Hairpin)&quot;&gt;
+  &lt;!ENTITY commands-other2 &quot;(cue|transposedCue)During|default|deminutum|dim(Text(Decresc|Decr|Dim)|Hairpin)|display(Lily)?Music|divisio(Maior|Maxima|Minima)|(dynamic|dots|phrasingSlur|slur|stem|tie|tuplet)(Down|Neutral|Up)|(balloon|text)LengthO(ff|n)|featherDurations|figure(mode|s)|finalis|flexa|(french|german|italian|semiGerman)Chords|glissando|grace|harmonic|(unH|h)ideNotes|(hide|show)StaffSwitch|inclinatum|(keep|remove)WithTag|key(\s+&amp;pitch;)?|killCues&quot;&gt;
+  &lt;!ENTITY commands-other3 &quot;label|laissezVibrer|linea|makeClusters|mark|maxima|melisma(End)?|mergeDifferently(Head|Dott)edO(ff|n)|newSpacingSection|no(Beam|Break|PageBreak|PageTurn)|normalsize|numericTimeSignature|octaveCheck|oneVoice|oriscus|ottava|page(-ref|Break|Turn)|parallelMusic|parenthesize|partcombine|partial(\s*&amp;duration;)?|pes|pitchedTrill&quot;&gt;
+  &lt;!ENTITY commands-other4 &quot;pointAndClickO(ff|n)|quilisma|quoteDuring|relative(\s+&amp;pitch;)?|RemoveEmptyStaffContext|repeat(\s+(unfold|volta|tremolo|percent)(\s+\d+)?)?|repeatTie|resetRelativeOctave|rest|scaleDurations|scoreTweak|easyHeadsO(ff|n)|shift(Durations|Off|On{1,3})|(slur|tie)(Both|Dashed|Dotted|Solid)|small|spacingTweaks&quot;&gt;
+  &lt;!ENTITY commands-other5 &quot;(start|stop)(Group|(Text|Trill)Span|Staff)|stemBoth|stropha|super|(sustain|sostenuto)O(ff|n)|table-of-contents|tag|times?(\s*\d+/\d+)?|tiny|tocItem&quot;&gt;
+  &lt;!ENTITY commands-other6 &quot;transpose(\s+&amp;pitch;\s*&amp;pitch;)?|transposition(\s+&amp;pitch;)&quot;&gt;
+  &lt;!ENTITY commands-other7 &quot;tweak|unfoldRepeats|virg(ul)?a|voice(One|Two|Three|Four)|withMusicProperty|cm|mm|in|pt|major|minor|ionian|locrian|aeolian|mixolydian|lydian|phrygian|dorian&quot;&gt;
+
+  &lt;!ENTITY deprecatedcommands &quot;arpeggio(Up|Down|Neutral)|newpage|script(Up|Down|Both)|(empty|fat)Text|setEasyHeads|(default|voice|modernVoice|piano|forget)Accidentals|(modern(Voice)?|piano)Cautionaries|noResetKey|compressMusic|octave|(sustain|sostenuto)(Down|Up)|set(Hairpin|Text)(Cresc|Decresc|Dim)|setTextDecr&quot;&gt;
+  &lt;!ENTITY markupnotextargs &quot;arrow-head|beam|char|(semi|sesqui|double)?(flat|sharp)|draw-(circle|line)|epsfile|eyeglasses|filled-box|fret-diagram(-terse|-verbose)?|fromproperty|harp-pedal|(justify|wordwrap)-(field|string)|left-brace|lookup|markalphabet|markletter|musicglyph|natural|note-by-number|note|null|path|right-brace|simple|(back)?slashed-digit|stencil|strut|tied-lyric|triangle|verbatim-file&quot;&gt;
+  &lt;!ENTITY markupwithtextargs &quot;markup|bold|(rounded-)?box|bracket|caps|(center|general|left|right)-align|circle|((center|dir|left|right)-)?column|combine|concat|dynamic|fill-line|finger|fontCaps|(abs-)?fontsize|fraction|halign|hbracket|hcenter-in|hcenter|hspace|huge|italic|justify|larger?|line|lower|magnify|medium|normal-size-(sub|super)|normal-text|normalsize|number|on-the-fly|override|pad-(around|markup|to-box|x)|page-ref|postscript|put-adjacent|raise|roman|rotate|sans|small(er)?|smallCaps|sub|super|teeny|text|tiny|translate(-scaled)?|transparent|typewriter|underline|upright|vcenter|whiteout|with-(color|dimensions|url)|wordwrap|(markup|column-|justified-|override-|wordwrap-)lines|wordwrap-(string-)?internal&quot;&gt;
+  &lt;!ENTITY deprecatedmarkup &quot;bigger|h?center&quot;&gt;
+  &lt;!ENTITY headervars &quot;dedication|((?:sub){0,2})title|poet|composer|meter|opus|arranger|instrument|piece|breakbefore|copyright|tagline|mutopia(title|composer|poet|opus|instrument)|date|enteredby|source|style|maintainer(Email|Web)?|moreInfo|lastupdated|texidoc|footer&quot;&gt;
+
+  &lt;!-- The &#39;-new&#39; entities are for for LilyPond 2.13.4 and higher, and &#39;-old&#39; for LilyPond up to 2.12 --&gt;
+  &lt;!ENTITY paper-margin &quot;(top|bottom|left|right)-margin|(foot|head)-separation|indent|short-indent|paper-(height|width)|horizontal-shift|line-width&quot;&gt;
+  &lt;!ENTITY paper-margin-new &quot;(inner|outer)-margin|two-sided|binding-offset&quot;&gt;
+  &lt;!ENTITY paper-spacing-old &quot;(after|before|between)-title-space|between-system-(space|padding)|page-top-space|page-breaking-between-system-padding&quot;&gt;
+  &lt;!ENTITY paper-spacing-new &quot;(after|before|between)-title-spacing|between-(scores-)?system-spacing|bottom-system-spacing|top-title-spacing|top-system-spacing|page-breaking-between-system-spacing&quot;&gt;
+  &lt;!ENTITY paper-systems &quot;system-count&quot;&gt;
+  &lt;!ENTITY paper-systems-new &quot;(min-|max-)?systems-per-page&quot;&gt;
+  &lt;!ENTITY paper-other &quot;annotate-spacing|auto-first-page-number|blank-(last-)?page-force|first-page-number|page-count|page-limit-inter-system-space|page-limit-inter-system-space-factor|page-spacing-weight|print-all-headers|print-first-page-number|print-page-number|ragged-(bottom|right)|ragged-last(-bottom)?|system-separator-markup|force-assignment|input-encoding|output-scale&quot;&gt;
+  &lt;!ENTITY paper-markup &quot;((even|odd)(Footer|Header)|(book|score|toc)Title|tocItem)Markup&quot;&gt;
+  &lt;!ENTITY papervars &quot;&amp;paper-margin;|&amp;paper-margin-new;|&amp;paper-spacing-old;|&amp;paper-spacing-new;|&amp;paper-systems;|&amp;paper-systems-new;|&amp;paper-other;|&amp;paper-markup;&quot;&gt;
+
+  &lt;!ENTITY layoutvars &quot;system-count|(short-)?indent&quot;&gt;
+  &lt;!ENTITY toplevelvars &quot;dash(Hat|Plus|Dash|Bar|Larger|Dot|Underscore)|fermataMarkup|pipeSymbol|slashSeparator&quot;&gt;
+  &lt;!ENTITY performer &quot;Beam|Control_track|Drum_note|Dynamic|Key|Lyric|Note|Piano_pedal|Slur|Staff|Swallow|Tempo|Tie|Time_signature&quot;&gt;
+  &lt;!ENTITY translator &quot;Note_swallow|Rest_swallow|Skip_event_swallow|Timing&quot;&gt;
+  &lt;!ENTITY engraver0 &quot;Accidental|Ambitus|Arpeggio|Auto_beam|Axis_group|Balloon|Bar|Bar_number|Beam|Bend|Break_align|Breathing_sign|Chord_name|Chord_tremolo|Clef|Cluster_spanner|Collision|Completion_heads|Custos|Default_bar_line|Dot_column|Dots|Drum_notes|Dynami_align|Dynamic|Episema|Extender|Figured_bass|Figured_bass_position|Fingering|Font_size|Forbid_line_break|Fretboard|Glissando|Grace_beam|Grace|Grace_spacing|Grid_line_span|Grid_point|Grob_pq|Hara_kiri|Horizontal_bracket&quot;&gt;
+  &lt;!ENTITY engraver1 &quot;Hyphen|Instrument_name|Instrument_switch|Key|Laissez_vibrer|Ledger_line|Ligature_bracket|Lyric|Mark|Measure_grouping|Melody|Mensural_ligature|Metronome_mark|Multi_measure_rest|New_dynamic|New_fingering|Note_head_line|Note_heads|Note_name|Note_spacing|Ottava_spanner|Output_property|Page_turn|Paper_column|Parenthesis|Part_combine|Percent_repeat|Phrasing_slur|Piano_pedal_align|Piano_pedal|Pitch_squash|Pitched_trill|Repeat_acknowledge|Repeat_tie|Rest_collision|Rest|Rhythmic_column|Scheme|Script_column|Script|Script_row&quot;&gt;
+  &lt;!ENTITY engraver2 &quot;Separating_line_group|Slash_repeat|Slur|Spacing|Span_arpeggio|Span_bar|Spanner_break_forbid|Staff_collecting|Staff_symbol|Stanza_number_align|Stanza_number|Stem|String_number|Swallow|System_start_delimiter|Tab_harmonic|Tab_note_heads|Tab_staff_symbol|Text|Text_spanner|Tie|Time_signature|Trill_spanner|Tuplet|Tweak|Vaticana_ligature|Vertical_align|Vertically_spaced_contexts|Volta&quot;&gt;
+  &lt;!ENTITY engravers00 &quot;(&amp;engraver0;)_engraver&quot;&gt;
+  &lt;!ENTITY engravers01 &quot;(&amp;engraver1;)_engraver&quot;&gt;
+  &lt;!ENTITY engravers02 &quot;(&amp;engraver2;)_engraver&quot;&gt;
+  &lt;!ENTITY engravers1 &quot;(&amp;performer;)_performer&quot;&gt;
+  &lt;!ENTITY engravers2 &quot;(&amp;translator;)_translator&quot;&gt;
+
+  &lt;!ENTITY schemename &quot;[a-zA-Z#][^\s(){}[\];$&amp;quot;]*&quot;&gt;
+  &lt;!ENTITY schemefunc0 &quot;\b(define|defined\?|define\*(-public)?|define-(\*|builtin-markup-(list-)?command|class|(extra-)?display-method|fonts?|grob-property|ly-syntax(-loc|-simple)?|macro(-public)?|markup-(list-)command|method|module|music-function|post-event-display-method|public(-macro|-toplevel)?|safe-public|span-event-display-method)|defmacro(\*(-public)?)?|lambda\*?|and|or|if|cond|case|let\*?|letrec|begin|do|delay|set!|else|(quasi)?quote|unquote(-splicing)?|(define|let|letrec)-syntax|syntax-rules)(?=($|\s|\)))&quot;&gt;
+  &lt;!ENTITY schemefunc1 &quot;\b(not|boolean\?|eq\?|eqv\?|equal\?|pair\?|cons|set-c[ad]r!|c[ad]{1,4}r|null\?|list\?|list|length|append|reverse|list-ref|mem[qv]|member|ass[qv]|assoc|symbol\?|symbol-&amp;gt;string|string-&amp;gt;symbol|number\?|complex\?|real\?|rational\?|integer\?|exact\?|inexact\?|zero\?|positive\?|negative\?|odd\?|even\?|max|min|abs|quotient|remainder|modulo|gcd|lcm|numerator|denominator|floor|ceiling|truncate|round|rationalize|exp|log|sin|cos|tan|asin|acos|atan|sqrt|expt|make-rectangular|make-polar|real-part|imag-part|magnitude|angle|exact-&amp;gt;inexact|inexact-&amp;gt;exact|number-&amp;gt;string|string-&amp;gt;number)(?=($|\s|\)))&quot;&gt;
+  &lt;!ENTITY schemefunc2 &quot;\b(char((-ci)?(=\?|&amp;lt;\?|&amp;gt;\?|&amp;lt;=\?|&amp;gt;=\?)|-alphabetic\?|\?|-numeric\?|-whitespace\?|-upper-case\?|-lower-case\?|-&amp;gt;integer|-upcase|-downcase|-ready\?)|integer-&amp;gt;char|make-string|string(\?|-copy|-fill!|-length|-ref|-set!|(-ci)?(=\?|&amp;lt;\?|&amp;gt;\?|&amp;lt;=\?|&amp;gt;=\?)|-append)|substring|make-vector|vector(\?|-length|-ref|-set!|-fill!)?|procedure\?|apply|map|for-each|force|call-with-(current-continuation|(in|out)put-file)|(in|out)put-port\?|current-(in|out)put-port|open-(in|out)put-file|close-(in|out)put-port|eof-object\?|read|(read|peek)-char|write(-char)?|display|newline|call/cc|list-tail|string-&amp;gt;list|list-&amp;gt;string|vector-&amp;gt;list|list-&amp;gt;vector|with-input-from-file|with-output-to-file|load|transcript-(on|off)|eval|dynamic-wind|port\?|values|call-with-values|(scheme-report-|null-|interaction-)environment)(?=($|\s|\)))&quot;&gt;
+]&gt;
+&lt;language name=&quot;LilyPond&quot; section=&quot;Other&quot;
+          style=&quot;lilypond&quot; indenter=&quot;lilypond&quot;
+          version=&quot;4&quot; kateversion=&quot;3.3&quot;
+          extensions=&quot;*.ly;*.LY;*.ily;*.ILY;*.lyi;*.LYI&quot;
+          mimetype=&quot;text/x-lilypond&quot;
+          author=&quot;Wilbert Berendsen (info@wilbertberendsen.nl)&quot; license=&quot;LGPL&quot;&gt;
+
+  &lt;!--
+
+    Fall 2010
+    Minor updates by Wilbert Berendsen
+
+    Changes:
+    - add some new commands (\path, \eyeglasses, etc), contexts and grobs for LilyPond 2.14
+    - cleaned up papervars mess by using nested entities categorizing different variables
+
+    November, 2009
+    Minor updates by Wilbert Berendsen
+
+    Changes:
+    - add makeClusters
+    - fix chords in drummode
+
+    October, 2008
+    Minor updates by Wilbert Berendsen
+
+    Changes:
+    - More new LilyPond commands (2.12) and some more deprecated words
+    - Match deprecated properties after header vars
+    - Special case \tempo command
+
+    January, 2008
+    Fully rewritten by Wilbert Berendsen (info@wilbertberendsen.nl)
+
+    Changes:
+    - correctly parse pitches, chords, durations, etc. marking often made mistakes as invalid
+    - speed up by shortening contexts, e.g. branch out on a \, instead of RegExpr&#39;ing all \commands
+    - recognize some contexts like \layout, \with, \header to colorcode variables, engravers, etc. only there
+    - recognize lilypond words like ChoirStaff etc. only in sections and after \set, \override etc.
+    - highlight some standard Scheme function names
+    - add \figuremode recognition
+    - all Scheme stuff has a nice, very light background, to show where Lilypond is in Scheme mode.
+    - mark some deprecated (pre 2.12) LilyPond commands and properties
+
+    October, 2007
+    New version by Wilbert Berendsen (info@wilbertberendsen.nl)
+
+    Changes:
+    - better recognition of being inside lyrics, drums, notes, chords and markup sections
+    - detect block comments %{  %}
+    - links to ##Alerts in comments (e.g. TODO, FIXME)
+    - detect lilypond inside scheme #{ #}
+    - detect \score inside \markup, etc.
+    - helps with some often made errors like forgetting spaces around lyric extenders and hyphens
+    - more scheme improvements: strings, numbers, $substitutions, lilypond objects
+    - highlights many variables, commands, lilypond objects, properties, engravers, etc.
+    - by using entities for many regexps the main syntax checking parts remain legible, and the file more maintainable.
+
+    I borrowed some colors and the drum names from Andrea Primiani&#39;s first version (August, 2004).
+
+  --&gt;
+
+  &lt;highlighting&gt;
+    &lt;list name=&quot;contexts&quot;&gt;
+      &lt;item&gt; ChoirStaff &lt;/item&gt;
+      &lt;item&gt; ChordNames &lt;/item&gt;
+      &lt;item&gt; CueVoice &lt;/item&gt;
+      &lt;item&gt; Devnull &lt;/item&gt;
+      &lt;item&gt; DrumStaff &lt;/item&gt;
+      &lt;item&gt; DrumVoice &lt;/item&gt;
+      &lt;item&gt; Dynamics &lt;/item&gt;
+      &lt;item&gt; FiguredBass &lt;/item&gt;
+      &lt;item&gt; FretBoards &lt;/item&gt;
+      &lt;item&gt; Global &lt;/item&gt;
+      &lt;item&gt; GrandStaff &lt;/item&gt;
+      &lt;item&gt; GregorianTranscriptionStaff &lt;/item&gt;
+      &lt;item&gt; GregorianTranscriptionVoice &lt;/item&gt;
+      &lt;item&gt; Lyrics &lt;/item&gt;
+      &lt;item&gt; MensuralStaff &lt;/item&gt;
+      &lt;item&gt; MensuralVoice &lt;/item&gt;
+      &lt;item&gt; NoteNames &lt;/item&gt;
+      &lt;item&gt; PianoStaff &lt;/item&gt;
+      &lt;item&gt; RhythmicStaff &lt;/item&gt;
+      &lt;item&gt; Score &lt;/item&gt;
+      &lt;item&gt; Staff &lt;/item&gt;
+      &lt;item&gt; StaffGroup &lt;/item&gt;
+      &lt;item&gt; TabStaff &lt;/item&gt;
+      &lt;item&gt; TabVoice &lt;/item&gt;
+      &lt;item&gt; Timing &lt;/item&gt;
+      &lt;item&gt; VaticanaStaff &lt;/item&gt;
+      &lt;item&gt; VaticanaVoice &lt;/item&gt;
+      &lt;item&gt; Voice &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;deprecatedcontexts&quot;&gt;
+      &lt;item&gt; InnerChoirStaff &lt;/item&gt;
+      &lt;item&gt; InnerStaffGroup &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;layoutobjects&quot;&gt;
+      &lt;item&gt; Accidental &lt;/item&gt;
+      &lt;item&gt; AccidentalCautionary &lt;/item&gt;
+      &lt;item&gt; AccidentalPlacement &lt;/item&gt;
+      &lt;item&gt; AccidentalSuggestion &lt;/item&gt;
+      &lt;item&gt; Ambitus &lt;/item&gt;
+      &lt;item&gt; AmbitusAccidental &lt;/item&gt;
+      &lt;item&gt; AmbitusLine &lt;/item&gt;
+      &lt;item&gt; AmbitusNoteHead &lt;/item&gt;
+      &lt;item&gt; Arpeggio &lt;/item&gt;
+      &lt;item&gt; BalloonTextItem &lt;/item&gt;
+      &lt;item&gt; BarLine &lt;/item&gt;
+      &lt;item&gt; BarNumber &lt;/item&gt;
+      &lt;item&gt; BassFigure &lt;/item&gt;
+      &lt;item&gt; BassFigureAlignment &lt;/item&gt;
+      &lt;item&gt; BassFigureAlignmentPositioning &lt;/item&gt;
+      &lt;item&gt; BassFigureBracket &lt;/item&gt;
+      &lt;item&gt; BassFigureContinuation &lt;/item&gt;
+      &lt;item&gt; BassFigureLine &lt;/item&gt;
+      &lt;item&gt; Beam &lt;/item&gt;
+      &lt;item&gt; BendAfter &lt;/item&gt;
+      &lt;item&gt; BreakAlignGroup &lt;/item&gt;
+      &lt;item&gt; BreakAlignment &lt;/item&gt;
+      &lt;item&gt; BreathingSign &lt;/item&gt;
+      &lt;item&gt; ChordName &lt;/item&gt;
+      &lt;item&gt; Clef &lt;/item&gt;
+      &lt;item&gt; ClusterSpanner &lt;/item&gt;
+      &lt;item&gt; ClusterSpannerBeacon &lt;/item&gt;
+      &lt;item&gt; CombineTextScript &lt;/item&gt;
+      &lt;item&gt; Custos &lt;/item&gt;
+      &lt;item&gt; DotColumn &lt;/item&gt;
+      &lt;item&gt; Dots &lt;/item&gt;
+      &lt;item&gt; DoublePercentRepeat &lt;/item&gt;
+      &lt;item&gt; DoublePercentRepeatCounter &lt;/item&gt;
+      &lt;item&gt; DynamicLineSpanner &lt;/item&gt;
+      &lt;item&gt; DynamicText &lt;/item&gt;
+      &lt;item&gt; DynamicTextSpanner &lt;/item&gt;
+      &lt;item&gt; Episema &lt;/item&gt;
+      &lt;item&gt; Fingering &lt;/item&gt;
+      &lt;item&gt; FretBoard &lt;/item&gt;
+      &lt;item&gt; Glissando &lt;/item&gt;
+      &lt;item&gt; GraceSpacing &lt;/item&gt;
+      &lt;item&gt; GridLine &lt;/item&gt;
+      &lt;item&gt; GridPoint &lt;/item&gt;
+      &lt;item&gt; Hairpin &lt;/item&gt;
+      &lt;item&gt; HarmonicParenthesesItem &lt;/item&gt;
+      &lt;item&gt; HorizontalBracket &lt;/item&gt;
+      &lt;item&gt; InstrumentName &lt;/item&gt;
+      &lt;item&gt; InstrumentSwitch &lt;/item&gt;
+      &lt;item&gt; KeyCancellation &lt;/item&gt;
+      &lt;item&gt; KeySignature &lt;/item&gt;
+      &lt;item&gt; LaissezVibrerTie &lt;/item&gt;
+      &lt;item&gt; LaissezVibrerTieColumn &lt;/item&gt;
+      &lt;item&gt; LedgerLineSpanner &lt;/item&gt;
+      &lt;item&gt; LeftEdge &lt;/item&gt;
+      &lt;item&gt; LigatureBracket &lt;/item&gt;
+      &lt;item&gt; LyricExtender &lt;/item&gt;
+      &lt;item&gt; LyricHyphen &lt;/item&gt;
+      &lt;item&gt; LyricSpace &lt;/item&gt;
+      &lt;item&gt; LyricText &lt;/item&gt;
+      &lt;item&gt; MeasureGrouping &lt;/item&gt;
+      &lt;item&gt; MelodyItem &lt;/item&gt;
+      &lt;item&gt; MensuralLigature &lt;/item&gt;
+      &lt;item&gt; MetronomeMark &lt;/item&gt;
+      &lt;item&gt; MultiMeasureRest &lt;/item&gt;
+      &lt;item&gt; MultiMeasureRestNumber &lt;/item&gt;
+      &lt;item&gt; MultiMeasureRestText &lt;/item&gt;
+      &lt;item&gt; NonMusicalPaperColumn &lt;/item&gt;
+      &lt;item&gt; NoteCollision &lt;/item&gt;
+      &lt;item&gt; NoteColumn &lt;/item&gt;
+      &lt;item&gt; NoteHead &lt;/item&gt;
+      &lt;item&gt; NoteName &lt;/item&gt;
+      &lt;item&gt; NoteSpacing &lt;/item&gt;
+      &lt;item&gt; OctavateEight &lt;/item&gt;
+      &lt;item&gt; OttavaBracket &lt;/item&gt;
+      &lt;item&gt; PaperColumn &lt;/item&gt;
+      &lt;item&gt; ParenthesesItem &lt;/item&gt;
+      &lt;item&gt; PercentRepeat &lt;/item&gt;
+      &lt;item&gt; PercentRepeatCounter &lt;/item&gt;
+      &lt;item&gt; PhrasingSlur &lt;/item&gt;
+      &lt;item&gt; PianoPedalBracket &lt;/item&gt;
+      &lt;item&gt; RehearsalMark &lt;/item&gt;
+      &lt;item&gt; RepeatSlash &lt;/item&gt;
+      &lt;item&gt; RepeatTie &lt;/item&gt;
+      &lt;item&gt; RepeatTieColumn &lt;/item&gt;
+      &lt;item&gt; Rest &lt;/item&gt;
+      &lt;item&gt; RestCollision &lt;/item&gt;
+      &lt;item&gt; Script &lt;/item&gt;
+      &lt;item&gt; ScriptColumn &lt;/item&gt;
+      &lt;item&gt; ScriptRow &lt;/item&gt;
+      &lt;item&gt; SeparationItem &lt;/item&gt;
+      &lt;item&gt; Slur &lt;/item&gt;
+      &lt;item&gt; SostenutoPedal &lt;/item&gt;
+      &lt;item&gt; SostenutoPedalLineSpanner &lt;/item&gt;
+      &lt;item&gt; SpacingSpanner &lt;/item&gt;
+      &lt;item&gt; SpanBar &lt;/item&gt;
+      &lt;item&gt; StaffGrouper &lt;/item&gt;
+      &lt;item&gt; StaffSpacing &lt;/item&gt;
+      &lt;item&gt; StaffSymbol &lt;/item&gt;
+      &lt;item&gt; StanzaNumber &lt;/item&gt;
+      &lt;item&gt; Stem &lt;/item&gt;
+      &lt;item&gt; StemTremolo &lt;/item&gt;
+      &lt;item&gt; StringNumber &lt;/item&gt;
+      &lt;item&gt; StrokeFinger &lt;/item&gt;
+      &lt;item&gt; SustainPedal &lt;/item&gt;
+      &lt;item&gt; SustainPedalLineSpanner &lt;/item&gt;
+      &lt;item&gt; System &lt;/item&gt;
+      &lt;item&gt; SystemStartBar &lt;/item&gt;
+      &lt;item&gt; SystemStartBrace &lt;/item&gt;
+      &lt;item&gt; SystemStartBracket &lt;/item&gt;
+      &lt;item&gt; SystemStartSquare &lt;/item&gt;
+      &lt;item&gt; TabNoteHead &lt;/item&gt;
+      &lt;item&gt; TextScript &lt;/item&gt;
+      &lt;item&gt; TextSpanner &lt;/item&gt;
+      &lt;item&gt; Tie &lt;/item&gt;
+      &lt;item&gt; TieColumn &lt;/item&gt;
+      &lt;item&gt; TimeSignature &lt;/item&gt;
+      &lt;item&gt; TrillPitchAccidental &lt;/item&gt;
+      &lt;item&gt; TrillPitchGroup &lt;/item&gt;
+      &lt;item&gt; TrillPitchHead &lt;/item&gt;
+      &lt;item&gt; TrillSpanner &lt;/item&gt;
+      &lt;item&gt; TupletBracket &lt;/item&gt;
+      &lt;item&gt; TupletNumber &lt;/item&gt;
+      &lt;item&gt; UnaCordaPedal &lt;/item&gt;
+      &lt;item&gt; UnaCordaPedalLineSpanner &lt;/item&gt;
+      &lt;item&gt; VaticanaLigature &lt;/item&gt;
+      &lt;item&gt; VerticalAlignment &lt;/item&gt;
+      &lt;item&gt; VerticalAxisGroup &lt;/item&gt;
+      &lt;item&gt; VoiceFollower &lt;/item&gt;
+      &lt;item&gt; VoltaBracket &lt;/item&gt;
+      &lt;item&gt; VoltaBracketSpanner &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;properties&quot;&gt;
+      &lt;item&gt; aDueText &lt;/item&gt;
+      &lt;item&gt; alignAboveContext &lt;/item&gt;
+      &lt;item&gt; alignBassFigureAccidentals &lt;/item&gt;
+      &lt;item&gt; alignBelowContext &lt;/item&gt;
+      &lt;item&gt; allowBeamBreak &lt;/item&gt;
+      &lt;item&gt; associatedVoice &lt;/item&gt;
+      &lt;item&gt; autoAccidentals &lt;/item&gt;
+      &lt;item&gt; autoBeamCheck &lt;/item&gt;
+      &lt;item&gt; autoBeamSettings &lt;/item&gt;
+      &lt;item&gt; autoBeaming &lt;/item&gt;
+      &lt;item&gt; autoCautionaries &lt;/item&gt;
+      &lt;item&gt; automaticBars &lt;/item&gt;
+      &lt;item&gt; barAlways &lt;/item&gt;
+      &lt;item&gt; barCheckSynchronize &lt;/item&gt;
+      &lt;item&gt; barNumberVisibility &lt;/item&gt;
+      &lt;item&gt; baseMoment &lt;/item&gt;
+      &lt;item&gt; bassFigureFormatFunction &lt;/item&gt;
+      &lt;item&gt; bassStaffProperties &lt;/item&gt;
+      &lt;item&gt; beamExceptions &lt;/item&gt;
+      &lt;item&gt; beatGrouping &lt;/item&gt;
+      &lt;item&gt; beatLength &lt;/item&gt;
+      &lt;item&gt; beatStructure &lt;/item&gt;
+      &lt;item&gt; chordChanges &lt;/item&gt;
+      &lt;item&gt; chordNameExceptions &lt;/item&gt;
+      &lt;item&gt; chordNameExceptionsFull &lt;/item&gt;
+      &lt;item&gt; chordNameExceptionsPartial &lt;/item&gt;
+      &lt;item&gt; chordNameFunction &lt;/item&gt;
+      &lt;item&gt; chordNameSeparator &lt;/item&gt;
+      &lt;item&gt; chordNoteNamer &lt;/item&gt;
+      &lt;item&gt; chordPrefixSpacer &lt;/item&gt;
+      &lt;item&gt; chordRootNamer &lt;/item&gt;
+      &lt;item&gt; clefGlyph &lt;/item&gt;
+      &lt;item&gt; clefOctavation &lt;/item&gt;
+      &lt;item&gt; clefPosition &lt;/item&gt;
+      &lt;item&gt; connectArpeggios &lt;/item&gt;
+      &lt;item&gt; countPercentRepeats &lt;/item&gt;
+      &lt;item&gt; createKeyOnClefChange &lt;/item&gt;
+      &lt;item&gt; createSpacing &lt;/item&gt;
+      &lt;item&gt; crescendoSpanner &lt;/item&gt;
+      &lt;item&gt; crescendoText &lt;/item&gt;
+      &lt;item&gt; currentBarNumber &lt;/item&gt;
+      &lt;item&gt; decrescendoSpanner &lt;/item&gt;
+      &lt;item&gt; decrescendoText &lt;/item&gt;
+      &lt;item&gt; defaultBarType &lt;/item&gt;
+      &lt;item&gt; doubleSlurs &lt;/item&gt;
+      &lt;item&gt; doubleRepeatType &lt;/item&gt;
+      &lt;item&gt; drumPitchTable &lt;/item&gt;
+      &lt;item&gt; drumStyleTable &lt;/item&gt;
+      &lt;item&gt; dynamicAbsoluteVolumeFunction &lt;/item&gt;
+      &lt;item&gt; explicitClefVisibility &lt;/item&gt;
+      &lt;item&gt; explicitKeySignatureVisibility &lt;/item&gt;
+      &lt;item&gt; extendersOverRests &lt;/item&gt;
+      &lt;item&gt; extraNatural &lt;/item&gt;
+      &lt;item&gt; figuredBassAlterationDirection &lt;/item&gt;
+      &lt;item&gt; figuredBassCenterContinuations &lt;/item&gt;
+      &lt;item&gt; figuredBassFormatter &lt;/item&gt;
+      &lt;item&gt; figuredBassPlusDirection &lt;/item&gt;
+      &lt;item&gt; fingeringOrientations &lt;/item&gt;
+      &lt;item&gt; firstClef &lt;/item&gt;
+      &lt;item&gt; followVoice &lt;/item&gt;
+      &lt;item&gt; fontSize &lt;/item&gt;
+      &lt;item&gt; forbidBreak &lt;/item&gt;
+      &lt;item&gt; forceClef &lt;/item&gt;
+      &lt;item&gt; gridInterval &lt;/item&gt;
+      &lt;item&gt; hairpinToBarline &lt;/item&gt;
+      &lt;item&gt; harmonicAccidentals &lt;/item&gt;
+      &lt;item&gt; highStringOne &lt;/item&gt;
+      &lt;item&gt; ignoreBarChecks &lt;/item&gt;
+      &lt;item&gt; ignoreFiguredBassRest &lt;/item&gt;
+      &lt;item&gt; ignoreMelismata &lt;/item&gt;
+      &lt;item&gt; implicitBassFigures &lt;/item&gt;
+      &lt;item&gt; implicitTimeSignatureVisibility &lt;/item&gt;
+      &lt;item&gt; instrumentCueName &lt;/item&gt;
+      &lt;item&gt; instrumentEqualizer &lt;/item&gt;
+      &lt;item&gt; instrumentName &lt;/item&gt;
+      &lt;item&gt; instrumentTransposition &lt;/item&gt;
+      &lt;item&gt; internalBarNumber &lt;/item&gt;
+      &lt;item&gt; keepAliveInterfaces &lt;/item&gt;
+      &lt;item&gt; keyAlterationOrder &lt;/item&gt;
+      &lt;item&gt; keySignature &lt;/item&gt;
+      &lt;item&gt; lyricMelismaAlignment &lt;/item&gt;
+      &lt;item&gt; majorSevenSymbol &lt;/item&gt;
+      &lt;item&gt; markFormatter &lt;/item&gt;
+      &lt;item&gt; maximumFretStretch &lt;/item&gt;
+      &lt;item&gt; measureLength &lt;/item&gt;
+      &lt;item&gt; measurePosition &lt;/item&gt;
+      &lt;item&gt; melismaBusyProperties &lt;/item&gt;
+      &lt;item&gt; metronomeMarkFormatter &lt;/item&gt;
+      &lt;item&gt; middleCClefPosition &lt;/item&gt;
+      &lt;item&gt; middleCOffset &lt;/item&gt;
+      &lt;item&gt; middleCPosition &lt;/item&gt;
+      &lt;item&gt; midiInstrument &lt;/item&gt;
+      &lt;item&gt; midiMaximumVolume &lt;/item&gt;
+      &lt;item&gt; midiMinimumVolume &lt;/item&gt;
+      &lt;item&gt; minimumFret &lt;/item&gt;
+      &lt;item&gt; minimumPageTurnLength &lt;/item&gt;
+      &lt;item&gt; minimumRepeatLengthForPageTurn &lt;/item&gt;
+      &lt;item&gt; noteToFretFunction &lt;/item&gt;
+      &lt;item&gt; ottavation &lt;/item&gt;
+      &lt;item&gt; output &lt;/item&gt;
+      &lt;item&gt; pedalSostenutoStrings &lt;/item&gt;
+      &lt;item&gt; pedalSostenutoStyle &lt;/item&gt;
+      &lt;item&gt; pedalSustainStrings &lt;/item&gt;
+      &lt;item&gt; pedalSustainStyle &lt;/item&gt;
+      &lt;item&gt; pedalUnaCordaStrings &lt;/item&gt;
+      &lt;item&gt; pedalUnaCordaStyle &lt;/item&gt;
+      &lt;item&gt; printKeyCancellation &lt;/item&gt;
+      &lt;item&gt; printOctaveNames &lt;/item&gt;
+      &lt;item&gt; printPartCombineTexts &lt;/item&gt;
+      &lt;item&gt; proportionalNotationDuration &lt;/item&gt;
+      &lt;item&gt; recordEventSequence &lt;/item&gt;
+      &lt;item&gt; rehearsalMark &lt;/item&gt;
+      &lt;item&gt; repeatCommands &lt;/item&gt;
+      &lt;item&gt; restNumberThreshold &lt;/item&gt;
+      &lt;item&gt; scriptDefinitions &lt;/item&gt;
+      &lt;item&gt; shapeNoteStyles &lt;/item&gt;
+      &lt;item&gt; shortInstrumentName &lt;/item&gt;
+      &lt;item&gt; shortVocalName &lt;/item&gt;
+      &lt;item&gt; skipBars &lt;/item&gt;
+      &lt;item&gt; skipTypesetting &lt;/item&gt;
+      &lt;item&gt; soloIIText &lt;/item&gt;
+      &lt;item&gt; soloText &lt;/item&gt;
+      &lt;item&gt; squashedPosition &lt;/item&gt;
+      &lt;item&gt; staffLineLayoutFunction &lt;/item&gt;
+      &lt;item&gt; stanza &lt;/item&gt;
+      &lt;item&gt; stemLeftBeamCount &lt;/item&gt;
+      &lt;item&gt; stemRightBeamCount &lt;/item&gt;
+      &lt;item&gt; stringNumberOrientations &lt;/item&gt;
+      &lt;item&gt; stringOneTopmost &lt;/item&gt;
+      &lt;item&gt; stringTunings &lt;/item&gt;
+      &lt;item&gt; strokeFingerOrientations &lt;/item&gt;
+      &lt;item&gt; subdivideBeams &lt;/item&gt;
+      &lt;item&gt; suggestAccidentals &lt;/item&gt;
+      &lt;item&gt; systemStartDelimiter &lt;/item&gt;
+      &lt;item&gt; systemStartDelimiterHierarchy &lt;/item&gt;
+      &lt;item&gt; tablatureFormat &lt;/item&gt;
+      &lt;item&gt; tempoUnitCount &lt;/item&gt;
+      &lt;item&gt; tempoUnitDuration &lt;/item&gt;
+      &lt;item&gt; tempoWholesPerMinute &lt;/item&gt;
+      &lt;item&gt; tieWaitForNote &lt;/item&gt;
+      &lt;item&gt; timeSignatureFraction &lt;/item&gt;
+      &lt;item&gt; timing &lt;/item&gt;
+      &lt;item&gt; tonic &lt;/item&gt;
+      &lt;item&gt; topLevelAlignment &lt;/item&gt;
+      &lt;item&gt; trebleStaffProperties &lt;/item&gt;
+      &lt;item&gt; tremoloFlags &lt;/item&gt;
+      &lt;item&gt; tupletFullLength &lt;/item&gt;
+      &lt;item&gt; tupletFullLengthNote &lt;/item&gt;
+      &lt;item&gt; tupletSpannerDuration &lt;/item&gt;
+      &lt;item&gt; useBassFigureExtenders &lt;/item&gt;
+      &lt;item&gt; verticallySpacedContexts &lt;/item&gt;
+      &lt;item&gt; vocalName &lt;/item&gt;
+      &lt;item&gt; voltaOnThisStaff &lt;/item&gt; &lt;!-- gone in 2.12 and 2.13 --&gt;
+      &lt;item&gt; voltaSpannerDuration &lt;/item&gt;
+      &lt;item&gt; whichBar &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;deprecatedproperties&quot;&gt;
+      &lt;item&gt; barNumberAlignSymbol &lt;/item&gt;
+      &lt;item&gt; centralCPosition &lt;/item&gt;
+      &lt;item&gt; extraVerticalExtent &lt;/item&gt;
+      &lt;item&gt; fingerHorizontalDirection &lt;/item&gt;
+      &lt;item&gt; instr &lt;/item&gt;
+      &lt;item&gt; instrument &lt;/item&gt;
+      &lt;item&gt; keyAccidentalOrder &lt;/item&gt;
+      &lt;item&gt; minimumVerticalExtent &lt;/item&gt;
+      &lt;item&gt; rehearsalMarkAlignSymbol &lt;/item&gt;
+      &lt;item&gt; soloADue &lt;/item&gt;
+      &lt;item&gt; tupletNumberFormatFunction &lt;/item&gt;
+      &lt;item&gt; vocNam &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;musicexpressions&quot;&gt;
+      &lt;item&gt; AbsoluteDynamicEvent &lt;/item&gt;
+      &lt;item&gt; AnnotateOutputEvent &lt;/item&gt;
+      &lt;item&gt; ApplyContext &lt;/item&gt;
+      &lt;item&gt; ApplyOutputEvent &lt;/item&gt;
+      &lt;item&gt; ArpeggioEvent &lt;/item&gt;
+      &lt;item&gt; ArticulationEvent &lt;/item&gt;
+      &lt;item&gt; AutoChangeMusic &lt;/item&gt;
+      &lt;item&gt; BarCheck &lt;/item&gt;
+      &lt;item&gt; BassFigureEvent &lt;/item&gt;
+      &lt;item&gt; BeamEvent &lt;/item&gt;
+      &lt;item&gt; BeamForbidEvent &lt;/item&gt;
+      &lt;item&gt; BendAfterEvent &lt;/item&gt;
+      &lt;item&gt; BreathingEvent &lt;/item&gt;
+      &lt;item&gt; ClusterNoteEvent &lt;/item&gt;
+      &lt;item&gt; ContextChange &lt;/item&gt;
+      &lt;item&gt; ContextSpeccedMusic &lt;/item&gt;
+      &lt;item&gt; CrescendoEvent &lt;/item&gt;
+      &lt;item&gt; DecrescendoEvent &lt;/item&gt;
+      &lt;item&gt; Event &lt;/item&gt;
+      &lt;item&gt; EventChord &lt;/item&gt;
+      &lt;item&gt; ExtenderEvent &lt;/item&gt;
+      &lt;item&gt; FingeringEvent &lt;/item&gt;
+      &lt;item&gt; GlissandoEvent &lt;/item&gt;
+      &lt;item&gt; GraceMusic &lt;/item&gt;
+      &lt;item&gt; HarmonicEvent &lt;/item&gt;
+      &lt;item&gt; HyphenEvent &lt;/item&gt;
+      &lt;item&gt; KeyChangeEvent &lt;/item&gt;
+      &lt;item&gt; LabelEvent &lt;/item&gt;
+      &lt;item&gt; LaissezVibrerEvent &lt;/item&gt;
+      &lt;item&gt; LigatureEvent &lt;/item&gt;
+      &lt;item&gt; LineBreakEvent &lt;/item&gt;
+      &lt;item&gt; LyricCombineMusic &lt;/item&gt;
+      &lt;item&gt; LyricEvent &lt;/item&gt;
+      &lt;item&gt; MarkEvent &lt;/item&gt;
+      &lt;item&gt; MultiMeasureRestEvent &lt;/item&gt;
+      &lt;item&gt; MultiMeasureRestMusic &lt;/item&gt;
+      &lt;item&gt; MultiMeasureTextEvent &lt;/item&gt;
+      &lt;item&gt; Music &lt;/item&gt;
+      &lt;item&gt; NoteEvent &lt;/item&gt;
+      &lt;item&gt; NoteGroupingEvent &lt;/item&gt;
+      &lt;item&gt; OverrideProperty &lt;/item&gt;
+      &lt;item&gt; PageBreakEvent &lt;/item&gt;
+      &lt;item&gt; PageTurnEvent &lt;/item&gt;
+      &lt;item&gt; PartCombineMusic &lt;/item&gt;
+      &lt;item&gt; PercentEvent &lt;/item&gt;
+      &lt;item&gt; PercentRepeatedMusic &lt;/item&gt;
+      &lt;item&gt; PesOrFlexaEvent &lt;/item&gt;
+      &lt;item&gt; PhrasingSlurEvent &lt;/item&gt;
+      &lt;item&gt; PropertySet &lt;/item&gt;
+      &lt;item&gt; PropertyUnset &lt;/item&gt;
+      &lt;item&gt; QuoteMusic &lt;/item&gt;
+      &lt;item&gt; RelativeOctaveCheck &lt;/item&gt;
+      &lt;item&gt; RelativeOctaveMusic &lt;/item&gt;
+      &lt;item&gt; RepeatTieEvent &lt;/item&gt;
+      &lt;item&gt; RepeatedMusic &lt;/item&gt;
+      &lt;item&gt; RestEvent &lt;/item&gt;
+      &lt;item&gt; RevertProperty &lt;/item&gt;
+      &lt;item&gt; ScriptEvent &lt;/item&gt;
+      &lt;item&gt; SequentialMusic &lt;/item&gt;
+      &lt;item&gt; SimultaneousMusic &lt;/item&gt;
+      &lt;item&gt; SkipEvent &lt;/item&gt;
+      &lt;item&gt; SkipMusic &lt;/item&gt;
+      &lt;item&gt; SlurEvent &lt;/item&gt;
+      &lt;item&gt; SoloOneEvent &lt;/item&gt;
+      &lt;item&gt; SoloTwoEvent &lt;/item&gt;
+      &lt;item&gt; SostenutoEvent &lt;/item&gt;
+      &lt;item&gt; SpacingSectionEvent &lt;/item&gt;
+      &lt;item&gt; SpanEvent &lt;/item&gt;
+      &lt;item&gt; StaffSpanEvent &lt;/item&gt;
+      &lt;item&gt; StringNumberEvent &lt;/item&gt;
+      &lt;item&gt; StrokeFingerEvent &lt;/item&gt;
+      &lt;item&gt; SustainEvent &lt;/item&gt;
+      &lt;item&gt; TextScriptEvent &lt;/item&gt;
+      &lt;item&gt; TextSpanEvent &lt;/item&gt;
+      &lt;item&gt; TieEvent &lt;/item&gt;
+      &lt;item&gt; TimeScaledMusic &lt;/item&gt;
+      &lt;item&gt; TransposedMusic &lt;/item&gt;
+      &lt;item&gt; TremoloEvent &lt;/item&gt;
+      &lt;item&gt; TremoloRepeatedMusic &lt;/item&gt;
+      &lt;item&gt; TremoloSpanEvent &lt;/item&gt;
+      &lt;item&gt; TrillSpanEvent &lt;/item&gt;
+      &lt;item&gt; TupletSpanEvent &lt;/item&gt;
+      &lt;item&gt; UnaCordaEvent &lt;/item&gt;
+      &lt;item&gt; UnfoldedRepeatedMusic &lt;/item&gt;
+      &lt;item&gt; UnisonoEvent &lt;/item&gt;
+      &lt;item&gt; UnrelativableMusic &lt;/item&gt;
+      &lt;item&gt; VoiceSeparator &lt;/item&gt;
+      &lt;item&gt; VoltaRepeatedMusic &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;list name=&quot;drumpitchnames&quot;&gt;
+      &lt;item&gt; acousticbassdrum &lt;/item&gt;
+      &lt;item&gt; acousticsnare &lt;/item&gt;
+      &lt;item&gt; agh &lt;/item&gt;
+      &lt;item&gt; agl &lt;/item&gt;
+      &lt;item&gt; bassdrum &lt;/item&gt;
+      &lt;item&gt; bd &lt;/item&gt;
+      &lt;item&gt; bda &lt;/item&gt;
+      &lt;item&gt; boh &lt;/item&gt;
+      &lt;item&gt; bohm &lt;/item&gt;
+      &lt;item&gt; boho &lt;/item&gt;
+      &lt;item&gt; bol &lt;/item&gt;
+      &lt;item&gt; bolm &lt;/item&gt;
+      &lt;item&gt; bolo &lt;/item&gt;
+      &lt;item&gt; cab &lt;/item&gt;
+      &lt;item&gt; cabasa &lt;/item&gt;
+      &lt;item&gt; cb &lt;/item&gt;
+      &lt;item&gt; cgh &lt;/item&gt;
+      &lt;item&gt; cghm &lt;/item&gt;
+      &lt;item&gt; cgho &lt;/item&gt;
+      &lt;item&gt; cgl &lt;/item&gt;
+      &lt;item&gt; cglm &lt;/item&gt;
+      &lt;item&gt; cglo &lt;/item&gt;
+      &lt;item&gt; chinesecymbal &lt;/item&gt;
+      &lt;item&gt; cl &lt;/item&gt;
+      &lt;item&gt; claves &lt;/item&gt;
+      &lt;item&gt; closedhihat &lt;/item&gt;
+      &lt;item&gt; cowbell &lt;/item&gt;
+      &lt;item&gt; crashcymbal &lt;/item&gt;
+      &lt;item&gt; crashcymbala &lt;/item&gt;
+      &lt;item&gt; crashcymbalb &lt;/item&gt;
+      &lt;item&gt; cuim &lt;/item&gt;
+      &lt;item&gt; cuio &lt;/item&gt;
+      &lt;item&gt; cymc &lt;/item&gt;
+      &lt;item&gt; cymca &lt;/item&gt;
+      &lt;item&gt; cymcb &lt;/item&gt;
+      &lt;item&gt; cymch &lt;/item&gt;
+      &lt;item&gt; cymr &lt;/item&gt;
+      &lt;item&gt; cymra &lt;/item&gt;
+      &lt;item&gt; cymrb &lt;/item&gt;
+      &lt;item&gt; cyms &lt;/item&gt;
+      &lt;item&gt; da &lt;/item&gt;
+      &lt;item&gt; db &lt;/item&gt;
+      &lt;item&gt; dc &lt;/item&gt;
+      &lt;item&gt; dd &lt;/item&gt;
+      &lt;item&gt; de &lt;/item&gt;
+      &lt;item&gt; electricsnare &lt;/item&gt;
+      &lt;item&gt; fivedown &lt;/item&gt;
+      &lt;item&gt; fiveup &lt;/item&gt;
+      &lt;item&gt; fourdown &lt;/item&gt;
+      &lt;item&gt; fourup &lt;/item&gt;
+      &lt;item&gt; gui &lt;/item&gt;
+      &lt;item&gt; guil &lt;/item&gt;
+      &lt;item&gt; guiro &lt;/item&gt;
+      &lt;item&gt; guis &lt;/item&gt;
+      &lt;item&gt; halfopenhihat &lt;/item&gt;
+      &lt;item&gt; handclap &lt;/item&gt;
+      &lt;item&gt; hc &lt;/item&gt;
+      &lt;item&gt; hh &lt;/item&gt;
+      &lt;item&gt; hhc &lt;/item&gt;
+      &lt;item&gt; hhho &lt;/item&gt;
+      &lt;item&gt; hho &lt;/item&gt;
+      &lt;item&gt; hhp &lt;/item&gt;
+      &lt;item&gt; hiagogo &lt;/item&gt;
+      &lt;item&gt; hibongo &lt;/item&gt;
+      &lt;item&gt; hiconga &lt;/item&gt;
+      &lt;item&gt; highfloortom &lt;/item&gt;
+      &lt;item&gt; hightom &lt;/item&gt;
+      &lt;item&gt; hihat &lt;/item&gt;
+      &lt;item&gt; himidtom &lt;/item&gt;
+      &lt;item&gt; hisidestick &lt;/item&gt;
+      &lt;item&gt; hitimbale &lt;/item&gt;
+      &lt;item&gt; hiwoodblock &lt;/item&gt;
+      &lt;item&gt; loagogo &lt;/item&gt;
+      &lt;item&gt; lobongo &lt;/item&gt;
+      &lt;item&gt; loconga &lt;/item&gt;
+      &lt;item&gt; longguiro &lt;/item&gt;
+      &lt;item&gt; longwhistle &lt;/item&gt;
+      &lt;item&gt; losidestick &lt;/item&gt;
+      &lt;item&gt; lotimbale &lt;/item&gt;
+      &lt;item&gt; lowfloortom &lt;/item&gt;
+      &lt;item&gt; lowmidtom &lt;/item&gt;
+      &lt;item&gt; lowoodblock &lt;/item&gt;
+      &lt;item&gt; lowtom &lt;/item&gt;
+      &lt;item&gt; mar &lt;/item&gt;
+      &lt;item&gt; maracas &lt;/item&gt;
+      &lt;item&gt; mutecuica &lt;/item&gt;
+      &lt;item&gt; mutehibongo &lt;/item&gt;
+      &lt;item&gt; mutehiconga &lt;/item&gt;
+      &lt;item&gt; mutelobongo &lt;/item&gt;
+      &lt;item&gt; muteloconga &lt;/item&gt;
+      &lt;item&gt; mutetriangle &lt;/item&gt;
+      &lt;item&gt; onedown &lt;/item&gt;
+      &lt;item&gt; oneup &lt;/item&gt;
+      &lt;item&gt; opencuica &lt;/item&gt;
+      &lt;item&gt; openhibongo &lt;/item&gt;
+      &lt;item&gt; openhiconga &lt;/item&gt;
+      &lt;item&gt; openhihat &lt;/item&gt;
+      &lt;item&gt; openlobongo &lt;/item&gt;
+      &lt;item&gt; openloconga &lt;/item&gt;
+      &lt;item&gt; opentriangle &lt;/item&gt;
+      &lt;item&gt; pedalhihat &lt;/item&gt;
+      &lt;item&gt; rb &lt;/item&gt;
+      &lt;item&gt; ridebell &lt;/item&gt;
+      &lt;item&gt; ridecymbal &lt;/item&gt;
+      &lt;item&gt; ridecymbala &lt;/item&gt;
+      &lt;item&gt; ridecymbalb &lt;/item&gt;
+      &lt;item&gt; shortguiro &lt;/item&gt;
+      &lt;item&gt; shortwhistle &lt;/item&gt;
+      &lt;item&gt; sidestick &lt;/item&gt;
+      &lt;item&gt; sn &lt;/item&gt;
+      &lt;item&gt; sna &lt;/item&gt;
+      &lt;item&gt; snare &lt;/item&gt;
+      &lt;item&gt; sne &lt;/item&gt;
+      &lt;item&gt; splashcymbal &lt;/item&gt;
+      &lt;item&gt; ss &lt;/item&gt;
+      &lt;item&gt; ssh &lt;/item&gt;
+      &lt;item&gt; ssl &lt;/item&gt;
+      &lt;item&gt; tamb &lt;/item&gt;
+      &lt;item&gt; tambourine &lt;/item&gt;
+      &lt;item&gt; tamtam &lt;/item&gt;
+      &lt;item&gt; threedown &lt;/item&gt;
+      &lt;item&gt; threeup &lt;/item&gt;
+      &lt;item&gt; timh &lt;/item&gt;
+      &lt;item&gt; timl &lt;/item&gt;
+      &lt;item&gt; tomfh &lt;/item&gt;
+      &lt;item&gt; tomfl &lt;/item&gt;
+      &lt;item&gt; tomh &lt;/item&gt;
+      &lt;item&gt; toml &lt;/item&gt;
+      &lt;item&gt; tommh &lt;/item&gt;
+      &lt;item&gt; tomml &lt;/item&gt;
+      &lt;item&gt; tri &lt;/item&gt;
+      &lt;item&gt; triangle &lt;/item&gt;
+      &lt;item&gt; trim &lt;/item&gt;
+      &lt;item&gt; trio &lt;/item&gt;
+      &lt;item&gt; tt &lt;/item&gt;
+      &lt;item&gt; twodown &lt;/item&gt;
+      &lt;item&gt; twoup &lt;/item&gt;
+      &lt;item&gt; ua &lt;/item&gt;
+      &lt;item&gt; ub &lt;/item&gt;
+      &lt;item&gt; uc &lt;/item&gt;
+      &lt;item&gt; ud &lt;/item&gt;
+      &lt;item&gt; ue &lt;/item&gt;
+      &lt;item&gt; vibraslap &lt;/item&gt;
+      &lt;item&gt; vibs &lt;/item&gt;
+      &lt;item&gt; wbh &lt;/item&gt;
+      &lt;item&gt; wbl &lt;/item&gt;
+      &lt;item&gt; whl &lt;/item&gt;
+      &lt;item&gt; whs &lt;/item&gt;
+    &lt;/list&gt;
+    &lt;contexts&gt;
+      &lt;!-- Entry point --&gt;
+      &lt;context name=&quot;lilypond&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;IncludeRules context=&quot;music&quot;/&gt;
+        &lt;RegExpr String=&quot;\b[a-z]+\s*=&quot; insensitive=&quot;true&quot; lookAhead=&quot;true&quot; context=&quot;assignment&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Music expressions --&gt;
+      &lt;context name=&quot;music&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;AnyChar String=&quot;()~&quot; attribute=&quot;Slur&quot;/&gt;
+        &lt;AnyChar String=&quot;[]&quot; attribute=&quot;Beam&quot;/&gt;
+        &lt;AnyChar String=&quot;-_^&quot; context=&quot;connect&quot;/&gt;
+        &lt;DetectChar char=&quot;\&quot; context=&quot;musiccommand&quot; lookAhead=&quot;true&quot;/&gt;
+        &lt;IncludeRules context=&quot;default&quot;/&gt;
+        &lt;DetectChar char=&quot;&amp;lt;&quot; attribute=&quot;Chord&quot; context=&quot;chord&quot;/&gt;
+        &lt;DetectChar char=&quot;&amp;gt;&quot; attribute=&quot;Invalid&quot;/&gt;&lt;!-- chord terminator outsite chord --&gt;
+        &lt;RegExpr String=&quot;[a-z]+\d+\.*[,&#39;]+&quot; attribute=&quot;Invalid&quot;/&gt;&lt;!-- pitch-dur-octave i.s.o. pitch-oct-dur --&gt;
+        &lt;RegExpr String=&quot;(&amp;rest;|&amp;pitch;)&quot; context=&quot;pitch&quot;/&gt;
+        &lt;RegExpr String=&quot;:\d*&quot; attribute=&quot;Tremolo&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Default Lilypond code to be recognized e.g. also inside lyrics --&gt;
+      &lt;context name=&quot;default&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;Detect2Chars char=&quot;&amp;lt;&quot; char1=&quot;&amp;lt;&quot; attribute=&quot;Keyword&quot; beginRegion=&quot;simultaneous&quot;/&gt;
+        &lt;Detect2Chars char=&quot;&amp;gt;&quot; char1=&quot;&amp;gt;&quot; attribute=&quot;Keyword&quot; endRegion=&quot;simultaneous&quot;/&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;|&quot; attribute=&quot;Check&quot;/&gt;
+        &lt;DetectChar char=&quot;\&quot; context=&quot;command&quot; lookAhead=&quot;true&quot;/&gt;
+        &lt;IncludeRules context=&quot;basic&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Basic Lilypond syntax that also works inside markup --&gt;
+      &lt;context name=&quot;basic&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;Detect2Chars char=&quot;%&quot; char1=&quot;{&quot; context=&quot;commentblock&quot; beginRegion=&quot;comment&quot;/&gt;
+        &lt;DetectChar char=&quot;%&quot; context=&quot;commentline&quot;/&gt;
+        &lt;DetectChar char=&quot;&amp;quot;&quot; context=&quot;string&quot;/&gt;
+        &lt;DetectChar char=&quot;#&quot; context=&quot;scheme&quot;/&gt;
+        &lt;DetectChar char=&quot;$&quot; context=&quot;schemesub&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;musiccommand&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#pop&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;\\(&amp;dynamics;)&amp;b;&quot; attribute=&quot;Dynamic&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[&amp;lt;!&amp;gt;]&quot; attribute=&quot;Dynamic&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;scripts;)&amp;b;&quot; attribute=&quot;Articulation&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[()]&quot; attribute=&quot;Slur&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[][]&quot; attribute=&quot;Beam&quot;/&gt;
+        &lt;IncludeRules context=&quot;command&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;command&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#pop&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;Detect2Chars char=&quot;\&quot; char1=&quot;\&quot; attribute=&quot;Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;\\note(mode|s)&amp;b;&quot; context=&quot;notemode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\drum(mode|s)&amp;b;&quot; context=&quot;drummode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\chord(mode|s)&amp;b;&quot; context=&quot;chordmode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\figure(mode|s)&amp;b;&quot; context=&quot;figuremode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(lyric(mode|s)|addlyrics)&amp;b;&quot; context=&quot;lyricmode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\lyricsto&amp;b;&quot; context=&quot;lyricsto&quot;/&gt;
+        &lt;RegExpr String=&quot;\\markup(lines)?&amp;b;&quot; attribute=&quot;Markup&quot; context=&quot;markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(header|paper|layout|midi|with)\b&quot; context=&quot;section&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(new|context|change)\b&quot; attribute=&quot;Keyword&quot; context=&quot;context&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(un)?set\b&quot; attribute=&quot;Keyword&quot; context=&quot;set&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(override(Property)?|revert)&amp;b;&quot; attribute=&quot;Keyword&quot; context=&quot;override&quot;/&gt;
+        &lt;RegExpr String=&quot;\\skip&amp;b;&quot; attribute=&quot;Command&quot; context=&quot;duration&quot;/&gt;
+        &lt;RegExpr String=&quot;\\tempo&amp;b;&quot; attribute=&quot;Command&quot; context=&quot;tempo&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;keywords;)&amp;b;&quot; attribute=&quot;Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-heads;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other1;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other2;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other3;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other4;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other5;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other6;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;commands-other7;)&amp;b;&quot; attribute=&quot;Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;toplevelvars;)&amp;b;&quot; attribute=&quot;Variable&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;deprecatedkeywords;)&amp;b;&quot; attribute=&quot;Deprecated Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;deprecatedcommands;)&amp;b;&quot; attribute=&quot;Deprecated Command&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(translator|newcontext)\b&quot; attribute=&quot;Deprecated Keyword&quot; context=&quot;context&quot;/&gt;
+        &lt;RegExpr String=&quot;\\property&amp;b;&quot; attribute=&quot;Deprecated Keyword&quot; context=&quot;override&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[A-Za-z]+&quot; attribute=&quot;User Command&quot;/&gt;
+        &lt;DetectChar char=&quot;\&quot; attribute=&quot;Invalid&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;assignment&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;\b(&amp;toplevelvars;)\b&quot; attribute=&quot;Variable&quot; context=&quot;#pop&quot;/&gt;
+        &lt;RegExpr String=&quot;[a-z]+&quot; insensitive=&quot;true&quot; attribute=&quot;User Command&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;pitch&quot; attribute=&quot;Pitch&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;=\s*(&#39;+|,+)?&quot; attribute=&quot;Check&quot;/&gt;
+        &lt;AnyChar String=&quot;!?&quot;/&gt;
+        &lt;IncludeRules context=&quot;duration&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;duration&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectSpaces attribute=&quot;Normal Text&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;duration;&quot; attribute=&quot;Duration&quot; context=&quot;#pop&quot;/&gt;
+        &lt;RegExpr String=&quot;\d+&quot; attribute=&quot;Invalid&quot; context=&quot;#pop&quot;/&gt;&lt;!-- uncaught (wrong) durations --&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;chord&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;&amp;gt;&quot; context=&quot;chordend&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;pitch;&quot; context=&quot;chordpitch&quot;/&gt;
+        &lt;AnyChar String=&quot;&amp;lt;{}srR&quot; attribute=&quot;Invalid&quot;/&gt;&lt;!-- no rests in chord allowed --&gt;
+        &lt;IncludeRules context=&quot;music&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;chordpitch&quot; attribute=&quot;Pitch&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectSpaces attribute=&quot;Normal Text&quot;/&gt;
+        &lt;RegExpr String=&quot;=\s*(&#39;+|,+)?&quot; attribute=&quot;Check&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;duration;&quot; attribute=&quot;Invalid&quot; context=&quot;#pop&quot;/&gt;&lt;!-- no duration in chord allowed --&gt;
+        &lt;RegExpr String=&quot;\d+&quot; attribute=&quot;Invalid&quot; context=&quot;#pop&quot;/&gt;&lt;!-- catch other (wrong) durations as well --&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;chordend&quot; attribute=&quot;Chord&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop#pop&quot;&gt;
+        &lt;DetectSpaces attribute=&quot;Normal Text&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;duration;&quot; attribute=&quot;Duration&quot; context=&quot;#pop#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;commentline&quot; attribute=&quot;Comment&quot; lineEndContext=&quot;#pop&quot;&gt;
+        &lt;IncludeRules context=&quot;##Alerts&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;commentblock&quot; attribute=&quot;Comment&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;Detect2Chars char=&quot;%&quot; char1=&quot;}&quot; attribute=&quot;Comment&quot; context=&quot;#pop&quot; endRegion=&quot;comment&quot;/&gt;
+        &lt;IncludeRules context=&quot;##Alerts&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;string&quot; attribute=&quot;Quoted Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;&amp;quot;&quot; attribute=&quot;Quoted Text&quot; context=&quot;#pop&quot;/&gt;
+        &lt;Detect2Chars char=&quot;\&quot; char1=&quot;\&quot;/&gt;
+        &lt;Detect2Chars char=&quot;\&quot; char1=&quot;&amp;quot;&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;connect&quot; attribute=&quot;Articulation&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;AnyChar String=&quot;.-+|&amp;gt;^_12345&quot; attribute=&quot;Articulation&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Scheme --&gt;
+      &lt;context name=&quot;scheme&quot; attribute=&quot;Scheme&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;scheme2&quot;&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;scheme2&quot; attribute=&quot;Scheme&quot; lineEndContext=&quot;#pop#pop&quot;&gt;
+        &lt;DetectChar char=&quot;(&quot; attribute=&quot;Scheme Keyword&quot; context=&quot;scheme3&quot; beginRegion=&quot;scheme&quot;/&gt;
+        &lt;IncludeRules context=&quot;schemerules&quot;/&gt;
+        &lt;DetectSpaces lookAhead=&quot;true&quot; context=&quot;#pop#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;scheme3&quot; attribute=&quot;Scheme&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;)&quot; attribute=&quot;Scheme Keyword&quot; context=&quot;#pop#pop#pop&quot; endRegion=&quot;scheme&quot;/&gt;
+        &lt;IncludeRules context=&quot;schemerules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemerules&quot; attribute=&quot;Scheme&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;(&quot; context=&quot;schemerules&quot; beginRegion=&quot;scheme&quot;/&gt;
+        &lt;DetectChar char=&quot;)&quot; context=&quot;#pop&quot; endRegion=&quot;scheme&quot;/&gt;
+        &lt;DetectChar char=&quot;&amp;quot;&quot; context=&quot;schemestring&quot;/&gt;
+        &lt;DetectChar char=&quot;;&quot; context=&quot;schemecommentline&quot;/&gt;
+        &lt;DetectChar char=&quot;$&quot; context=&quot;schemesub&quot;/&gt;
+        &lt;DetectChar char=&quot;&#39;&quot; context=&quot;schemequote&quot;/&gt;
+        &lt;Detect2Chars char=&quot;#&quot; char1=&quot;!&quot; context=&quot;schemecommentblock&quot; beginRegion=&quot;schemecomment&quot;/&gt;
+        &lt;Detect2Chars char=&quot;#&quot; char1=&quot;{&quot; attribute=&quot;Scheme Keyword&quot; context=&quot;schemelily&quot; beginRegion=&quot;schemelily&quot;/&gt;
+        &lt;keyword String=&quot;musicexpressions&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;keyword String=&quot;contexts&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;keyword String=&quot;layoutobjects&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;[-+]?(\d+(\.\d+)?|\.\d+)&quot; attribute=&quot;Scheme Value&quot;/&gt;
+        &lt;RegExpr String=&quot;#(t|f|b[-+]?[01.]+|o[-+]?[0-7.]+|d[-+]?[0-9.]+|x[-+]?[0-9a-f.]+)&quot;
+                 insensitive=&quot;true&quot; attribute=&quot;Scheme Value&quot;/&gt;
+        &lt;RegExpr String=&quot;[+-](inf|nan)\.0&quot; attribute=&quot;Scheme Value&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc0;&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc1;&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc2;&quot; attribute=&quot;Scheme Keyword&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemename;&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemequote&quot; attribute=&quot;Scheme&quot; lineEndContext=&quot;#pop&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc0;&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc1;&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;schemefunc2;&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemelily&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;Detect2Chars char=&quot;#&quot; char1=&quot;}&quot; attribute=&quot;Scheme Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;schemelily&quot;/&gt;
+        &lt;IncludeRules context=&quot;lilypond&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemecommentline&quot; attribute=&quot;Scheme Comment&quot; lineEndContext=&quot;#pop&quot;&gt;
+        &lt;IncludeRules context=&quot;##Alerts&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemecommentblock&quot; attribute=&quot;Scheme Comment&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;Detect2Chars char=&quot;!&quot; char1=&quot;#&quot; attribute=&quot;Scheme Comment&quot; context=&quot;#pop&quot; endRegion=&quot;schemecomment&quot;/&gt;
+        &lt;IncludeRules context=&quot;##Alerts&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemesub&quot; attribute=&quot;Scheme Subst&quot; lineEndContext=&quot;#pop&quot;
+                fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;&amp;schemename;&quot; attribute=&quot;Scheme Subst&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;schemestring&quot; attribute=&quot;Scheme String&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;&amp;quot;&quot; attribute=&quot;Scheme String&quot; context=&quot;#pop&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[0fnrtav\\&amp;quot;]&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- NoteMode --&gt;
+      &lt;context name=&quot;notemode&quot; attribute=&quot;Other Mode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;notemode2&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;notemode2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;noterules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;noterules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;noterules&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;music&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Drummode --&gt;
+      &lt;context name=&quot;drummode&quot; attribute=&quot;Other Mode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;drummode2&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;drummode2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;drumrules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;drumrules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;drumrules&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;lt;(?!&amp;lt;)&quot; attribute=&quot;Chord&quot; context=&quot;drumchord&quot;/&gt;
+        &lt;keyword attribute=&quot;Other Text&quot; String=&quot;drumpitchnames&quot; context=&quot;duration&quot;/&gt;
+        &lt;IncludeRules context=&quot;music&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;drumchord&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;keyword attribute=&quot;Other Text&quot; String=&quot;drumpitchnames&quot;/&gt;
+        &lt;IncludeRules context=&quot;chord&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Chordmode --&gt;
+      &lt;context name=&quot;chordmode&quot; attribute=&quot;Other Mode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;chordmode2&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;chordmode2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;chordrules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;chordrules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;chordrules&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;RegExpr attribute=&quot;Other Text&quot; String=&quot;:?([\.^]?\d+[-+]?|(m|dim|aug|maj|sus)&amp;b;)*(/\+?&amp;pitch;)?&quot;/&gt;
+        &lt;IncludeRules context=&quot;music&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Figuremode --&gt;
+      &lt;context name=&quot;figuremode&quot; attribute=&quot;Other Mode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;figuremode2&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;figuremode2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;figurerules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;figurerules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;figurerules&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;&amp;lt;&quot; attribute=&quot;Chord&quot; context=&quot;figure&quot;/&gt;
+        &lt;RegExpr String=&quot;&amp;rest;&quot; attribute=&quot;Pitch&quot; context=&quot;duration&quot;/&gt;
+        &lt;IncludeRules context=&quot;default&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;figure&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;&amp;gt;&quot; attribute=&quot;Chord&quot; context=&quot;chordend&quot;/&gt;
+        &lt;IncludeRules context=&quot;basic&quot;/&gt;
+        &lt;RegExpr String=&quot;\\markup(lines)?&amp;b;&quot; attribute=&quot;Markup&quot; context=&quot;markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\skip&amp;b;&quot; attribute=&quot;Command&quot; context=&quot;duration&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Lyrics --&gt;
+      &lt;context name=&quot;lyricmode&quot; attribute=&quot;Lyricmode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;lyricmode2&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;lyricmode2&quot; attribute=&quot;Lyric Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;lyricrules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- LyricsTo has extra parameter --&gt;
+      &lt;context name=&quot;lyricsto&quot; attribute=&quot;Lyricmode&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;&amp;quot;(\\[&amp;quot;\\]|[^&amp;quot;\\])+&amp;quot;&quot; attribute=&quot;Quoted Text&quot; context=&quot;lyricsto2&quot;/&gt;
+        &lt;RegExpr String=&quot;[A-Za-z]+&quot; attribute=&quot;Normal Text&quot; context=&quot;lyricsto2&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;lyricsto2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;lyricsto3&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;lyricsto3&quot; attribute=&quot;Lyric Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;IncludeRules context=&quot;lyricrules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;lyricrules&quot; attribute=&quot;Lyric Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;lyricrules&quot; beginRegion=&quot;sequential&quot;/&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+        &lt;RegExpr String=&quot;(\w+-{2,}|\w+_{2,}|-{2,}\w+|_{2,}\w+)&quot; attribute=&quot;Invalid&quot;/&gt;&lt;!-- two hyphens or underscores run together with a word --&gt;
+        &lt;RegExpr String=&quot;&amp;duration;&quot; attribute=&quot;Duration&quot;/&gt;
+        &lt;RegExpr String=&quot;(--|__|_)&quot; attribute=&quot;Lyricmode&quot;/&gt;
+        &lt;IncludeRules context=&quot;default&quot;/&gt;
+        &lt;RegExpr String=&quot;\S+\}&quot; attribute=&quot;Invalid&quot; context=&quot;#pop&quot; endRegion=&quot;sequential&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- Markup --&gt;
+      &lt;context name=&quot;markup&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;markup2&quot; beginRegion=&quot;markup&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;RegExpr String=&quot;\\score\b&quot; attribute=&quot;Markup&quot; context=&quot;notemode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;markupwithtextargs;)&amp;b;&quot; attribute=&quot;Markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;markupnotextargs;)&amp;b;&quot; attribute=&quot;Markup&quot; context=&quot;#pop&quot;/&gt;
+        &lt;DetectChar char=&quot;#&quot; context=&quot;scheme&quot;/&gt;
+        &lt;RegExpr String=&quot;[^&amp;quot;\s\\#%{}$]+&quot; attribute=&quot;Normal Text&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;markup2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;markup&quot;/&gt;
+        &lt;IncludeRules context=&quot;markuprules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;markuprules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;markup&quot;/&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;markuprules&quot; beginRegion=&quot;markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\score\b&quot; attribute=&quot;Markup&quot; context=&quot;notemode&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;markupnotextargs;|&amp;markupwithtextargs;)&amp;b;&quot; attribute=&quot;Markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\(&amp;deprecatedmarkup;)&amp;b;&quot; attribute=&quot;Deprecated Markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\\[A-Za-z]+(-[A-Za-z]+)*&quot; attribute=&quot;User Command&quot;/&gt;
+        &lt;IncludeRules context=&quot;basic&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- \paper, \layout, \midi, \header, \with --&gt;
+      &lt;context name=&quot;section&quot; attribute=&quot;Keyword&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;section2&quot; beginRegion=&quot;section&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;section2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop#pop&quot; endRegion=&quot;section&quot;/&gt;
+        &lt;IncludeRules context=&quot;sectionrules&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;sectionrules&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;&gt;
+        &lt;DetectChar char=&quot;}&quot; attribute=&quot;Keyword&quot; context=&quot;#pop&quot; endRegion=&quot;section&quot;/&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;sectionrules&quot; beginRegion=&quot;section&quot;/&gt;
+        &lt;keyword String=&quot;contexts&quot; attribute=&quot;Context&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedcontexts&quot; attribute=&quot;Deprecated Context&quot;/&gt;
+        &lt;RegExpr String=&quot;(&amp;quot;?)\b(&amp;engravers00;)\b\1&quot; attribute=&quot;Engraver&quot;/&gt;
+        &lt;RegExpr String=&quot;(&amp;quot;?)\b(&amp;engravers01;)\b\1&quot; attribute=&quot;Engraver&quot;/&gt;
+        &lt;RegExpr String=&quot;(&amp;quot;?)\b(&amp;engravers02;)\b\1&quot; attribute=&quot;Engraver&quot;/&gt;
+        &lt;RegExpr String=&quot;(&amp;quot;?)\b(&amp;engravers1;)\b\1&quot; attribute=&quot;Engraver&quot;/&gt;
+        &lt;RegExpr String=&quot;(&amp;quot;?)\b(&amp;engravers2;)\b\1&quot; attribute=&quot;Engraver&quot;/&gt;
+        &lt;keyword String=&quot;layoutobjects&quot; attribute=&quot;Layout Object&quot;/&gt;
+        &lt;keyword String=&quot;properties&quot; attribute=&quot;Property&quot;/&gt;
+        &lt;RegExpr String=&quot;\b(&amp;headervars;|&amp;papervars;|&amp;layoutvars;)\b&quot; attribute=&quot;Variable&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedproperties&quot; attribute=&quot;Deprecated Property&quot;/&gt;
+        &lt;IncludeRules context=&quot;default&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- \new, \context, \change --&gt;
+      &lt;context name=&quot;context&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;keyword String=&quot;contexts&quot; attribute=&quot;Context&quot; context=&quot;context2&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedcontexts&quot; attribute=&quot;Deprecated Context&quot; context=&quot;context2&quot;/&gt;
+        &lt;RegExpr String=&quot;[A-Za-z]+&quot; attribute=&quot;User Command&quot; context=&quot;context2&quot;/&gt;
+        &lt;DetectChar char=&quot;{&quot; attribute=&quot;Keyword&quot; context=&quot;section2&quot; beginRegion=&quot;section&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;context name=&quot;context2&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop#pop&quot;&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;RegExpr String=&quot;=(\s*[A-Za-z]+)?&quot; attribute=&quot;Normal Text&quot; context=&quot;#pop#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- \set, \unset --&gt;
+      &lt;context name=&quot;set&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;keyword String=&quot;contexts&quot; attribute=&quot;Context&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedcontexts&quot; attribute=&quot;Deprecated Context&quot;/&gt;
+        &lt;DetectChar char=&quot;.&quot;/&gt;
+        &lt;keyword String=&quot;properties&quot; attribute=&quot;Property&quot; context=&quot;#pop&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedproperties&quot; attribute=&quot;Deprecated Property&quot; context=&quot;#pop&quot;/&gt;
+        &lt;RegExpr String=&quot;[A-Za-z]+&quot; attribute=&quot;User Command&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- \override, \overrideProperty, \revert --&gt;
+      &lt;context name=&quot;override&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;keyword String=&quot;contexts&quot; attribute=&quot;Context&quot;/&gt;
+        &lt;keyword String=&quot;deprecatedcontexts&quot; attribute=&quot;Deprecated Context&quot;/&gt;
+        &lt;DetectChar char=&quot;.&quot;/&gt;
+        &lt;keyword String=&quot;layoutobjects&quot; attribute=&quot;Layout Object&quot; context=&quot;#pop&quot;/&gt;
+        &lt;RegExpr String=&quot;[A-Za-z]+(?=\s*\.)&quot; attribute=&quot;User Command&quot;/&gt;
+        &lt;RegExpr String=&quot;[A-Za-z]+&quot; attribute=&quot;User Command&quot; context=&quot;#pop&quot;/&gt;
+      &lt;/context&gt;
+
+      &lt;!-- special cases for individual commands --&gt;
+      &lt;!-- \tempo --&gt;
+      &lt;context name=&quot;tempo&quot; attribute=&quot;Normal Text&quot; lineEndContext=&quot;#stay&quot;
+               fallthrough=&quot;true&quot; fallthroughContext=&quot;#pop&quot;&gt;
+        &lt;RegExpr String=&quot;\\markup(lines)?&amp;b;&quot; attribute=&quot;Markup&quot; context=&quot;markup&quot;/&gt;
+        &lt;RegExpr String=&quot;\d+\.*\s*=\s*\d+&quot; attribute=&quot;Command&quot; context=&quot;#pop&quot;/&gt;
+        &lt;DetectSpaces/&gt;
+        &lt;IncludeRules context=&quot;basic&quot;/&gt;
+      &lt;/context&gt;
+
+    &lt;/contexts&gt;
+    &lt;itemDatas&gt;
+      &lt;itemData name=&quot;Pitch&quot; defStyleNum=&quot;dsNormal&quot;/&gt;
+      &lt;itemData name=&quot;Duration&quot; defStyleNum=&quot;dsDataType&quot;/&gt;
+      &lt;itemData name=&quot;Slur&quot; defStyleNum=&quot;dsChar&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Dynamic&quot; defStyleNum=&quot;dsString&quot; color=&quot;#ee5000&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Articulation&quot; defStyleNum=&quot;dsControlFlow&quot; color=&quot;#ee5000&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Chord&quot; defStyleNum=&quot;dsVariable&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Beam&quot; defStyleNum=&quot;dsVariable&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Check&quot; defStyleNum=&quot;dsDecVal&quot;/&gt;
+      &lt;itemData name=&quot;Repeat&quot; defStyleNum=&quot;dsBuiltIn&quot; italic=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Keyword&quot; defStyleNum=&quot;dsKeyword&quot;/&gt;
+      &lt;itemData name=&quot;Command&quot; defStyleNum=&quot;dsFunction&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;User Command&quot; defStyleNum=&quot;dsOthers&quot;/&gt;
+      &lt;itemData name=&quot;Context&quot; defStyleNum=&quot;dsControlFlow&quot; bold=&quot;true&quot;/&gt;
+      &lt;itemData name=&quot;Layout Object&quot; defStyleNum=&quot;dsDataType&quot;/&gt;
+      &lt;itemData name=&quot;Property&quot; defStyleNum=&quot;dsDataType&quot;/&gt;
+      &lt;itemData name=&quot;Variable&quot; defStyleNum=&quot;dsDataType&quot;/&gt;
+      &lt;itemData name=&quot;Engraver&quot; defStyleNum=&quot;dsDataType&quot;/&gt;
+      &lt;itemData name=&quot;Markup&quot; defStyleNum=&quot;dsBaseN&quot; color=&quot;#009817&quot;/&gt;
+      &lt;itemData name=&quot;Lyricmode&quot; defStyleNum=&quot;dsAttribute&quot; color=&quot;#007010&quot;/&gt;
+      &lt;itemData name=&quot;Lyric Text&quot; defStyleNum=&quot;dsNormal&quot; color=&quot;#007010&quot;/&gt;
+      &lt;itemData name=&quot;Other Mode&quot; defStyleNum=&quot;dsVerbatimString&quot; color=&quot;#0094e4&quot;/&gt;
+      &lt;itemData name=&quot;Other Text&quot; defStyleNum=&quot;dsSpecialString&quot; color=&quot;#0094e4&quot;/&gt;
+      &lt;itemData name=&quot;Normal Text&quot; defStyleNum=&quot;dsNormal&quot;/&gt;
+      &lt;itemData name=&quot;Quoted Text&quot; defStyleNum=&quot;dsString&quot;/&gt;
+      &lt;itemData name=&quot;Comment&quot; defStyleNum=&quot;dsComment&quot;/&gt;
+      &lt;itemData name=&quot;Scheme&quot; defStyleNum=&quot;dsFloat&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Scheme Keyword&quot; defStyleNum=&quot;dsFloat&quot; bold=&quot;true&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Scheme Subst&quot; defStyleNum=&quot;dsDecVal&quot; bold=&quot;true&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Scheme Value&quot; defStyleNum=&quot;dsDecVal&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Scheme String&quot; defStyleNum=&quot;dsString&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Scheme Comment&quot; defStyleNum=&quot;dsComment&quot; backgroundColor=&quot;#fff6ff&quot;/&gt;
+      &lt;itemData name=&quot;Deprecated Keyword&quot; defStyleNum=&quot;dsKeyword&quot; backgroundColor=&quot;#fcc&quot;/&gt;
+      &lt;itemData name=&quot;Deprecated Command&quot; defStyleNum=&quot;dsFunction&quot; backgroundColor=&quot;#fcc&quot;/&gt;
+      &lt;itemData name=&quot;Deprecated Property&quot; defStyleNum=&quot;dsDataType&quot; backgroundColor=&quot;#fcc&quot;/&gt;
+      &lt;itemData name=&quot;Deprecated Context&quot; defStyleNum=&quot;dsDataType&quot; bold=&quot;true&quot; backgroundColor=&quot;#fcc&quot;/&gt;
+      &lt;itemData name=&quot;Deprecated Markup&quot; defStyleNum=&quot;dsBaseN&quot; color=&quot;#009817&quot; backgroundColor=&quot;#fcc&quot;/&gt;
+      &lt;itemData name=&quot;Invalid&quot; defStyleNum=&quot;dsError&quot;/&gt;
+    &lt;/itemDatas&gt;
+  &lt;/highlighting&gt;
+  &lt;general&gt;
+    &lt;comments&gt;
+      &lt;comment name=&quot;singleLine&quot; start=&quot;%&quot;/&gt;
+      &lt;comment name=&quot;multiLine&quot; start=&quot;%{&quot; end=&quot;%}&quot; region=&quot;comment&quot;/&gt;
+    &lt;/comments&gt;
+    &lt;keywords casesensitive=&quot;true&quot; additionalDeliminator=&quot;&#39;_0123456789&quot;/&gt;
+  &lt;/general&gt;
+&lt;/language&gt;
+&lt;!--
+  kate: space-indent on; indent-width 2; replace-tabs on;
+--&gt;
+</code></pre>
+</div>
+                </div>
+            </div>
+
+            <div class="row footer">
+                <div class="hidden-xs hidden-sm col-md-2">&nbsp;</div>
+                <div class="col-xs-2 col-sm-1 col-md-1" style="text-align: center">
+                    <a href="https://fastapi.metacpan.org">API</a>
+                </div>
+                <div class="col-xs-5 col-sm-3 col-md-2" style="text-align: center">
+                    <a href="/about">About MetaCPAN</a>
+                </div>
+                <div class="hidden-xs col-sm-3 col-md-2" style="text-align: center">
+                    <a href="https://github.com/metacpan/metacpan-web">Fork metacpan.org</a>
+                </div>
+                <div class="hidden-xs col-sm-1 col-md-1" style="text-align: center">
+                    <a href="https://www.perl.org/">Perl.org</a>
+                </div>
+            </div>
+
+            <div class="row" style="padding: 50px 15px 30px">
+              <div class="col-xs-9 col-md-3" style="padding:25px">
+                <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
+                  <img width="170" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
+                </a>
+              </div>
+              <div class="col-xs-9 col-md-3" style="padding:15px">
+                <a target="_blank" href="https://www.liquidweb.com/" rel="noopener">
+                  <img width="170" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
+                </a>
+              </div>
+              <div class="col-xs-9 col-md-3" style="padding:15px">
+                <a target="_blank" href="https://www.yellowbot.com/" rel="noopener">
+                  <img width="170" src="/static/images/sponsors/yellowbot-small.png" alt="YellowBot logo">
+                </a>
+              </div>
+              <div class="col-xs-9 col-md-3" style="padding:15px">
+                <a href="https://www.fastly.com/" target="_blank" rel="noopener">
+                  <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51 alt="Fastly logo">
+                </a>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="metacpan_keyboard-shortcuts">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Keyboard Shortcuts</h4>
+              </div>
+              <div class="modal-body row">
+<div class="col-md-6">
+  <table class="table keyboard-shortcuts">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Global</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="keys">
+          <kbd>s</kbd>
+        </td>
+        <td>Focus search bar</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>?</kbd>
+        </td>
+        <td>Bring up this help dialog</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table keyboard-shortcuts">
+    <thead>
+      <tr>
+        <th></th>
+        <th>GitHub</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>p</kbd>
+        </td>
+        <td>Go to pull requests</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>i</kbd>
+        </td>
+        <td>go to github issues (only if github is preferred repository)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-md-6">
+  <table class="table keyboard-shortcuts">
+    <thead>
+      <tr>
+        <th></th>
+        <th>POD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>a</kbd>
+        </td>
+        <td>Go to author</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>c</kbd>
+        </td>
+        <td>Go to changes</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>i</kbd>
+        </td>
+        <td>Go to issues</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>d</kbd>
+        </td>
+        <td>Go to dist</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>r</kbd>
+        </td>
+        <td>Go to repository/SCM</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>s</kbd>
+        </td>
+        <td>Go to source</td>
+      </tr>
+      <tr>
+        <td class="keys">
+          <kbd>g</kbd> <kbd>b</kbd>
+        </td>
+        <td>Go to file browse</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="col-md-12">
+  <table class="table keyboard-shortcuts">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Search terms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><em>module:</em> (e.g. <a href="/search?q=module%3APlugin">module:Plugin</a>)<td>
+      </tr>
+      <tr>
+        <td><em>distribution:</em> (e.g. <a href="/search?q=distribution%3ADancer+auth">distribution:Dancer auth</a>)<td>
+      </tr>
+      <tr>
+        <td><em>author:</em> (e.g. <a href="/search?q=author%3ASONGMU+Redis">author:SONGMU Redis</a>)<td>
+      </tr>
+      <tr>
+        <td><em>version:</em> (e.g. <a href="/search?q=version%3A1.00">version:1.00</a>)<td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+              </div>
+              <div class="modal-footer"></div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
