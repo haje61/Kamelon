@@ -56,7 +56,6 @@ sub CreateIndex {
 				if (defined $xml) {
 					my %options = ();
 					my $cl = $xml->Comment;
-					use Data::Dumper; print Dumper $cl;
 					for (keys %$cl) {
 						my $name = $_;
 						my $data = $cl->{$name};
@@ -220,7 +219,6 @@ sub LoadIndex {
 	my $file = '';
 	unless ($noindex) { $file = $self->XMLFolder . '/' . $self->IndexFile }
 	if (-e $file) {
-		print "Loading $file\n";
 		if (open(OFILE, "<", $file)) {
 			my %index = ();
 			my $section;
