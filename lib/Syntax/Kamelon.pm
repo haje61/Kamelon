@@ -255,28 +255,19 @@ sub GetLexer {
 	my $id = $self->{INDEXER};
 	my $i = $id->{INDEX};
 
-	if (exists $pool->{$syntax}) { #syntax definition is already loaded
-		return $pool->{$syntax}
-	} elsif (exists $i->{$syntax}) { #create the syntax definition
+	return $pool->{$syntax} if exists $pool->{$syntax}; #syntax definition is already loaded
+		
+	if (exists $i->{$syntax}) { #create the syntax definition
 		my $file = $id->{XMLFOLDER} . '/' . $i->{$syntax}->{'file'};
 		my $hl = Syntax::Kamelon::Builder->new(
 			engine => $self,
 			xmlfile => $file,
 		);
  		$pool->{$syntax} = $hl;
-
- 		#if the newly created syntax definition depends on others, they are loaded here
- 		my $p = $self->{POSTCREATE};
- 		while (@$p) {
-			my $s = shift @$p;
-			unless (exists $pool->{$s}) {
-				$self->GetLexer($s)
-			}
-		}
 		return $hl
-	} else {
-		$self->LogWarning("Syntax definition for '$syntax' not found");
-	}
+	} 
+	$self->LogWarning("Syntax definition for '$syntax' not found");
+	return undef
 }
 
 sub IncludeRules {

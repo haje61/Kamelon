@@ -255,9 +255,12 @@ Version 0.20 May 8, 2022
 	Added disclaimer to pod
 
 Version 0.21 Mar 2, 2023
+	Changed license to Perl
+	Made the method Filename a full accessor
+	Added #pop!context context switcher to Syntax::Kamelon::Builder
 	Make Syntax::Kamelon::XMLData read comment information
 	Make Syntax::Kamelon::Indexer interpret comment information
-	Removed all XS related details. This widget stays pure Perl
+	Removed all XS related details. This package stays pure Perl
 	Removed all Wx related stuff
 
 	Updated syntax .desktop from version 2 to version 6
