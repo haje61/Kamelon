@@ -44,13 +44,11 @@ there are also formatters for ANSI (Syntax::Kamelon::ANSI) and HTML4
 
 Add output formatters for HTML5, PDF, RTF, ODT, etcetera
 
-The Perl formatter coul use some tlc. We do not have a formatter for Raku.
-
 Help and support is appreciated.
 
 # user license
 
-This software is licensed under the GPLV3.
+This software is licensed under the same lincense as Perl.
 
 
 
