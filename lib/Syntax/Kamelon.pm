@@ -325,6 +325,7 @@ sub LastcharDeliminator {
 	my ($self, $delim) = @_;
 	return 1 if ($self->LineStart);
 	my $last = $self->LastChar;
+	return 1 if $last eq '';
 	return $last =~ /$delim/
 }
 
@@ -879,8 +880,8 @@ sub testDetectIdentifier {
 	my $self = shift;
 	my $text = shift;
 	my $delim = shift;
-	return '' if $self->LastcharDeliminator($delim);
-	if ($$text =~ /^([a-z][a-z0-9_]*)/i) {
+	return '' unless $self->LastcharDeliminator($delim);
+	if ($$text =~ /^([a-zA-Z_][a-zA-Z0-9_]*)/) {
 		my $parser = pop @_;
 		&$parser($self, $text, $1, @_);
 		return 1
@@ -927,12 +928,11 @@ sub testHlCHex {
 	my $self = shift;
 	my $text = shift;
 	my $delim = shift;
-	if ($self->LastcharDeliminator($delim)) {
-		if ($$text =~ /^(0x[0-9a-fA-F]+)/) {
-			my $parser = pop @_;
-			&$parser($self, $text, $1, @_);
-			return 1
-		}
+	return '' unless $self->LastcharDeliminator($delim);
+	if ($$text =~ /^(0x[0-9a-fA-F]+)/) {
+		my $parser = pop @_;
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -941,12 +941,11 @@ sub testHlCOct {
 	my $self = shift;
 	my $text = shift;
 	my $delim = shift;
-	if ($self->LastcharDeliminator($delim)) {
-		if ($$text =~ /^(0[0-7]+)/) {
-			my $parser = pop @_;
-			&$parser($self, $text, $1, @_);
-			return 1;
-		}
+	return '' unless $self->LastcharDeliminator($delim);
+	if ($$text =~ /^(0[0-7]+)/) {
+		my $parser = pop @_;
+		&$parser($self, $text, $1, @_);
+		return 1;
 	}
 	return ''
 }

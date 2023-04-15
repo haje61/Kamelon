@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use lib 't/testlib';
 
-use Test::More tests => 16;
+use Test::More tests => 17;
 
 use Syntax::Kamelon;
 use KamTest qw(InitWorkFolder PostText PreText TestParse WriteCleanUp);

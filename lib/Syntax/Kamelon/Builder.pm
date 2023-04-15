@@ -84,6 +84,18 @@ sub CurRule {
 	return $self->{CURRULE};
 }
 
+sub Delim2Reg {
+	my ($self, $delim) = @_;
+	my $reg = '';
+	my @d = keys %$delim;
+	while (@d) {
+		my $k = shift @d;
+		$reg = $reg . quotemeta($k);
+		$reg = $reg . '|' if @d
+	}
+	return $reg
+}
+
 sub Engine {
 	my $self = shift;
 	return $self->{ENGINE};
@@ -583,8 +595,7 @@ sub SetupRuleDetect2Chars {
 sub SetupRuleDetectIdentifier {
 	my ($self, $rule) = @_;
 	my $method = $tests{$rule->{'type'}};
-	my $delim = $self->Deliminators;
-	return $method, quotemeta($delim)
+	return $method, $self->Delim2Reg($self->Deliminators)
 }
 
 sub SetupRuleKeyword {
@@ -602,12 +613,13 @@ sub SetupRuleKeyword {
 		$method = undef;
 		$self->LogWarning("List $string does not exist");
 	}
-	my $delim = $self->WordWrapDeliminators;
+	my $d = $self->WordWrapDeliminators;
+	my %delim = %$d;
 	my $weak = shift @o;
-	$delim = $self->MergeWeakDeliminators($delim, $weak) if defined $weak;
+	$self->MergeWeakDeliminators(\%delim, $weak) if defined $weak;
 	my $additional = shift @o;
-	$delim = $delim . $additional if defined $additional;
-	return $method, $lsts->{$string}, quotemeta($delim)
+	$self->MergeAdditionalDeliminators(\%delim, $additional) if defined $additional;
+	return $method, $lsts->{$string}, $self->Delim2Reg(\%delim);
 }
 
 sub SetupRuleLineContinue {
@@ -631,7 +643,7 @@ sub SetupRuleLineContinue {
 sub SetupRuleNumber {
 	my ($self, $rule) = @_;
 	my $method = $tests{$rule->{'type'}};
-	return $method, quotemeta($self->Deliminators)
+	return $method, $self->Delim2Reg($self->Deliminators)
 }
 
 sub SetupRuleRangeDetect {
@@ -770,12 +782,13 @@ sub SetupRuleWordDetect {
 		$method = $method . 'I';
 		$string = lc($string);
 	}
-	my $delim = $self->WordWrapDeliminators;
+	my $d = $self->WordWrapDeliminators;
+	my %delim = %$d;
 	my $weak = shift @o;
-	$delim = $self->MergeWeakDeliminators($delim, $weak) if defined $weak;
+	$self->MergeWeakDeliminators(\%delim, $weak) if defined $weak;
 	my $additional = shift @o;
-	$delim = $delim . $additional if defined $additional;
-	return $method, $string, quotemeta($delim)
+	$self->MergeAdditionalDeliminators(\%delim, $additional) if defined $additional;
+	return $method, $string, $self->Delim2Reg(\%delim);
 }
 
 sub SyntaxExists {

@@ -10,6 +10,8 @@ ext=*.docbook;*.xml;*.rc;*.daml;*.rdf;*.rss;*.xspf;*.xsd;*.svg;*.ui;*.kcfg;*.qrc
 file=xml.xml
 menu=Markup
 mime=text/xml;text/book;text/daml;text/rdf;application/rss+xml;application/xspf+xml;image/svg+xml;application/x-designer;application/xml
+mlcommentend=-->
+mlcommentstart=<!--
 version=2.03
 
 [anychar]
@@ -85,6 +87,13 @@ version=0.1
 [numbers]
 ext=*.numbers;
 file=numbers.xml
+menu=Test
+mime=
+version=0.1
+
+[pop2context]
+ext=*.pop2context;
+file=pop2context.xml
 menu=Test
 mime=
 version=0.1

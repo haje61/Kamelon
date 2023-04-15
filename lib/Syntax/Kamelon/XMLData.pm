@@ -6,7 +6,38 @@ use XML::TokeParser;
 
 our $VERSION = '0.23';
 
-my $regchars = "\\^.\$|()[]{}*+?~!%^&/";
+# my $regchars = "\\^.\$|()[]{}*+?~!%^&/";
+
+my %deliminators = (
+	'.' => 1,
+	'(' => 1,
+	')' => 1,
+	':' => 1,
+	'!' => 1,
+	'+' => 1,
+	',' => 1,
+	'-' => 1,
+	'<' => 1,
+	'=' => 1,
+	'>' => 1,
+	'%' => 1,
+	'&' => 1,
+	'*' => 1,
+	'/' => 1,
+	';' => 1,
+	'?' => 1,
+	'[' => 1,
+	']' => 1,
+	'^' => 1,
+	'{' => 1,
+	'|' => 1,
+	'}' => 1,
+	'~' => 1,
+	' ' => 1,
+	"\\" => 1,
+	"\t" => 1,
+);
+my %wordwrapdeliminators = %deliminators;
 
 sub new {
 	my $proto = shift;
@@ -19,10 +50,10 @@ sub new {
 		COMMENT => {},
 		BASECONTEXT => '',
 		CONTEXTDATA => {},
-		DELIMINATORS => '.():!+,-<=>%&*/;?[]^{|}~ ' . "\\\t",
+		DELIMINATORS => \%deliminators,
 		ADDDELIMINATORS => '',
 		WEAKDELIMINATORS => '',
-		WORDWRAPDELIMINATORS => '.():!+,-<=>%&*/;?[]^{|}~ ' . "\\\t",
+		WORDWRAPDELIMINATORS => \%wordwrapdeliminators,
 		FILENAME => $file,
 		KEYWORDSCASE => 'undef',
 		LANGUAGE => {},
@@ -148,12 +179,20 @@ sub Lists {
 	return $self->{LISTS}
 }
 
+sub MergeAdditionalDeliminators {
+	my ($self, $delim, $weak) = @_;
+	my @w = split(//, $weak);
+	for (@w) {
+		$delim->{$_} = 1
+	}
+	return $delim
+}
+
 sub MergeWeakDeliminators {
 	my ($self, $delim, $weak) = @_;
 	my @w = split(//, $weak);
 	for (@w) {
-		my $reg = quotemeta($_);
-		$delim =~ s/$reg//;
+		delete $delim->{$_}
 	}
 	return $delim
 }
@@ -203,17 +242,21 @@ sub XMLGetKeywordSettings {
 	my $wdelim = delete $token->[2]->{'weakDeliminator'};
 	if (defined $wdelim) {
 		$self->WeakDeliminators($wdelim);
-		$self->Deliminators($self->MergeWeakDeliminators($self->Deliminators, $wdelim));
+		$self->MergeWeakDeliminators($self->Deliminators, $wdelim);
 	}
 
 	my $adelim = delete $token->[2]->{'additionalDeliminator'};
 	if (defined $adelim) {
 		$self->AdditionalDeliminators($adelim);
-		$self->Deliminators($self->Deliminators . $adelim);
+		$self->MergeAdditionalDeliminators($self->Deliminators . $adelim);
 	}
 
 	my $wrapdelim = delete $token->[2]->{'wordWrapDeliminator '};
-	$self->WordWrapDeliminators($wrapdelim) if defined $wrapdelim;
+	if (defined $wrapdelim) {
+		my %wdelim = ();
+		$self->MergeAdditionalDeliminators(\%wdelim, $wrapdelim); 
+		$self->WordWrapDeliminators(\%wdelim) ;
+	}
 }
 
 sub XMLGetLanguage {
