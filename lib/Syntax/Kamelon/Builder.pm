@@ -1,6 +1,6 @@
 package Syntax::Kamelon::Builder;
 
-our $VERSION = '0.21';
+our $VERSION = '0.23';
 
 use strict;
 use Carp qw(cluck);
@@ -20,7 +20,6 @@ sub new {
 
    $self->{CURCONTEXT} = '';
    $self->{CURRULE} = '';
-   $self->{DELIMINATORS} = '';
 	$self->{ENGINE} = $engine;
 	if (defined $self->FileName) {
 		return $self->Setup;
@@ -83,12 +82,6 @@ sub CurRule {
 	my $self = shift;
 	if (@_) { $self->{CURRULE} = shift; }
 	return $self->{CURRULE};
-}
-
-sub Deliminators {
-	my $self = shift;
-	if (@_) { $self->{DELIMINATORS} = shift; };
-	return $self->{DELIMINATORS};
 }
 
 sub Engine {
@@ -182,27 +175,6 @@ my %tests = (
 
 sub Setup {
 	my $self = shift;
-	my $deliminators = ".():!+,-<=>%&*/;?[]^{|}~\\";
-	my $wdelim = $self->WeakDeliminator;
-	while ($wdelim ne '') {
-		$wdelim =~ s/^(.)//;
-		my $wd = $1;
-		if (index($regchars, $wd) >= 0) { $wd = "\\$wd" };
-		$deliminators =~ s/$wd//;
-	}
-	my $adelim = $self->AdditionalDeliminator;
-	if (defined $adelim) {
-		$deliminators = $deliminators . $adelim;
-	}
-	my @delimchars = split //, $deliminators;
-	my $delim = '';
-	for (@delimchars) {
-		my $dc = $_;
-		if (index($regchars, $dc ) >= 0) { $dc = "\\$dc" };
-		$delim = "$delim|$dc";
-	}
-	$delim = " |\t|\n|" . $delim;
-	$self->{DELIMINATORS} = $delim;
 	
 	my $casesensitive = 1;
 	unless ($self->KeywordsCase eq 'undef') {
@@ -229,7 +201,7 @@ sub Setup {
 	my %parser = (
 		basecontext => $self->BaseContext,
 		contexts => {},
-		deliminators => $delim,
+		deliminators => $self->Deliminators,
 		lists => $lists,
 		syntax => $self->Syntax,
 	);
@@ -248,21 +220,21 @@ my %parses = (
 	AnyChar => \&SetupRuleAnyChar,
 	DetectChar => \&SetupRuleDetectChar,
 	Detect2Chars => \&SetupRuleDetect2Chars,
-	DetectIdentifier => \&SetupRuleDefault,
+	DetectIdentifier => \&SetupRuleDetectIdentifier,
 	DetectSpaces => \&SetupRuleDefault,
-	Float => \&SetupRuleDefault,
+	Float => \&SetupRuleNumber,
 	HlCChar => \&SetupRuleDefault,
-	HlCHex => \&SetupRuleDefault,
-	HlCOct => \&SetupRuleDefault,
+	HlCHex => \&SetupRuleNumber,
+	HlCOct => \&SetupRuleNumber,
 	HlCStringChar => \&SetupRuleDefault,
 	IncludeRules => \&SetupRuleDefault,
-	Int => \&SetupRuleDefault,
+	Int => \&SetupRuleNumber,
 	keyword => \&SetupRuleKeyword,
 	LineContinue => \&SetupRuleLineContinue,
 	RangeDetect => \&SetupRuleRangeDetect,
 	RegExpr => \&SetupRuleRegExpr,
 	StringDetect => \&SetupRuleStringDetect,
-	WordDetect => \&SetupRuleStringDetect,
+	WordDetect => \&SetupRuleWordDetect,
 );
 
 sub SetupContext {
@@ -561,10 +533,10 @@ sub SetupRuleDetectChar {
 		return (undef);
 	}
 	$char = $self->RuleGetChar($char);
-	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
-		$self->LogWarning("Option char is longer than one character");
-		return (undef);
-	}
+# 	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+# 		$self->LogWarning("Option char is longer than one character");
+# 		return (undef);
+# 	}
 	if ($d and $self->CurContextIsDynamic) {
 		$method = $method . 'D';
 	}
@@ -588,15 +560,15 @@ sub SetupRuleDetect2Chars {
 		return (undef);
 	}
 	$char = $self->RuleGetChar($char);
-	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
-		$self->LogWarning("Option char is longer than one character");
-		return (undef);
-	}
-	$char1 = $self->RuleGetChar($char1);
-	unless (length($char1) eq 1) { #the regex did not compile, the rule is useless
-		$self->LogWarning("Option char1 is longer than one character");
-		return (undef);
-	}
+# 	unless (length($char) eq 1) { #the regex did not compile, the rule is useless
+# 		$self->LogWarning("Option char is longer than one character");
+# 		return (undef);
+# 	}
+# 	$char1 = $self->RuleGetChar($char1);
+# 	unless (length($char1) eq 1) { #the regex did not compile, the rule is useless
+# 		$self->LogWarning("Option char1 is longer than one character");
+# 		return (undef);
+# 	}
 	if ($d and $self->CurContextIsDynamic) {
 		$method = $method . 'D';
 	}
@@ -608,22 +580,34 @@ sub SetupRuleDetect2Chars {
 	return $method, $char, $char1
 }
 
+sub SetupRuleDetectIdentifier {
+	my ($self, $rule) = @_;
+	my $method = $tests{$rule->{'type'}};
+	my $delim = $self->Deliminators;
+	return $method, quotemeta($delim)
+}
+
 sub SetupRuleKeyword {
 	my ($self, $rule) = @_;
-	my ($string) = $self->RuleGetArgs($rule, 'String' );
+	my @o = $self->RuleGetArgs($rule, qw/String weakDeliminator additionalDeliminator/);
+	my $string = shift @o;
 	unless ((defined $string) and ($string ne '')) {
 		$self->LogWarning("Option string is not defined or is empty");
 		return (undef);
 	}
 	my $method = $tests{$rule->{'type'}};
 	unless ($self->KeywordsCase) { $method = $method . 'I' }
-	my $lsts = $self->{LISTS};
+	my $lsts = $self->Lists;
 	unless (exists $lsts->{$string}) { 
 		$method = undef;
 		$self->LogWarning("List $string does not exist");
 	}
-	my $delim = $self->{DELIMINATORS};
-	return $method, $lsts->{$string}, $delim
+	my $delim = $self->WordWrapDeliminators;
+	my $weak = shift @o;
+	$delim = $self->MergeWeakDeliminators($delim, $weak) if defined $weak;
+	my $additional = shift @o;
+	$delim = $delim . $additional if defined $additional;
+	return $method, $lsts->{$string}, quotemeta($delim)
 }
 
 sub SetupRuleLineContinue {
@@ -642,6 +626,12 @@ sub SetupRuleLineContinue {
 	
 	my $method = $tests{$rule->{'type'}};
 	return $method, $char 
+}
+
+sub SetupRuleNumber {
+	my ($self, $rule) = @_;
+	my $method = $tests{$rule->{'type'}};
+	return $method, quotemeta($self->Deliminators)
 }
 
 sub SetupRuleRangeDetect {
@@ -760,6 +750,32 @@ sub SetupRuleStringDetect {
 		$string = lc($string);
 	}
 	return $method, $string
+}
+
+sub SetupRuleWordDetect {
+	my ($self, $rule) = @_;
+	my @o = $self->RuleGetArgs($rule, qw/String insensitive dynamic weakDeliminator additionalDeliminator/ );
+	my $method = $tests{$rule->{'type'}};
+	my $string = shift @o;
+	my $i = shift @o;
+	my $d = shift @o;
+	unless ((defined $string) and ($string ne '')) {
+		$self->LogWarning("Option string is not defined or is empty");
+		return (undef);
+	}
+	if ($d and $self->CurContextIsDynamic) {
+		$method = $method . 'D'
+	}
+	if ($i) { 
+		$method = $method . 'I';
+		$string = lc($string);
+	}
+	my $delim = $self->WordWrapDeliminators;
+	my $weak = shift @o;
+	$delim = $self->MergeWeakDeliminators($delim, $weak) if defined $weak;
+	my $additional = shift @o;
+	$delim = $delim . $additional if defined $additional;
+	return $method, $string, quotemeta($delim)
 }
 
 sub SyntaxExists {

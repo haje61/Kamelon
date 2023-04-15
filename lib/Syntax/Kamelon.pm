@@ -315,14 +315,6 @@ sub InitFormatter {
 	}
 }
 
-sub IsDeliminator {
-	my ($self, $char) = @_;
-	my $deliminators = '\s|\~|\!|\%|\^|\&|\*|\+|\(|\)|-|=|\{|\}|\[|\]|:|;|<|>|,|\\|\||\.|\?|\/';
-# 	my $deliminators = $self->deliminators;
-	if ($char =~ /$deliminators/) { return 1 }
-	return ''
-}
-
 sub LastcharBoundary {
 	my $self = shift;
 	my $l = $self->LastChar;
@@ -330,9 +322,10 @@ sub LastcharBoundary {
 }
 
 sub LastcharDeliminator {
-	my $self = shift;
-	if ($self->LineStart) { return 1 }
-	return ($self->IsDeliminator($self->LastChar))
+	my ($self, $delim) = @_;
+	return 1 if ($self->LineStart);
+	my $last = $self->LastChar;
+	return $last =~ /$delim/
 }
 
 sub LastChar {
@@ -885,7 +878,8 @@ sub testDetect2CharsI {
 sub testDetectIdentifier {
 	my $self = shift;
 	my $text = shift;
-	unless ($self->LastcharDeliminator) { return '' }
+	my $delim = shift;
+	return '' if $self->LastcharDeliminator($delim);
 	if ($$text =~ /^([a-z][a-z0-9_]*)/i) {
 		my $parser = pop @_;
 		&$parser($self, $text, $1, @_);
@@ -908,12 +902,12 @@ sub testDetectSpaces {
 sub testFloat {
 	my $self = shift;
 	my $text = shift;
-	if ($self->LastcharDeliminator) {
-		if ($$text =~ /^((?=\.?\d)\d*(?:\.\d*)?(?:[Ee][+-]?\d+)?)/) {
-			my $parser = pop @_;
-			&$parser($self, $text, $1, @_);
-			return 1
-		}
+	my $delim = shift;
+	return '' unless $self->LastcharDeliminator($delim);
+	if ($$text =~ /^((?=\.?\d)\d*(?:\.\d*)?(?:[Ee][+-]?\d+)?)/) {
+		my $parser = pop @_;
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
@@ -932,7 +926,8 @@ sub testHlCChar {
 sub testHlCHex {
 	my $self = shift;
 	my $text = shift;
-	if ($self->LastcharDeliminator) {
+	my $delim = shift;
+	if ($self->LastcharDeliminator($delim)) {
 		if ($$text =~ /^(0x[0-9a-fA-F]+)/) {
 			my $parser = pop @_;
 			&$parser($self, $text, $1, @_);
@@ -945,7 +940,8 @@ sub testHlCHex {
 sub testHlCOct {
 	my $self = shift;
 	my $text = shift;
-	if ($self->LastcharDeliminator) {
+	my $delim = shift;
+	if ($self->LastcharDeliminator($delim)) {
 		if ($$text =~ /^(0[0-7]+)/) {
 			my $parser = pop @_;
 			&$parser($self, $text, $1, @_);
@@ -979,26 +975,23 @@ sub testHlCStringChar {
 sub testInt {
 	my $self = shift;
 	my $text = shift;
-	if ($self->LastcharDeliminator) {
-		if ($$text =~ /^([+-]?\d+)/) {
-			my $parser = pop @_;
-			&$parser($self, $text, $1, @_);
-			return 1
-		}
+	my $delim = shift;
+	return '' unless $self->LastcharDeliminator($delim);
+	if ($$text =~ /^([+-]?\d+)/) {
+		my $parser = pop @_;
+		&$parser($self, $text, $1, @_);
+		return 1
 	}
 	return ''
 }
 
 sub testKeyword {
 	my $self = shift;
-	unless ($self->LastcharDeliminator) { return '' }
 	my $text = shift;
 	my $list = shift;
 	my $delim = shift;
-# 	my $deliminators = $self->StackTop->[0]->{deliminators};
-# 	if ($$text =~ /^([^$deliminators]+)/) {
+	return '' unless $self->LastcharDeliminator($delim);
 	if ($$text =~ /^([^$delim]+)/) {
-# 	if ($$text =~ /^([^\b]+)/) {
 		my $match = $1;
 		if (exists $list->{$match}) {
 			my $parser = pop @_;
@@ -1011,14 +1004,11 @@ sub testKeyword {
 
 sub testKeywordI {
 	my $self = shift;
-	unless ($self->LastcharDeliminator) { return '' }
 	my $text = shift;
 	my $list = shift;
 	my $delim = shift;
-# 	my $deliminators = $self->StackTop->[0]->{deliminators};
-# 	if ($$text =~ /^([^$deliminators]+)/) {
+	return '' unless $self->LastcharDeliminator($delim);
 	if ($$text =~ /^([^$delim]+)/) {
-# 	if ($$text =~ /^([^\b]+)/) {
 		my $match = $1;
 		my $test = lc($match);
 		if (exists $list->{$test}) {
@@ -1230,10 +1220,12 @@ sub testWordDetect {
 	my $self = shift;
 	my $text = shift;
 	my $string = shift;
+	my $delim = shift;
 	if (length($string) + 1 > length($$text)) { return '' }
-	unless ($self->LastcharDeliminator) { return '' }
+	my $last = $self->LastChar;
+	return '' if $last =~ /$delim/;
 	my $testc = substr($$text, length($string), 1);
-	unless ($self->IsDeliminator($testc)) { return '' }
+	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
@@ -1247,11 +1239,12 @@ sub testWordDetectD {
 	my $self = shift;
 	my $text = shift;
 	my $string = shift;
+	my $delim = shift;
+	return '' unless $self->LastcharDeliminator($delim);
 	if (length($string) + 1 > length($$text)) { return '' }
 	$string = $self->CapturedParse($string);
-	unless ($self->LastcharDeliminator) { return '' }
 	my $testc = substr($$text, length($string), 1);
-	unless ($self->IsDeliminator($testc)) { return '' }
+	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
 	if ($string eq $test) {
 		my $parser = pop @_;
@@ -1265,11 +1258,12 @@ sub testWordDetectDI {
 	my $self = shift;
 	my $text = shift;
 	my $string = shift;
+	my $delim = shift;
+	return '' unless $self->LastcharDeliminator($delim);
 	if (length($string) + 1 > length($$text)) { return '' }
 	$string = lc($self->CapturedParse($string));
-	unless ($self->LastcharDeliminator) { return '' }
 	my $testc = substr($$text, length($string), 1);
-	unless ($self->IsDeliminator($testc)) { return '' }
+	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
@@ -1283,10 +1277,11 @@ sub testWordDetectI {
 	my $self = shift;
 	my $text = shift;
 	my $string = shift;
+	my $delim = shift;
+	return '' unless $self->LastcharDeliminator($delim);
 	if (length($string) + 1 > length($$text)) { return '' }
-	unless ($self->LastcharDeliminator) { return '' }
 	my $testc = substr($$text, length($string), 1);
-	unless ($self->IsDeliminator($testc)) { return '' }
+	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
 	if (lc($string) eq lc($test)) {
 		my $parser = pop @_;
