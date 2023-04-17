@@ -315,17 +315,11 @@ sub InitFormatter {
 	}
 }
 
-sub LastcharBoundary {
-	my $self = shift;
-	my $l = $self->LastChar;
-	return ($l =~ /\b/)
-}
-
 sub LastcharDeliminator {
 	my ($self, $delim) = @_;
 	return 1 if ($self->LineStart);
 	my $last = $self->LastChar;
-	return 1 if $last eq '';
+# 	return 1 if $last eq '';
 	return $last =~ /$delim/
 }
 
@@ -659,14 +653,32 @@ sub StateSet {
 
 sub SuggestSyntax {
 	my ($self, $file) = @_;
-	my $hsh = $self->{INDEXER}->Extensions;
+	my $id = $self->GetIndexer;
+	my $hsh = $id->Extensions;
 	my $ext;
 	if ($file =~ /(\.[^\.]+)$/) {
 		$ext = $1;
 	}
 	return undef unless defined $ext;
-	my $key = "*$ext";
-	return $hsh->{$key}->[0] if exists $hsh->{$key};
+	my $list = $hsh->{"*$ext"};
+	if (defined $list) {
+		my @l = @$list;
+		my $syntax = shift @l;
+		while (@l) {
+			my $new = shift @l;
+
+			my $pnew = $id->InfoPriority($new);
+			$pnew = 0 unless defined $pnew;
+			$pnew = 0 unless $pnew =~ /^\d+$/;
+
+			my $psyntax = $id->InfoPriority($syntax);
+			$psyntax = 0 unless defined $psyntax;
+			$psyntax = 0 unless $psyntax =~ /^\d+$/;
+
+			$syntax = $new if $pnew > $psyntax;
+		}
+		return $syntax
+	}
 	return undef;
 }
 

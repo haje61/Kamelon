@@ -93,6 +93,7 @@ sub Delim2Reg {
 		$reg = $reg . quotemeta($k);
 		$reg = $reg . '|' if @d
 	}
+	$reg = qr/$reg/;
 	return $reg
 }
 

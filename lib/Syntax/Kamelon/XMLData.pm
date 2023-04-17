@@ -180,9 +180,9 @@ sub Lists {
 }
 
 sub MergeAdditionalDeliminators {
-	my ($self, $delim, $weak) = @_;
-	my @w = split(//, $weak);
-	for (@w) {
+	my ($self, $delim, $additional) = @_;
+	my @a = split(//, $additional);
+	for (@a) {
 		$delim->{$_} = 1
 	}
 	return $delim
@@ -248,7 +248,7 @@ sub XMLGetKeywordSettings {
 	my $adelim = delete $token->[2]->{'additionalDeliminator'};
 	if (defined $adelim) {
 		$self->AdditionalDeliminators($adelim);
-		$self->MergeAdditionalDeliminators($self->Deliminators . $adelim);
+		$self->MergeAdditionalDeliminators($self->Deliminators, $adelim);
 	}
 
 	my $wrapdelim = delete $token->[2]->{'wordWrapDeliminator '};
