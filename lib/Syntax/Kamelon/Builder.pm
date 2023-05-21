@@ -1,6 +1,6 @@
 package Syntax::Kamelon::Builder;
 
-our $VERSION = '0.23';
+our $VERSION = '0.22';
 
 use strict;
 use Carp qw(cluck);
@@ -604,7 +604,7 @@ sub SetupRuleKeyword {
 	my @o = $self->RuleGetArgs($rule, qw/String weakDeliminator additionalDeliminator/);
 	my $string = shift @o;
 	unless ((defined $string) and ($string ne '')) {
-		$self->LogWarning("Option string is not defined or is empty");
+		$self->LogWarning("Option String is not defined or is empty");
 		return (undef);
 	}
 	my $method = $tests{$rule->{'type'}};
@@ -643,8 +643,13 @@ sub SetupRuleLineContinue {
 
 sub SetupRuleNumber {
 	my ($self, $rule) = @_;
+	my ($weak, $additional) = $self->RuleGetArgs($rule, qw/weakDeliminator additionalDeliminator/);
+	my $d = $self->Deliminators;
+	my %delim = %$d;
+	$self->MergeWeakDeliminators(\%delim, $weak) if defined $weak;
+	$self->MergeAdditionalDeliminators(\%delim, $additional) if defined $additional;
 	my $method = $tests{$rule->{'type'}};
-	return $method, $self->Delim2Reg($self->Deliminators)
+	return $method, $self->Delim2Reg(\%delim)
 }
 
 sub SetupRuleRangeDetect {

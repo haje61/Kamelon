@@ -11,7 +11,7 @@ use Syntax::Kamelon::Indexer;
 use Module::Load::Conditional qw[can_load];
 use Data::Dumper;
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 my @attributes = qw (
 	Alert
@@ -317,7 +317,7 @@ sub InitFormatter {
 
 sub LastcharDeliminator {
 	my ($self, $delim) = @_;
-	return 1 if ($self->LineStart);
+	return 1 if $self->LineStart;
 	my $last = $self->LastChar;
 # 	return 1 if $last eq '';
 	return $last =~ /$delim/
@@ -1232,9 +1232,8 @@ sub testWordDetect {
 	my $text = shift;
 	my $string = shift;
 	my $delim = shift;
-	if (length($string) + 1 > length($$text)) { return '' }
-	my $last = $self->LastChar;
-	return '' if $last =~ /$delim/;
+	return '' if (length($string) + 1 > length($$text));
+	return '' unless $self->LastcharDeliminator($delim);
 	my $testc = substr($$text, length($string), 1);
 	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
@@ -1251,9 +1250,9 @@ sub testWordDetectD {
 	my $text = shift;
 	my $string = shift;
 	my $delim = shift;
-	return '' unless $self->LastcharDeliminator($delim);
-	if (length($string) + 1 > length($$text)) { return '' }
 	$string = $self->CapturedParse($string);
+	return '' if (length($string) + 1 > length($$text));
+	return '' unless $self->LastcharDeliminator($delim);
 	my $testc = substr($$text, length($string), 1);
 	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
@@ -1270,9 +1269,9 @@ sub testWordDetectDI {
 	my $text = shift;
 	my $string = shift;
 	my $delim = shift;
-	return '' unless $self->LastcharDeliminator($delim);
-	if (length($string) + 1 > length($$text)) { return '' }
 	$string = lc($self->CapturedParse($string));
+	return '' if (length($string) + 1 > length($$text));
+	return '' unless $self->LastcharDeliminator($delim);
 	my $testc = substr($$text, length($string), 1);
 	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));
@@ -1289,8 +1288,9 @@ sub testWordDetectI {
 	my $text = shift;
 	my $string = shift;
 	my $delim = shift;
+	$string = lc($self->CapturedParse($string));
+	return '' if (length($string) + 1 > length($$text));
 	return '' unless $self->LastcharDeliminator($delim);
-	if (length($string) + 1 > length($$text)) { return '' }
 	my $testc = substr($$text, length($string), 1);
 	return '' unless $testc =~ /$delim/;
 	my $test = substr($$text, 0, length($string));

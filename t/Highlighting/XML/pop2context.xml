@@ -7,6 +7,7 @@
 
 <context name="Base" attribute="Normal Text" lineEndContext="#stay">
 	<StringDetect attribute="Test Area" context="TestArea" String="&lt;TestArea&gt;" />
+	<IncludeRules context="##XML" />
 </context>
 
 <context name="Comment" attribute="Comment" lineEndContext="#pop">

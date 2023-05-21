@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Syntax::Kamelon::XMLData;
 
-my $VERSION = '0.16';
+my $VERSION = '0.23';
 
 
 sub new {
