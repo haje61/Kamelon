@@ -1,6 +1,6 @@
 package Syntax::Kamelon::Builder;
 
-our $VERSION = '0.22';
+our $VERSION = '0.25';
 
 use strict;
 use Carp qw(cluck);
@@ -788,7 +788,7 @@ sub SetupRuleWordDetect {
 		$method = $method . 'I';
 		$string = lc($string);
 	}
-    my $wwd = $self->WordWrapDeliminators;
+	my $wwd = $self->WordWrapDeliminators;
 	my %delim = %$wwd;
 	my $weak = shift @o;
 	$self->MergeWeakDeliminators(\%delim, $weak) if defined $weak;
